@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 hello this is Jnanesh2002
 
-=======
-hello this is Jnanesh 0000
->>>>>>> 813bf5947b44fc41591abed5bddb32c4cc04430d
