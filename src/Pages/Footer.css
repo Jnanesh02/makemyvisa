@@ -1,0 +1,9 @@
+footer {
+    background: #dd2817;
+    color: white;
+    padding: 20px;
+}
+.footer-list li a {
+    color: #ffffffc9 !important;
+    font-size: 14px;
+}
