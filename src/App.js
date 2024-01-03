@@ -1,19 +1,27 @@
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './Pages/Login';
-import Registration from './Pages/Registration';
 
+import './App.css';
+import Layout from './components/Layout';
+import { BrowserRouter, Routes, Route }  from 'react-router-dom';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+// Visa
+// Travel ItineraryInsurance
+// Apostille & Attestation
+// Study/Admission
+// Contact Us
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/login' exact element={<Login/>}/> 
-          <Route path='/registration' exact element={<Registration/>}/> 
-        </Routes>
-      </Router>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
