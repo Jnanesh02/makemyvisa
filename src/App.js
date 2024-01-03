@@ -1,27 +1,25 @@
 
 import './App.css';
-import Layout from './components/Layout';
-import { BrowserRouter, Routes, Route }  from 'react-router-dom';
-import Home from './Pages/Home';
-import Login from './Pages/Login';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './Pages/Login/Login';
+import Layout from './Pages/Layout';
+import Home from './Pages/Home/Home';
 import SignUp from './Pages/SignUp';
-// Visa
-// Travel ItineraryInsurance
-// Apostille & Attestation
-// Study/Admission
-// Contact Us
+
 function App() {
   return (
-    <BrowserRouter>
+    <div className="App">
+     <Router>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="registration" element={<SignUp />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
+    </div>
   );
 }
 
