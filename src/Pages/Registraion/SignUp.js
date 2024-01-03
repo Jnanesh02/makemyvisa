@@ -1,6 +1,6 @@
 import React from "react";
 import PhoneInput from "react-phone-input-2";
-import backgroundImage from "../assets/images/OJO4YQ0.jpg";
+import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
 import { useState, useEffect } from "react";
 import "react-phone-input-2/lib/style.css";
 import { State } from "country-state-city";
