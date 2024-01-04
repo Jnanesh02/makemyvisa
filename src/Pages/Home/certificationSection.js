@@ -9,8 +9,6 @@ const CertificationSection = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-12">
-            {/* Uncomment the line below if you want to keep the h4 tag */}
-            {/* <h4> OUR CLIENTS REVIEWS </h4> */}
             <h2> ACCREDITATION </h2>
           </div>
           <div className="row">

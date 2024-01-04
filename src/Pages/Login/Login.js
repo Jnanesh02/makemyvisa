@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
+
 const Login = () => {
   const initialState = { email: "", password: "" };
   const [ userInputDetails, setuserInputDetails ] = useState(initialState);
@@ -29,7 +31,7 @@ const Login = () => {
       <div>
         <section
           className="certificate-section sing-up"
-          style={{ backgroundImage: "url(images/OJO4YQ0.jpg)" }}
+          style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className="container-fluid">
             <div className="row">
