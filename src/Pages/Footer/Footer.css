@@ -7,3 +7,19 @@ footer {
     color: #ffffffc9 !important;
     font-size: 14px;
 }
+
+img.footer-logo {
+    width: 50%;
+}
+
+h5.footer-menu-one {
+    text-align: center;
+}
+
+.footer-list li {
+    text-align: center;
+}
+
+.footer-list li a:hover {
+    color: white !important;
+}

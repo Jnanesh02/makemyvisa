@@ -1,7 +1,9 @@
 import React from 'react'
-import Logo from "../assets/images/logo.png";
-import avatar from "../assets/images/avatar.png";
-import "../index.css"
+import Logo from "../../assets/images/logo.png";
+import avatar from "../../assets/images/avatar.png";
+
+import "./Header.css"
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -23,7 +25,7 @@ function Header() {
                               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
                                   <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#"> Visa </a>
+                                    <Link className="nav-link active" aria-current="page" to="visa"> Visa </Link>
                                   </li>
                                   <li className="nav-item">
                                     <a className="nav-link" href="#"> Travel ItineraryInsurance</a>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import bannerImage from "../../assets/images/banner-1.jpg";
 import sliderImage from "../../assets/images/slider-img.png";
 import Enquiry from "../Enquiry/enquiry";
-
+import "./Home.css";
 const SlideSection = () => {
   return (
     <>
