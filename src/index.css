@@ -12,7 +12,7 @@ img.header-logo {
 }
 .navbar-list {
     display: flex;
-    justify-content:flex-end;
+    justify-content: flex-end;
     width: 100%;
     font-size: 14px;
 }
@@ -366,9 +366,7 @@ button.btn.btn-primary.btn-sidenavbar-b {
     right: 47px;
     top: 130px;
 }
-img.footer-logo {
-    width: 50%;
-}
+
 button.carousel-control-prev {
     background: #ffffffcc;
     width: 50px;
@@ -406,19 +404,13 @@ ul.dropdown-menu.show {
 button.btn.btn-secondary.dropdown-toggle {
     background: none;
 }
-.footer-list li a:hover {
-    color: white !important;
-}
+
 section.banner-section img {
     width: 100%;
 }
-.footer-list li {
-    text-align: center;
-}
 
-h5.footer-menu-one {
-    text-align: center;
-}
+
+
 .login-forms {
     width: 100%;
     margin: auto;

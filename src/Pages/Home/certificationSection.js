@@ -1,6 +1,7 @@
 import React from 'react';
 import certificate from '../../assets/images/certificate.jpg';
 import backgroundImage from '../../assets/images/relief-plaster-wall.jpg';
+import "./Home.css";
 const CertificationSection = () => {
     return (
         <>

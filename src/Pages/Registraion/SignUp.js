@@ -4,6 +4,20 @@ import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
 import { useState, useEffect } from "react";
 import "react-phone-input-2/lib/style.css";
 import { State } from "country-state-city";
+import "../PopupForm.css";
+
+const questionsData = [
+  {
+    id: 1,
+    question: "What is your favorite color?",
+    options: ["Option 1", "Option 2", "Option 3"],
+  },
+  {
+    id: 2,
+    question: "How did you hear about us?",
+    options: ["Option 1", "Option 2", "Option 3"],
+  },
+];
 
 function SignUp() {
   const [inputs, setInputs] = useState({
@@ -14,25 +28,11 @@ function SignUp() {
     confirmPassword: "",
     phonenumber: "91",
     serviceType: "",
-    country: { countryCode: "IN",name:"India" }, // Default country code
+    country: { countryCode: "in", name: "India" }, // Default country code
     state: "", // New field for service type
   });
-
-  useEffect(() => {
-    // Fetch the list of states when the selected country changes
-    if (inputs.country) {
-      const statesForSelectedCountry = State.getStatesOfCountry(
-        inputs.country.countryCode.toUpperCase()
-      );
-      const countryname = inputs.country.name;
-      setStates(statesForSelectedCountry);
-      setCountry(countryname);
-    }
-  }, [inputs.country]);
-
   const [states, setStates] = useState([]);
   const [Country, setCountry] = useState("");
-
   const [errors, setErrors] = useState({
     firstname: "",
     lastname: "",
@@ -44,92 +44,79 @@ function SignUp() {
     state: "",
   });
 
+  useEffect(() => {
+    if (inputs.country) {
+      const statesForSelectedCountry = State.getStatesOfCountry(
+        inputs.country.countryCode.toUpperCase()
+      );
+      const countryname = inputs.country.name;
+      setStates(statesForSelectedCountry);
+      setCountry(countryname);
+    }
+  }, [inputs.country]);
+
   const validateForm = () => {
     const newErrors = {};
-
-    // First Name validation
     if (inputs.firstname.trim() === "") {
       newErrors.firstname = "First Name is required";
     } else {
-      // First Name length validation
       if (inputs.firstname.trim().length < 3) {
         newErrors.firstname = "First Name must be at least 3 characters long";
       }
-      // First Name letters only validation
       const nameRegex = /^[a-zA-Z]+$/;
       if (!nameRegex.test(inputs.firstname)) {
         newErrors.firstname = "First Name should only contain letters";
       }
     }
-
-    // Last Name validation
     if (inputs.lastname.trim() === "") {
       newErrors.lastname = "Last Name is required";
     } else {
-      // Last Name length validation
       if (inputs.lastname.trim().length < 3) {
         newErrors.lastname = "Last Name must be at least 3 characters long";
       }
-      // Last Name letters only validation
       const lastnameRegex = /^[a-zA-Z]+$/;
       if (!lastnameRegex.test(inputs.lastname)) {
         newErrors.lastname = "Last Name should only contain letters";
       }
     }
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(inputs.email)) {
       newErrors.email = "Email is required";
     }
-
-    // Password validation
     if (!inputs.password?.trim()) {
       newErrors.password = "Password is required";
     } else {
-      // Password special characters validation
       const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*\d).{8,}$/;
       if (!passwordRegex.test(inputs.password)) {
         newErrors.password =
           "Password must contain at least one special character, one capital letter, and one number. Minimum length is 8 characters.";
       }
     }
-
-    // Confirm Password validation
     if (!inputs.confirmPassword?.trim()) {
       newErrors.confirmPassword = "Confirm Password is required";
     } else if (inputs.confirmPassword !== inputs.password) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-
-    // Phone Number validation
-    const mobileNumberRegex = /^[0-9]{10}$/;
+    const mobileNumberRegex = /^\d{10,}$/;
     if (!mobileNumberRegex.test(inputs.phonenumber)) {
       newErrors.phonenumber = "Mobile Number should be a 10-digit number";
     }
-
-    // Country validation
     if (!inputs.country || !Country) {
       newErrors.country = "Please select a valid country";
     }
-
-    // State validation
     if (!inputs.state) {
       newErrors.state = "Please select a state";
     }
-
     setErrors(newErrors);
-    // Return true if there are no errors
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate the form
     const isValid = validateForm();
     if (isValid) {
-      // Submit the form data or perform further actions
       console.log("Form submitted:", inputs);
+      setFormOpen(true);
     } else {
       console.log("Form contains errors. Please fix them.");
     }
@@ -151,14 +138,19 @@ function SignUp() {
   };
 
   const handleCountryChange = (event) => {
+    const selectedCountryCode = event.target.value;
+    const selectedCountry = State.getCountryByCode(selectedCountryCode);
+
     setInputs((prev) => ({
       ...prev,
-      country: event.target.value,
+      country: {
+        countryCode: selectedCountryCode,
+        name: selectedCountry?.name || "",
+      },
     }));
   };
 
   const handlePhoneChange = (value, country) => {
-    console.log(country);
     setInputs((prev) => ({
       ...prev,
       phonenumber: value,
@@ -166,6 +158,75 @@ function SignUp() {
     }));
   };
 
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [isFormOpen, setFormOpen] = useState(false);
+
+  // const openForm = () => {
+  //   setFormOpen(true);
+  // };
+
+  const closeForm = () => {
+    setFormOpen(false);
+  };
+
+  const handleOptionChange = (questionId, optionValue) => {
+    setSelectedOptions({
+      ...selectedOptions,
+      [questionId]: optionValue,
+    });
+  };
+
+  const handleNext = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
+  // const handleSubmit = () => {
+  //   console.log("Selected Options:", selectedOptions);
+  //   closeForm();
+  // };
+
+  const renderQuestion = () => {
+    const currentQuestion = questionsData[currentQuestionIndex];
+    if (!currentQuestion) {
+      return null;
+    }
+
+    return (
+      <div className="question">
+        <label
+          htmlFor={`q${currentQuestion.id}`}
+        >{`Question ${currentQuestion.id}: ${currentQuestion.question}`}</label>
+        <div className="options">
+          {currentQuestion.options.map((option, index) => (
+            <div key={index}>
+              <input
+                type={currentQuestion.options.length === 1 ? "text" : "radio"}
+                id={`q${currentQuestion.id}_option${index + 1}`}
+                name={`q${currentQuestion.id}`}
+                value={option}
+                checked={selectedOptions[currentQuestion.id] === option}
+                onChange={() => handleOptionChange(currentQuestion.id, option)}
+              />
+              <label htmlFor={`q${currentQuestion.id}_option${index + 1}`}>
+                {option}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  function handleQuestionSubmit() {
+    console.log("Selected Options:", selectedOptions);
+    closeForm();
+  }
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <main>
       <section
@@ -196,7 +257,9 @@ function SignUp() {
                           onChange={handleChange}
                         />
                         {errors.firstname && (
-                          <div className="error-message">{errors.firstname}</div>
+                          <div className="error-message">
+                            {errors.firstname}
+                          </div>
                         )}
                       </div>
                       <div className="col-md-6">
@@ -239,14 +302,26 @@ function SignUp() {
                         <label htmlFor="password" className="form-label">
                           Password
                         </label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="password"
-                          name="password"
-                          value={inputs.password}
-                          onChange={handleChange}
-                        />
+                        <div className="input-group">
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            value={inputs.password}
+                            onChange={handleChange}
+                          />
+                          <span
+                            className="input-group-text"
+                            onClick={togglePasswordVisibility}
+                          >
+                            <i
+                              className={`fas ${
+                                showPassword ? "fa-eye-slash" : "fa-eye"
+                              }`}
+                            ></i>
+                          </span>
+                        </div>
                         {errors.password && (
                           <div className="error-message">{errors.password}</div>
                         )}
@@ -255,14 +330,26 @@ function SignUp() {
                         <label htmlFor="confirmPassword" className="form-label">
                           Confirm Password
                         </label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          value={inputs.confirmPassword}
-                          onChange={handleChange}
-                        />
+                        <div className="input-group">
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            className="form-control"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={inputs.confirmPassword}
+                            onChange={handleChange}
+                          />
+                          <span
+                            className="input-group-text"
+                            onClick={togglePasswordVisibility}
+                          >
+                            <i
+                              className={`fas ${
+                                showPassword ? "fa-eye-slash" : "fa-eye"
+                              }`}
+                            ></i>
+                          </span>
+                        </div>
                         {errors.confirmPassword && (
                           <div className="error-message">
                             {errors.confirmPassword}
@@ -284,7 +371,9 @@ function SignUp() {
                           }
                         />
                         {errors.phonenumber && (
-                          <div className="error-message">{errors.phonenumber}</div>
+                          <div className="error-message">
+                            {errors.phonenumber}
+                          </div>
                         )}
                       </div>
                       <div className="col-md-6">
@@ -295,12 +384,17 @@ function SignUp() {
                           className="form-select form-control"
                           name="country"
                           onChange={handleCountryChange}
-                          value={inputs.country}
+                          value={inputs.country.countryCode}
                         >
                           <option value="" disabled>
                             Select country
                           </option>
-                          <option value={Country}>{Country}</option>
+                          <option
+                            key={inputs.country.countryCode}
+                            value={inputs.country.countryCode}
+                          >
+                            {inputs.country.name}
+                          </option>
                         </select>
                         {errors.country && (
                           <div className="error-message">{errors.country}</div>
@@ -321,8 +415,8 @@ function SignUp() {
                         <option value="" disabled>
                           Select State
                         </option>
-                        {states.map((state) => (
-                          <option key={state.id} value={state.name}>
+                        {states.map((state, index) => (
+                          <option key={index} value={state.name}>
                             {state.name}
                           </option>
                         ))}
@@ -346,6 +440,40 @@ function SignUp() {
           </div>
         </div>
       </section>
+      {isFormOpen && (
+        <div>
+          <div className="backdrop" onClick={closeForm}></div>
+          <div className="formPopup">
+            <form action="/submit_form" className="formContainer">
+              {renderQuestion()}
+              {currentQuestionIndex < questionsData.length - 1 ? (
+                <button
+                  type="button"
+                  className="btnFormSubmit"
+                  onClick={handleNext}
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btnFormSubmit"
+                  onClick={handleQuestionSubmit}
+                >
+                  Submit
+                </button>
+              )}
+              <button
+                type="button"
+                className="btnFormSubmit cancel"
+                onClick={closeForm}
+              >
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

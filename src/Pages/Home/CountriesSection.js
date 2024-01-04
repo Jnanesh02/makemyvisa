@@ -5,7 +5,7 @@ import UK from "../../assets/images/03.png";
 import Ireland from "../../assets/images/04.png";
 import USA from "../../assets/images/05.png";
 import European from "../../assets/images/06.png";
-
+import "./Home.css";
 const renderFlipCard = (imageSrc, countryName, description) => (
   <div className="col-lg-4 col-md-6 col-sm-6">
     <div className="flip-card">
