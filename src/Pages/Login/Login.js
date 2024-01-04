@@ -50,6 +50,7 @@ const Login = () => {
                           className="form-control"
                           id="exampleInputEmail1"
                           name="email"
+                          required
                           value={userInputDetails.email}
                           onChange={(event) => {
                             handleInputDetails(event);
@@ -63,6 +64,7 @@ const Login = () => {
                           placeholder="password"
                           id="exampleInputPassword1"
                           name="password"
+                          required
                           value={userInputDetails.password}
                           onChange={(event) => {
                             handleInputDetails(event);

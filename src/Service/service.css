@@ -1,0 +1,16 @@
+button.btn.btn-primary.btn-sidenavbar-b {
+    position: fixed;
+    z-index: 9999;
+    right: -26px;
+    rotate: 90deg;
+    top: 300px;
+    background: #fe5141;
+    border: none;
+}
+.modal.show .modal-dialog {
+    transform: none;
+    /* display: flex; */
+    position: absolute;
+    right: 47px;
+    top: 130px;
+}

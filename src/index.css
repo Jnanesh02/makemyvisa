@@ -12,7 +12,7 @@ img.header-logo {
 }
 .navbar-list {
     display: flex;
-    justify-content: end;
+    justify-content:flex-end;
     width: 100%;
     font-size: 14px;
 }
@@ -242,7 +242,7 @@ img.testimonals {
 }
 footer {
   background: #dd2817;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 20px;
   
   bottom: 0;

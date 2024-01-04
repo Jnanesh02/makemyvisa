@@ -36,7 +36,6 @@ const Enquiry = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEnQuiryData({ ...EnquiryData, [name]: value });
-    console.log(EnquiryData);
   };
 
   return (
@@ -52,8 +51,10 @@ const Enquiry = () => {
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                name="email"
-                value={EnquiryData.email}
+                name="name"
+                required
+                autoComplete="off"
+                value={EnquiryData.name}
                 onChange={(event) => {
                   handleInputChange(event);
                 }}
@@ -61,12 +62,16 @@ const Enquiry = () => {
             </div>
             <div className="mb-4 form-inputs-controls">
               <input
-                type="phoneNumber"
+                type="text"
                 className="form-control"
                 placeholder="Phone no"
                 name="phoneNumber"
                 value={EnquiryData.phoneNumber}
                 id="exampleInputPhoneNumber"
+                maxLength={10}
+                minLength={10} 
+                required
+                autoComplete="off"
                 onChange={(event) => {
                   handleInputChange(event);
                 }}
@@ -79,6 +84,8 @@ const Enquiry = () => {
                 placeholder="Email"
                 name="email"
                 value={EnquiryData.email}
+                required
+                autoComplete="off"
                 id="exampleInputPassword1"
                 onChange={(event) => {
                   handleInputChange(event);
@@ -86,43 +93,42 @@ const Enquiry = () => {
               />
             </div>
             <select
-                    className="form-select mb-4 form-inputs-controls"
-                    aria-label="Default select example"
-            
-          type="text"
-          placeholder="ServiceType"
-          name="serviceType"
-          value={EnquiryData.serviceType}
-          onChange={(event) => {
-            handleInputChange(event);
-          }}
-          required
-          autoComplete="off"
-        >
-          <option value="" disabled>
-            Select Service Type
-          </option>
-          <option value="visa">Visa</option>
-          <option value="insurance">Insurance</option>
-        </select>
-        {EnquiryData.serviceType === 'visa' && (
-        <select
-          className="form-select mb-4 form-inputs-controls"
-          aria-label="Default select example"
-          value={EnquiryData.serviceDetails}
-          name="serviceDetails"
-          onChange={(event) => {
-            handleInputChange(event);
-          }}
-        >
-          <option value="" disabled>Choose Type of Visa</option>
-          <option value="work">Work Visa</option>
-          <option value="student">Student Visa</option>
-          {/* Add more visa types as needed */}
-        </select>
-      )}
-
-        
+              className="form-select mb-4 form-inputs-controls"
+              aria-label="Default select example"
+              type="text"
+              placeholder="ServiceType"
+              name="serviceType"
+              value={EnquiryData.serviceType}
+              onChange={(event) => {
+                handleInputChange(event);
+              }}
+              required
+              autoComplete="off"
+            >
+              <option value="" disabled>
+                Select Service Type
+              </option>
+              <option value="visa">Visa</option>
+              <option value="insurance">Insurance</option>
+            </select>
+            {EnquiryData.serviceType === "visa" && (
+              <select
+                className="form-select mb-4 form-inputs-controls"
+                aria-label="Default select example"
+                value={EnquiryData.serviceDetails}
+                name="serviceDetails"
+                onChange={(event) => {
+                  handleInputChange(event);
+                }}
+              >
+                <option value="" disabled>
+                  Choose Type of Visa
+                </option>
+                <option value="work">Work Visa</option>
+                <option value="student">Student Visa</option>
+                {/* Add more visa types as needed */}
+              </select>
+            )}
 
             <button
               type="submit"
