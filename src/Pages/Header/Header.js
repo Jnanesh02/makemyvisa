@@ -34,7 +34,7 @@ function Header() {
                                     <a className="nav-link" href="#"> Apostille & Attestation </a>
                                   </li>
                                   <li className="nav-item">
-                                    <a className="nav-link" href="#"> Study/Admission </a>
+                                    <a className="nav-link" href="#">Study/Admission </a>
                                   </li>
                                   <li className="nav-item">
                                     <a className="nav-link" href="#"> Contact Us </a>

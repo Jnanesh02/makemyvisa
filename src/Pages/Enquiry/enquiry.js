@@ -129,11 +129,9 @@ const Enquiry = () => {
                 {/* Add more visa types as needed */}
               </select>
             )}
-
             <button
               type="submit"
-              className="btn btn-primary submit form-control-btn"
-            >
+              className="btn btn-primary submit form-control-btn">
               Submit
             </button>
           </form>
