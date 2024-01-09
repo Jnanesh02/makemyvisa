@@ -1,7 +1,9 @@
 footer {
     background: #dd2817;
     color: white;
-    padding: 20px;
+    padding: 4.5rem 4rem 0;
+    
+    
 }
 .footer-list li a {
     color: #ffffffc9 !important;
@@ -13,13 +15,93 @@ img.footer-logo {
 }
 
 h5.footer-menu-one {
-    text-align: center;
+    text-align: left;
 }
 
 .footer-list li {
-    text-align: center;
+    text-align: left;
 }
 
 .footer-list li a:hover {
     color: white !important;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    font-size: 24px;
+    color: white  /* Adjust the font size as needed */
+  }
+  
+  .social-icons i {
+    margin-right: 10px; /* Adjust the spacing between icons */
+  }
+
+
+  .footer-last{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap:3rem;
+  }
+  @media only screen and (max-width: 990px) {
+    footer {
+        font-size: medium;
+        padding: 2rem; /* Adjust padding for smaller screens */
+        text-align: center;
+        text-align: center; /* Center-align text within the footer */
+    }
+    
+    .text-start {
+        text-align: center; /* Center-align text within the container */
+    }
+
+    .footer-logo {
+        max-width: 100%; /* Make the logo responsive */
+        margin-bottom: 1rem; /* Add some space below the logo */
+    }
+
+    .footer-para {
+        width: 100%; /* Full width for smaller screens */
+        margin: auto; 
+        margin-bottom: 3rem;/* Center-align the paragraph within its container */
+    }
+
+    .footer-list {
+        padding: 0; /* Remove default padding on the list */
+        text-align: center; /* Center-align list items */
+    }
+
+    .social-icons {
+        margin-top: 1rem; /* Add some spacing between social icons and the copyright text */
+    }
+
+    .footer-last {
+        text-align: center; /* Center-align the last section */
+    }
+    
+    .footer-list .footer-menu-one{
+        
+        text-align: center;
+
+    }
+    .footer-list >ul>li{
+        text-align: center;
+        
+    }
+    .row h5{
+       
+        text-align: center;
+    }
+    .row h3{
+        margin-left:3.5rem ;
+        
+    }
+    .footer-para{
+        width: 80%;
+    }
+    
+
+
 }

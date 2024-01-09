@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
+import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const initialState = { email: "", password: "" };
+  const [showPassword, setShowPassword] = useState(false);
   const [userInputDetails, setuserInputDetails] = useState(initialState);
   const handleInputDetails = (event) => {
     const { name, value } = event.target;
@@ -36,12 +38,15 @@ const Login = () => {
               <div className="row">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
-                  <div className="login-forms">
+                  <div className="login-forms  login  shadow-sm">
                     <form>
                       <div className="mb-2">
+                        <label htmlFor="email" className="form-label">
+                          Email
+                        </label>
                         <input
                           type="email"
-                          placeholder="email"
+                          placeholder="Email"
                           className="form-control"
                           id="exampleInputEmail1"
                           name="email"
@@ -53,19 +58,45 @@ const Login = () => {
                         />
                       </div>
                       <div className="mb-2">
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="password"
-                          id="exampleInputPassword1"
-                          name="password"
-                          required
-                          value={userInputDetails.password}
-                          onChange={(event) => {
-                            handleInputDetails(event);
-                          }}
-                        />
+                        <label htmlFor="email" className="form-label">
+                          Password
+                        </label>
+                        <div style={{ position: "relative" }}>
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            className="form-control"
+                            placeholder="Password"
+                            id="exampleInputPassword1"
+                            name="password"
+                            required
+                            value={userInputDetails.password}
+                            onChange={(event) => handleInputDetails(event)}
+                            style={{ paddingRight: "30px" }}
+                          />
+                          <i
+                            className={`fas ${
+                              showPassword ? "fa-eye" : "fa-eye-slash"
+                            }`}
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              right:
+                                "10px" /* Adjust right position as needed */,
+                              transform: "translateY(-50%)",
+                              cursor: "pointer",
+                            }}
+                          ></i>
+                        </div>
                       </div>
+                      <NavLink
+                        style={{ color: "#fe5141" }}
+                        to="/forgotpassword"
+                      >
+                        Forgot Password?
+                      </NavLink>
+                      <br />
+                      <br />
                       <button
                         type="submit"
                         className="btn btn-primary sign-up-sumbit-button">
@@ -78,7 +109,8 @@ const Login = () => {
                       <ul className="list-group list-group-horizontal ul-hz-list w-100 mt-3">
                         <li
                           className="list-group-item ul-hz-list w-100 fb"
-                          onClick={facebookAuth}>
+                          onClick={facebookAuth}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"
@@ -89,7 +121,8 @@ const Login = () => {
                         </li>
                         <li
                           className="list-group-item ul-hz-list w-100 google"
-                          onClick={googleAuth}>
+                          onClick={googleAuth}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"
@@ -100,7 +133,8 @@ const Login = () => {
                         </li>
                         <li
                           className="list-group-item ul-hz-list w-100 linkedin"
-                          onClick={LinkedInAuth}>
+                          onClick={LinkedInAuth}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"

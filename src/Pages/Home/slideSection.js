@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import bannerImage from "../../assets/images/banner-1.jpg";
 import sliderImage from "../../assets/images/slider-img.png";
-import Enquiry from "../Enquiry/enquiry";
+import Enquiry from "./Enquiry/enquiry";
 import "./Home.css";
 const SlideSection = () => {
   return (
@@ -54,7 +54,7 @@ const SlideSection = () => {
                         className="img-banner-fxd"
                         alt="SliderImage"
                       />
-                      <div className="carousel-caption d-md-block slider-content-img">
+                      <div className="carousel-caption d-md-block slider-content-img ">
                         <div className="row">
                           <div className="col-lg-6">
                             <div className="slider-inner-content">

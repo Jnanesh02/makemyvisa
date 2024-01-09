@@ -2,23 +2,27 @@ import React from "react";
 import Logo from "../../assets/images/logo.png";
 
 import "./Footer.css";
+import { NavLink } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="">
+    <footer className="text-start">
+      {" "}
+      {/* Add text-start class to align text to the left */}
       <div className="row">
         <div className="col-lg-3">
           <img className="footer-logo" src={Logo} alt="" />
           <h5> ----- About Us </h5>
           <h3> Makemyvisa </h3>
-          <p>
+          <p className="footer-para">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s
           </p>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-2 footer-list">
           <h5 className="footer-menu-one"> Migrate </h5>
-          <ul className="list-unstyled text-small footer-list">
+          <ul className="list-unstyled text-small footer-list ">
             <li className="mb-1">
               <a className="link-secondary text-decoration-none" href="/">
                 Canada
@@ -51,7 +55,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-2 footer-list">
           <h5 className="footer-menu-one"> Sitemap </h5>
           <ul className="list-unstyled text-small footer-list">
             <li className="mb-1">
@@ -65,9 +69,9 @@ const Footer = () => {
               </a>
             </li>
             <li className="mb-1">
-              <a className="link-secondary text-decoration-none" href="/">
+              <NavLink className="link-secondary text-decoration-none" to="/contact">
                 Contact
-              </a>
+              </NavLink>
             </li>
             <li className="mb-1">
               <a className="link-secondary text-decoration-none" href="/">
@@ -81,7 +85,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-2 footer-list">
           <h5 className="footer-menu-one"> Services </h5>
           <ul className="list-unstyled text-small footer-list">
             <li className="mb-1">
@@ -111,7 +115,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-2 footer-list">
           <h5 className="footer-menu-one"> Connect with us </h5>
           <ul className="list-unstyled text-small footer-list">
             <li className="mb-1">
@@ -136,6 +140,26 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="d-flex align-items-center justify-content-between mt-3">
+        <p className="m-1">
+          <strong>&copy; 2024 Copyright:</strong> Make My Visa
+        </p>
+
+        <div className="social-icons">
+          <i className="fab fa-facebook"></i>
+          <i className="fab fa-twitter"></i>
+          <i className="fab fa-youtube"></i>
+          <i className="fab fa-instagram"></i>
+          <i className="fab fa-linkedin"></i>
+        </div>
+      </div>
+      <hr />
+      <div className="footer-last">
+        <p>Privacy</p>
+        <p>Terms</p>
+        <p>Cancellation</p>
+        <p>Cookies</p>
       </div>
     </footer>
   );

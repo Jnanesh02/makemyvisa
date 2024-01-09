@@ -33,3 +33,17 @@
     display: flex;
     gap: 1rem;
 }
+
+.forgotpassword{
+    color: pink;
+}
+
+/* Hide the password reveal button in Microsoft Edge */
+input::-ms-reveal {
+    display: none;
+}
+
+/* Optional: You may also want to hide the clear button in Edge */
+input::-ms-clear {
+    display: none;
+}
