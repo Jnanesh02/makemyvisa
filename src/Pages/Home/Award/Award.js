@@ -1,5 +1,5 @@
 import React,{useRef,useEffect} from 'react';
-import award from "../../assets/images/awards.png"
+import award from "../../../assets/images/awards.png"
 const Award = () => {
     const count1Ref = useRef(null);
     const count2Ref = useRef(null);

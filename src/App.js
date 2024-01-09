@@ -1,11 +1,11 @@
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './Pages/Login/Login';
+import Login from './Pages/CostumerDetails/Login/Login';
 import Layout from './Pages/Layout';
 import Home from './Pages/Home/Home';
-import SignUp from './Pages/Registraion/SignUp';
-
+import SignUp from './Pages/CostumerDetails/Registraion/SignUp';
+import Contact from "./Pages/contact/contact"
 function App() {
   
 
@@ -18,6 +18,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<SignUp />} />
+          <Route path="contact" element={<Contact/>} />
           
         </Route>
       </Routes>

@@ -1,10 +1,10 @@
 import React from "react";
 import PhoneInput from "react-phone-input-2";
-import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
+import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
 import { useState, useEffect } from "react";
 import "react-phone-input-2/lib/style.css";
 import { State } from "country-state-city";
-import "../PopupForm.css";
+import "./PopupForm.css";
 
 const questionsData = [
   {
@@ -20,6 +20,12 @@ const questionsData = [
 ];
 
 function SignUp() {
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [isFormOpen, setFormOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const [inputs, setInputs] = useState({
     firstname: "",
     lastname: "",
@@ -111,14 +117,60 @@ function SignUp() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
+
     if (isValid) {
-      console.log("Form submitted:", inputs);
-      setFormOpen(true);
+      try {
+        // Assuming 'apiEndpoint' is the URL of your API
+        const response = await fetch(apiEndpoint, {
+          method: "POST", // or 'PUT' or 'GET', etc., depending on your API
+          headers: {
+            "Content-Type": "application/json",
+            // Add any other headers your API requires
+          },
+          body: JSON.stringify(inputs), // Assuming inputs is an object containing form data
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log("Form submitted:", responseData);
+          setFormOpen(true);
+        } else {
+          console.log("Error submitting form:", response.statusText);
+        }
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
+      }
     } else {
       console.log("Form contains errors. Please fix them.");
+    }
+  };
+
+  const handleQuestionSubmit = async () => {
+    try {
+      // Assuming 'questionApiEndpoint' is the URL of your question submission API
+      const response = await fetch(questionApiEndpoint, {
+        method: "POST", // or 'PUT' or 'GET', etc., depending on your API
+        headers: {
+          "Content-Type": "application/json",
+          // Add any other headers your API requires
+        },
+        body: JSON.stringify(selectedOptions), // Assuming selectedOptions is an object containing question data
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Question submitted:", responseData);
+        closeForm();
+      } else {
+        console.log("Error submitting question:", response.statusText);
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
     }
   };
 
@@ -157,10 +209,6 @@ function SignUp() {
       country: country,
     }));
   };
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [isFormOpen, setFormOpen] = useState(false);
 
   // const openForm = () => {
   //   setFormOpen(true);
@@ -218,12 +266,6 @@ function SignUp() {
     );
   };
 
-  function handleQuestionSubmit() {
-    console.log("Selected Options:", selectedOptions);
-    closeForm();
-  }
-  const [showPassword, setShowPassword] = useState(false);
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -233,7 +275,7 @@ function SignUp() {
         className="certificate-section sing-up"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <div className="container-fluid">
+        <div className="container-fluid  signupForm">
           <div className="row">
             <div className="col-lg-12">
               <h2 className="sign-up-text"> Sign Up </h2>
