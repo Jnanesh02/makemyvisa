@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
+import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
-import { useState, useEffect } from "react";
 import "react-phone-input-2/lib/style.css";
 import { State } from "country-state-city";
 import "../PopupForm.css";
+import axios from "axios";
 
 const questionsData = [
   {
@@ -20,6 +21,7 @@ const questionsData = [
 ];
 
 function SignUp() {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     firstname: "",
     lastname: "",
@@ -31,8 +33,12 @@ function SignUp() {
     country: { countryCode: "in", name: "India" }, // Default country code
     state: "", // New field for service type
   });
+
   const [states, setStates] = useState([]);
   const [Country, setCountry] = useState("");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [isFormOpen, setFormOpen] = useState(false);
   const [errors, setErrors] = useState({
     firstname: "",
     lastname: "",
@@ -111,17 +117,6 @@ function SignUp() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const isValid = validateForm();
-    if (isValid) {
-      console.log("Form submitted:", inputs);
-      setFormOpen(true);
-    } else {
-      console.log("Form contains errors. Please fix them.");
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((prev) => ({
@@ -158,14 +153,6 @@ function SignUp() {
     }));
   };
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [isFormOpen, setFormOpen] = useState(false);
-
-  // const openForm = () => {
-  //   setFormOpen(true);
-  // };
-
   const closeForm = () => {
     setFormOpen(false);
   };
@@ -180,11 +167,34 @@ function SignUp() {
   const handleNext = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
-
-  // const handleSubmit = () => {
-  //   console.log("Selected Options:", selectedOptions);
-  //   closeForm();
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/makemyvisa/customer/register",
+          {
+            firstName: inputs.firstname,
+            lastName: inputs.lastname,
+            email: inputs.email,
+            phoneNumber: inputs.phonenumber,
+            state: inputs.state,
+            country: inputs.country.name,
+            password: inputs.password,
+          }
+        );
+        if (response.data) {
+          alert(response.data.message);
+          setFormOpen(true);
+        }
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    } else {
+      console.log("Form contains errors. Please fix them.");
+    }
+  };
 
   const renderQuestion = () => {
     const currentQuestion = questionsData[currentQuestionIndex];
@@ -218,10 +228,28 @@ function SignUp() {
     );
   };
 
-  function handleQuestionSubmit() {
-    console.log("Selected Options:", selectedOptions);
-    closeForm();
-  }
+  const handleQuestionSubmit = async () => {
+    try {
+      console.log("Success mani");
+      const questionnaire = await axios.post(
+        "http://localhost:3000/makemyvisa/customer/questionnaires",
+        {
+          email: inputs.email,
+          questionnaire: [
+            {
+              question: "What is your favorite color?",
+              answer: "hello",
+            },
+          ],
+        }
+      );
+      if (questionnaire.status === 200) {
+        navigate("/login");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -442,7 +470,7 @@ function SignUp() {
       </section>
       {isFormOpen && (
         <div>
-          <div className="backdrop" onClick={closeForm}></div>
+          {/* <div className="backdrop" onClick={closeForm}></div> */}
           <div className="formPopup">
             <form action="/submit_form" className="formContainer">
               {renderQuestion()}

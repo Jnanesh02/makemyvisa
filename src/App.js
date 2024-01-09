@@ -5,6 +5,7 @@ import Login from './Pages/Login/Login';
 import Layout from './Pages/Layout';
 import Home from './Pages/Home/Home';
 import SignUp from './Pages/Registraion/SignUp';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
   
@@ -18,8 +19,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<SignUp />} />
-          
         </Route>
+        <Route path="/dashboard" Component={Dashboard}/>
       </Routes>
     </Router>
     </div>
