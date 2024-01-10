@@ -1,7 +1,28 @@
 import React from "react";
 import "./Dashboard.css";
+import { useEffect } from "react";
+import Logo from "../../assets/images/logo.png";
+import Avatar from "../../assets/images/avatar.png"
+import { NavLink, Outlet } from "react-router-dom";
+
 
 function Dashboard() {
+  useEffect(() => {
+    // This runs after the component has been rendered
+    const handleSidebarToggle = () => {
+      document.getElementById("sidebar").classList.toggle("active");
+    };
+
+    // Attach the event listener to the button
+    document.getElementById("sidebarCollapse").addEventListener("click", handleSidebarToggle);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      document.getElementById("sidebarCollapse").removeEventListener("click", handleSidebarToggle);
+    };
+  }, []);
+
+
   return (
     <div>
       <main className="content" />
@@ -9,10 +30,12 @@ function Dashboard() {
         {/* <!-- Sidebar  --> */}
         <nav id="sidebar">
           <div className="sidebar-header">
-            <img className="dashboard-logo" src="images/logo.png" alt="" />
+      
+            <img className="dashboard-logo" src={Logo} alt="" />
           </div>
 
           <ul className="list-unstyled components">
+            <NavLink style={{textDecoration:"none" }} to="/dashboard">
             <p>
               <svg
                 className="dashborad-icons"
@@ -25,76 +48,69 @@ function Dashboard() {
               </svg>
               Dashboard{" "}
             </p>
-            <li className="active">
-              <a
-                href="#homeSubmenu"
-                data-toggle="collapse"
-                aria-expanded="false"
-                className="dropdown-toggle"
-              >
-                {" "}
-                Products{" "}
-              </a>
-              <ul className="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                  <a href="/">Home 1</a>
-                </li>
-                <li>
-                  <a href="/">Home 2</a>
-                </li>
-                <li>
-                  <a href="/">Home 3</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="/"> Campaigns </a>
-            </li>
-            <li>
-              <a
-                href="#pageSubmenu"
-                data-toggle="collapse"
-                aria-expanded="false"
-                className="dropdown-toggle"
-              >
-                {" "}
-                Schedules{" "}
-              </a>
-              <ul className="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                  <a href="/">Page 1</a>
-                </li>
-                <li>
-                  <a href="/">Page 2</a>
-                </li>
-                <li>
-                  <a href="/">Page 3</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="/"> Payouts </a>
-            </li>
-            <li>
-              <a href="/"> Settings </a>
-            </li>
+            </NavLink>
+            
+            
+            
+            <div className="accordion" id="accordionExample1">
+        <div className="accordion-item">
+            <h2 className="accordion-header" id="headingOne1">
+              
+                <button className="accordion-button custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu1" aria-expanded="false" aria-controls="homeSubmenu1">
+                <i className="fas fa-gear"></i> Settings
+                </button>
+            </h2>
+            <div id="homeSubmenu1" className="accordion-collapse collapse  custom-collapse" aria-labelledby="headingOne1" data-bs-parent="#accordionExample1">
+                <div className="accordion-body">
+                    <NavLink className="custom-link" to="profile"> <i className="fa-solid fa-user m-2"></i>Profile</NavLink>
+                </div>
+                <div className="accordion-body">
+                <NavLink className="custom-link" to="profile"> <i className="fas fa-power-off m-2"></i>Logout</NavLink>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+    {/* <div className="accordion" id="accordionExample2">
+        <div className="accordion-item">
+            <h2 className="accordion-header" id="headingOne2">
+                <button className="accordion-button custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu2" aria-expanded="false" aria-controls="homeSubmenu2">
+                <i className="fas fa-power-off"></i> Logout
+                </button>
+            </h2>
+            <div id="homeSubmenu2" className="accordion-collapse collapse" aria-labelledby="headingOne2" data-bs-parent="#accordionExample2">
+                <div className="accordion-body">
+                    <a className="custom-link" href="/">Home 4</a>
+                </div>
+                <div className="accordion-body">
+                    <a className="custom-link" href="/">Home 5</a>
+                </div>
+                <div className="accordion-body">
+                    <a className="custom-link" href="/">Home 6</a>
+                </div>
+            </div>
+        </div>
+    </div> */}
+
+        
+    
+
+
+
+            
+            
+            
           </ul>
 
-          <ul className="list-unstyled CTAs">
-            <li>
-              <a
-                href="https://bootstrapious.com/tutorial/files/sidebar.zip"
-                className="download dashboard"
-              >
-                Download source
-              </a>
-            </li>
-          </ul>
+         
         </nav>
 
         {/* <!-- Page Content  --> */}
         <div id="content">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="Dashboardnavbar navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
               <button
                 type="button"
@@ -160,14 +176,14 @@ function Dashboard() {
                       aria-expanded="false"
                       aria-controls="collapseExample"
                     >
-                      <img className="avatar-icons" src="images/icons.jpg" alt="" />
+                      <img className="avatar-icons" src={Avatar} alt="" />
                     </button>
 
                     <div className="collapse" id="collapseExample">
                       <div className="card card-body card-avatar">
                         <ul className="list-group">
                           <li className="list-group-item">
-                            <span className="profile-name"> Hello World </span>
+                            <span className="profile-name">Profile</span>
                           </li>
                           <li className="list-group-item">
                             {" "}
@@ -187,115 +203,15 @@ function Dashboard() {
               </div>
             </div>
           </nav>
-          <div className="main-dashboard-k">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-3">
-                  <div className="card card-transparent">
-                    <div className="card-body">
-                      <div className="main-section-one">
-                        <div className="one-section">
-                          Earning Monthly
-                          <br />
-                          <span> $ 500 </span>
-                          <p className="mb-0"> Sales of the month </p>
-                        </div>
-                        <div className="section-section">
-                          <svg
-                            className="card-icons-inside"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 -960 960 960"
-                            width="24"
-                          >
-                            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="card card-transparent">
-                    <div className="card-body">
-                      <div className="main-section-one">
-                        <div className="one-section">
-                          Earning Monthly
-                          <br />
-                          <span> $ 500 </span>
-                          <p className="mb-0"> Sales of the month </p>
-                        </div>
-                        <div className="section-section">
-                          <svg
-                            className="card-icons-inside"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 -960 960 960"
-                            width="24"
-                          >
-                            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="card card-transparent">
-                    <div className="card-body">
-                      <div className="main-section-one">
-                        <div className="one-section">
-                          Earning Monthly
-                          <br />
-                          <span> $ 500 </span>
-                          <p className="mb-0"> Sales of the month </p>
-                        </div>
-                        <div className="section-section">
-                          <svg
-                            className="card-icons-inside"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 -960 960 960"
-                            width="24"
-                          >
-                            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="card card-transparent">
-                    <div className="card-body">
-                      <div className="main-section-one">
-                        <div className="one-section">
-                          Earning Monthly
-                          <br />
-                          <span> $ 500 </span>
-                          <p className="mb-0"> Sales of the month </p>
-                        </div>
-                        <div className="section-section">
-                          <svg
-                            className="card-icons-inside"
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 -960 960 960"
-                            width="24"
-                          >
-                            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
+          <Outlet/>
         </div>
+        
       </div>
+      
+      
     </div>
+    
   );
 }
 
