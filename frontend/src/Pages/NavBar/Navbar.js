@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 // import Dashboard from "../Dashboard/Dashboard";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const Login = () => {
+    // setIsLoggedIn(true);
     return (
       <Link className="dropdown-item" to="/login">
         Login
@@ -15,6 +17,7 @@ const Navbar = () => {
     );
   };
   const Logout = () => {
+    // setIsLoggedIn(false);
     return (
       <Link className="dropdown-item" to="/">
         Logout

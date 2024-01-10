@@ -51,7 +51,8 @@ passport.use(
     {
       clientID: process.env.GoogleStrategyID,
       clientSecret: process.env.GoogleStrategySecret,
-      callbackURL: "http://0.0.0.0:3000/auth/linkedin/callback",
+      callbackURL:
+        "http://localhost:3000/makemyvisa/customer/auth/google/callback",
       scope: ["profile", "email"],
     },
     // Process Google authentication, create or update user in the database4
