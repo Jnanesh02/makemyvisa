@@ -6,7 +6,7 @@ router.post("/logout", (req, res) => {
     if (err) {
       return res.status(500).json({ message: "logout failed" });
     } else {
-      res.json({ message: "logout successfull " });
+      res.status(200).json({ message: "logout successfull " });
     }
   });
 });

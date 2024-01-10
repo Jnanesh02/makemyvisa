@@ -6,7 +6,7 @@ const customer = require("../../models/customerSchema");
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    
     const existingUser = await customer.findOne({ email: email });
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email" });

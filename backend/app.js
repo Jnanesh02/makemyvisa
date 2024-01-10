@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-// const cors = require("cors");
+const cors = require("cors");
 require("dotenv").config();
 require("./config/database").connect();
 const passportStrategy = require("./config/passport");
@@ -24,13 +24,13 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     methods: "GET,POST,PUT,DELETE",
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 app.use("/makemyvisa/customer", customerRouter.customerRegistration);
 app.use("/makemyvisa/customer", customerRouter.customerLogin);
