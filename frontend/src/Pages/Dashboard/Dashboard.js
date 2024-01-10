@@ -1,9 +1,11 @@
 import React from "react";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   return (
     <div>
+      <h1>`hello ${}`</h1>
       <main className="content" />
       <div className="wrapper">
         {/* <!-- Sidebar  --> */}
@@ -19,8 +21,7 @@ function Dashboard() {
                 xmlns="http://www.w3.org/2000/svg"
                 height="24"
                 viewBox="0 -960 960 960"
-                width="24"
-              >
+                width="24">
                 <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
               </svg>
               Dashboard{" "}
@@ -30,8 +31,7 @@ function Dashboard() {
                 href="#homeSubmenu"
                 data-toggle="collapse"
                 aria-expanded="false"
-                className="dropdown-toggle"
-              >
+                className="dropdown-toggle">
                 {" "}
                 Products{" "}
               </a>
@@ -55,8 +55,7 @@ function Dashboard() {
                 href="#pageSubmenu"
                 data-toggle="collapse"
                 aria-expanded="false"
-                className="dropdown-toggle"
-              >
+                className="dropdown-toggle">
                 {" "}
                 Schedules{" "}
               </a>
@@ -84,8 +83,7 @@ function Dashboard() {
             <li>
               <a
                 href="https://bootstrapious.com/tutorial/files/sidebar.zip"
-                className="download dashboard"
-              >
+                className="download dashboard">
                 Download source
               </a>
             </li>
@@ -99,15 +97,13 @@ function Dashboard() {
               <button
                 type="button"
                 id="sidebarCollapse"
-                className="btn btn-info "
-              >
+                className="btn btn-info ">
                 <svg
                   className="mb-bl"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
-                  width="24"
-                >
+                  width="24">
                   <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                 </svg>
 
@@ -116,8 +112,7 @@ function Dashboard() {
                     xmlns="http://www.w3.org/2000/svg"
                     height="24"
                     viewBox="0 -960 960 960"
-                    width="24"
-                  >
+                    width="24">
                     <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                   </svg>
                 </span>
@@ -129,15 +124,13 @@ function Dashboard() {
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+                aria-label="Toggle navigation">
                 <i className="fas fa-align-justify"></i>
               </button>
 
               <div
                 className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
+                id="navbarSupportedContent">
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item">
                     <a className="nav-link notification" href="/">
@@ -145,8 +138,7 @@ function Dashboard() {
                         xmlns="http://www.w3.org/2000/svg"
                         height="24"
                         viewBox="0 -960 960 960"
-                        width="24"
-                      >
+                        width="24">
                         <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
                       </svg>
                     </a>
@@ -158,9 +150,12 @@ function Dashboard() {
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseExample"
                       aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <img className="avatar-icons" src="images/icons.jpg" alt="" />
+                      aria-controls="collapseExample">
+                      <img
+                        className="avatar-icons"
+                        src="images/icons.jpg"
+                        alt=""
+                      />
                     </button>
 
                     <div className="collapse" id="collapseExample">
@@ -171,13 +166,14 @@ function Dashboard() {
                           </li>
                           <li className="list-group-item">
                             {" "}
-                            <button
-                              type="button"
-                              className="btn btn-primary logout-button"
-                            >
-                              {" "}
-                              Logout{" "}
-                            </button>
+                            <Link to="/">
+                              <button
+                                type="button"
+                                className="btn btn-primary logout-button">
+                                {" "}
+                                Logout{" "}
+                              </button>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -206,8 +202,7 @@ function Dashboard() {
                             xmlns="http://www.w3.org/2000/svg"
                             height="24"
                             viewBox="0 -960 960 960"
-                            width="24"
-                          >
+                            width="24">
                             <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
                           </svg>
                         </div>
@@ -231,8 +226,7 @@ function Dashboard() {
                             xmlns="http://www.w3.org/2000/svg"
                             height="24"
                             viewBox="0 -960 960 960"
-                            width="24"
-                          >
+                            width="24">
                             <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
                           </svg>
                         </div>
@@ -256,8 +250,7 @@ function Dashboard() {
                             xmlns="http://www.w3.org/2000/svg"
                             height="24"
                             viewBox="0 -960 960 960"
-                            width="24"
-                          >
+                            width="24">
                             <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
                           </svg>
                         </div>
@@ -281,8 +274,7 @@ function Dashboard() {
                             xmlns="http://www.w3.org/2000/svg"
                             height="24"
                             viewBox="0 -960 960 960"
-                            width="24"
-                          >
+                            width="24">
                             <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
                           </svg>
                         </div>

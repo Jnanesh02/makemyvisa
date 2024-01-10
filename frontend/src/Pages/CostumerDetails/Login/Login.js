@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const initialState = { email: "", password: "" };
   const [showPassword, setShowPassword] = useState(false);
   const [userInputDetails, setuserInputDetails] = useState(initialState);
@@ -10,8 +12,34 @@ const Login = () => {
     const { name, value } = event.target;
     setuserInputDetails({ ...userInputDetails, [name]: value });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const [email, password] = [
+      userInputDetails.email,
+      userInputDetails.password,
+    ];
+    const data = { email, password };
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/makemyvisa/customer/login",
+        data
+      );
+      if (response.data.error) {
+        alert(response.data.error.message);
+      } else {
+        // alert("successfully logged in ");
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
   const googleAuth = () => {
-    window.open("http://localhost:3000/auth/google", "_self");
+    window.open(
+      "http://localhost:3000/makemyvisa/customer/auth/google",
+      "_self"
+    );
   };
 
   const facebookAuth = () => {
@@ -34,12 +62,12 @@ const Login = () => {
             <div className="row">
               <div className="col-lg-12">
                 <h2 className="sign-up-text"> Login </h2>
-              </div>
+              </div>  
               <div className="row">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
                   <div className="login-forms  login  shadow-sm">
-                    <form>
+                    <form method="post" action="login">
                       <div className="mb-2">
                         <label htmlFor="email" className="form-label">
                           Email
@@ -85,21 +113,20 @@ const Login = () => {
                                 "10px" /* Adjust right position as needed */,
                               transform: "translateY(-50%)",
                               cursor: "pointer",
-                            }}
-                          ></i>
+                            }}></i>
                         </div>
                       </div>
                       <NavLink
                         style={{ color: "#fe5141" }}
-                        to="/forgotpassword"
-                      >
+                        to="/forgotpassword">
                         Forgot Password?
                       </NavLink>
                       <br />
                       <br />
                       <button
                         type="submit"
-                        className="btn btn-primary sign-up-sumbit-button">
+                        className="btn btn-primary sign-up-sumbit-button"
+                        onClick={handleSubmit}>
                         Submit
                       </button>
                     </form>
@@ -109,8 +136,7 @@ const Login = () => {
                       <ul className="list-group list-group-horizontal ul-hz-list w-100 mt-3">
                         <li
                           className="list-group-item ul-hz-list w-100 fb"
-                          onClick={facebookAuth}
-                        >
+                          onClick={facebookAuth}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"
@@ -121,8 +147,7 @@ const Login = () => {
                         </li>
                         <li
                           className="list-group-item ul-hz-list w-100 google"
-                          onClick={googleAuth}
-                        >
+                          onClick={googleAuth}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"
@@ -133,8 +158,7 @@ const Login = () => {
                         </li>
                         <li
                           className="list-group-item ul-hz-list w-100 linkedin"
-                          onClick={LinkedInAuth}
-                        >
+                          onClick={LinkedInAuth}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="16"
