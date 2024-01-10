@@ -25,6 +25,8 @@ const Login = () => {
         "http://localhost:3000/makemyvisa/customer/login",
         data
       );
+
+      console.log(response);
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
@@ -62,7 +64,7 @@ const Login = () => {
             <div className="row">
               <div className="col-lg-12">
                 <h2 className="sign-up-text"> Login </h2>
-              </div>  
+              </div>
               <div className="row">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6 col-md-12 col-sm-12">

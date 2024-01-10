@@ -2,9 +2,8 @@ import React from "react";
 import "./Dashboard.css";
 import { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
-import Avatar from "../../assets/images/avatar.png"
-import { NavLink, Outlet } from "react-router-dom";
-
+import Avatar from "../../assets/images/avatar.png";
+import { NavLink, Link, Outlet } from "react-router-dom";
 
 function Dashboard() {
   useEffect(() => {
@@ -14,67 +13,78 @@ function Dashboard() {
     };
 
     // Attach the event listener to the button
-    document.getElementById("sidebarCollapse").addEventListener("click", handleSidebarToggle);
+    document
+      .getElementById("sidebarCollapse")
+      .addEventListener("click", handleSidebarToggle);
 
     // Clean up the event listener when the component is unmounted
     return () => {
-      document.getElementById("sidebarCollapse").removeEventListener("click", handleSidebarToggle);
+      document
+        .getElementById("sidebarCollapse")
+        .removeEventListener("click", handleSidebarToggle);
     };
   }, []);
 
-
   return (
     <div>
-      <h1>`hello ${}`</h1>
       <main className="content" />
       <div className="wrapper">
         {/* <!-- Sidebar  --> */}
         <nav id="sidebar">
           <div className="sidebar-header">
-      
             <img className="dashboard-logo" src={Logo} alt="" />
           </div>
 
           <ul className="list-unstyled components">
-            <NavLink style={{textDecoration:"none" }} to="/dashboard">
-            <p>
-              <svg
-                className="dashborad-icons"
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                viewBox="0 -960 960 960"
-                width="24">
-                <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
-              </svg>
-              Dashboard{" "}
-            </p>
+            <NavLink style={{ textDecoration: "none" }} to="/dashboard">
+              <p>
+                <svg
+                  className="dashborad-icons"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24"
+                  viewBox="0 -960 960 960"
+                  width="24">
+                  <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
+                </svg>
+                Dashboard{" "}
+              </p>
             </NavLink>
-            
-            
-            
-            <div className="accordion" id="accordionExample1">
-        <div className="accordion-item">
-            <h2 className="accordion-header" id="headingOne1">
-              
-                <button className="accordion-button custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu1" aria-expanded="false" aria-controls="homeSubmenu1">
-                <i className="fas fa-gear"></i> Settings
-                </button>
-            </h2>
-            <div id="homeSubmenu1" className="accordion-collapse collapse  custom-collapse" aria-labelledby="headingOne1" data-bs-parent="#accordionExample1">
-                <div className="accordion-body">
-                    <NavLink className="custom-link" to="profile"> <i className="fa-solid fa-user m-2"></i>Profile</NavLink>
-                </div>
-                <div className="accordion-body">
-                <NavLink className="custom-link" to="profile"> <i className="fas fa-power-off m-2"></i>Logout</NavLink>
-                    
-                </div>
-                
-            </div>
-        </div>
-    </div>
 
-    
-    {/* <div className="accordion" id="accordionExample2">
+            <div className="accordion" id="accordionExample1">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne1">
+                  <button
+                    className="accordion-button custom-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#homeSubmenu1"
+                    aria-expanded="false"
+                    aria-controls="homeSubmenu1">
+                    <i className="fas fa-gear"></i> Settings
+                  </button>
+                </h2>
+                <div
+                  id="homeSubmenu1"
+                  className="accordion-collapse collapse  custom-collapse"
+                  aria-labelledby="headingOne1"
+                  data-bs-parent="#accordionExample1">
+                  <div className="accordion-body">
+                    <NavLink className="custom-link" to="profile">
+                      {" "}
+                      <i className="fa-solid fa-user m-2"></i>Profile
+                    </NavLink>
+                  </div>
+                  <div className="accordion-body">
+                    <NavLink className="custom-link" to="../login">
+                      {" "}
+                      <i className="fas fa-power-off m-2"></i>Logout
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="accordion" id="accordionExample2">
         <div className="accordion-item">
             <h2 className="accordion-header" id="headingOne2">
                 <button className="accordion-button custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu2" aria-expanded="false" aria-controls="homeSubmenu2">
@@ -94,18 +104,7 @@ function Dashboard() {
             </div>
         </div>
     </div> */}
-
-        
-    
-
-
-
-            
-            
-            
           </ul>
-
-         
         </nav>
 
         {/* <!-- Page Content  --> */}
@@ -168,8 +167,7 @@ function Dashboard() {
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseExample"
                       aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
+                      aria-controls="collapseExample">
                       <img className="avatar-icons" src={Avatar} alt="" />
                     </button>
 
@@ -181,13 +179,14 @@ function Dashboard() {
                           </li>
                           <li className="list-group-item">
                             {" "}
-                            <Link to="/">
-                              <button
+                            <Link to="/logout">
+                              {/* <button
                                 type="button"
                                 className="btn btn-primary logout-button">
                                 {" "}
                                 Logout{" "}
-                              </button>
+                              </button> */}
+                              logout
                             </Link>
                           </li>
                         </ul>
@@ -198,15 +197,11 @@ function Dashboard() {
               </div>
             </div>
           </nav>
-         
-          <Outlet/>
+
+          <Outlet />
         </div>
-        
       </div>
-      
-      
     </div>
-    
   );
 }
 
