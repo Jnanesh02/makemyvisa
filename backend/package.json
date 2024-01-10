@@ -20,6 +20,7 @@
     "google-auth-library": "^9.4.1",
     "googleapis": "^129.0.0",
     "i18n-iso-countries": "^7.7.0",
+    "jsonwebtoken": "^9.0.2",
     "libphonenumber-js": "^1.10.51",
     "mongoose": "^8.0.2",
     "nodemailer": "^6.9.7",

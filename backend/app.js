@@ -25,7 +25,7 @@ app.use(passport.session());
 
 app.use(
 	cors({
-		origin: "http://localhost:3001",
+		origin: "http://localhost:3000",
 		methods: "GET,POST,PUT,DELETE",
 		credentials: true,
 	})
@@ -38,6 +38,7 @@ app.use("/makemyvisa/customer", customerRouter.forgotpassword);
 app.use("/makemyvisa/customer", customerRouter.resetPassword);
 app.use("/makemyvisa/customer", customerRouter.enquiries);
 app.use("/makemyvisa/customer", customerRouter.socialmedia);
+app.use("/makemyvisa/employee", customerRouter.employees);
 
 
 app.get("/", function (req, res) {
