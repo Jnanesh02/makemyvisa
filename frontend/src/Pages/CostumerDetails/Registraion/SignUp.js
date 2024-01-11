@@ -4,21 +4,8 @@ import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
 import "react-phone-input-2/lib/style.css";
 import { State } from "country-state-city";
-import "./PopupForm.css";
 import axios from "axios";
-
-const questionsData = [
-  {
-    id: 1,
-    question: "What is your favorite color?",
-    options: ["Option 1", "Option 2", "Option 3"],
-  },
-  {
-    id: 2,
-    question: "How did you hear about us?",
-    options: ["Option 1", "Option 2", "Option 3"],
-  },
-];
+import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -36,9 +23,6 @@ function SignUp() {
 
   const [states, setStates] = useState([]);
   const [Country, setCountry] = useState("");
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [isFormOpen, setFormOpen] = useState(false);
   const [errors, setErrors] = useState({
     firstname: "",
     lastname: "",
@@ -110,9 +94,7 @@ function SignUp() {
     if (!inputs.country || !Country) {
       newErrors.country = "Please select a valid country";
     }
-    if (!inputs.state) {
-      newErrors.state = "Please select a state";
-    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -153,20 +135,6 @@ function SignUp() {
     }));
   };
 
-  const closeForm = () => {
-    setFormOpen(false);
-  };
-
-  const handleOptionChange = (questionId, optionValue) => {
-    setSelectedOptions({
-      ...selectedOptions,
-      [questionId]: optionValue,
-    });
-  };
-
-  const handleNext = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
@@ -186,7 +154,7 @@ function SignUp() {
         );
         if (response.data) {
           alert(response.data.message);
-          setFormOpen(true);
+          navigate("/login");
         }
       } catch (error) {
         alert(error.response.data.message);
@@ -196,59 +164,6 @@ function SignUp() {
     }
   };
 
-  const renderQuestion = () => {
-    const currentQuestion = questionsData[currentQuestionIndex];
-    if (!currentQuestion) {
-      return null;
-    }
-
-    return (
-      <div className="question">
-        <label
-          htmlFor={`q${currentQuestion.id}`}>{`Question ${currentQuestion.id}: ${currentQuestion.question}`}</label>
-        <div className="options">
-          {currentQuestion.options.map((option, index) => (
-            <div key={index}>
-              <input
-                type={currentQuestion.options.length === 1 ? "text" : "radio"}
-                id={`q${currentQuestion.id}_option${index + 1}`}
-                name={`q${currentQuestion.id}`}
-                value={option}
-                checked={selectedOptions[currentQuestion.id] === option}
-                onChange={() => handleOptionChange(currentQuestion.id, option)}
-              />
-              <label htmlFor={`q${currentQuestion.id}_option${index + 1}`}>
-                {option}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const handleQuestionSubmit = async () => {
-    try {
-      console.log("Success mani");
-      const questionnaire = await axios.post(
-        "http://localhost:3000/makemyvisa/customer/questionnaires",
-        {
-          email: inputs.email,
-          questionnaire: [
-            {
-              question: "What is your favorite color?",
-              answer: "hello",
-            },
-          ],
-        }
-      );
-      if (questionnaire.status === 200) {
-        navigate("/login");
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -271,10 +186,8 @@ function SignUp() {
                   <form onSubmit={handleSubmit}>
                     <div className="row mb-2">
                       <div className="col-md-6">
-                        <label htmlFor="firstName" className="form-label">
-                          First Name
-                        </label>
                         <input
+                          placeholder="First Name"
                           type="text"
                           className="form-control"
                           id="firstName"
@@ -289,10 +202,8 @@ function SignUp() {
                         )}
                       </div>
                       <div className="col-md-6">
-                        <label htmlFor="lastName" className="form-label">
-                          Last Name
-                        </label>
                         <input
+                          placeholder="Last Name"
                           type="text"
                           className="form-control"
                           id="lastName"
@@ -307,10 +218,8 @@ function SignUp() {
                     </div>
 
                     <div className="mb-2">
-                      <label htmlFor="email" className="form-label">
-                        Email
-                      </label>
                       <input
+                        placeholder="Email"
                         type="text"
                         className="form-control"
                         id="email"
@@ -325,11 +234,9 @@ function SignUp() {
 
                     <div className="row mb-2">
                       <div className="col-md-6">
-                        <label htmlFor="password" className="form-label">
-                          Password
-                        </label>
                         <div className="input-group">
                           <input
+                            placeholder="Password"
                             type={showPassword ? "text" : "password"}
                             className="form-control"
                             id="password"
@@ -351,11 +258,9 @@ function SignUp() {
                         )}
                       </div>
                       <div className="col-md-6">
-                        <label htmlFor="confirmPassword" className="form-label">
-                          Confirm Password
-                        </label>
                         <div className="input-group">
                           <input
+                            placeholder="Confirm Password"
                             type={showPassword ? "text" : "password"}
                             className="form-control"
                             id="confirmPassword"
@@ -382,10 +287,8 @@ function SignUp() {
 
                     <div className="row mb-2">
                       <div className="col-md-6">
-                        <label htmlFor="phonenumber" className="form-label">
-                          Phone Number
-                        </label>
                         <PhoneInput
+                          placeholder="Phone Number"
                           name="phonenumber"
                           value={inputs.phonenumber}
                           onChange={(value, country) =>
@@ -399,10 +302,8 @@ function SignUp() {
                         )}
                       </div>
                       <div className="col-md-6">
-                        <label htmlFor="state" className="form-label">
-                          Select Country
-                        </label>
                         <select
+                          placeholder="Select Country"
                           className="form-select form-control"
                           name="country"
                           onChange={handleCountryChange}
@@ -423,10 +324,8 @@ function SignUp() {
                     </div>
 
                     <div className="mb-2">
-                      <label htmlFor="state" className="form-label">
-                        Select State
-                      </label>
                       <select
+                        placeholder="Select State"
                         className="form-select form-control"
                         name="state"
                         onChange={handleStateChange}
@@ -451,6 +350,7 @@ function SignUp() {
                       Submit
                     </button>
                   </form>
+                  <SocialMediaAccount />
                 </div>
               </div>
               <div className="col-lg-3"></div>
@@ -458,37 +358,6 @@ function SignUp() {
           </div>
         </div>
       </section>
-      {isFormOpen && (
-        <div>
-          {/* <div className="backdrop" onClick={closeForm}></div> */}
-          <div className="formPopup">
-            <form action="/submit_form" className="formContainer">
-              {renderQuestion()}
-              {currentQuestionIndex < questionsData.length - 1 ? (
-                <button
-                  type="button"
-                  className="btnFormSubmit"
-                  onClick={handleNext}>
-                  Next
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btnFormSubmit"
-                  onClick={handleQuestionSubmit}>
-                  Submit
-                </button>
-              )}
-              <button
-                type="button"
-                className="btnFormSubmit cancel"
-                onClick={closeForm}>
-                Close
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </main>
   );
 }

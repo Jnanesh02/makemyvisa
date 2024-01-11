@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [onSignup, setOnSignup] = useState(false);
+  const [onLogin, setOnLogin] = useState(false);
+  
 
   const Login = () => {
     // setIsLoggedIn(true);
@@ -35,6 +38,14 @@ const Navbar = () => {
     return (
       <Link className="dropdown-item" to="/registration">
         signup
+      </Link>
+    );
+  };
+
+  const HomeLink = () => {
+    return (
+      <Link className="dropdown-item" to="/home">
+        Home
       </Link>
     );
   };

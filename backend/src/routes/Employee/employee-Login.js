@@ -1,63 +1,136 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const employee = require("../../models/employeeSchema");
-const admin = require("../../models/adminSchema");
-const operationTeam = require("../../models/operationTeamSchema");
+const Employee = require("../../models/employeeSchema");
+const Admin = require("../../models/adminSchema");
+const OperationTeam = require("../../models/operationTeamSchema");
 const isAdmin = require("../../middleware/authenication");
+
+// Route for user login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const existingUser = await employee.findOne({ email: email });
+    // Check if the user exists
+    const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email" });
     }
 
-    const isMatch = await bcrypt.compare(password, existingUser.password);
+    // If the password starts not with "TEMP_", prompt the user to reset it
+    if (!existingUser.password.startsWith("TEMP_")) {
+      // Check if the provided password matches the stored hashed password
+      const isMatch = await bcrypt.compare(password, existingUser.password);
 
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password." });
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid password" });
+      }
     }
+
+    // Check if the user is inactive
     if (existingUser.inActive) {
       return res.status(403).json({ message: "Employee is not active" });
     }
+
+    // Retrieve user details based on the role
+    let userDetails;
     switch (existingUser.role) {
       case "admin":
-        const existingAdmin = await admin.findOne({
-          email: existingUser.email,
-        });
-         req.session.user ={
-          id: existingAdmin._id,
-          role: existingAdmin.role
-         }
-        return res.status(200).json({ message: existingAdmin});
+        userDetails = await Admin.findOne({ email: existingUser.email });
+        break;
       case "operation":
-        const existingOperationTeam = await operationTeam.findOne({
+        userDetails = await OperationTeam.findOne({
           email: existingUser.email,
         });
-
-        return res.status(200).json({ message: existingOperationTeam });
+        break;
     }
+
+    // Set user details in the session
+    req.session.user = {
+      id: userDetails._id,
+      role: userDetails.role,
+    };
+
+    // Return user details in the response
+    return res.status(200).json({ message: userDetails });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
-// Route to create an employee account (accessible to admins only)
-router.post("/createEmployee", isAdmin, async (req, res) => {
-  try {
-    // Add logic to create an employee account
-    // Extract relevant information from the request body
-    // Check if an employee with the provided email already exists
-    // Hash the password before saving to the database
-    // Create a new employee
-    // Save the new employee to the database
 
-    res.status(200).json({ message: 'Employee account created successfully' });
+// Route to create a new employee account (accessible to admins only)
+router.post("/createEmployee", async (req, res) => {
+  try {
+    const { firstName, lastName, contactDetails, address, email, role } =
+      req.body;
+
+    // Check if the user with the given email already exists
+    const existingUser = await Employee.findOne({ email: email });
+    if (existingUser) {
+      return res.status(204).json({ message: "Email already exists" });
+    }
+
+    // Generate a temporary password for the new employee
+    const generatePassword = `TEMP_${Math.random().toString(36).slice(-8)}`;
+
+    // Create a new employee instance
+    const newEmployee = new Employee({
+      firstName: firstName,
+      lastName: lastName,
+      contact_Details: contactDetails,
+      Address: address,
+      email: email,
+      password: generatePassword,
+      role: role,
+    });
+
+    // Save the new employee to the database
+    await newEmployee.save();
+
+    // Create user details based on the role
+    let userDetails;
+    switch (newEmployee.role) {
+      case "admin":
+        userDetails = new Admin({
+          firstName: newEmployee.firstName,
+          lastName: newEmployee.lastName,
+          contact_Details: newEmployee.contact_Details,
+          Address: newEmployee.Address,
+          email: newEmployee.email,
+          password: newEmployee.password,
+          role: newEmployee.role,
+        });
+        break;
+      case "operation":
+        userDetails = new OperationTeam({
+          firstName: newEmployee.firstName,
+          lastName: newEmployee.lastName,
+          contact_Details: newEmployee.contact_Details,
+          Address: newEmployee.Address,
+          email: newEmployee.email,
+          password: newEmployee.password,
+          role: newEmployee.role,
+        });
+        break;
+    }
+
+    // Save the user details to the database
+    await userDetails.save();
+
+    // Return the details of the created user in the response
+    return res.status(200).json({ message: userDetails });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
+  }
+});
+router.get("/employeData", isAdmin, async (req, res) => {
+  try {
+    const employeeData = await Employee.find();
+    return res.status(200).json({ employeeData });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 module.exports = router;

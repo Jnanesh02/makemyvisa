@@ -7,21 +7,22 @@ import { NavLink, Link, Outlet } from "react-router-dom";
 
 function Dashboard() {
   useEffect(() => {
-    // This runs after the component has been rendered
     const handleSidebarToggle = () => {
-      document.getElementById("sidebar").classList.toggle("active");
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar) {
+        sidebar.classList.toggle("active");
+      }
     };
 
-    // Attach the event listener to the button
-    document
-      .getElementById("sidebarCollapse")
-      .addEventListener("click", handleSidebarToggle);
+    const sidebarCollapseButton = document.getElementById("sidebarCollapse");
+    if (sidebarCollapseButton) {
+      sidebarCollapseButton.addEventListener("click", handleSidebarToggle);
+    }
 
-    // Clean up the event listener when the component is unmounted
     return () => {
-      document
-        .getElementById("sidebarCollapse")
-        .removeEventListener("click", handleSidebarToggle);
+      if (sidebarCollapseButton) {
+        sidebarCollapseButton.removeEventListener("click", handleSidebarToggle);
+      }
     };
   }, []);
 

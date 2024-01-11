@@ -12,6 +12,7 @@ module.exports = {
   customerLogout,
   forgotpassword,
   resetPassword,
+  employees,
   enquiries,
   socialmedia,
 };
