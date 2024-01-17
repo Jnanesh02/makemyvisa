@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import Logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/avatar.png";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import Dashboard from "../Dashboard/Dashboard";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [onSignup, setOnSignup] = useState(false);
-  const [onLogin, setOnLogin] = useState(false);
-  
+  const location = useLocation();
+  const onLoginPage = location.pathname === "/login";
+  const onSignupPage = location.pathname === "/registration";
+  const onHomePage = location.pathname === "/";
 
   const Login = () => {
     // setIsLoggedIn(true);
@@ -44,7 +45,7 @@ const Navbar = () => {
 
   const HomeLink = () => {
     return (
-      <Link className="dropdown-item" to="/home">
+      <Link className="dropdown-item" to="/">
         Home
       </Link>
     );
@@ -118,16 +119,28 @@ const Navbar = () => {
                           <img src={avatar} alt="Avatar" />
                         </button>
                         <ul className="dropdown-menu">
-                          <li>
-                            {isLoggedIn ? (
-                              <DashboardLink></DashboardLink>
-                            ) : (
+                          {onLoginPage && (
+                            <>
+                              <HomeLink></HomeLink>
+
                               <Signup></Signup>
-                            )}
-                          </li>
-                          <li>
-                            {isLoggedIn ? <Logout></Logout> : <Login></Login>}
-                          </li>
+                            </>
+                          )}
+
+                          {onSignupPage && (
+                            <>
+                              <HomeLink></HomeLink>
+
+                              {isLoggedIn ? <Logout></Logout> : <Login></Login>}
+                            </>
+                          )}
+
+                          {onHomePage && (
+                            <>
+                              <Signup></Signup>
+                              <Login></Login>
+                            </>
+                          )}
                         </ul>
                       </div>
                     </div>
