@@ -8,7 +8,6 @@ const passportStrategy = require("./config/passport");
 const app = express();
 const customerRouter = require("./src/routes");
 app.use(cookieParser());
-app.use(express.json());
 
 const session = require("express-session");
 
@@ -17,6 +16,13 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      path: '/', 
+      httpOnly: true,
+      maxAge: 86400000,
+      sameSite: 'None' 
+    },
+    
   })
 );
 
@@ -41,6 +47,9 @@ app.use("/makemyvisa/customer", customerRouter.resetPassword);
 app.use("/makemyvisa/customer", customerRouter.enquiries);
 app.use("/makemyvisa/customer", customerRouter.socialmedia);
 app.use("/makemyvisa/employee", customerRouter.employees);
+app.use("/makemyvisa/employee", customerRouter.deleteEmployeeData);
+app.use("/makemyvisa/employee", customerRouter.employeesLogout);
+
 
 app.get("/", function (req, res) {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
