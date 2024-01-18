@@ -7,7 +7,10 @@ const enquiries = require("./enquiry");
 const socialmedia = require("./customer/socialmedia");
 const employees = require("./Employee/employee-Login");
 const employeesLogout = require("./Employee/logout");
-const deleteEmployeeData = require("./Employee/delete-employee")
+const deleteEmployeeData = require("./Employee/delete-employee");
+const updateEmployeePassword = require("./Employee/update-password");
+const updateEmployeeDetails = require("./Employee/update-EmployeeDetails")
+
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -18,5 +21,7 @@ module.exports = {
   enquiries,
   socialmedia,
   employeesLogout,
-  deleteEmployeeData
+  deleteEmployeeData,
+  updateEmployeePassword,
+  updateEmployeeDetails
 };
