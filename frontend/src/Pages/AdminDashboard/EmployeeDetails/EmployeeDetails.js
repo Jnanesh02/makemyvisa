@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./employe.css";
 import CreateAccountForm from "./CreateAccountForm";
-
-
+import Modal from "./CreateAccountModal";
 
 const EmployeeDetails = () => {
   const [employees, setEmployees] = useState([]);
@@ -15,7 +14,14 @@ const EmployeeDetails = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
-  const displayFields = ["firstName", "lastName", "email", "role", "contactDetails", "status"];
+  const displayFields = [
+    "firstName",
+    "lastName",
+    "email",
+    "role",
+    "contact_Details",
+    "status",
+  ];
 
   const adminToken = localStorage.getItem("adminToken");
   const headers = {
@@ -24,7 +30,10 @@ const EmployeeDetails = () => {
 
   const fetchEmployeeDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/makemyvisa/employee/employeData", { headers , withCredentials: true});
+      const response = await axios.get(
+        "http://localhost:3000/makemyvisa/employee/employeData",
+        { headers, withCredentials: true }
+      );
       const employeeData = response.data.employeeData;
       setEmployees(employeeData);
     } catch (error) {
@@ -35,11 +44,12 @@ const EmployeeDetails = () => {
   };
   // Function to apply all filters
   const applyFilters = (data) => {
-    return data.filter((employee) => (
-      filterBySearchTerm(employee, searchTerm) &&
-      filterByRole(employee, roleFilter) &&
-      filterByStatus(employee, statusFilter)
-    ));
+    return data.filter(
+      (employee) =>
+        filterBySearchTerm(employee, searchTerm) &&
+        filterByRole(employee, roleFilter) &&
+        filterByStatus(employee, statusFilter)
+    );
   };
   // useEffect to fetch data on component mount
   useEffect(() => {
@@ -48,7 +58,7 @@ const EmployeeDetails = () => {
 
   // useEffect to apply filters whenever filter-related state changes
   useEffect(() => {
-    applyAndFetch(employees, applyFilters, setFilteredEmployees);// eslint-disable-next-line
+    applyAndFetch(employees, applyFilters, setFilteredEmployees); // eslint-disable-next-line
   }, [employees, roleFilter, statusFilter, searchTerm]); // Include applyFilters in the dependency array
 
   // Function to apply filters and fetch data
@@ -76,26 +86,27 @@ const EmployeeDetails = () => {
     setFilteredEmployees(applyFilters(employees));
   };
 
-
   // Separate filter functions
-  const filterBySearchTerm = (employee, term) => (
+  const filterBySearchTerm = (employee, term) =>
     term === "" ||
-    (employee.firstName && employee.firstName.toLowerCase().includes(term.toLowerCase())) ||
-    (employee.lastName && employee.lastName.toLowerCase().includes(term.toLowerCase())) ||
-    (employee.email && employee.email.toLowerCase().includes(term.toLowerCase())) ||
-    (employee.contactDetails && employee.contactDetails.toLowerCase().includes(term.toLowerCase())) ||
-    (employee.role && employee.role.toLowerCase().includes(term.toLowerCase())) ||
-    (employee.status && employee.status.toLowerCase().includes(term.toLowerCase()))
-  );
+    (employee.firstName &&
+      employee.firstName.toLowerCase().includes(term.toLowerCase())) ||
+    (employee.lastName &&
+      employee.lastName.toLowerCase().includes(term.toLowerCase())) ||
+    (employee.email &&
+      employee.email.toLowerCase().includes(term.toLowerCase())) ||
+    (employee.contactDetails &&
+      employee.contactDetails.toLowerCase().includes(term.toLowerCase())) ||
+    (employee.role &&
+      employee.role.toLowerCase().includes(term.toLowerCase())) ||
+    (employee.status &&
+      employee.status.toLowerCase().includes(term.toLowerCase()));
 
-  const filterByRole = (employee, role) => (
-    role === "" || employee.role.toLowerCase() === role.toLowerCase()
+  const filterByRole = (employee, role) =>
+    role === "" || employee.role.toLowerCase() === role.toLowerCase();
 
-  );
-
-  const filterByStatus = (employee, status) => (
-    status === "" || employee.status.toLowerCase() === status.toLowerCase()
-  );
+  const filterByStatus = (employee, status) =>
+    status === "" || employee.status.toLowerCase() === status.toLowerCase();
 
   // Function to handle form submission
   const handleCreateAccount = (newEmployee) => {
@@ -106,23 +117,35 @@ const EmployeeDetails = () => {
   };
 
   const handleDelete = async (employeeId) => {
-    try {
-      await axios.delete( `${process.env.REACT_APP_ADMIN_DELETE}/delete/${employeeId}`,{ headers , withCredentials: true});
+    const isConfirmed = window.confirm(
+      "Are you sure? you want to delete this user"
+    );
+    if (isConfirmed) {
+      try {
+        await axios.delete(
+          `${process.env.REACT_APP_ADMIN_DELETE}/delete/${employeeId}`,
+          { headers, withCredentials: true }
+        );
 
-      // Update the state to remove the deleted employee
-      const updatedEmployees = employees.filter((employee) => employee._id !== employeeId);
-      setEmployees(updatedEmployees);
-      setFilteredEmployees(applyFilters(updatedEmployees));
-    } catch (error) {
-      console.error("Error deleting employee:", error.message);
-      setError("Error deleting employee. Please try again later.");
+        // Update the state to remove the deleted employee
+        const updatedEmployees = employees.filter(
+          (employee) => employee._id !== employeeId
+        );
+        setEmployees(updatedEmployees);
+        setFilteredEmployees(applyFilters(updatedEmployees));
+      } catch (error) {
+        console.error("Error deleting employee:", error.message);
+        setError("Error deleting employee. Please try again later.");
+      }
     }
   };
 
   // Function to handle edit action
   const handleEdit = (employeeId) => {
     // Retrieve the employee data based on the employeeId
-    const employeeToEdit = employees.find((employee) => employee._id === employeeId);
+    const employeeToEdit = employees.find(
+      (employee) => employee._id === employeeId
+    );
 
     // Set the employee as the editing employee
     setEditingEmployee(employeeToEdit);
@@ -139,16 +162,22 @@ const EmployeeDetails = () => {
     <div>
       <h2>Employee Details</h2>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "16px",
+        }}>
         <input
           type="text"
           placeholder="Search..."
+          className="Searchbar"
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ marginRight: '8px' }}
+          style={{ marginRight: "8px" }}
         />
 
-        <label style={{ marginRight: '8px' }}>
+        <label style={{ marginRight: "8px" }}>
           Role Filter:
           <select value={roleFilter} onChange={handleRoleFilterChange}>
             <option value="">All</option>
@@ -157,7 +186,7 @@ const EmployeeDetails = () => {
           </select>
         </label>
 
-        <label style={{ marginRight: '8px' }}>
+        <label style={{ marginRight: "8px" }}>
           Status Filter:
           <select value={statusFilter} onChange={handleStatusFilterChange}>
             <option value="">All</option>
@@ -171,7 +200,10 @@ const EmployeeDetails = () => {
         </button>
       </div>
 
-      {showCreateForm && <CreateAccountForm onSubmit={handleCreateAccount} />}
+      {/* {showCreateForm && <CreateAccountForm onSubmit={handleCreateAccount} />} */}
+      <Modal open={showCreateForm} onClose={() => setShowCreateForm(false)}>
+        <CreateAccountForm onSubmit={handleCreateAccount} />
+      </Modal>
 
       <table className="employee-table">
         <thead>
@@ -193,11 +225,18 @@ const EmployeeDetails = () => {
                     <input
                       type="text"
                       value={editingEmployee[field]}
-                      onChange={(e) => setEditingEmployee({ ...editingEmployee, [field]: e.target.value })}
+                      onChange={(e) =>
+                        setEditingEmployee({
+                          ...editingEmployee,
+                          [field]: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     // Render the field value with a click event to enable editing
-                    <span onClick={() => handleEdit(employee._id)}>{employee[field]}</span>
+                    <span onClick={() => handleEdit(employee._id)}>
+                      {employee[field]}
+                    </span>
                   )}
                 </td>
               ))}
@@ -209,11 +248,15 @@ const EmployeeDetails = () => {
                   </button>
                 )}
                 {!editingEmployee && (
-                  <button className="action-button" onClick={() => handleEdit(employee._id)}>
+                  <button
+                    className="action-button"
+                    onClick={() => handleEdit(employee._id)}>
                     Edit
                   </button>
                 )}
-                <button className="action-button" onClick={() => handleDelete(employee._id)}>
+                <button
+                  className="action-button"
+                  onClick={() => handleDelete(employee._id)}>
                   Delete
                 </button>
               </td>
@@ -227,6 +270,5 @@ const EmployeeDetails = () => {
     </div>
   );
 };
-
 
 export default EmployeeDetails;

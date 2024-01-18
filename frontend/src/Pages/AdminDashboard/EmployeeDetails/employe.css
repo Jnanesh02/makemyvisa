@@ -1,31 +1,34 @@
 /* Add this to your CSS file */
 .employee-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-  }
-  
-  .employee-table th, .employee-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .employee-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .action-button {
-    margin-right: 8px; 
-    padding: 0px 10px;
-    /* Adjust the margin as needed */
-  }
-  
-  .edit-button {
-    background-color: #4CAF50;
-    padding: 10px; /* Green color for edit button, customize as needed */
-  }
-  
-  .delete-button {
-    background-color: #f44336; /* Red color for delete button, customize as needed */
-  }
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+.Searchbar {
+  width: 500px;
+}
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}
+
+.action-button {
+  margin-right: 8px;
+  padding: 0px 10px;
+  /* Adjust the margin as needed */
+}
+
+.edit-button {
+  background-color: #4caf50;
+  padding: 10px; /* Green color for edit button, customize as needed */
+}
+
+.delete-button {
+  background-color: #f44336; /* Red color for delete button, customize as needed */
+}

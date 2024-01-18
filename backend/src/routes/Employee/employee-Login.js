@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const Employee = require("../../models/employeeSchema");
 const Admin = require("../../models/adminSchema");
 const OperationTeam = require("../../models/operationTeamSchema");
-const {isAdmin} = require("../../middleware/authenication");
+const { isAdmin } = require("../../middleware/authenication");
 
 // Route for user login
 router.post("/login", async (req, res) => {
@@ -46,24 +46,24 @@ router.post("/login", async (req, res) => {
         break;
     }
 
-     // Generate a token with user details
-     const token = jwt.sign(
+    // Generate a token with user details
+    const token = jwt.sign(
       {
         id: userDetails._id,
         role: userDetails.role,
       },
-      "your-secret-key", 
-      { expiresIn: "1h" } 
+      "your-secret-key",
+      { expiresIn: "1h" }
     );
 
-    return res.status(200).json({ message: userDetails,token:token });
+    return res.status(200).json({ message: userDetails, token: token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
 // Route to create a new employee account (accessible to admins only)
-router.post("/createEmployee",isAdmin, async (req, res) => {
+router.post("/createEmployee", isAdmin, async (req, res) => {
   try {
     const { firstName, lastName, contactDetails, address, email, role } =
       req.body;
@@ -103,7 +103,7 @@ router.post("/createEmployee",isAdmin, async (req, res) => {
           email: newEmployee.email,
           password: newEmployee.password,
           role: newEmployee.role,
-          _id:newEmployee._id
+          _id: newEmployee._id,
         });
         break;
       case "operation":
@@ -115,8 +115,7 @@ router.post("/createEmployee",isAdmin, async (req, res) => {
           email: newEmployee.email,
           password: newEmployee.password,
           role: newEmployee.role,
-          _id:newEmployee._id
-
+          _id: newEmployee._id,
         });
         break;
     }
@@ -131,7 +130,7 @@ router.post("/createEmployee",isAdmin, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-router.get("/employeData",isAdmin, async (req, res) => {
+router.get("/employeData", isAdmin, async (req, res) => {
   try {
     const employeeData = await Employee.find();
     return res.status(200).json({ employeeData });
