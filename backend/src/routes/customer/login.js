@@ -17,6 +17,7 @@ router.post("/login", async (req, res) => {
     }
 
     req.session.userId = existingUser._id;
+    console.log( req.session)
     res.json({ message: { message: "login successful", data: existingUser } });
     // return res.json({ existingUser });
   } catch (error) {

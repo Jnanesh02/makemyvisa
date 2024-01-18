@@ -23,25 +23,6 @@ const EmployeeDetails = () => {
     "status",
   ];
 
-  const adminToken = localStorage.getItem("adminToken");
-  const headers = {
-    Authorization: `Bearer ${adminToken}`,
-  };
-
-  const fetchEmployeeDetails = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/makemyvisa/employee/employeData",
-        { headers, withCredentials: true }
-      );
-      const employeeData = response.data.employeeData;
-      setEmployees(employeeData);
-    } catch (error) {
-      setError("Error fetching employee details. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
   // Function to apply all filters
   const applyFilters = (data) => {
     return data.filter(
@@ -53,6 +34,26 @@ const EmployeeDetails = () => {
   };
   // useEffect to fetch data on component mount
   useEffect(() => {
+    const fetchEmployeeDetails = async () => {
+      try {
+        const adminToken = localStorage.getItem("adminToken");
+        const response = await axios.get(
+          "http://localhost:3000/makemyvisa/employee/employeData",
+          {
+            headers: {
+              Authorization: `Bearer ${adminToken}`,
+            },
+            withCredentials: true,
+          }
+        );
+        const employeeData = response.data.employeeData;
+        setEmployees(employeeData);
+      } catch (error) {
+        setError("Error fetching employee details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchEmployeeDetails();
   }, []);
 
@@ -122,9 +123,16 @@ const EmployeeDetails = () => {
     );
     if (isConfirmed) {
       try {
+        const adminToken = localStorage.getItem("adminToken");
+
         await axios.delete(
           `${process.env.REACT_APP_ADMIN_DELETE}/delete/${employeeId}`,
-          { headers, withCredentials: true }
+          {
+            headers: {
+              Authorization: `Bearer ${adminToken}`,
+            },
+            withCredentials: true,
+          }
         );
 
         // Update the state to remove the deleted employee

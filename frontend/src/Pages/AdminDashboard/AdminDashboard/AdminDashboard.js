@@ -89,7 +89,7 @@ export const AdminDashboard = () => {
         <div className="accordion-item">
             <h2 className="accordion-header" id="headingOne2">
             <NavLink className="accordion-button custom-button" to="employeeDetails">
-              Employee Details
+              Employee Management
             </NavLink>
             </h2>
         </div>

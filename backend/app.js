@@ -47,8 +47,10 @@ app.use("/makemyvisa/customer", customerRouter.resetPassword);
 app.use("/makemyvisa/customer", customerRouter.enquiries);
 app.use("/makemyvisa/customer", customerRouter.socialmedia);
 app.use("/makemyvisa/employee", customerRouter.employees);
+app.use("/makemyvisa/employee", customerRouter.updateEmployeePassword);
 app.use("/makemyvisa/employee", customerRouter.deleteEmployeeData);
 app.use("/makemyvisa/employee", customerRouter.employeesLogout);
+app.use("/makemyvisa/employee", customerRouter.updateEmployeeDetails);
 
 
 app.get("/", function (req, res) {

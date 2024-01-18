@@ -1,4 +1,3 @@
-// CreateAccountForm.js
 import React, { useState } from "react";
 import "./CreateAccountForm.css";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +56,7 @@ const CreateAccountForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="admin-form" onSubmit={handleSubmit}>
       <input
         type="text"
         name="firstName"
