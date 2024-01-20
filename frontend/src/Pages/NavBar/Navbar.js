@@ -23,7 +23,7 @@ const Navbar = () => {
   const Logout = () => {
     // setIsLoggedIn(false);
     return (
-      <Link className="dropdown-item" to="/">
+      <Link className="dropdown-item" to="/logout">
         Logout
       </Link>
     );
@@ -57,7 +57,9 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-2 col-sm-4 col-md-4 col">
-                <img className="header-logo" src={Logo} alt="Logo" />
+                <Link to="/">
+                  <img className="header-logo" src={Logo} alt="Logo" />
+                </Link>
               </div>
               <div className="col-lg-10 col-sm-8 col-md-8  nav-cont-b">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-section">

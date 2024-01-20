@@ -23,6 +23,7 @@ function App() {
   const AA = () => <h1>AA is working</h1>;
   const ContactUs = () => <h1>contactus is working</h1>;
   const Study = () => <h1>study is working</h1>;
+
   return (
     <div className="App">
       <Router>
@@ -32,8 +33,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-
           </Route>
+
           <Route path="dashboard" element={<Dashboard />}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
@@ -42,16 +43,15 @@ function App() {
               <Route path="Travel" element={<TravelDetails />} />
             </Route>
           </Route>
+
           <Route path="Admindashboard" element={<AdminDashboard />}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
               <Route index element={<ProfileDetails />} />
               <Route path="Address" element={<AddressDetails />} />
               <Route path="Travel" element={<TravelDetails />} />
-
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
-
           </Route>
           <Route path="/logout" element={<AdminLogout />} />
 

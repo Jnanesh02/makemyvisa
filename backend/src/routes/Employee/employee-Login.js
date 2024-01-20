@@ -11,7 +11,7 @@ const { isAdmin } = require("../../middleware/authenication");
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log(req.path);
     // Check if the user exists
     const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {
@@ -130,6 +130,15 @@ router.post("/createEmployee", isAdmin, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.get("/Admindashboard", isAdmin, async (req, res) => {
+  try {
+    res.redirect("/admindashboard");
+  } catch (err) {
+    res.redirect("/login"); 
+  }
+});
+
 router.get("/employeData", isAdmin, async (req, res) => {
   try {
     const employeeData = await Employee.find();
