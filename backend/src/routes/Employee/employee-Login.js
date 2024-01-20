@@ -67,7 +67,7 @@ router.post("/createEmployee", isAdmin, async (req, res) => {
   try {
     const { firstName, lastName, contactDetails, address, email, role } =
       req.body;
-
+  console.log(req.body);
     // Check if the user with the given email already exists
     const existingUser = await Employee.findOne({ email: email });
     if (existingUser) {

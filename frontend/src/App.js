@@ -1,5 +1,6 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Pages/CostumerDetails/Login/Login";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home/Home";
@@ -18,6 +19,11 @@ import { AdminLogout } from "./Pages/AdminDashboard/AdminDashboard/AdminLogout";
 import EmployeeDetails from "./Pages/AdminDashboard/EmployeeDetails/EmployeeDetails";
 
 function App() {
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+useEffect(()=>{
+  const adminToken= localStorage.getItem("adminToken");
+  setIsAdminLoggedIn(!!adminToken)
+},[]);
   const Visa = () => <h1>visa is working</h1>;
   const Travel = () => <h1>travel is working</h1>;
   const AA = () => <h1>AA is working</h1>;
@@ -42,7 +48,7 @@ function App() {
               <Route path="Travel" element={<TravelDetails />} />
             </Route>
           </Route>
-          <Route path="Admindashboard" element={<AdminDashboard />}>
+          <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace/>)}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
               <Route index element={<ProfileDetails />} />

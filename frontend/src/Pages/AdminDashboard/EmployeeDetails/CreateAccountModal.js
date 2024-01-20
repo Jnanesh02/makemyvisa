@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const MODAL_STYLES = {
+  width:"30%",
   position: "fixed",
   top: "50%",
   left: "50%",

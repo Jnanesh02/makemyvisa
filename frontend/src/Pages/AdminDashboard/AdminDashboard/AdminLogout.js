@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,22 +19,25 @@ async function performLogout() {
   }
 }
 
+
 export const AdminLogout = () => {
   const navigate = useNavigate();
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async()=>{
     const success = await performLogout();
-    if (success) {
-      navigate("/admin");
-    } else {
-      alert("Failed to log out.");
+    if(success){
+      navigate("/admin")
+    }else{
+      alert("failed to logout")
     }
-  };
-
-  // Call handleLogout when the component mounts
-  React.useEffect(() => {
+  },[navigate])
+  useEffect(()=>{
     handleLogout();
-  }, []);
-
-  return <div>Logging out...</div>;
+  },[handleLogout])
+  return (
+    <div>Logging out...</div>
+  )
 }
+
+
+ 
 

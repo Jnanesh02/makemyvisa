@@ -6,6 +6,7 @@ const OperationTeam = require("../../models/operationTeamSchema");
 router.put("/update/:id", async (req, res) => {
     const object_id = req.params.id
     const { firstName, lastName, email, phoneNumber, role, status } = req.body;
+    console.log(req.body);
   try {
     const existingEmployee = await Employee.findById({ _id: object_id })
     if (!existingEmployee) {
@@ -53,6 +54,7 @@ router.put("/update/:id", async (req, res) => {
                     phoneNumber,
                     status
                 });
+                break;
                 case "operation":
                     await OperationTeam.findByIdAndUpdate(object_id, {
                         firstName,
