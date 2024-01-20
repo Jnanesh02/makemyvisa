@@ -42,7 +42,7 @@ const ProfileForm = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [formData]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -63,7 +63,7 @@ const ProfileForm = () => {
 
     try {
       const employeeId = localStorage.getItem("userId");
-      const response = await axios.put(`http://localhost:3000/makemyvisa/customer/updateCustomerProfile/${employeeId}`, formData);
+       await axios.put(`http://localhost:3000/makemyvisa/customer/updateCustomerProfile/${employeeId}`, formData);
       setUpdateUserSuccess("Profile updated successfully");
       setOriginalFormData({ ...formData });
     } catch (error) {

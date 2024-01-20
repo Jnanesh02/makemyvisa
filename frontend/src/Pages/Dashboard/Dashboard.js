@@ -76,7 +76,7 @@ function Dashboard() {
                     </NavLink>
                   </div>
                   <div className="accordion-body">
-                    <NavLink className="custom-link" to="/login">
+                    <NavLink className="custom-link" to="/CustomerLogout">
                       {" "}
                       <i className="fas fa-power-off m-2"></i>Logout
                     </NavLink>
@@ -179,14 +179,7 @@ function Dashboard() {
                             <span className="profile-name">Profile</span>
                           </li>
                           <li className="list-group-item">
-                            {" "}
-                            <Link to="/logout">
-                              {/* <button
-                                type="button"
-                                className="btn btn-primary logout-button">
-                                {" "}
-                                Logout{" "}
-                              </button> */}
+                            <Link to="/CustomerLogout">
                               logout
                             </Link>
                           </li>

@@ -5,15 +5,14 @@ import Login from "./Pages/CostumerDetails/Login/Login";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home/Home";
 import SignUp from "./Pages/CostumerDetails/Registraion/SignUp";
-// import Contact from "./Pages/contact/contact"
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Hello from "./Pages/Dashboard/Hello";
 import Profile from "./Pages/Dashboard/Profile";
-import Logout from "./Pages/Dashboard/Logout";
 import AdminLogin from "./Pages/AdminDashboard/AdminLogin";
 import { AdminDashboard } from "./Pages/AdminDashboard/AdminDashboard/AdminDashboard";
 import { AdminLogout } from "./Pages/AdminDashboard/AdminDashboard/AdminLogout";
 import EmployeeDetails from "./Pages/AdminDashboard/EmployeeDetails/EmployeeDetails";
+import { CustomerLogout } from "./Pages/Dashboard/CustomerLogout";
 
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
@@ -43,12 +42,15 @@ useEffect(()=>{
             <Route path="profile" element={<Profile />}>
             </Route>
           </Route>
-          <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace/>)}>
+          <Route path="CustomerLogout" element={<CustomerLogout />} />
+
+          <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace={true}/>)}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
           </Route>
+          <Route path="AdminLogout" element={<AdminLogout />} />
 
           <Route path="visa" element={<Visa />} />
           <Route path="study" element={<Study />} />

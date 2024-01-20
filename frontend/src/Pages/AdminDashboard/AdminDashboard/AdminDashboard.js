@@ -76,7 +76,7 @@ export const AdminDashboard = () => {
                     </NavLink>
                   </div>
                   <div className="accordion-body">
-                    <NavLink className="custom-link" to="/logout">
+                    <NavLink className="custom-link" to="/AdminLogout">
                       {" "}
                       <i className="fas fa-power-off m-2"></i>Logout
                     </NavLink>
@@ -169,7 +169,7 @@ export const AdminDashboard = () => {
                           </li>
                           <li className="list-group-item">
                             {" "}
-                            <Link to="/logout">
+                            <Link to="/AdminLogout">
                               {/* <button
                                 type="button"
                                 className="btn btn-primary logout-button">
