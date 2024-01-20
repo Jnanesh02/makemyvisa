@@ -76,7 +76,7 @@ function Dashboard() {
                     </NavLink>
                   </div>
                   <div className="accordion-body">
-                    <NavLink className="custom-link" to="../login">
+                    <NavLink className="custom-link" to="/login">
                       {" "}
                       <i className="fas fa-power-off m-2"></i>Logout
                     </NavLink>

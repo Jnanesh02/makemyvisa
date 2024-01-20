@@ -10,8 +10,6 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Hello from "./Pages/Dashboard/Hello";
 import Profile from "./Pages/Dashboard/Profile";
 import ProfileDetails from "./Pages/Dashboard/ProfileDetails";
-import AddressDetails from "./Pages/Dashboard/AddressDetails";
-import TravelDetails from "./Pages/Dashboard/TravelDetails";
 import Logout from "./Pages/Dashboard/Logout";
 import AdminLogin from "./Pages/AdminDashboard/AdminLogin";
 import { AdminDashboard } from "./Pages/AdminDashboard/AdminDashboard/AdminDashboard";
@@ -45,20 +43,15 @@ useEffect(()=>{
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
               <Route index element={<ProfileDetails />} />
-              <Route path="Address" element={<AddressDetails />} />
-              <Route path="Travel" element={<TravelDetails />} />
             </Route>
           </Route>
           <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace/>)}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
               <Route index element={<ProfileDetails />} />
-              <Route path="Address" element={<AddressDetails />} />
-              <Route path="Travel" element={<TravelDetails />} />
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
           </Route>
-          <Route path="/logout" element={<AdminLogout />} />
 
           <Route path="visa" element={<Visa />} />
           <Route path="study" element={<Study />} />
