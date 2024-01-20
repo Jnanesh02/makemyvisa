@@ -41,6 +41,8 @@ app.use(
 app.use("/makemyvisa/customer", customerRouter.customerRegistration);
 app.use("/makemyvisa/customer", customerRouter.customerLogin);
 app.use("/makemyvisa/customer", customerRouter.customerLogout);
+app.use("/makemyvisa/customer", customerRouter.customerDetails);
+app.use("/makemyvisa/customer", customerRouter.updateCustomerDetails);
 
 app.use("/makemyvisa/customer", customerRouter.forgotpassword);
 app.use("/makemyvisa/customer", customerRouter.resetPassword);

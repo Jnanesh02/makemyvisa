@@ -1,8 +1,11 @@
 const customerRegistration = require("./customer/registration");
 const customerLogin = require("./customer/login");
 const customerLogout = require("./customer/logout");
+const customerDetails = require("./customer/getCustomer");
 const forgotpassword = require("./customer/forgotpassword");
 const resetPassword = require("./customer/resetpassword");
+const updateCustomerDetails = require("./customer/updateCustomer");
+
 const enquiries = require("./enquiry");
 const socialmedia = require("./customer/socialmedia");
 const employees = require("./Employee/employee-Login");
@@ -17,11 +20,13 @@ module.exports = {
   customerLogout,
   forgotpassword,
   resetPassword,
+  updateCustomerDetails,
   employees,
   enquiries,
   socialmedia,
   employeesLogout,
   deleteEmployeeData,
   updateEmployeePassword,
-  updateEmployeeDetails
+  updateEmployeeDetails,
+  customerDetails
 };

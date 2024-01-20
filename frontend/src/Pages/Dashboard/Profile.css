@@ -51,9 +51,9 @@
     width: 70%;
     align-self: center;
     margin: 0 auto;
+    padding-bottom:0.7rem ;
     font-size: 1.1rem;
-    
-
+    border-bottom: 2px solid black;
 
 
 }
@@ -63,3 +63,59 @@
     text-align: center;
     
 }
+
+
+.DetailsInputsForm{
+    
+    width: 70%;
+    align-self: center;
+    margin: 1rem auto;
+    font-size: 1.1rem;
+    padding: 1rem ;
+    
+}
+
+
+
+
+.floating-label {
+    position: relative;
+  }
+  
+  .floating-label input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 10px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .floating-label label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 10px;
+    color: #495057;
+    pointer-events: none;
+    transition: transform 0.2s ease-out, font-size 0.2s ease-out,
+      padding 0.2s ease-out;
+  }
+  
+  .floating-label input:focus + label,
+  .floating-label input:not(:placeholder-shown) + label {
+    transform: translateY(-30%);
+    font-size: 0.75rem;
+    padding: 2px;
+    margin: -3px 5px;
+    background-color: white;
+  }
+  
+  .floating-label input:focus {
+    border-color: #007bff;
+    outline: 0;
+    background-color: white;
+    
+  }
+
+  .form-control:disabled {
+    background-color: white;
+  }

@@ -21,6 +21,20 @@ const customerSchema = new mongoose.Schema({
     unique: true,
     default: "",
   },
+  address:{
+    type:String,
+    default:"",
+  },
+  passport:{
+    passportNumber:{
+      type: String,
+      default:"",
+    },
+    passportExpiry:{
+      type: Date,
+      default:"",
+    },
+  },
   social_media: {
     linkedinId: {
       type: String,
