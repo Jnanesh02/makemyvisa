@@ -9,7 +9,6 @@ import SignUp from "./Pages/CostumerDetails/Registraion/SignUp";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Hello from "./Pages/Dashboard/Hello";
 import Profile from "./Pages/Dashboard/Profile";
-import ProfileDetails from "./Pages/Dashboard/ProfileDetails";
 import Logout from "./Pages/Dashboard/Logout";
 import AdminLogin from "./Pages/AdminDashboard/AdminLogin";
 import { AdminDashboard } from "./Pages/AdminDashboard/AdminDashboard/AdminDashboard";
@@ -42,13 +41,11 @@ useEffect(()=>{
           <Route path="dashboard" element={<Dashboard />}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
-              <Route index element={<ProfileDetails />} />
             </Route>
           </Route>
           <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace/>)}>
             <Route index element={<Hello />} />
             <Route path="profile" element={<Profile />}>
-              <Route index element={<ProfileDetails />} />
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
           </Route>
