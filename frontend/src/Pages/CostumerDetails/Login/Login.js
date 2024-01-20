@@ -3,12 +3,15 @@ import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
+import { useProfile } from "../../Dashboard/context/ProfileProvider";
 
-const Login = () => {
+const Login = ({ userData }) => {
   const navigate = useNavigate();
   const initialState = { email: "", password: "" };
   const [showPassword, setShowPassword] = useState(false);
   const [userInputDetails, setuserInputDetails] = useState(initialState);
+  const { setProfile } = useProfile();
+  // console.log(profile);
   const handleInputDetails = (event) => {
     const { name, value } = event.target;
     setuserInputDetails({ ...userInputDetails, [name]: value });
@@ -27,11 +30,12 @@ const Login = () => {
         data
       );
 
-      console.log(response);
+      // console.log(response);
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
         // alert("successfully logged in ");
+        setProfile(response.data.message.data);
         navigate("/dashboard");
       }
     } catch (err) {
