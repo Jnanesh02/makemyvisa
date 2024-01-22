@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./CreateAccountForm.css";
 import ConfirmationModal from "./ConfirmationAccountModel";
 import axios from "axios";
@@ -28,8 +28,8 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
       setEmployeeData(initialEmployeeData);
       setIsEditing(false);
     }
-    
-  }, [editingEmployee,initialEmployeeData]); 
+
+  }, [editingEmployee, initialEmployeeData]);
 
   const onChangeInput = (event) => {
     event.preventDefault();
@@ -93,19 +93,18 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   };
 
   const handleConfirm = async () => {
-    const adminToken = localStorage.getItem("adminToken");
-    const headers = { Authorization: `Bearer ${adminToken}` };
+    const adminToken = JSON.parse(localStorage.getItem("adminToken"));
 
     try {
       const response = isEditing
         ? await axios.put(
-            `http://localhost:3000/makemyvisa/employee/update/${editingEmployee._id}`,
-            employeeData,
-            { headers }
-          )
+          `http://localhost:3000/makemyvisa/employee/update/${editingEmployee._id}`,
+          employeeData,
+          { Authorization: `Bearer ${adminToken.AdminToken}` }
+        )
         : await axios.post("http://localhost:3000/makemyvisa/employee/createEmployee", employeeData, {
-            headers,
-          });
+          Authorization: `Bearer ${adminToken.AdminToken}`
+        });
 
       if (response.status === 200) {
         isEditing ? onEmployeeUpdate(employeeData) : onEmployeeCreate(employeeData);

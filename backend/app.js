@@ -37,22 +37,23 @@ app.use(
     credentials: true,
   })
 );
-
 app.use("/makemyvisa/customer", customerRouter.customerRegistration);
 app.use("/makemyvisa/customer", customerRouter.customerLogin);
 app.use("/makemyvisa/customer", customerRouter.customerLogout);
 app.use("/makemyvisa/customer", customerRouter.customerDetails);
 app.use("/makemyvisa/customer", customerRouter.updateCustomerDetails);
-
 app.use("/makemyvisa/customer", customerRouter.forgotpassword);
 app.use("/makemyvisa/customer", customerRouter.resetPassword);
 app.use("/makemyvisa/customer", customerRouter.enquiries);
 app.use("/makemyvisa/customer", customerRouter.socialmedia);
+
 app.use("/makemyvisa/employee", customerRouter.employees);
 app.use("/makemyvisa/employee", customerRouter.updateEmployeePassword);
 app.use("/makemyvisa/employee", customerRouter.deleteEmployeeData);
 app.use("/makemyvisa/employee", customerRouter.employeesLogout);
-app.use("/makemyvisa/employee", customerRouter.updateEmployeeDetails);
+app.use("/makemyvisa/employee", customerRouter.adminUpdateEmployee);
+app.use("/makemyvisa/employee", customerRouter.getEmployeedetail);
+app.use("/makemyvisa/employee", customerRouter.updateEmpoyeeProfile);
 
 
 app.get("/", function (req, res) {

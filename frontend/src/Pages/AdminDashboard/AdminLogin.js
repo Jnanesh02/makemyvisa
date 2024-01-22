@@ -26,12 +26,15 @@ const AdminLogin = () => {
         data
       );
 
-      console.log(response);
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
-        // alert("successfully logged in ");
-        localStorage.setItem("adminToken", response.data.token);
+        // alert("successfully logged in "); 
+        const adminTokens = JSON.stringify({
+          "AdminToken": response.data.token,
+          "_Id":response.data.message._id
+        })
+        localStorage.setItem("adminToken",adminTokens );
         navigate("/Admindashboard");
       }
     } catch (err) {

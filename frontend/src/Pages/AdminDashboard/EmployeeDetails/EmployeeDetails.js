@@ -32,12 +32,12 @@ const EmployeeDetails = () => {
   const fetchEmployeeDetails = async () => {
     try {
       setLoading(true);
-      const adminToken = localStorage.getItem("adminToken");
+      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
       const response = await axios.get(
         "http://localhost:3000/makemyvisa/employee/employeData",
         {
           headers: {
-            Authorization: `Bearer ${adminToken}`,
+            Authorization: `Bearer ${adminToken.AdminToken}`,
           },
           withCredentials: true,
         }
@@ -110,12 +110,13 @@ const EmployeeDetails = () => {
     setDeleteConfirmationModalOpen(false);
 
     try {
-      const adminToken = localStorage.getItem("adminToken");
+      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+
       await axios.delete(
         `${process.env.REACT_APP_ADMIN_DELETE}/delete/${confirmationEmployeeId}`,
         {
           headers: {
-            Authorization: `Bearer ${adminToken}`,
+            Authorization: `Bearer ${adminToken.AdminToken}`,
           },
           withCredentials: true,
         }

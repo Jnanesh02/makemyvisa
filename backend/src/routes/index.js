@@ -10,10 +10,11 @@ const enquiries = require("./enquiry");
 const socialmedia = require("./customer/socialmedia");
 const employees = require("./Employee/employee-Login");
 const employeesLogout = require("./Employee/logout");
+const getEmployeedetail = require("./Employee/getEmployee");
 const deleteEmployeeData = require("./Employee/delete-employee");
 const updateEmployeePassword = require("./Employee/update-password");
-const updateEmployeeDetails = require("./Employee/update-EmployeeDetails")
-
+const adminUpdateEmployee= require("./Employee/AdminUpdateEmpoyeRole")
+const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile")
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -27,6 +28,8 @@ module.exports = {
   employeesLogout,
   deleteEmployeeData,
   updateEmployeePassword,
-  updateEmployeeDetails,
-  customerDetails
+  customerDetails,
+  getEmployeedetail,
+  adminUpdateEmployee,
+  updateEmpoyeeProfile
 };

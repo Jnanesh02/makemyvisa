@@ -9,7 +9,7 @@ async function performLogout() {
 
     );
     if (response.status === 200) {
-      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminToken")
       return true;
     }
     return false;

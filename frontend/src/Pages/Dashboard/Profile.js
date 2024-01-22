@@ -24,8 +24,10 @@ const ProfileForm = () => {
         const employeeId = localStorage.getItem("userId");
         const response = await axios.get(`http://localhost:3000/makemyvisa/customer/getuserdetails/${employeeId}`);
         const userData = response.data.existingUser;
-           console.log(userData)
-        setFormData({
+        console.log(userData);
+  
+        setFormData(prevFormData => ({
+          ...prevFormData,
           firstName: userData.first_name || "",
           lastName: userData.last_name || "",
           email: userData.email || "",
@@ -33,19 +35,20 @@ const ProfileForm = () => {
           address: userData.address || "",
           passportNumber: userData.passport.passportNumber || "",
           passportExpiry: userData.passport.passportExpiry || "",
-        });
+        }));
+        setOriginalFormData(prevFormData => ({ ...prevFormData}));
 
-        setOriginalFormData({ ...formData });
       } catch (error) {
         console.error("Error fetching user data:", error.message);
       }
     };
+  
+      fetchUserData();
 
-    fetchUserData();
-  }, [formData]);
+  }, []);
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData(prevFormData=>({...prevFormData,[e.target.id]:e.target.value}))
   };
 
   const toggleEditMode = () => {
