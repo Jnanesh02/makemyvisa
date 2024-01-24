@@ -37,7 +37,7 @@ export const AdminDashboard = () => {
           </div>
 
           <ul className="list-unstyled components">
-            <NavLink style={{ textDecoration: "none" }} to="/dashboard">
+            <NavLink style={{ textDecoration: "none" }} to="/Admindashboard">
               <p>
                 <svg
                   className="dashborad-icons"
@@ -50,50 +50,42 @@ export const AdminDashboard = () => {
                 Dashboard{" "}
               </p>
             </NavLink>
-
-            <div className="accordion" id="accordionExample1">
+            <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne1">
-                  <button
-                    className="accordion-button custom-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#homeSubmenu1"
-                    aria-expanded="false"
-                    aria-controls="homeSubmenu1">
-                    <i className="fas fa-gear"></i> Settings
-                  </button>
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="profile">
+                    profile
+                  </NavLink>
                 </h2>
-                <div
-                  id="homeSubmenu1"
-                  className="accordion-collapse collapse  custom-collapse"
-                  aria-labelledby="headingOne1"
-                  data-bs-parent="#accordionExample1">
-                  <div className="accordion-body">
-                    <NavLink className="custom-link" to="profile">
-                      {" "}
-                      <i className="fa-solid fa-user m-2"></i>Profile
-                    </NavLink>
-                  </div>
-                  <div className="accordion-body">
-                    <NavLink className="custom-link" to="/AdminLogout">
-                      {" "}
-                      <i className="fas fa-power-off m-2"></i>Logout
-                    </NavLink>
-                  </div>
-                </div>
               </div>
             </div>
-
             <div className="accordion" id="accordionExample2">
-        <div className="accordion-item">
-            <h2 className="accordion-header" id="headingOne2">
-            <NavLink className="accordion-button custom-button" to="employeeDetails">
-              Employee Management
-            </NavLink>
-            </h2>
-        </div>
-    </div>
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="employeeDetails">
+                    Employee Management
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="employeeDetails">
+                    <i className="fas fa-gear"></i> Settings
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="/AdminLogout">
+                    Logout
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
           </ul>
         </nav>
 

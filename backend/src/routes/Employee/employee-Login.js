@@ -3,10 +3,8 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Employee = require("../../models/employeeSchema");
-const Admin = require("../../models/adminSchema");
-const OperationTeam = require("../../models/operationTeamSchema");
 const { isAdmin } = require("../../middleware/authenication");
-
+const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 // Route for user login
 router.post("/login", async (req, res) => {
   try {
@@ -33,24 +31,11 @@ router.post("/login", async (req, res) => {
       return res.status(403).json({ message: "Employee is not active" });
     }
 
-    // Retrieve user details based on the role
-    let userDetails;
-    switch (existingUser.role) {
-      case "admin":
-        userDetails = await Admin.findOne({ email: existingUser.email });
-        break;
-      case "operation":
-        userDetails = await OperationTeam.findOne({
-          email: existingUser.email,
-        });
-        break;
-    }
-
     // Generate a token with user details
     const token = jwt.sign(
       {
-        id: userDetails._id,
-        role: userDetails.role,
+        id: existingUser._id,
+        role: existingUser.role,
       },
       "your-secret-key",
       { expiresIn: "1h" }
@@ -63,15 +48,13 @@ router.post("/login", async (req, res) => {
 });
 
 // Route to create a new employee account (accessible to admins only)
-router.post("/createEmployee", isAdmin, async (req, res) => {
+router.post("/createEmployee",isAdmin, async (req, res) => {
   try {
-    const { firstName, lastName, contactDetails, address, email, role } =
-      req.body;
-  console.log(req.body);
+    const { firstName, lastName, contactDetails, address, email, role } =  req.body;
     // Check if the user with the given email already exists
     const existingUser = await Employee.findOne({ email: email });
     if (existingUser) {
-      return res.status(204).json({ message: "Email already exists" });
+      return res.status(201).json({ message: "Email already exists" });
     }
 
     // Generate a temporary password for the new employee
@@ -90,41 +73,21 @@ router.post("/createEmployee", isAdmin, async (req, res) => {
 
     // Save the new employee to the database
     await newEmployee.save();
+    const EmployeeModel = createRoleBasedModel(role); // Use the dynamic model
+    const newEmployeeRoleData = new EmployeeModel({
+      _id:newEmployee._id,
+      firstName: firstName,
+      lastName: lastName,
+      contact_Details: contactDetails,
+      Address: address,
+      email: email,
+      password: generatePassword,
+      role: role,
+    });
 
-    // Create user details based on the role
-    let userDetails;
-    switch (newEmployee.role) {
-      case "admin":
-        userDetails = new Admin({
-          firstName: newEmployee.firstName,
-          lastName: newEmployee.lastName,
-          contact_Details: newEmployee.contact_Details,
-          Address: newEmployee.Address,
-          email: newEmployee.email,
-          password: newEmployee.password,
-          role: newEmployee.role,
-          _id: newEmployee._id,
-        });
-        break;
-      case "operation":
-        userDetails = new OperationTeam({
-          firstName: newEmployee.firstName,
-          lastName: newEmployee.lastName,
-          contact_Details: newEmployee.contact_Details,
-          Address: newEmployee.Address,
-          email: newEmployee.email,
-          password: newEmployee.password,
-          role: newEmployee.role,
-          _id: newEmployee._id,
-        });
-        break;
-    }
-
-    // Save the user details to the database
-    await userDetails.save();
-
-    // Return the details of the created user in the response
-    return res.status(200).json({ message: userDetails });
+    // Save the new employee to the database
+    await newEmployeeRoleData.save();
+    return res.status(200).json({ message: newEmployee });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

@@ -12,8 +12,7 @@ const employeeSchema = new mongoose.Schema({
   password: { type: "string", required: true },
   role: {
     type: "string",
-    enum: ["admin", "operation", "bussiness"],
-    default: "operation",
+    default: "",
   },
   status: {
     type: "string",

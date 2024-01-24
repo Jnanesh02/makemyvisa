@@ -1,44 +1,48 @@
 const express = require("express");
 const router = express.Router();
 const Employee = require("../../models/employeeSchema");
-const Admin = require("../../models/adminSchema");
-const OperationTeam = require("../../models/operationTeamSchema");
+const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 const bcrypt = require("bcrypt");
 
 router.put("/updatePassword/:id", async (req, res) => {
-    const object_id = req.params.id;
-    const { password } = req.body;
-    try {
-        const existingEmployee = await Employee.findById({ _id: object_id });
-        if (!existingEmployee) {
-            res.status(201).json({ message: "employee id not found" })
-        }
-        const hashingPassword =await bcrypt.hash(password, 10)
+  const object_id = req.params.id;
+  const { password } = req.body;
 
-        switch (existingEmployee.role) {
-            case "admin":
-                const adminDetails = await Admin.findById({ _id: existingEmployee._id });
-                if (!adminDetails) {
-                    return res.status(404).json({ message: "adminDetails details not found" });
-                }
-                adminDetails.password = hashingPassword
-                await adminDetails.save();
-                break;
-            case "operation":
-                const operationTeamDetails = await OperationTeam.findById({ _id: existingEmployee._id });
-                if (!operationTeamDetails) {
-                    return res.status(404).json({ message: "Operation Team details not found" });
-                }
-                operationTeamDetails.password = hashingPassword
-                await operationTeamDetails.save();
-                break;
-        }
-        existingEmployee.password = hashingPassword;
-        await existingEmployee.save();
-        res.status(200).json({ message: "Password updated successfully" });
-    } catch (error) {
-        res.status(500).json({ message: "Internal Error" });
+  try {
+    const existingEmployee = await Employee.findById({ _id: object_id });
 
+    if (!existingEmployee) {
+      return res.status(201).json({ message: "Employee ID not found" });
     }
-})
-module.exports = router
+
+    const hashedPassword = await hashPassword(password);
+    
+    // Dynamically determine the model based on the role
+    const employeeRoleModel = createRoleBasedModel(existingEmployee.role);
+
+    // Update the password in the Employee schema
+    existingEmployee.password = hashedPassword;
+    await existingEmployee.save();
+
+    // Save the new password in the new collection
+    const updatePassword = await employeeRoleModel.findByIdAndUpdate(
+      { _id: object_id },
+      { password: hashedPassword },
+      { new: true } 
+    );
+
+    if (!updatePassword) {
+      return res.status(500).json({ message: "Error updating password" });
+    }
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+async function hashPassword(password) {
+  return bcrypt.hash(password, 10);
+}
+
+module.exports = router;
