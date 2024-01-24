@@ -1,15 +1,10 @@
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const YoutubeV3Strategy = require("passport-youtube-v3").Strategy;
-const { google } = require("googleapis");
 const passport = require("passport");
-const { OpenAI } = require("openai");
 
 const Customer = require("../src/models/customerSchema");
-const openai = new OpenAI({
-  apiKey: "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", // defaults to process.env["OPENAI_API_KEY"]
-});
+
 passport.use(
   new LinkedInStrategy(
     {
@@ -93,123 +88,7 @@ passport.use(
   )
 );
 
-passport.use(
-  new YoutubeV3Strategy(
-    {
-      clientID:
-        "739497392240-i92aop6sbd9mo44tk2a8u3397shp30ag.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL:
-        "http://localhost:3000/makemyvisa/customer/auth/youtube/callback",
-      scope: [
-        "https://www.googleapis.com/auth/youtube.readonly",
-        "https://www.googleapis.com/auth/youtube.force-ssl",
-      ],
-    },
-    function (accessToken, refreshToken, profile, done) {
-      // Access user's channel details
-      const channelId = profile.id;
 
-      // Create a youtube object using OAuth2 tokens
-      const auth = new google.auth.OAuth2();
-      auth.setCredentials({ access_token: accessToken });
-      const youtube = google.youtube({ version: "v3", auth });
-
-      // Make requests to get user's activities
-
-      // Fetch user's channel details
-      youtube.channels.list(
-        {
-          part: "snippet,contentDetails,statistics",
-          id: channelId,
-        },
-        (err, channelResponse) => {
-          if (err) {
-            return done(err);
-          }
-
-          console.log("User Channel Details:", channelResponse.data);
-
-          // Fetch user's video comments
-          youtube.commentThreads.list(
-            {
-              part: "snippet",
-              allThreadsRelatedToChannelId: channelId,
-            },
-            (err, commentsResponse) => {
-              if (err) {
-                return done(err);
-              }
-
-              const comments = commentsResponse.data.items;
-
-              // Iterate through each comment thread
-              comments.forEach(async (comment) => {
-                try {
-                  // Extract topLevelComment from the snippet
-                  const topLevelComment =
-                    comment.snippet.topLevelComment.snippet.textDisplay;
-
-                  // Log or process the topLevelComment as needed
-                  // Pass the comment to ChatGPT for a short response
-                  const chatGPTResponse = await getChatGPTResponse(
-                    topLevelComment
-                  );
-
-                  // Check if the ChatGPT response is not empty
-                  if (chatGPTResponse.trim() !== "") {
-                    // Insert the reply using youtube.commentThreads.insert
-                    const replyResponse = youtube.commentThreads.insert({
-                      auth: auth,
-                      part: "snippet",
-                      resource: {
-                        snippet: {
-                          channelId:
-                            comment.snippet.topLevelComment.snippet
-                              .authorChannelId.value,
-                          videoId: comment.snippet.videoId,
-                          topLevelComment: {
-                            snippet: {
-                              textOriginal: chatGPTResponse,
-                            },
-                          },
-                        },
-                      },
-                    });
-                  }
-                } catch (error) {
-                  console.error(
-                    "Error replying to YouTube comment:",
-                    error.message
-                  );
-                }
-              });
-              // Fetch user's liked videos
-              youtube.videos.list(
-                {
-                  part: "snippet",
-                  myRating: "like",
-                },
-                (err, likedVideosResponse) => {
-                  if (err) {
-                    return done(err);
-                  }
-
-                  console.log("User Liked Videos:", likedVideosResponse.data);
-
-                  // You can add more API requests based on your requirements
-
-                  // Call done() to finish the authentication process
-                  done(null, profile);
-                }
-              );
-            }
-          );
-        }
-      );
-    }
-  )
-);
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -218,24 +97,4 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-// Function to interact with ChatGPT and get a short response
-async function getChatGPTResponse(comment) {
-  const prompt = `User Comment: ${comment}`;
-  try {
-    const response = await openai.completions.create({
-      model: "text-davinci-002",
-      prompt: prompt,
-      max_tokens: 50,
-    });
 
-    if (response && response.choices && response.choices.length > 0) {
-      return response.choices[0].text.trim();
-    } else {
-      console.error("Invalid response format from OpenAI API");
-      return "Error: Invalid response format";
-    }
-  } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    return "Error calling OpenAI API";
-  }
-}

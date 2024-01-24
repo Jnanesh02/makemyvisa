@@ -25,14 +25,8 @@ router.get(
   })
 );
 
-router.get("/auth/youtube", passport.authenticate("youtube"));
-router.get(
-  "/auth/youtube/callback",
-  passport.authenticate("youtube", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "/login",
-  })
-);
+
+
 router.get("/auth/linkedin", passport.authenticate("linkedin"));
 
 router.get("/auth/linkedin/callback", async (req, res) => {
