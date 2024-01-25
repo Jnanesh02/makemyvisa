@@ -15,6 +15,7 @@ const deleteEmployeeData = require("./Employee/delete-employee");
 const updateEmployeePassword = require("./Employee/update-password");
 const adminUpdateEmployee= require("./Employee/AdminUpdateEmpoyeRole")
 const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile")
+const departments = require("./Employee/departments")
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -31,5 +32,6 @@ module.exports = {
   customerDetails,
   getEmployeedetail,
   adminUpdateEmployee,
-  updateEmpoyeeProfile
+  updateEmpoyeeProfile,
+  departments
 };

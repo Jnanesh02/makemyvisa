@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email" });
     }
-
+   console.log(existingUser);
     // If the password starts not with "TEMP_", prompt the user to reset it
     if (!existingUser.password.startsWith("TEMP_")) {
       // Check if the provided password matches the stored hashed password
@@ -41,14 +41,14 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    return res.status(200).json({ message: userDetails, token: token });
+    return res.status(200).json({ message: existingUser, token: token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
 // Route to create a new employee account (accessible to admins only)
-router.post("/createEmployee",isAdmin, async (req, res) => {
+router.post("/createEmployee", async (req, res) => {
   try {
     const { firstName, lastName, contactDetails, address, email, role } =  req.body;
     // Check if the user with the given email already exists
@@ -94,7 +94,7 @@ router.post("/createEmployee",isAdmin, async (req, res) => {
   }
 });
 
-router.get("/Admindashboard", isAdmin, async (req, res) => {
+router.get("/Admindashboard", async (req, res) => {
   try {
     res.redirect("/admindashboard");
   } catch (err) {

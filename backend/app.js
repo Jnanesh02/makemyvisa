@@ -54,6 +54,7 @@ app.use("/makemyvisa/employee", customerRouter.employeesLogout);
 app.use("/makemyvisa/employee", customerRouter.adminUpdateEmployee);
 app.use("/makemyvisa/employee", customerRouter.getEmployeedetail);
 app.use("/makemyvisa/employee", customerRouter.updateEmpoyeeProfile);
+app.use("/makemyvisa/employee",customerRouter.departments);
 
 
 app.get("/", function (req, res) {

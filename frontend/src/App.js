@@ -14,6 +14,7 @@ import { AdminLogout } from "./Pages/AdminDashboard/AdminDashboard/AdminLogout";
 import EmployeeDetails from "./Pages/AdminDashboard/EmployeeDetails/EmployeeDetails";
 import { CustomerLogout } from "./Pages/Dashboard/CustomerLogout";
 import { AdminProfile } from "./Pages/AdminDashboard/AdminDashboard/AdminProfile";
+import Department from "./Pages/AdminDashboard/AdminDashboard/master/Department";
 
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
@@ -51,6 +52,8 @@ function App() {
 
           <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace={true}/>)}>
             <Route index element={<Hello />} />
+            <Route path="Department" element={<Department />}>
+            </Route>
             <Route path="profile" element={<AdminProfile />}>
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />

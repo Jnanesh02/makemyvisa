@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Logo from "../../../assets/images/logo.png";
 import Avatar from "../../../assets/images/avatar.png";
 import { NavLink, Link, Outlet } from "react-router-dom";
+import { Master } from "./master/Master";
 
 export const AdminDashboard = () => {
   useEffect(() => {
@@ -50,6 +51,7 @@ export const AdminDashboard = () => {
                 Dashboard{" "}
               </p>
             </NavLink>
+          <Master/>
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
