@@ -5,9 +5,9 @@ const departmentSchema = new mongoose.Schema({
         unique: true,
       },
       status: {
-        type: "string",
-        enum: ["active", "inactive"], 
-        default: "active", 
+        type: String,
+        enum: ['active', 'inactive'], 
+        default: 'active', 
       },
       description: {
         type: String,

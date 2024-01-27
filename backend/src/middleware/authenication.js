@@ -23,7 +23,6 @@ const isAdmin = (req, res, next) => {
 
       // Check if the decoded user has the role of "admin"
       if (decoded && decoded.role === "admin") {
-        console.log(req.path);
         req.user = decoded; // Set the user details in the request object
         next(); // Proceed to the next middleware or route handler
       } else {

@@ -4,14 +4,23 @@ const Employee = require("../../models/employeeSchema");
 const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 const {isAdmin} = require("../../middleware/authenication");
 
-router.delete("/delete/:id",isAdmin,async(req,res)=>{
+router.delete("/delete/:id",async(req,res)=>{
    const object_id=req.params.id;
    try {
-      const existingEmployee = await Employee.findById({_id : object_id});
+      const existingEmployee = await Employee.findById(object_id);
+      console.log(existingEmployee);
+      
+      if (!existingEmployee) {
+        return res.status(404).json({ message: "Employee not found" });
+      }
+      
       const oldCollectionModel = createRoleBasedModel(existingEmployee.role);
-      await oldCollectionModel.findByIdAndDelete(object_id);
-       await existingEmployee.findByIdAndDelete({_id : object_id})
-       res.status(200).json({ message: "successfully deleted" });
+      console.log(oldCollectionModel);
+      
+      await oldCollectionModel.deleteOne({ _id: object_id });
+      await Employee.deleteOne({ _id: object_id });
+      res.status(200).json({ message: "successfully deleted" });
+
 
    } catch (error) {
       res.status(500).json({ message: error.message });

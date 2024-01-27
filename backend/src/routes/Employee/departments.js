@@ -7,7 +7,6 @@ router.post("/create/department", async (req, res) => {
     const { role,status,description } = req.body;
     // Check if a model with the specified role already exists
     const existingModel =await Employee.findOne({role: role});
-    console.log( existingModel);
 
     // If the model already exists, return an error
     if (existingModel) {
@@ -32,7 +31,7 @@ router.post("/create/department", async (req, res) => {
 
 router.get("/get/department", async (req, res) => {
     try {
-  const uniqueRole = await Employee.distinct('role');
+  const uniqueRole = await Employee.find();
       res.status(200).json({ message: uniqueRole });
     } catch (error) {
       console.error(error);
