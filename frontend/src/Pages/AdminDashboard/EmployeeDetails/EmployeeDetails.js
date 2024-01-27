@@ -19,6 +19,7 @@ const EmployeeDetails = () => {
   const [confirmationEmployeeId, setConfirmationEmployeeId] = useState(null);
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [roles, setRoles] = useState([]);
 
   const displayFields = [
     "firstName",
@@ -50,7 +51,17 @@ const EmployeeDetails = () => {
       setLoading(false);
     }
   };
-
+  const fetchRolesAndStatuses = async () => {
+    try {
+     
+      const departmentsResponse = await axios.get(
+        "http://localhost:3000/makemyvisa/employee/get/department"
+      );
+      setRoles(departmentsResponse.data.message);
+    } catch (error) {
+      console.error("Error fetching roles and departments:", error.message);
+    }
+  };
   const applyFilters = useCallback((data) => {
     return data.filter(
       (employee) =>
@@ -73,11 +84,13 @@ const EmployeeDetails = () => {
         value.toString().toLowerCase().includes(term.toLowerCase())
     );
 
-  const filterByRole = (employee, role) =>
-    role === "" || employee.Role.toLowerCase() === role.toLowerCase();
+    const filterByRole = (employee, role) => {
+      return role === "" || (employee && employee.role && employee.role.toLowerCase() === role.toLowerCase());
+    };
+  const filterByStatus = (employee, status) =>{
+    return status === "" || (employee && employee.status && employee.status.toLowerCase() === status.toLowerCase());
 
-  const filterByStatus = (employee, status) =>
-    status === "" || employee.Status.toLowerCase() === status.toLowerCase();
+  }
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -127,7 +140,6 @@ const EmployeeDetails = () => {
       );
       applyAndFetch(updatedEmployees, applyFilters, setFilteredEmployees);
     } catch (error) {
-      console.error("Error deleting employee:", error.message);
       setError("Error deleting employee. Please try again later.");
     }
   };
@@ -163,11 +175,12 @@ const EmployeeDetails = () => {
     setEditingEmployee(null);
     setIsAccountCreated(true);
   };
-
   useEffect(() => {
     fetchEmployeeDetails();
   }, [isAccountCreated, isEditing]);
-
+  useEffect(() => {
+    fetchRolesAndStatuses();
+  }, []);
   useEffect(() => {
     applyAndFetch(employees, applyFilters, setFilteredEmployees);
   }, [employees, roleFilter, statusFilter, searchTerm, applyFilters]);
@@ -195,9 +208,12 @@ const EmployeeDetails = () => {
         <label style={{ marginRight: "8px" }}>
           Role Filter:
           <select value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
-            <option value="">All</option>
-            <option value="admin">Admin</option>
-            <option value="operation">Operation</option>
+          <option value="">All</option>
+    {roles.map((role) => (
+      <option key={role._id} value={role.role}>
+        {role.role}
+      </option>
+    ))}
           </select>
         </label>
 

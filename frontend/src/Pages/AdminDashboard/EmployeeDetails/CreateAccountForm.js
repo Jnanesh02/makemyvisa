@@ -16,7 +16,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   const [employeeData, setEmployeeData] = useState(initialEmployeeData);
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-
+  const [roles,setRoles]=useState([]);
   const EDIT_FIELDS = ["firstName", "lastName", "email", "role", "contact_Details", "status"];
   const CREATE_FIELDS = ["firstName", "lastName", "email", "role", "contactDetails", "address"];
 
@@ -31,6 +31,19 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 
   }, [editingEmployee, initialEmployeeData]);
 
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/makemyvisa/employee/get/department");
+        console.log("roles",response.data);
+        setRoles(response.data.message); 
+      } catch (error) {
+        console.error("Error fetching roles:", error.message);
+      }
+    };
+
+    fetchRoles();
+  }, []);
   const onChangeInput = (event) => {
     event.preventDefault();
     setEmployeeData({
@@ -42,41 +55,53 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   const renderSelectOptions = (options) => (
     <>
       <option value="">Select {options.label}</option>
-      {options.values.map((value) => (
-        <option key={value} value={value}>
-          {value.charAt(0).toUpperCase() + value.slice(1)}
+      {options.values &&
+        options.values.map((value) => (
+          <option key={value._id} value={value.role}>
+                      {options.label === "role" ? value.role : value.status}
         </option>
-      ))}
+        ))}
+    </>
+  );
+  const renderStatusSelectOptions = (values) => (
+    <>
+      <option value="">Select status</option>
+      {values &&
+        values.map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
     </>
   );
 
   const renderFormFields = (fields) =>
-    fields.map((field) => (
-      <div key={field}>
-        {field === "role" || field === "status" ? (
-          <select
-            name={field}
-            className="form-input"
-            value={employeeData[field] || ""}
-            required
-            onChange={(e) => onChangeInput(e)}
-          >
-            {field === "role"
-              ? renderSelectOptions({ label: "role", values: ["admin", "operation"] })
-              : renderSelectOptions({ label: "status", values: ["active", "inactive"] })}
-          </select>
-        ) : (
-          <input
-            type="text"
-            name={field}
-            className="form-input"
-            value={employeeData[field] || ""}
-            placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}:`}
-            onChange={(e) => onChangeInput(e)}
-          />
-        )}
-      </div>
-    ));
+  fields.map((field) => (
+    <div key={field}>
+      {field === "role" || field === "status" ? (
+        <select
+          name={field}
+          className="form-input"
+          value={employeeData[field] || ""}
+          required
+          onChange={(e) => onChangeInput(e)}
+        >
+          {field === "role"
+            ? renderSelectOptions({ label: "role", values: roles })
+            : renderStatusSelectOptions(["active", "inactive"])}
+        </select>
+      ) : (
+        <input
+          type="text"
+          name={field}
+          className="form-input"
+          value={employeeData[field] || ""}
+          placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}:`}
+          onChange={(e) => onChangeInput(e)}
+        />
+      )}
+    </div>
+  ));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
