@@ -1,4 +1,3 @@
-import React from "react";
 import "./Dashboard.css";
 import { useEffect } from "react";
 import Logo from "../../../assets/images/logo.png";

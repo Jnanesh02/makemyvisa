@@ -27,7 +27,13 @@ app.use(passport.session());
 
 // Connect to the database
 connect();
-
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 //Customers Routes
 app.use("/makemyvisa", makeMyVisa.customerRegistration);
 app.use("/makemyvisa", makeMyVisa.customerLogin);
@@ -47,6 +53,7 @@ app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
 app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
 app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
 app.use("/makemyvisa", makeMyVisa.departments);
+
 
 // Health check endpoint
 app.get("/", function (req, res) {

@@ -15,6 +15,7 @@ import EmployeeDetails from "./Pages/AdminDashboard/EmployeeDetails/EmployeeDeta
 import { CustomerLogout } from "./Pages/Dashboard/CustomerLogout";
 import { AdminProfile } from "./Pages/AdminDashboard/AdminDashboard/AdminProfile";
 import Department from "./Pages/AdminDashboard/AdminDashboard/master/Department";
+import  CountryServices  from "./Pages/AdminDashboard/AdminDashboard/master/CountryServices";
 
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
@@ -23,8 +24,12 @@ function App() {
   });
 
   useEffect(() => {
-    const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-    setIsAdminLoggedIn(!!adminToken?.AdminToken);
+    const checkAdminLogin = async () => {
+      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+      await setIsAdminLoggedIn(!!adminToken?.AdminToken);
+    };
+  
+    checkAdminLogin();
   }, []);
   const Visa = () => <h1>visa is working</h1>;
   const Travel = () => <h1>travel is working</h1>;
@@ -53,6 +58,8 @@ function App() {
           <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace={true}/>)}>
             <Route index element={<Hello />} />
             <Route path="Department" element={<Department />}>
+            </Route>
+            <Route path="countryServices" element={<CountryServices />}>
             </Route>
             <Route path="profile" element={<AdminProfile />}>
             </Route>
