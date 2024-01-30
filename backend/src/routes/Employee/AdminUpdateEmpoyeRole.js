@@ -3,7 +3,7 @@ const router = express.Router();
 const Employee = require("../../models/employeeSchema");
 const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 
-router.put("/update/:id", async (req, res) => {
+router.put("/employee/update/:id", async (req, res) => {
   const object_id = req.params.id;
   const { firstName, lastName, email, phoneNumber, role, status } = req.body;
 

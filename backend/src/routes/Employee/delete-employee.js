@@ -4,7 +4,7 @@ const Employee = require("../../models/employeeSchema");
 const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 const {isAdmin} = require("../../middleware/authenication");
 
-router.delete("/delete/:id",async(req,res)=>{
+router.delete("/employee/delete/:id",async(req,res)=>{
    const object_id=req.params.id;
    try {
       const existingEmployee = await Employee.findById(object_id);

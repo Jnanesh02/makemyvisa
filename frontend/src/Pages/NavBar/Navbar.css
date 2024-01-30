@@ -40,3 +40,37 @@ li.nav-item {
 .dropdown.drp-navbar img {
   width: 40px;
 }
+
+.google-review-link {
+  color: #6b6b6b;
+}
+
+.google-reviews {
+  display: flex;
+  justify-content: space-around !important;
+  position: relative;
+  top: 0px;
+  background: #e6e6e642;
+  padding: 10px;
+  border: 1px solid #fe514142;
+  float: left;
+  width: 124%;
+}
+span.points-fr {
+  font-size: 33px;
+  padding-right: 10px;
+  font-weight: bold;
+}
+svg.google-review-icons {
+  width: 20px;
+  fill: #ec951e;
+}
+
+@media only screen and (max-width: 1000px) {
+
+.google-reviews {
+      margin-top: 10px;
+  }
+
+
+}

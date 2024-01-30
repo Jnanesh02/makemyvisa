@@ -19,7 +19,7 @@ export const AdminProfile = () => {
       const fetchUserData = async () => {
         try {
           const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-          const response = await axios.get(`http://localhost:3000/makemyvisa/employee/getEmployedetail/${adminToken._Id}`);
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${adminToken._Id}`);
           console.log(response);
           const userData = response.data.message;
           setFormData(prevFormData=>({
@@ -58,7 +58,7 @@ export const AdminProfile = () => {
   
       try {
         const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-         await axios.put(`http://localhost:3000/makemyvisa/employee/updateprofile/${adminToken._Id}`, formData);
+         await axios.put(`${process.env.REACT_APP_BACKEND_URL}/employee/updateprofile/${adminToken._Id}`, formData);
         setUpdateUserSuccess("Profile updated successfully");
         setOriginalFormData({ ...formData });
       } catch (error) {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 async function performLogout() {
     try {
       const response = await axios.post(
-        "http://localhost:3000/makemyvisa/customer/logout"
+        `${process.env.REACT_APP_BACKEND_URL}/customer/logout`
       );
       if (response.status === 200) {
         localStorage.removeItem("userId")

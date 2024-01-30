@@ -115,27 +115,35 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="col-lg-2 footer-list">
+        <div className="col-lg-3 footer-list ">
           <h5 className="footer-menu-one"> Connect with us </h5>
           <ul className="list-unstyled text-small footer-list">
             <li className="mb-1">
+            <i class="fas fa-phone m-1"></i>
               <a className="link-secondary text-decoration-none" href="/">
-                Team
+              
+              +91 9818602259
               </a>
             </li>
             <li className="mb-1">
+            <i class="fas fa-globe m-1"></i> 
               <a className="link-secondary text-decoration-none" href="/">
-                Locations
+              
+              www.makemyvisa.co
               </a>
             </li>
             <li className="mb-1">
+            <i class="fas fa-map-marker-alt m-1"></i>
               <a className="link-secondary text-decoration-none" href="/">
-                Privacy
+              
+              HD-053, We Work Embassy Tech Village, Bellandur, Bengaluru - 50610, Karnataka
               </a>
             </li>
             <li className="mb-1">
+            <i class="fas fa-envelope m-1"></i>
               <a className="link-secondary text-decoration-none" href="/">
-                Terms
+              
+              info@makemyvisa.co
               </a>
             </li>
           </ul>

@@ -46,7 +46,7 @@ const Award = () => {
                 <img src={award} alt="Award 1" />
                 <div className="awards-counts-section">
                   <p className="text-awards">Average time to apply <br /> on makemyvisa </p>
-                  <h3 ref={count1Ref} className="display-4 text-awards">
+                  <h3 ref={count1Ref} className="display-4 center text-awards">
                   <span className="visually-hidden">Count 1: </span>
                 </h3>
                 </div>
@@ -59,7 +59,7 @@ const Award = () => {
                 <img src={award} alt="Award 2" />
                 <div className="awards-counts-section">
                   <p className="text-awards">Average time to apply <br /> on makemyvisa </p>
-                  <h3 ref={count2Ref} className="display-4 text-awards">
+                  <h3 ref={count2Ref} className="display-4 center text-awards">
                   <span className="visually-hidden">Count 1: </span>
                 </h3>
                 </div>
@@ -72,7 +72,7 @@ const Award = () => {
                 <img src={award} alt="Award 3" />
                 <div className="awards-counts-section">
                   <p className="text-awards">Average time to apply <br /> on makemyvisa </p>
-                  <h3 ref={count3Ref} className="display-4 text-awards">
+                  <h3 ref={count3Ref} className="display-4 text-center text-awards">
                   <span className="visually-hidden">Count 1: </span>
                 </h3>
                 </div>

@@ -6,7 +6,7 @@ const Employee = require("../../models/employeeSchema");
 const { isAdmin } = require("../../middleware/authenication");
 const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 // Route for user login
-router.post("/login", async (req, res) => {
+router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     // Check if the user exists
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Route to create a new employee account (accessible to admins only)
-router.post("/createEmployee", async (req, res) => {
+router.post("/employee/createEmployee", async (req, res) => {
   try {
     const { firstName, lastName, contactDetails, address, email, role } =  req.body;
     // Check if the user with the given email already exists
@@ -93,7 +93,7 @@ router.post("/createEmployee", async (req, res) => {
   }
 });
 
-router.get("/Admindashboard", async (req, res) => {
+router.get("/employee/Admindashboard", async (req, res) => {
   try {
     res.redirect("/admindashboard");
   } catch (err) {
@@ -101,7 +101,7 @@ router.get("/Admindashboard", async (req, res) => {
   }
 });
 
-router.get("/employeData", isAdmin, async (req, res) => {
+router.get("/employee/employeData", isAdmin, async (req, res) => {
   try {
     const employeeData = await Employee.find();
     return res.status(200).json({ employeeData });

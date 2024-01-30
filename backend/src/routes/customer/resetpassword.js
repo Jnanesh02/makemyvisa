@@ -3,7 +3,7 @@ const router = express.Router();
 const customer = require("../../models/customerSchema");
 const bcrypt = require("bcrypt");
 
-router.post("/resetpassword/:object_id", async (req, res) => {
+router.post("/customer/resetpassword/:object_id", async (req, res) => {
   try {
     const { password } = req.body;
     const objectId = req.params.object_id; // Extracting object_id from the route parameters

@@ -35,7 +35,7 @@ const EmployeeDetails = () => {
       setLoading(true);
       const adminToken = JSON.parse(localStorage.getItem("adminToken"));
       const response = await axios.get(
-        "http://localhost:3000/makemyvisa/employee/employeData",
+        `${process.env.REACT_APP_BACKEND_URL}/employee/employeData`,
         {
           headers: {
             Authorization: `Bearer ${adminToken.AdminToken}`,
@@ -55,7 +55,7 @@ const EmployeeDetails = () => {
     try {
      
       const departmentsResponse = await axios.get(
-        "http://localhost:3000/makemyvisa/employee/get/department"
+        `${process.env.REACT_APP_BACKEND_URL}/employee/get/department`
       );
       setRoles(departmentsResponse.data.message);
     } catch (error) {

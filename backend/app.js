@@ -1,66 +1,63 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const passport = require("passport");
-const cors = require("cors");
 require("dotenv").config();
-require("./config/database").connect();
-const passportStrategy = require("./config/passport");
-const app = express();
-const customerRouter = require("./src/routes");
-app.use(cookieParser());
-
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+const googleAuth=require("./passport");
 const session = require("express-session");
+const makeMyVisa = require("./src/routes");
+const crypto = require("crypto");
+const { connect } = require("./config/database");
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL , methods: "GET,POST,PUT,DELETE", credentials: true }));
 
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: crypto.randomBytes(32).toString("hex"),
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      path: '/', 
-      httpOnly: true,
-      maxAge: 86400000,
-      sameSite: 'None' 
-    },
-    
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 24 hours in milliseconds
   })
 );
 
-app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
-app.use("/makemyvisa/customer", customerRouter.customerRegistration);
-app.use("/makemyvisa/customer", customerRouter.customerLogin);
-app.use("/makemyvisa/customer", customerRouter.customerLogout);
-app.use("/makemyvisa/customer", customerRouter.customerDetails);
-app.use("/makemyvisa/customer", customerRouter.updateCustomerDetails);
-app.use("/makemyvisa/customer", customerRouter.forgotpassword);
-app.use("/makemyvisa/customer", customerRouter.resetPassword);
-app.use("/makemyvisa/customer", customerRouter.enquiries);
-app.use("/makemyvisa/customer", customerRouter.socialmedia);
+// Connect to the database
+connect();
 
-app.use("/makemyvisa/employee", customerRouter.employees);
-app.use("/makemyvisa/employee", customerRouter.updateEmployeePassword);
-app.use("/makemyvisa/employee", customerRouter.deleteEmployeeData);
-app.use("/makemyvisa/employee", customerRouter.employeesLogout);
-app.use("/makemyvisa/employee", customerRouter.adminUpdateEmployee);
-app.use("/makemyvisa/employee", customerRouter.getEmployeedetail);
-app.use("/makemyvisa/employee", customerRouter.updateEmpoyeeProfile);
-app.use("/makemyvisa/employee",customerRouter.departments);
+//Customers Routes
+app.use("/makemyvisa", makeMyVisa.customerRegistration);
+app.use("/makemyvisa", makeMyVisa.customerLogin);
+app.use("/makemyvisa", makeMyVisa.customerLogout);
+app.use("/makemyvisa", makeMyVisa.customerDetails);
+app.use("/makemyvisa", makeMyVisa.forgotpassword);
+app.use("/makemyvisa", makeMyVisa.resetPassword);
+app.use("/makemyvisa", makeMyVisa.updateCustomerDetails);
+app.use("/makemyvisa", makeMyVisa.enquiries);
+app.use("/makemyvisa", makeMyVisa.socialmedia);
+//Employee Routes
+app.use("/makemyvisa", makeMyVisa.employees);
+app.use("/makemyvisa", makeMyVisa.employeesLogout);
+app.use("/makemyvisa", makeMyVisa.getEmployeedetail);
+app.use("/makemyvisa", makeMyVisa.deleteEmployeeData);
+app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
+app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
+app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
+app.use("/makemyvisa", makeMyVisa.departments);
 
-
+// Health check endpoint
 app.get("/", function (req, res) {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
 });
 
-app.listen(process.env.Port, (req, res) => {
-  console.log("Server is running on http://localhost:" + process.env.Port);
+console.log(process.env.GOOGLE_CLIENT_ID);
+
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+  
 });

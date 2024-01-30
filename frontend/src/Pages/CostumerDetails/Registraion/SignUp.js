@@ -141,7 +141,7 @@ function SignUp() {
     if (isValid) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/makemyvisa/customer/register",
+          `${process.env.REACT_APP_BACKEND_URL}/customer/register`,
           {
             firstName: inputs.firstname,
             lastName: inputs.lastname,

@@ -22,7 +22,7 @@ const ProfileForm = () => {
     const fetchUserData = async () => {
       try {
         const employeeId = localStorage.getItem("userId");
-        const response = await axios.get(`http://localhost:3000/makemyvisa/customer/getuserdetails/${employeeId}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/customer/getuserdetails/${employeeId}`);
         const userData = response.data.existingUser;
         console.log(userData);
   
@@ -66,7 +66,7 @@ const ProfileForm = () => {
 
     try {
       const employeeId = localStorage.getItem("userId");
-       await axios.put(`http://localhost:3000/makemyvisa/customer/updateCustomerProfile/${employeeId}`, formData);
+       await axios.put(`${process.env.REACT_APP_BACKEND_URL}/customer/updateCustomerProfile/${employeeId}`, formData);
       setUpdateUserSuccess("Profile updated successfully");
       setOriginalFormData({ ...formData });
     } catch (error) {

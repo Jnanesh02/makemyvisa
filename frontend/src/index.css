@@ -402,6 +402,8 @@ ul.dropdown-menu.show {
     left: auto;
 }
 button.btn.btn-secondary.dropdown-toggle {
+    position: relative;
+    left: 4rem;
     background: none;
 }
 

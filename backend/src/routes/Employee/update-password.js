@@ -4,7 +4,7 @@ const Employee = require("../../models/employeeSchema");
 const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 const bcrypt = require("bcrypt");
 
-router.put("/updatePassword/:id", async (req, res) => {
+router.put("/employee/updatePassword/:id", async (req, res) => {
   const object_id = req.params.id;
   const { password } = req.body;
 

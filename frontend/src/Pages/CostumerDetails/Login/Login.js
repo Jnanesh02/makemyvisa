@@ -24,7 +24,7 @@ const Login = ({ userData }) => {
     const data = { email, password };
     try {
       const response = await axios.post(
-        "http://localhost:3000/makemyvisa/customer/login",
+        `${process.env.REACT_APP_BACKEND_URL}/customer/login`,
         data
       );
 

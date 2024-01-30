@@ -3,7 +3,7 @@ import React from "react";
 export default function SocialMediaAccount() {
   const googleAuth = () => {
     window.open(
-      "http://localhost:3000/makemyvisa/customer/auth/google",
+      `${process.env.REACT_APP_BACKEND_URL}/customer/auth/google`,
       "_self"
     );
   };

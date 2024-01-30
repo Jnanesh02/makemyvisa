@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const customer = require("../../models/customerSchema");
-router.post("/forgotpassword", async (req, res) => {
+router.post("/customer/forgotpassword", async (req, res) => {
   try {
     const { email } = req.body;
     const existingUser = await customer.findOne({ email: email });

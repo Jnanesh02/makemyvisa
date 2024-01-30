@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Employee = require("../../models/departmentSchema");
 
-router.post("/create/department", async (req, res) => {
+router.post("/employee/create/department", async (req, res) => {
   try {
     const { role,status,description } = req.body;
+    console.log("body:",req.body);
     // Check if a model with the specified role already exists
     const existingModel =await Employee.findOne({role: role});
 
@@ -29,7 +30,7 @@ router.post("/create/department", async (req, res) => {
 });
 
 
-router.get("/get/department", async (req, res) => {
+router.get("/employee/get/department", async (req, res) => {
     try {
   const uniqueRole = await Employee.find();
       res.status(200).json({ message: uniqueRole });

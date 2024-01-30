@@ -4,38 +4,58 @@ const passport = require("passport");
 const axios = require("axios");
 const Customer = require("../../models/customerSchema");
 
-router.get("/auth/facebook", passport.authenticate("facebook"));
+router.get("/customer/auth/facebook", passport.authenticate("facebook"));
 router.get(
-  "/auth/facebook/callback",
+  "/customer/auth/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect: `${process.env.FRONTEND_URL}/dashboard`,
     failureRedirect: "/login",
   })
 );
 
+router.get("/customer/auth/login/success", (req, res) => {
+  console.log("hello:",req.user)
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "successful",
+      user: req.user,
+    });
+  }
+});
+
+router.get("/customer/auth/login/failed", (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "failure",
+  });
+});
+
+// router.get("/customer/auth/logout", (req, res) => {
+//   req.logout();
+//   res.redirect(process.env.FRONTEND_URL);
+// });
+
+router.get("/customer/auth/google", passport.authenticate('google', { scope: ['profile', 'email'] }));
+
 router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
-router.get(
-  "/auth/google/callback",
+  "/customer/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3001/dashboard",
-    failureRedirect: "/login",
+    successRedirect: `${process.env.FRONTEND_URL}/dashboard`,
+    failureRedirect: "/login/failed",
   })
 );
 
 
+router.get("/customer/auth/linkedin", passport.authenticate("linkedin"));
 
-router.get("/auth/linkedin", passport.authenticate("linkedin"));
-
-router.get("/auth/linkedin/callback", async (req, res) => {
+router.get("/customer/auth/linkedin/callback", async (req, res) => {
   try {
     const { code } = req.query;
     const client_id = "786klmvnz0ks2y";
     const client_secret = "0e9gzMlcID9fBeeS";
     const redirect_uri =
-      "http://localhost:3000/makemyvisa/customer/auth/linkedin/callback";
+      `${process.env.BACKEND_URL}/customer/auth/linkedin/callback`;
 
     // Exchange authorization code for access token
     const accessTokenUrl = `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${client_id}&client_secret=${client_secret}`;

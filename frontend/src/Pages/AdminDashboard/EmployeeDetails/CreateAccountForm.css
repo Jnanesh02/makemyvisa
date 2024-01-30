@@ -27,11 +27,5 @@
   cursor: pointer;
   font-size: 16px;
 }
-button {
-  background-color: #e42716;
-  color: white;
-}
 
-button:hover {
-  background-color: #45a049;
-}
+

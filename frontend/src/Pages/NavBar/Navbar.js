@@ -112,6 +112,41 @@ const Navbar = () => {
                           </Link>
                         </li>
                       </ul>
+
+                      {/* Googlereview */}
+                    <div>
+                    <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
+      <div className="google-reviews">
+        <div>
+          <span className="points-fr"> 4.5 </span>
+        </div>
+        <div className="">
+          <span>
+            <b>Google Review</b>
+          </span>
+          <br />
+          <span>
+            <svg className="google-review-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" />
+            </svg>
+            <svg className="google-review-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" />
+            </svg>
+            <svg className="google-review-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" />
+            </svg>
+            <svg className="google-review-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" />
+            </svg>
+            <svg className="google-review-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path d="M480-635v312l126 77-33-144 111-96-146-13-58-136ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </a>
+                    </div>
+
                       <div className="dropdown drp-navbar">
                         <button
                           className="btn btn-secondary dropdown-toggle"

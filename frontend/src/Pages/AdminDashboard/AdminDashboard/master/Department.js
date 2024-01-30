@@ -11,7 +11,7 @@ const Department = () => {
 
   const fetchDetails = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/makemyvisa/employee/get/department');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/department`);
       console.log(response.data.message);
       setRole(response.data.message);
     } catch (error) {
@@ -25,7 +25,7 @@ const Department = () => {
 
   const handleCreateDepartment = async () => {
     try {
-      await axios.post('http://localhost:3000/makemyvisa/employee/create/department', formData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employee/create/department`, formData);
       fetchDetails(); // Fetch updated data
       setShowModal(false); // Close the modal
     } catch (error) {

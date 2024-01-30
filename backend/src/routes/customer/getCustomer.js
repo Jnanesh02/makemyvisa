@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const customer = require("../../models/customerSchema");
-router.get("/getuserdetails/:id",async(req,res)=>{
+router.get("/customer/getuserdetails/:id",async(req,res)=>{
     try {
         const object_id = req.params.id;
         const existingUser= await customer.findById({_id:object_id});

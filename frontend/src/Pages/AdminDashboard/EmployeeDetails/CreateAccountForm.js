@@ -34,7 +34,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/makemyvisa/employee/get/department");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/department`);
         console.log("roles",response.data);
         setRoles(response.data.message); 
       } catch (error) {
@@ -123,11 +123,11 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
     try {
       const response = isEditing
         ? await axios.put(
-          `http://localhost:3000/makemyvisa/employee/update/${editingEmployee._id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/employee/update/${editingEmployee._id}`,
           employeeData,
           { Authorization: `Bearer ${adminToken.AdminToken}` }
         )
-        : await axios.post("http://localhost:3000/makemyvisa/employee/createEmployee", employeeData, {
+        : await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employee/createEmployee`, employeeData, {
           Authorization: `Bearer ${adminToken.AdminToken}`
         });
 

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Employee = require("../../models/employeeSchema");
 
-router.get("/getEmployedetail/:id",async(req,res)=>{
+router.get("/employee/getEmployedetail/:id",async(req,res)=>{
     const object_id = req.params.id;
     try {
         const existingEmployee = await Employee.findById({_id:object_id});

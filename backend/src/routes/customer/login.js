@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const customer = require("../../models/customerSchema");
 // const session = require("express-session");
-router.post("/login", async (req, res) => {
+router.post("/customer/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     
@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/dashboard", (req, res) => {
+router.get("/customer/dashboard", (req, res) => {
   if (!req.session.userId) {
     return res.json({ message: "unauthourised" });
   }

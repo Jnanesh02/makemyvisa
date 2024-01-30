@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Enquiry = require('../../models/enquirySchema');
 
-router.post("/enquiries", async (req, res) => {
+router.post("/customer/enquiries", async (req, res) => {
     try {
         const {
           name,

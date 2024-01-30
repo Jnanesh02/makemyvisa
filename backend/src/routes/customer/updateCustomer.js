@@ -3,7 +3,7 @@ const router = express.Router();
 const customer = require("../../models/customerSchema");
 
 
-router.put("/updateCustomerProfile/:id",async (req, res) => {
+router.put("/customer/updateCustomerProfile/:id",async (req, res) => {
     try {
         const object_id = req.params.id;
         console.log(object_id)

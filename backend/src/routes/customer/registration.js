@@ -4,7 +4,7 @@ const customer = require("../../models/customerSchema");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
-router.post("/register", async (req, res) => {
+router.post("/customer/register", async (req, res) => {
   console.log(req.body);
 
   try {
@@ -35,10 +35,10 @@ router.post("/register", async (req, res) => {
     
     if (existingUser) {
       if (existingUser.email === email) {
-        return res.status(400).json({ message: "Email already exists." });
+        return res.status(409).json({ message: "Email already exists." });
       }
       if (existingUser.phone_number === phoneNumber) {
-        return res.status(400).json({ message: "Phone number already exists." });
+        return res.status(409).json({ message: "Phone number already exists." });
       }
     }
 
@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 });
-router.post('/questionnaires',async(req,res) => {
+router.post('/customer/questionnaires',async(req,res) => {
   try {
     const {email,questionnaire} = req.body;
     console.log(req.body);

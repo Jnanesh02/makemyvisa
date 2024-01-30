@@ -5,7 +5,6 @@ const customerDetails = require("./customer/getCustomer");
 const forgotpassword = require("./customer/forgotpassword");
 const resetPassword = require("./customer/resetpassword");
 const updateCustomerDetails = require("./customer/updateCustomer");
-
 const enquiries = require("./enquiry");
 const socialmedia = require("./customer/socialmedia");
 const employees = require("./Employee/employee-Login");
