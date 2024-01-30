@@ -48,7 +48,7 @@ const CountriesSection = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/getcountries");
+        const response = await axios.get(`${process.env.REACT_APP_ADMIN_COUNTRIES}/getcountries`);
         if (response.status === 200) {
           setCountriesData(response.data.message);
         }

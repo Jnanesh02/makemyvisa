@@ -190,26 +190,6 @@ section.testimoinal h2 {
 .card.testiomal-cards {
     border: 1px solid #e4e4e4;
 }
-section.certificate-section {
-    height: 600px;
-    padding: 15px;
-}
-section.certificate-section h2 {
-    text-align: center;
-    font-weight: bold;
-}
-section.certificate-section h4 {
-    text-align: center;
-    color: #fe5141;
-}
-img.certificate-img {
-    width: 88%;
-    margin: auto;
-    display: block;
-    border: 1px solid #fe514173;
-    padding: 4px;
-    margin-top: 50px;
-}
 img.plane-images {
     position: absolute;
     width: 20%;
