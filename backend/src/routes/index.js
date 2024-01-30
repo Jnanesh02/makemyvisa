@@ -13,9 +13,11 @@ const employeesLogout = require("./Employee/logout");
 const getEmployeedetail = require("./Employee/getEmployee");
 const deleteEmployeeData = require("./Employee/delete-employee");
 const updateEmployeePassword = require("./Employee/update-password");
-const adminUpdateEmployee= require("./Employee/AdminUpdateEmpoyeRole")
-const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile")
-const departments = require("./Employee/departments")
+const adminUpdateEmployee= require("./Employee/AdminUpdateEmpoyeRole");
+const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile");
+const departments = require("./Employee/departments");
+
+const countryService = require("./countryService");
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -33,5 +35,6 @@ module.exports = {
   getEmployeedetail,
   adminUpdateEmployee,
   updateEmpoyeeProfile,
-  departments
+  departments,
+  countryService
 };

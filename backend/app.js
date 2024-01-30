@@ -55,7 +55,7 @@ app.use("/makemyvisa/employee", customerRouter.adminUpdateEmployee);
 app.use("/makemyvisa/employee", customerRouter.getEmployeedetail);
 app.use("/makemyvisa/employee", customerRouter.updateEmpoyeeProfile);
 app.use("/makemyvisa/employee",customerRouter.departments);
-
+app.use("/",customerRouter.countryService);
 
 app.get("/", function (req, res) {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
