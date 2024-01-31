@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 router.post("/customer/register", async (req, res) => {
-  console.log(req.body);
+ 
 
   try {
     const {
@@ -66,7 +66,7 @@ router.post("/customer/register", async (req, res) => {
 router.post('/customer/questionnaires',async(req,res) => {
   try {
     const {email,questionnaire} = req.body;
-    console.log(req.body);
+    
     const existingUser = await customer.findOne({ email: email});
     if(!existingUser){
       return res.status(400).json({ message: "user not found" });

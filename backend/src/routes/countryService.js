@@ -37,12 +37,19 @@ router.post("/create/newCountry",upload.single('image'),async(req,res)=>{
      }
 });
 
-router.get("/getcountries",async(req,res)=>{
-try {
-    const getAllCountriesServices = await countryServiceSchema.find();
-    return res.status(200).json({message:getAllCountriesServices});
-} catch (error) {
-    return res.status(500).json({message:error.message});
-}
-})
+router.get("/getcountries", async (req, res) => {
+    try {
+      const getAllCountriesServices = await countryServiceSchema.find();
+      
+      if (getAllCountriesServices.length === 0) {
+        return res.status(200).json({ message: "No countries found" });
+      }
+  
+      return res.status(200).json({ message: getAllCountriesServices });
+    } catch (error) {
+      console.log("error", error);
+      return res.status(500).json({ message: error.message });
+    }
+  });
+  
 module.exports = router;

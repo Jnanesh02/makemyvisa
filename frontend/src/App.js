@@ -1,23 +1,23 @@
 import "./App.css";
 import { useState,useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Pages/CostumerDetails/Login/Login";
+import Login from "./Pages/CostumerAuthentication/Login/Login";
 import Layout from "./Pages/Layout";
-import Home from "./Pages/Home/Home";
-import SignUp from "./Pages/CostumerDetails/Registraion/SignUp";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import Hello from "./Pages/Dashboard/Hello";
-import Profile from "./Pages/Dashboard/Profile";
+import Home from "./components/Home/Home";
+import SignUp from "./Pages/CostumerAuthentication/Registraion/SignUp";
+import Dashboard from "./Pages/CostumerDashboard/Dashboard";
+import CostumerHomePage from "./Pages/CostumerDashboard/CostumerHomePage";
+import AdminHomePage from "./Pages/AdminDashboard/AdminHomePage";
+import Profile from "./Pages/CostumerDashboard/Profile";
 import AdminLogin from "./Pages/AdminDashboard/AdminLogin";
-import { AdminDashboard } from "./Pages/AdminDashboard/AdminDashboard/AdminDashboard";
-import { AdminLogout } from "./Pages/AdminDashboard/AdminDashboard/AdminLogout";
+import { AdminDashboard } from "./Pages/AdminDashboard/AdminDashboard";
+import { AdminLogout } from "./Pages/AdminDashboard/AdminLogout";
 import EmployeeDetails from "./Pages/AdminDashboard/EmployeeDetails/EmployeeDetails";
-import { CustomerLogout } from "./Pages/Dashboard/CustomerLogout";
-import { AdminProfile } from "./Pages/AdminDashboard/AdminDashboard/AdminProfile";
-import Department from "./Pages/AdminDashboard/AdminDashboard/master/Department";
-import  CountryServices  from "./Pages/AdminDashboard/AdminDashboard/master/CountryServices";
-import { CountriesServiceDetails } from "./Pages/Home/CountriesServiceDetails";
-
+import { CustomerLogout } from "./Pages/CostumerDashboard/CustomerLogout";
+import { AdminProfile } from "./Pages/AdminDashboard/AdminProfile";
+import Department from "./Pages/AdminDashboard/master/Department";
+import CountryServices from "./Pages/AdminDashboard/master/CountryServices";
+import { CountriesServiceDetails } from "./components/Home/CountriesServiceDetails";
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
@@ -52,14 +52,14 @@ function App() {
           </Route>
 
           <Route path="dashboard" element={<Dashboard />}>
-            <Route index element={<Hello />} />
+            <Route index element={<CostumerHomePage />} />
             <Route path="profile" element={<Profile />}>
             </Route>
           </Route>
           <Route path="CustomerLogout" element={<CustomerLogout />} />
 
           <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace={true}/>)}>
-            <Route index element={<Hello />} />
+            <Route index element={<AdminHomePage />} />
             <Route path="Department" element={<Department />}>
             </Route>
             <Route path="profile" element={<AdminProfile />}>

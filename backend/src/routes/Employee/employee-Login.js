@@ -9,19 +9,20 @@ const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     // Check if the user exists
     const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email" });
     }
-   console.log(existingUser);
+   
     // If the password starts not with "TEMP_", prompt the user to reset it
     if (!existingUser.password.startsWith("TEMP_")) {
       // Check if the provided password matches the stored hashed password
       const isMatch = await bcrypt.compare(password, existingUser.password);
 
       if (!isMatch) {
-        return res.status(400).json({ message: "Invalid password" });
+        return res.status(409).json({ message: "Invalid password" });
       }
     }
 

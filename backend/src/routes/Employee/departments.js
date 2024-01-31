@@ -5,7 +5,7 @@ const Employee = require("../../models/departmentSchema");
 router.post("/employee/create/department", async (req, res) => {
   try {
     const { role,status,description } = req.body;
-    console.log("body:",req.body);
+    
     // Check if a model with the specified role already exists
     const existingModel =await Employee.findOne({role: role});
 

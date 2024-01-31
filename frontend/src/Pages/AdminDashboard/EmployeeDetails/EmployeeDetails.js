@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useCallback } from "react";
 import axios from "axios";
-import "./employe.css";
+import "../AdminDashboardStyles/Employee.css";
 import CreateAccountForm from "./CreateAccountForm";
 import Modal from "./CreateAccountModal";
 import ConfirmationModal from "./ConfirmationAccountModel";
@@ -126,7 +126,7 @@ const EmployeeDetails = () => {
       const adminToken = JSON.parse(localStorage.getItem("adminToken"));
 
       await axios.delete(
-        `${process.env.REACT_APP_ADMIN_DELETE}/delete/${confirmationEmployeeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/employee/delete/${confirmationEmployeeId}`,
         {
           headers: {
             Authorization: `Bearer ${adminToken.AdminToken}`,
@@ -186,29 +186,24 @@ const EmployeeDetails = () => {
   }, [employees, roleFilter, statusFilter, searchTerm, applyFilters]);
 
   return (
-    <div>
+    <div class="main-department-section">
+        <div class="dep-tbl">
       <h2>Employee Details</h2>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "16px",
-        }}
-      >
-        <input
+      <div>
+        <input 
           type="text"
           placeholder="Search..."
-          className="Searchbar"
+          className="Searchbar form-control"
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ marginRight: "8px" }}
+         
         />
 
-        <label style={{ marginRight: "8px" }}>
-          Role Filter:
-          <select value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
-          <option value="">All</option>
+        <label class="table-bar-label">
+      
+          <select class="form-select"  value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
+          <option value="">  Role Filter: </option>
     {roles.map((role) => (
       <option key={role._id} value={role.role}>
         {role.role}
@@ -217,20 +212,20 @@ const EmployeeDetails = () => {
           </select>
         </label>
 
-        <label style={{ marginRight: "8px" }}>
-          Status Filter:
-          <select value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
-            <option value="">All</option>
+        <label class="table-bar-label">
+    
+          <select class="form-select"  value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
+            <option value=""> Status Filter: </option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
         </label>
 
-        <button onClick={() => setShowCreateForm(!showCreateForm)}>
+        <button class="btn btn-primary create-button" onClick={() => setShowCreateForm(!showCreateForm)}>
           {showCreateForm ? "Cancel" : "Create Account"}
         </button>
       </div>
-
+      </div>
       <Modal open={showCreateForm} onClose={handleCancelEdit}>
         <CreateAccountForm
           onEmployeeCreate={handleCreateAccount}
@@ -268,13 +263,13 @@ const EmployeeDetails = () => {
                 {!editingEmployee && (
                   <>
                     <button
-                      className="action-button"
+                      className="action-button edit"
                       onClick={() => handleEdit(employee._id)}
                     >
                       Edit
                     </button>
                     <button
-                      className="action-button"
+                      className="action-button delete"
                       onClick={() => handleDelete(employee._id)}
                     >
                       Delete

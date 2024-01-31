@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import "./CreateAccountForm.css";
+import "../AdminDashboardStyles/CreateAccountForm.css";
 import ConfirmationModal from "./ConfirmationAccountModel";
 import axios from "axios";
 
@@ -35,7 +35,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
     const fetchRoles = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/department`);
-        console.log("roles",response.data);
+      
         setRoles(response.data.message); 
       } catch (error) {
         console.error("Error fetching roles:", error.message);
@@ -170,3 +170,11 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 };
 
 export default CreateAccountForm;
+
+
+
+
+
+
+
+

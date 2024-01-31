@@ -10,19 +10,10 @@ body
 img.header-logo {
     width: 200px;
 }
-.navbar-list {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    font-size: 14px;
-}
-li.nav-item {
-    margin-right: 50px;
-}
 
 .navbar-section {
     background: white !important;
-    padding-top: 16px;
+    padding-top: 0px !important;
 }
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
     color: rgb(225 41 18);
@@ -63,8 +54,8 @@ section.header-section {
     width: 100%;
     margin: 6px;
     border-radius: 20px;
-    padding: 8px 12px;
-    background:#fe5141;
+    padding: 8px 30px;
+    background: #fe5141;
     border: none;
    
     
@@ -190,6 +181,26 @@ section.testimoinal h2 {
 .card.testiomal-cards {
     border: 1px solid #e4e4e4;
 }
+section.certificate-section {
+    height: 600px;
+    padding: 15px;
+}
+section.certificate-section h2 {
+    text-align: center;
+    font-weight: bold;
+}
+section.certificate-section h4 {
+    text-align: center;
+    color: #fe5141;
+}
+img.certificate-img {
+    width: 88%;
+    margin: auto;
+    display: block;
+    border: 1px solid #fe514173;
+    padding: 4px;
+    margin-top: 50px;
+}
 img.plane-images {
     position: absolute;
     width: 20%;
@@ -284,11 +295,7 @@ ul.dropdown-menu.show {
     right: 0px !important;
     left: auto;
 }
-button.btn.btn-secondary.dropdown-toggle {
-    position: relative;
-    left: 4rem;
-    background: none;
-}
+
 
 section.banner-section img {
     width: 100%;
@@ -311,12 +318,6 @@ img.img-banner-fxd {
     width: 15%;
 }
 
-@media only screen and (max-width: 1400px) {
-    .carousel-caption {
-        top: 0% !important;
-        bottom: 0px;
-    }
-  }
   @media only screen and (max-width: 1000px) {
     .navbar-section {
         background: none !important;
@@ -401,7 +402,7 @@ img.img-banner-fxd {
     }
     .carousel-caption.d-md-block.slider-content-img {
         position: absolute;
-        
+        top:0px;
         left: 0px;
         top: 0px;
         padding-bottom: 0px;
@@ -439,6 +440,7 @@ img.img-banner-fxd {
     .slider-form h4 {
         text-align: center;
     }
+
   }
   .top-container {
     background-color: #f1f1f1;
@@ -461,21 +463,8 @@ img.img-banner-fxd {
   
   
   
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  .sticky + .content {
-    padding-top: 102px;
-  }
-  .header-form.sticky {
-    background: black;
-}
-.header-form.sticky form {
-    display: flex;
-}
+
+
 .header-form {
     width: 35%;
     position: absolute;
@@ -485,47 +474,7 @@ img.img-banner-fxd {
     background: none;
 }
 
-.header-form.sticky {
-    width: 100%;
 
-    position: fixed;
-    top: 0px;
-    right: auto;
-}
-.header-form.sticky .form-inputs-controls {
-    width: 100%;
-    margin-right: 20px;
-    margin-bottom: 12px I !important;
-}
-.header-form.sticky .slider-form {
-    border: none;
-    background: black;
-    margin-bottom: 0px !important;
-}
-.header-form.sticky .slider-form {
-    padding-top: 5px;
-    padding-bottom: 0px;
-    width: 80%;
-    margin: auto;
-}
-.header-form.sticky h4.mb-3.form-heading {
-    font-size: 16px;
-    margin-bottom: 8px !important;
-    margin-top: 6px;
-}
-.header-form.sticky .slider-form input {
-    padding: 8px;
-    font-size: 14px;
-}
-.header-form.sticky .slider-form select {
-    padding: 6px;
-    font-size: 14px;
-}
-.header-form.sticky button.btn.btn-primary.submit.form-control-btn {
-    margin-top: 0px;
-    font-size: 12px;
-    padding: 10px;
-}
 .modal-em-m {
     z-index: 9999999 !important;
 }
@@ -608,4 +557,29 @@ h5.social-media-or {
 
 .login{
     width: 70%;
+}
+section.certificate-section {
+    padding-bottom: 50px;
+}
+ul.list-group.states-links {
+    margin-top: 20px;
+}
+ul.list-group.states-links li {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding-left: 30px;
+    font-size: 18px;
+    border-bottom: 1px solid #ffffff33;
+}
+ul.list-group.states-links li  a {
+    color: white;
+    text-decoration: none;
+}
+@media only screen and (max-width: 600px)
+{
+img.certificate-img {
+    width: 90% !important;
+}
 }

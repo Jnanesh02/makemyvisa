@@ -14,7 +14,7 @@ router.get(
 );
 
 router.get("/customer/auth/login/success", (req, res) => {
-  console.log("hello:",req.user)
+
   if (req.user) {
     res.status(200).json({
       success: true,
@@ -54,8 +54,7 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
     const { code } = req.query;
     const client_id = "786klmvnz0ks2y";
     const client_secret = "0e9gzMlcID9fBeeS";
-    const redirect_uri =
-      `${process.env.BACKEND_URL}/customer/auth/linkedin/callback`;
+    const redirect_uri =`${process.env.BACKEND_URL}/customer/auth/linkedin/callback`;
 
     // Exchange authorization code for access token
     const accessTokenUrl = `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${client_id}&client_secret=${client_secret}`;
@@ -75,24 +74,26 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
         Authorization: `Bearer ${access_token}`,
       },
     });
+    
     const existingUser = await Customer.findOne({
       $or: [
         { email: user_info?.email },
         { "social_media.linkedinId": user_info.sub },
       ],
     });
-
+    
     if (existingUser) {
       if (existingUser.first_name === "") {
-        existingUser.first_name = user_info.first_name;
+        existingUser.first_name = user_info.given_name;
       }
       if (existingUser.last_name === "") {
-        existingUser.last_name = user_info.last_name;
+        existingUser.last_name = user_info.family_name;
       }
       // User already exists, update the Google account information
       existingUser.social_media.linkedinId = user_info.sub;
       await existingUser.save();
-      res.status(200).json({ message: existingUser });
+      // res.status(200).json({ message: existingUser_id });
+      res.redirect('http://localhost:3001/dashboard?userId=' + existingUser._id);
     } else {
       // User does not exist, create a new user account
       const newCustomer = new Customer({
@@ -106,7 +107,10 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
       });
 
       await newCustomer.save();
-      res.status(200).json({ message: "successfly" });
+
+      // res.status(200).json({ message:  newCustomer});
+      res.redirect('http://localhost:3001/dashboard?userId=' + newCustomer._id);
+
     }
   } catch (error) {
     console.error("Error:", error.message);
