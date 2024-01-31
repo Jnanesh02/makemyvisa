@@ -9,6 +9,7 @@ const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     // Check if the user exists
     const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {
@@ -21,7 +22,7 @@ router.post("/employee/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, existingUser.password);
 
       if (!isMatch) {
-        return res.status(400).json({ message: "Invalid password" });
+        return res.status(409).json({ message: "Invalid password" });
       }
     }
 

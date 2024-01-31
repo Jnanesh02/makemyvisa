@@ -4,25 +4,23 @@ img.header-logo {
 
 section.header-section {
   background: white;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 0px;
   box-shadow: 0px 0px 3px 0px #bbbbbb;
   border-bottom: 1px solid #ededed;
 }
 
 .navbar-list {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 100%;
   font-size: 14px;
 }
-li.nav-item {
-  margin-right: 50px;
-}
+
 
 .navbar-section {
   background: white !important;
-  padding-top: 16px;
+  padding-top: 16px !important;
 }
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
   color: rgb(225 41 18);

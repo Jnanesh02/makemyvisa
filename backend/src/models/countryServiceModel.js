@@ -15,7 +15,6 @@ const countryServiceSchema = new mongoose.Schema({
         {
        serviceName:{
         type:String,
-        required:true,
        }
     }
     ]

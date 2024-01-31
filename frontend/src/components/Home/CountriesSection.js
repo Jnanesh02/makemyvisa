@@ -27,9 +27,10 @@ const renderFlipCard = (country) => (
         </div>
         <div className="flip-card-back">
           {country.serviceTypes ? (
-            <ul>
+            <ul class="list-group states-links">
+              <li><h3 class="counter-name-backflip"> USA </h3></li>
               {country.serviceTypes.map((service, index) => (
-                <li key={index}><NavLink>{service.serviceName}</NavLink></li>
+                <li class="list-group-item" key={index}><NavLink>{service.serviceName}</NavLink></li>
               ))}
             </ul>
           ) : (

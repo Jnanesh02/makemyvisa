@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/avatar.png";
+import googlereview from "../../assets/images/review.png";
 import "./Navbar.css";
 import { Link, useLocation } from "react-router-dom";
 // import Dashboard from "../Dashboard/Dashboard";
@@ -61,7 +62,7 @@ const HomeLink = () => {
                   <img className="header-logo" src={Logo} alt="Logo" />
                 </Link>
               </div>
-              <div className="col-lg-10 col-sm-8 col-md-8  nav-cont-b">
+              <div className="col-lg-9 col-sm-8 col-md-8  nav-cont-b">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-section">
                   <div className="container-fluid">
                     <button
@@ -114,9 +115,19 @@ const HomeLink = () => {
                       </ul>
 
                       {/* Googlereview */}
-                    <div>
-                    <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
-      <div className="google-reviews">
+               
+
+                     
+                    </div>
+                  </div>
+                </nav>
+               
+              </div>
+              <div class="col-lg-1">
+             
+              {/* <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
+    <img class="header-googlwe-review" src={googlereview}/> */}
+      {/* <div className="google-reviews">
         <div>
           <span className="points-fr"> 4.5 </span>
         </div>
@@ -143,22 +154,22 @@ const HomeLink = () => {
             </svg>
           </span>
         </div>
-      </div>
-    </a>
-                    </div>
+      </div> */}
+    {/* </a> */}
 
-<div className="dropdown drp-navbar">
-  <button
-    className="btn btn-secondary dropdown-toggle"
-    type="button"
-    data-bs-toggle="dropdown"
-    aria-expanded="false">
-    <img src={avatar} alt="Avatar" />
-  </button>
-  <ul className="dropdown-menu">
-    {onLoginPage && (
-      <>
-        <HomeLink></HomeLink>
+    
+    <div className="dropdown drp-navbar">
+                        <button
+                          className="btn btn-secondary dropdown-toggle"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          <img src={avatar} alt="Avatar" />
+                        </button>
+                        <ul className="dropdown-menu">
+                          {onLoginPage && (
+                            <>
+                              <HomeLink></HomeLink>
 
         <Signup></Signup>
       </>
@@ -172,17 +183,14 @@ const HomeLink = () => {
       </>
     )}
 
-    {onHomePage && (
-      <>
-        <Signup></Signup>
-        <Login></Login>
-      </>
-    )}
-  </ul>
-</div>
-                    </div>
-                  </div>
-                </nav>
+                          {onHomePage && (
+                            <>
+                              <Signup></Signup>
+                              <Login></Login>
+                            </>
+                          )}
+                        </ul>
+                      </div>
               </div>
             </div>
           </div>

@@ -38,9 +38,10 @@ const Department = () => {
   };
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-        <h2 style={{ marginRight: '10px' }}>Department</h2>
-        <button style={{left: '62rem', position: 'relative'}}onClick={() => setShowModal(true)}>Create</button>
+    <div class="main-department-section">
+      <div class="dep-tbl">
+        <h2 >Department</h2>
+        <button class="btn btn-primary create-button" onClick={() => setShowModal(true)}>Create</button> 
       </div>
       <table className="employee-table">
       <thead>
@@ -58,22 +59,25 @@ const Department = () => {
         ))}
       </tbody>
     </table>
+    </div>
 
       {/* Modal */}
       {showModal && (
-        <div style={{ position: 'fixed', top: '0', left: '0', width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ background: '#fff', padding: '20px', borderRadius: '8px' }}>
+        <div >
+          <div className='create-account-dashboard'>
             <h3>Create Department</h3>
-            <label>
-              Department:
-              <input type="text" name="role" value={formData.role} onChange={handleInputChange} />
-            </label>
-            <label>
-              Description:
-              <input type="text" name="description" value={formData.description} onChange={handleInputChange} />
-            </label>
-            <button onClick={handleCreateDepartment}>Create</button>
-            <button onClick={() => setShowModal(false)}>Cancel</button>
+            <div className='create-dep-labels mb-3'>
+            <label class="form-label" > Department:   </label>
+              <input class="form-control" type="text" name="role" value={formData.role} onChange={handleInputChange} />
+              </div>
+              <div className='create-dep-labels mb-3'>
+            <label>  Description:  </label>
+              <input class="form-control" type="text" name="description" value={formData.description} onChange={handleInputChange} />
+          </div>
+          <div class="form-button-dashboard">
+            <button class="btn btn-primary create" onClick={handleCreateDepartment}>Create</button>
+            <button class="btn btn-primary cancel" onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
           </div>
         </div>
       )}

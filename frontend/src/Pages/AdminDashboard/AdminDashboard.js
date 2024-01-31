@@ -157,7 +157,7 @@ export const AdminDashboard = () => {
 
                     <div className="collapse" id="collapseExample">
                       <div className="card card-body card-avatar">
-                        <ul className="list-group">
+                        <ul className="list-group dashboard-avt">
                           <li className="list-group-item">
                             <span className="profile-name">Profile</span>
                           </li>
