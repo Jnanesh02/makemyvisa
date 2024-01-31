@@ -94,13 +94,7 @@ router.post("/employee/createEmployee", async (req, res) => {
   }
 });
 
-router.get("/employee/Admindashboard", async (req, res) => {
-  try {
-    res.redirect("/admindashboard");
-  } catch (err) {
-    res.redirect("/login"); 
-  }
-});
+
 
 router.get("/employee/employeData", isAdmin, async (req, res) => {
   try {
