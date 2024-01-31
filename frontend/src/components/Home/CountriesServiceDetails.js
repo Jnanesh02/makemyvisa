@@ -10,7 +10,7 @@ import axios from 'axios';
 import "./HomeStyles/countriesserviceDetails.css";
 export const CountriesServiceDetails = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const { countryName, serviceType } = useParams();
+    const { countryName, serviceName } = useParams();
     const [countryData, setCountryData] = useState([]);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export const CountriesServiceDetails = () => {
         };
 
         fetchData();
-    }, [countryName,serviceType]);
+    }, [countryName,serviceName]);
 
 
     const handlePrev = () => {
@@ -60,7 +60,7 @@ export const CountriesServiceDetails = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12">
-                            <h2 className="visa-category-text">Visa Categories</h2>
+                            <h2 className="visa-category-text">{serviceName}-Categories</h2>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ export const CountriesServiceDetails = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <h1>Information on Visa</h1>
+                            <h1>Information on {serviceName}</h1>
                             <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                             </p>
