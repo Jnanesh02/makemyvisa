@@ -37,7 +37,13 @@ h5.footer-menu-one {
   .social-icons i {
     margin-right: 10px; /* Adjust the spacing between icons */
   }
-
+  li.mb-1.footer-address {
+    text-align: left;
+    padding-bottom: 14px;
+}
+li.mb-1.footer-address svg {
+    fill: white;
+}
 
   .footer-last{
     align-items: center;
