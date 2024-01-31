@@ -1,0 +1,121 @@
+.clients-section .bbb_viewed_nav.bbb_viewed_prev {
+    background: #ffffffa3;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+h2.clents-heading {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: white;
+    border: none !important;
+}
+.clients-section .bbb_viewed_nav.bbb_viewed_next {
+    background: #ffffffa3;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+.viewed    
+{
+    padding-top: 51px;
+    padding-bottom: 60px;
+}
+
+.bbb_viewed_title
+{
+    margin-bottom: 14px;
+}
+.bbb_viewed_nav_container {
+    position: relative;
+    bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.bbb_viewed_nav
+{
+    display: inline-block;
+    cursor: pointer;
+}
+.bbb_viewed_nav i
+{
+    color: #dadada;
+    font-size: 18px;
+    padding: 5px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.bbb_viewed_nav:hover i
+{
+    color: #606264;
+}
+.bbb_viewed_prev
+{
+    margin-right: 15px;
+}
+.bbb_viewed_slider_container
+{
+    padding-top: 50px;
+}
+.bbb_viewed_item
+{
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 40
+    px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.bbb_viewed_item:hover {
+    background: #ffffff4a;
+    border: 1px solid white;
+    cursor: pointer;
+}
+.bbb_viewed_image
+{
+    width: 115px;
+    height: 115px;
+}
+.bbb_viewed_image img
+{
+    display: block;
+    max-width: 100%;
+}
+.bbb_viewed_content
+{
+    width: 100%;
+    margin-top: 25px;
+}
+
+.owl-carousel {
+    display: block !important;
+    width: 100%;
+    z-index: 1;
+}
+.owl-item {
+    width: 100%;
+}
+
+.companyies{
+    width: 150px;
+    padding: 1rem;
+    background-color: whitesmoke;
+}
+.companyies:hover{
+    background: #ffffff4a;
+    border: 1px solid white;
+    cursor: pointer;
+}

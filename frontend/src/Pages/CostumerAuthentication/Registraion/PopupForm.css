@@ -1,0 +1,98 @@
+/* General styles */
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Form container */
+  
+  .formContainer {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+  }
+  
+  /* Question styles */
+  
+  .question {
+    margin-bottom: 20px;
+    font-weight: bold; /* Added to make the question text bold */
+  }
+  
+  /* Options styles */
+  
+  .options {
+    margin-top: 10px;
+  }
+  
+  /* Button styles */
+  
+  .openButton {
+    border: none;
+    border-radius: 5px;
+    background-color: #1c87c9;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
+  }
+  
+  .btnFormSubmit {
+    padding: 12px 20px;
+    border: none;
+    background-color: #8ebf42;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    opacity: 0.8;
+  }
+  
+  .btnFormSubmit.cancel {
+    background-color: #cc0000;
+  }
+  
+  .btnFormSubmit:hover,
+  .openButton:hover {
+    opacity: 1;
+  }
+  
+  /* Popup styles */
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+  }
+  
+  .formPopup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+  .react-tel-input .form-control{
+    width: 100%;
+  }
+
+
+  @media only screen and (max-width: 750px) {
+    .signupForm{
+      width: 500px;
+    }
+}
