@@ -14,7 +14,7 @@ router.post("/employee/login", async (req, res) => {
     if (!existingUser) {
       return res.status(400).json({ message: "Invalid email" });
     }
-   console.log(existingUser);
+   
     // If the password starts not with "TEMP_", prompt the user to reset it
     if (!existingUser.password.startsWith("TEMP_")) {
       // Check if the provided password matches the stored hashed password

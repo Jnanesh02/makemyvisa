@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ConfirmationAccountModel.css"
+import "../AdminDashboardStyles/ConfirmationAccountModel.css"
 const ConfirmationAccountModel = ({message,onConfirm,onCancel}) => {
   return (
     <div className="confirmation-modal">

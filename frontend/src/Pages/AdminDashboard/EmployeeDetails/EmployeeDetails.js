@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useCallback } from "react";
 import axios from "axios";
-import "./employe.css";
+import "../AdminDashboardStyles/Employee.css";
 import CreateAccountForm from "./CreateAccountForm";
 import Modal from "./CreateAccountModal";
 import ConfirmationModal from "./ConfirmationAccountModel";
@@ -126,7 +126,7 @@ const EmployeeDetails = () => {
       const adminToken = JSON.parse(localStorage.getItem("adminToken"));
 
       await axios.delete(
-        `${process.env.REACT_APP_ADMIN_DELETE}/delete/${confirmationEmployeeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/employee/delete/${confirmationEmployeeId}`,
         {
           headers: {
             Authorization: `Bearer ${adminToken.AdminToken}`,

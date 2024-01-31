@@ -22,7 +22,7 @@ const AdminLogin = () => {
     const data = { email, password };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_ADMIN_LOGIN}/login`,
+        `${process.env.REACT_APP_BACKEND_URL}/employee/login`,
         data
       );
 

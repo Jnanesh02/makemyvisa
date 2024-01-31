@@ -44,7 +44,7 @@ const Service = () => {
                 className="services-btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ><i class="fa-solid fa-xmark"  style={{color:"#fe5141"}}></i></button>
+              ><i className="fa-solid fa-xmark"  style={{color:"#fe5141"}}></i></button>
 
               <div
                 id="carouselExample"

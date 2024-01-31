@@ -6,7 +6,8 @@ const passport = require("passport");
 const Customer = require("./src/models/customerSchema");
 
 
-
+const LINKEDIN_CLIENT_ID = "786klmvnz0ks2y";
+const LINKEDIN_CLIENT_SECRET = "0e9gzMlcID9fBeeS";
 
 
 // Google Strategy
@@ -56,24 +57,26 @@ passport.use(
   )
 );
 
-// // LinkedIn Strategy
-// passport.use(
-//   new LinkedInStrategy(
-//     {
-//       clientID: LINKEDIN_CLIENT_ID,
-//       clientSecret: LINKEDIN_CLIENT_SECRET,
-//       callbackURL: "http://localhost:3000/makemyvisa/customer/auth/linkedin/callback",
-//       scope: ['openid', 'profile', 'email'],
-//       state: true,
-//     },
-//     function (req, accessToken, refreshToken, profile, done) {
-//       req.session.accessToken = accessToken;
-//       process.nextTick(function () {
-//         return done(null, profile);
-//       });
-//     }
-//   )
-// );
+// LinkedIn Strategy
+passport.use(
+  new LinkedInStrategy(
+    {
+      clientID: LINKEDIN_CLIENT_ID,
+      clientSecret: LINKEDIN_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/makemyvisa/customer/auth/linkedin/callback",
+      scope: ['openid', 'profile', 'email'],
+      state: true,
+    },
+    function (req, accessToken, refreshToken, profile, done) {
+      req.session.accessToken = accessToken;
+      process.nextTick(function () {
+      
+        return done(null, profile);
+       
+      });
+    }
+  )
+);
 
 // // Facebook Strategy
 // passport.use(

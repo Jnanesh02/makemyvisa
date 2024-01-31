@@ -53,7 +53,7 @@ app.get("/", function (req, res) {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
 });
 
-console.log(process.env.GOOGLE_CLIENT_ID);
+
 
 // Start the server
 const port = process.env.PORT || 3000;

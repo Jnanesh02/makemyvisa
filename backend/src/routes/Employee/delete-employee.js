@@ -8,14 +8,14 @@ router.delete("/employee/delete/:id",async(req,res)=>{
    const object_id=req.params.id;
    try {
       const existingEmployee = await Employee.findById(object_id);
-      console.log(existingEmployee);
+    
       
       if (!existingEmployee) {
         return res.status(404).json({ message: "Employee not found" });
       }
       
       const oldCollectionModel = createRoleBasedModel(existingEmployee.role);
-      console.log(oldCollectionModel);
+      
       
       await oldCollectionModel.deleteOne({ _id: object_id });
       await Employee.deleteOne({ _id: object_id });
