@@ -11,11 +11,36 @@ img.header-logo {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid #dd281778;
 }
+.main-department-section {
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+}
+.main-department-section h2 {
+    color: #dd2817;
+    font-size: 24px;
+}
+.main-department-section  .employee-table th {
+    background-color: #dd2817;
+    color: white;
+    font-weight: normal;
+    padding: 12px;
+}
+.dep-tbl {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+button.btn.btn-primary.create-button {
+    background: #dd2817;
+    border: none;
+    border-radius: 0px;
 
+}
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
@@ -117,20 +142,24 @@ a[aria-expanded="true"] {
 }
 
 .custom-link {
-    padding: 5px !important; /* Adjust padding as needed */
+    padding: 5px !important;
     display: block !important;
-    color: white !important; /* Change to your desired link color */
+    color: white !important;
     text-decoration: none !important;
-    border-bottom: 1px solid #ddd !important; /* Add a bottom border to separate links */
+    border-bottom: 1px solid #dddddd6b !important;
 }
-
-
+ul.list-unstyled.components .accordion {
+    padding: 0px;
+}
 
 
 ul ul a {
     font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #b31c0e;
+    padding-left: 0px !important;
+    background: none;
+    color: #e14a3b;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 ul.CTAs {
@@ -221,13 +250,13 @@ img.avatar-icons {
 }
 button.btn.btn-primary.avatar-img {
     border-radius: 50%;
-    border: 1px solid #dd281791;
+    border:none;
     padding: 3px;
     background: white;
 }
 li.nav-item.avatar-icons-ds {
     position: absolute;
-    right: 0px;
+    right: 20px;
 }
 .card.card-body.card-avatar {
     position: absolute;
@@ -280,6 +309,19 @@ button.btn.btn-primary.logout-button {
     float: right;
     background: #dd2817;
     border: none;
+}
+ul.list-unstyled.components .accordion-body {
+    padding: 0px;
+    border: none !important;
+    background: #b11c09;
+}
+ul.list-unstyled.components button.accordion-button.custom-button {
+    padding-left: 10px !important;
+}
+svg.arrows-dashboard {
+    color: white;
+    fill: white;
+    float: right;
 }
 @media only screen and (max-width: 1100px) {
     div#navbarSupportedContent {

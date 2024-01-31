@@ -5,7 +5,7 @@ import certificate3 from '../../assets/images/certificate/certificate-3.jpg';
 import certificate4 from '../../assets/images/certificate/certificate-4.jpg';
 import certificate5 from '../../assets/images/certificate/certificate-5.jpg';
 import backgroundImage from "../../assets/images/certificate/relief-plaster-wall.jpg";
-import "./Home.css";
+import "./certificationSection.css";
 const CertificationSection = () => {
     return (
         <>

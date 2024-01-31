@@ -88,6 +88,7 @@ gladly recommend them to everyone.
 <svg class="star-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m183-11 79-338L-1-577l346-29 135-319 135 319 346 29-263 228 79 338-297-180L183-11Z"/></svg>
                                       <p class="card-text">
                                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                     
                                       </p>
                                       <h5 class="card-title">Special title treatment</h5>
                                    <span> Hello world </span>
@@ -101,7 +102,7 @@ gladly recommend them to everyone.
         </section>
         <style>{`
         .testimonial {
-          padding: 50px;
+          padding: 10px;
           padding-top: 100px;
           padding-bottom: 100px;
         }

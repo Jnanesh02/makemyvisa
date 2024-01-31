@@ -82,11 +82,3 @@ img.services-images {
     border-radius: 50% 50%;
     border: none;
 }
-@media only screen and (max-width: 1400px) {
-    .carousel-item.active.slider-one {
-        height: 680px;
-    }
-    .carousel-item.active.slider-one img {
-        height: 240px;
-    }
-}

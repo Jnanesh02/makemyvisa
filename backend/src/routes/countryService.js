@@ -37,7 +37,7 @@ router.post("/create/newCountry",upload.single('image'),async(req,res)=>{
      }
 });
 
-router.get("/getcountries",async(req,res)=>{
+router.get("/employee/getcountries",async(req,res)=>{
 try {
     const getAllCountriesServices = await countryServiceSchema.find();
     return res.status(200).json({message:getAllCountriesServices});

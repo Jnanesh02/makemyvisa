@@ -80,7 +80,7 @@ export const AdminProfile = () => {
     return (
       <>
         <div className="Profile-Header">
-          <h3>My Profile</h3>
+          <h3>My Profile </h3>
         </div>
         <div className="Profile-container">
           <img

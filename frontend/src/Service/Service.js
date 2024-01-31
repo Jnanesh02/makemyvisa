@@ -50,42 +50,55 @@ const Service = () => {
                 id="carouselExample"
                 className="carousel slide carousal-slider-services"
               >
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
+                <div className="carousel-inner services-icons-fd">
+                <div className="carousel-item active">
+                    <img className="services-images" src={services4} alt="Service 4" />
+                    <p> Hotel Reservation </p>
+                  </div>
+                  <div className="carousel-item ">
                     <img className="services-images" src={services2} alt="Service 2" />
+                    <p> Visa Assistance </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services3} alt="Service 3" />
+                    <p> Ticketing </p>
                   </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services4} alt="Service 4" />
-                  </div>
+                 
                   <div className="carousel-item">
                     <img className="services-images" src={services5} alt="Service 5" />
+                    <p> Travel Health Insurance </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services6} alt="Service 6" />
+                    <p> Immigration Advice </p>
                   </div>
                   <div className="carousel-item ">
                     <img className="services-images" src={services1} alt="Service 1" />
+                    <p> Forex Services </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services11} alt="Service 11" />
+                    <p> Apostille & Attestation Services </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services12} alt="Service 12" />
+                    <p> Translation & Notary Services </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services13} alt="Service 13" />
+                    <p> Courier, Pick-up & Drop Services </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services14} alt="Service 14" />
+                    <p> International Student Accommodation</p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services15} alt="Service 15" />
+                    <p> Travel Packages </p>
                   </div>
                   <div className="carousel-item">
                     <img className="services-images" src={services16} alt="Service 16" />
+                    <p> Student Admissions </p>
                   </div>
                 </div>
                 <button

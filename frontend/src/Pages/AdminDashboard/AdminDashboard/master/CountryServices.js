@@ -19,6 +19,7 @@ const CountryServices = () => {
     }, [])
     return (
         <>
+         <div class="main-department-section">
         <table className="employee-table">
             <thead>
                 <tr>
@@ -47,6 +48,7 @@ const CountryServices = () => {
                 ))}
             </tbody>
         </table>
+        </div>
         </>
     );
 };

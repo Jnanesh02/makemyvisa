@@ -8,7 +8,7 @@ import Australia from "../../assets/images/02.png";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import "./Home.css";
+import "./countriesSection.css";
 const renderFlipCard = (country) => (
   <div className="col-lg-4 col-md-6 col-sm-6" key={country.countryName}>
     <div className="flip-card">
@@ -27,9 +27,10 @@ const renderFlipCard = (country) => (
         </div>
         <div className="flip-card-back">
           {country.serviceTypes ? (
-            <ul>
+            <ul class="list-group states-links">
+              <li><h3 class="counter-name-backflip"> USA </h3></li>
               {country.serviceTypes.map((service, index) => (
-                <li key={index}><NavLink>{service.serviceName}</NavLink></li>
+                <li class="list-group-item" key={index}><NavLink>{service.serviceName}</NavLink></li>
               ))}
             </ul>
           ) : (
@@ -48,7 +49,7 @@ const CountriesSection = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/getcountries");
+        const response = await axios.get("http://localhost:3000/makemyvisa/employee/getcountries");
         if (response.status === 200) {
           setCountriesData(response.data.message);
         }
