@@ -1,6 +1,8 @@
 
 // import Canada from "../../assets/images/01.png";
 import Australia from "../../assets/images/02.png";
+import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
+
 // import UK from "../../assets/images/03.png";
 // import Ireland from "../../assets/images/04.png";
 // import USA from "../../assets/images/05.png";
@@ -26,10 +28,14 @@ const renderFlipCard = (country) => (
           </div>
         </div>
         <div className="flip-card-back">
-          {country.serviceTypes ? (
+        {country.serviceTypes ? (
             <ul>
               {country.serviceTypes.map((service, index) => (
-                <li key={index}><NavLink>{service.serviceName}</NavLink></li>
+                <li key={index}>
+                  <NavLink to={`/countries/${country.countryName}/${service.serviceName}`}>
+                    {service.serviceName}
+                  </NavLink>
+                </li>
               ))}
             </ul>
           ) : (

@@ -1,0 +1,111 @@
+/* certicate-css */
+img.banner-flag {
+    width: 70%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: auto;
+    display: block;
+}
+.country-banner-section h3 {
+    color: white;
+    padding-top: 90px;
+    font-size: 48px;
+}
+.country-banner-section p {
+    color: white;
+}
+.banner-country-text {
+    margin-left: 75px;
+}
+section.visa-category h2 {
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bold !important;
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+.card.country-cards {
+    padding: 15px;
+}
+.card.country-cards h5.card-title {
+    text-align: center;
+    color: #fe5140;
+    font-size: 24px;
+    margin-top: 70px;
+}
+.card.country-cards p.card-text {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
+.card.country-cards img {
+    border-radius: 25px;
+}
+.card.country-cards  {
+    border-radius: 25px;
+    margin-bottom: 50px;
+}
+
+.country-icons img {
+    width: 100%;
+}
+.card.country-cards .card-body {
+    padding: 0px;
+    padding-bottom: 20px;
+}
+.country-icons {
+    height: 100px;
+    width: 100px;
+    background: white;
+    margin: auto;
+    display: block;
+    padding: 15px;
+    border-radius: 50%;
+    border: 1px solid #d7d7d7;
+    box-shadow: 2px 2px 2px #b7b7b7;
+    position: absolute;
+    margin-top: -50px;
+    display: block;
+    left: 0px;
+    right: 0px;
+}
+
+section.information-visa h1 {
+    padding-top: 50px;
+    padding-bottom: 0px;
+    font-weight: bold;
+    text-align: center;
+}
+section.visa-category {
+    padding-bottom: 70px;
+}
+section.information-visa p {
+    padding-bottom: 50px;
+}
+.accordion.country-faq {
+    margin-bottom: 65px;
+}
+.accordion.country-faq button.accordion-button.collapsed {
+    background: #f1f1f1;
+}
+.accordion-button:not(.collapsed)
+{
+    background: #f1f1f1;
+    box-shadow: none;
+}
+.accordion.country-faq .accordion-item {
+    border: none;
+    margin: 15px;
+}
+section.information-visa {
+    padding-bottom: 50px;
+}
+section.visa-category .carousel-indicators [data-bs-target] {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    top: 38px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

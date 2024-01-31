@@ -16,6 +16,7 @@ import { CustomerLogout } from "./Pages/Dashboard/CustomerLogout";
 import { AdminProfile } from "./Pages/AdminDashboard/AdminDashboard/AdminProfile";
 import Department from "./Pages/AdminDashboard/AdminDashboard/master/Department";
 import  CountryServices  from "./Pages/AdminDashboard/AdminDashboard/master/CountryServices";
+import { CountriesServiceDetails } from "./Pages/Home/CountriesServiceDetails";
 
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
@@ -46,6 +47,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
+           <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
+
           </Route>
 
           <Route path="dashboard" element={<Dashboard />}>
@@ -59,8 +62,6 @@ function App() {
             <Route index element={<Hello />} />
             <Route path="Department" element={<Department />}>
             </Route>
-            <Route path="countryServices" element={<CountryServices />}>
-            </Route>
             <Route path="profile" element={<AdminProfile />}>
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
@@ -72,6 +73,7 @@ function App() {
           <Route path="aa" element={<AA />} />
           <Route path="contactus" element={<ContactUs />} />
           <Route path="travel" element={<Travel />} />
+
         </Routes>
       </Router>
     </div>

@@ -9,20 +9,20 @@ import "./certificationSection.css";
 const CertificationSection = () => {
     return (
         <>
-           <section class="certificate-section" style={{ backgroundImage: `url(${backgroundImage})` }}>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
+           <section className="certificate-section" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="container-fluid">
+        <div className="row">
+            <div className="col-lg-12">
                 <h2> ACCREDITATION </h2>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="certicate-images-services">
-                        <img class="certificate-img img-fluid" src={certificate1} alt="Certificate 1"/>
-                        <img class="certificate-img img-fluid" src={certificate2} alt="Certificate 2"/>
-                        <img class="certificate-img img-fluid" src={certificate3} alt="Certificate 3"/>
-                        <img class="certificate-img img-fluid" src={certificate4} alt="Certificate 4"/>
-                        <img class="certificate-img img-fluid" src={certificate5} alt="Certificate 5"/>
+            <div className="row">
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                    <div className="certicate-images-services">
+                        <img className="certificate-img img-fluid" src={certificate1} alt="Certificate 1"/>
+                        <img className="certificate-img img-fluid" src={certificate2} alt="Certificate 2"/>
+                        <img className="certificate-img img-fluid" src={certificate3} alt="Certificate 3"/>
+                        <img className="certificate-img img-fluid" src={certificate4} alt="Certificate 4"/>
+                        <img className="certificate-img img-fluid" src={certificate5} alt="Certificate 5"/>
                     </div>
                 </div>
             </div>
