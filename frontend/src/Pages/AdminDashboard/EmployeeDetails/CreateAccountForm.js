@@ -77,11 +77,11 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 
   const renderFormFields = (fields) =>
   fields.map((field) => (
-    <div key={field}>
+    <div class="input-fileds-account" key={field}>
       {field === "role" || field === "status" ? (
         <select
           name={field}
-          className="form-input"
+          className="form-control create-account-frm"
           value={employeeData[field] || ""}
           required
           onChange={(e) => onChangeInput(e)}
@@ -94,7 +94,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
         <input
           type="text"
           name={field}
-          className="form-input"
+          className="form-control create-account-frm"
           value={employeeData[field] || ""}
           placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)}:`}
           onChange={(e) => onChangeInput(e)}
@@ -153,7 +153,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
     <>
       <form className="admin-form" onSubmit={handleSubmit}>
         {renderFormFields(isEditing ? EDIT_FIELDS : CREATE_FIELDS)}
-        <button type="submit" className="form-btn">
+        <button type="submit" className="btn btn-primary create-account-btn">
           {isEditing ? "Update Employee" : "Create Account"}
         </button>
       </form>

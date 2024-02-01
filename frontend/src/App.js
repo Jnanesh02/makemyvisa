@@ -18,6 +18,7 @@ import { AdminProfile } from "./Pages/AdminDashboard/AdminProfile";
 import Department from "./Pages/AdminDashboard/master/Department";
 import CountryServices from "./Pages/AdminDashboard/master/CountryServices";
 import { CountriesServiceDetails } from "./components/Home/CountriesServiceDetails";
+import { CustomerDetails } from "./Pages/AdminDashboard/CustomerDeatails/CustomerDetails";
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
@@ -62,8 +63,11 @@ function App() {
             <Route index element={<AdminHomePage />} />
             <Route path="Department" element={<Department />}>
             </Route>
+            <Route path="countryServices" element={<CountryServices />}>
+            </Route>
             <Route path="profile" element={<AdminProfile />}>
             </Route>
+            <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
           </Route>
           <Route path="AdminLogout" element={<AdminLogout />} />

@@ -62,7 +62,7 @@ const HomeLink = () => {
                   <img className="header-logo" src={Logo} alt="Logo" />
                 </Link>
               </div>
-              <div className="col-lg-9 col-sm-8 col-md-8  nav-cont-b">
+              <div className="col-lg-8 col-sm-8 col-md-8  nav-cont-b">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-section">
                   <div className="container-fluid">
                     <button
@@ -123,8 +123,10 @@ const HomeLink = () => {
                 </nav>
                
               </div>
-              <div className="col-lg-1">
-             
+              <div className="col-lg-2">
+              <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
+              <img class="header-googlwe-review" src={googlereview}/> 
+              </a>
               {/* <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
     <img class="header-googlwe-review" src={googlereview}/> */}
       {/* <div className="google-reviews">

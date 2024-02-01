@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
 import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
 import icon from "../../assets/countriesserviceImages/countries-icons.png";
@@ -12,13 +12,28 @@ export const CountriesServiceDetails = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const { countryName, serviceName } = useParams();
     const [countryData, setCountryData] = useState([]);
-
+    const [filteredSubServiceType, setFilteredSubServiceTypes] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
                 const filteredCountries = response.data.message.filter(country => country.countryName === countryName);
-                setCountryData(filteredCountries.length > 0 ? filteredCountries[0] : null);
+
+                if (filteredCountries.length > 0) {
+                    setCountryData(filteredCountries[0]);
+
+                    // Filter and store sub-service types based on the selected serviceName
+                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName);
+
+                    if (selectedService) {
+                        setFilteredSubServiceTypes(selectedService.subServiceTypes);
+                    } else {
+                        setFilteredSubServiceTypes([]);
+                    }
+                } else {
+                    setCountryData(null);
+                    setFilteredSubServiceTypes([]);
+                }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -26,7 +41,7 @@ export const CountriesServiceDetails = () => {
         };
 
         fetchData();
-    }, [countryName,serviceName]);
+    }, [countryName, serviceName]);
 
 
     const handlePrev = () => {
@@ -68,26 +83,26 @@ export const CountriesServiceDetails = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div id="carouselExampleDark" className="carousel carousel-dark slide">
-                            <div className="row">
-            {countryData && countryData.serviceTypes ? (
-              countryData.serviceTypes.map((serviceType, index) => (
-                <div key={index} className="col-lg-4">
-                  <div className="card country-cards">
-                    <img src={card} className="card-img-top" alt={serviceType.serviceName} />
-                    <div className="card-body">
-                      <div className="country-icons">
-                        <img src={icon} alt="" />
-                      </div>
-                      <h5 className="card-title">{serviceType.serviceName}</h5>
-                      <p className="card-text">{serviceType.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No data available</p>
-            )}
-          </div>
+                                <div className="row">
+                                    {filteredSubServiceType ? (
+                                        filteredSubServiceType.map((subServiceType, index) => (
+                                            <div key={index} className="col-lg-4">
+                                                <div className="card country-cards">
+                                                    <img src={card} className="card-img-top" alt={subServiceType.subServiceName} />
+                                                    <div className="card-body">
+                                                        <div className="country-icons">
+                                                            <img src={icon} alt="" />
+                                                        </div>
+                                                        <h5 className="card-title">{subServiceType.subServiceName}</h5>
+                                                        <p className="card-text">{subServiceType.description}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No data available</p>
+                                    )}
+                                </div>
                                 <button className="carousel-control-prev" type="button" onClick={handlePrev}>
                                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span className="visually-hidden">Previous</span>
@@ -100,16 +115,23 @@ export const CountriesServiceDetails = () => {
                         </div>
                     </div>
                 </div>
-            </section>;
-
+            </section>
             <section className="information-visa">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <h1>Information on {serviceName}</h1>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                            </p>
+                            {countryData && countryData.serviceTypes ? (
+                                <p>
+                                    {countryData.serviceTypes
+                                        .filter(serviceType => serviceType.serviceName === serviceName)
+                                        .map((serviceType, index) => (
+                                            <span key={index}>{serviceType.description}</span>
+                                        ))}
+                                </p>
+                            ) : (
+                                <p>No service types available</p>
+                            )}
                         </div>
                         <div className="col-lg-12">
                             <div className="accordion country-faq" id="accordionExample">

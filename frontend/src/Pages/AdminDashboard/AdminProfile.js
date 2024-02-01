@@ -83,6 +83,7 @@ export const AdminProfile = () => {
 
   return (
     <>
+    <div class="profile-dashboard-header">
       <div className="Profile-Header">
         <h3>My Profile</h3>
       </div>
@@ -94,7 +95,8 @@ export const AdminProfile = () => {
           width="70"
         />
       </div>
-      <div className="container mt-2">
+      </div>
+      <div className="container mt-2 profile-form">
         <h4>Basic Details :</h4>
         <form>
           <div className="row mb-3">
@@ -173,7 +175,7 @@ export const AdminProfile = () => {
 
           <div className="row mb-1">
             <div className="col">
-              <div className="floating-label" style={{ height: "100px" }}>
+              <div className="floating-label" >
                 <textarea
                   className="form-control"
                   id="address"
@@ -186,10 +188,10 @@ export const AdminProfile = () => {
               </div>
             </div>
           </div>
-
+          <div class="profile-button-db">
           <button
             type="submit"
-            className="btn btn-primary me-2"
+            className="btn btn-primary me-2 btn-profile-cancel"
             hidden={!editMode}
             onClick={handleCancel}
           >
@@ -198,7 +200,7 @@ export const AdminProfile = () => {
           </button>
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-profile-save"
             onClick={toggleEditMode}
           >
             {editMode ? (
@@ -213,6 +215,7 @@ export const AdminProfile = () => {
               </>
             )}
           </button>
+          </div>
 
           {showConfirmationModal && (
             <ConfirmationModal

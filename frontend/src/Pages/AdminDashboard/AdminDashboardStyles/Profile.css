@@ -1,32 +1,7 @@
-.Profile-Header{
-    background-color:#dd2817c6;
-    height: 140px;
-    border-radius: 3px;
-    margin: 2px;
-   color: whitesmoke;
-}
 
-.Profile-Header h3{
-    padding: 2rem 3rem;
-}
 
-.Profile-container{
-	display: flex;
-	align-items: center;
-    margin-top: 0.5rem;
-    margin-left: 3rem;
 
-    
-}
-.profile-image{
-	border-radius: 10px;
-    margin-right: 2rem;
-    position: relative;
-    bottom: 2rem;
-    width: 100px;
-    height: 100px;
-	
-}
+
 .name{
 	font-size: 15px;
 	font-weight: bold;
@@ -62,4 +37,60 @@
     width: 100%;
     text-align: center;
     
+}
+.profile-dashboard-header {
+    background: #dd281738;
+    border: 0px solid white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dd2817;
+}
+.Profile-container img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 25px;
+}
+.Profile-Header h3 {
+    color: #dd2817;
+    font-size: 20px;
+    /* position: relative; */
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.container.mt-2.profile-form h4 {
+    text-align: center;
+    color: #dd2817;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.floating-label .form-control:disabled {
+    background-color: white;
+    border: 1px solid #dd281757;
+}
+.floating-label input:focus + label, .floating-label input:not(:placeholder-shown) + label {
+    transform: translateY(-30%);
+    font-size: 0.75rem;
+    padding: 2px;
+    margin: -3px 5px;
+    background-color: white;
+    color: #dd2817;
+}
+.profile-button-db {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+button.btn.btn-secondary.btn-profile-save {
+    background: #058300;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+}
+button.btn.btn-primary.me-2.btn-profile-cancel {
+    background: #dd2817;
+    border: none;
+    font-size: 14px;
 }
