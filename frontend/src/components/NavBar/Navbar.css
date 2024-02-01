@@ -63,7 +63,10 @@ svg.google-review-icons {
   width: 20px;
   fill: #ec951e;
 }
-
+img.header-googlwe-review {
+  width: 60%;
+  float: left;
+}
 @media only screen and (max-width: 1000px) {
 
 .google-reviews {

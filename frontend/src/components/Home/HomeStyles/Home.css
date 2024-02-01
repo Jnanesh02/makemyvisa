@@ -95,6 +95,7 @@ section.countrys-section h2 {
 section.countrys-section h4 {
     padding: 0px;
     padding-bottom: 5px;
+    text-transform: capitalize;
 }
 .flip-card-front img {
     width: 100% !important;

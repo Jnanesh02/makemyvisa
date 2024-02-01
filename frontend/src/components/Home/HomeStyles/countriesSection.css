@@ -50,7 +50,7 @@ section.countrys-section h2 {
   }
   
   .flip-card-back {
-    background-color: #fe5141;
+    background-color: #e12912;
     color: white;
     transform: rotateY(180deg);
   }
@@ -95,6 +95,7 @@ section.countrys-section h2 {
 section.countrys-section h4 {
     padding: 0px;
     padding-bottom: 5px;
+    text-transform: capitalize;
 }
 .flip-card-front img {
     width: 100% !important;
