@@ -62,6 +62,8 @@ function App() {
             <Route index element={<AdminHomePage />} />
             <Route path="Department" element={<Department />}>
             </Route>
+            <Route path="countryServices" element={<CountryServices />}>
+            </Route>
             <Route path="profile" element={<AdminProfile />}>
             </Route>
             <Route path="employeeDetails" element={<EmployeeDetails />} />
