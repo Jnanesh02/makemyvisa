@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const MODAL_STYLES = {
-  width:"30%",
+  width:"50%",
   position: "fixed",
   top: "50%",
   left: "50%",
@@ -14,25 +14,11 @@ const MODAL_STYLES = {
 };
 
 const OVERLAY_STYLES = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, .7)",
-  zIndex: 1000,
+  
 };
 
 const CLOSE_BUTTON_STYLES = {
-  position: "absolute",
-  top: "10px",
-  right: "10px",
-  cursor: "pointer",
-  fontSize: "20px",
-  fontWeight: "bold",
-  color: "#333",
-  background: "none",
-  border: "none",
+ 
 };
 
 export default function Modal({ open, children, onClose }) {
@@ -40,9 +26,9 @@ export default function Modal({ open, children, onClose }) {
 
   return ReactDOM.createPortal(
     <>
-      <div style={OVERLAY_STYLES} />
-      <div style={MODAL_STYLES}>
-        <button style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+      <div  style={OVERLAY_STYLES} />
+      <div class="create-account-dsh" style={MODAL_STYLES}>
+        <button class="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
           X
         </button>
         {children}

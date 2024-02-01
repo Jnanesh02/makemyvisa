@@ -27,3 +27,46 @@
 }
 
 
+.create-account-dsh {
+  border-radius: 20px;
+  background: #ffffff;
+  width: 50%;
+  margin: auto;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #dd2817;
+  opacity: 1;
+  box-shadow: none !important;
+}
+input.form-control.create-account-frm {
+  margin-bottom: 20px;
+}
+.create-account-dsh form.admin-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.input-fileds-account {
+  width: 48%;
+  margin-right: 15px;
+}
+button.close-buttonss {
+  background: #dd2817;
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  float: right;
+}
+button.btn.btn-primary.create-account-btn {
+  background: #dd2817;
+  border: none;
+  margin: auto;
+  box-shadow: none;
+}
+.account-heading {
+  display: flex;
+  justify-content: space-between;
+}

@@ -65,7 +65,10 @@ const Department = () => {
       {showModal && (
         <div >
           <div className='create-account-dashboard'>
+            <div className='account-heading'>
             <h3>Create Department</h3>
+            <button class="close-buttonss" onClick={() => setShowModal(false)}> x </button>
+            </div>
             <div className='create-dep-labels mb-3'>
             <label class="form-label" > Department:   </label>
               <input class="form-control" type="text" name="role" value={formData.role} onChange={handleInputChange} />

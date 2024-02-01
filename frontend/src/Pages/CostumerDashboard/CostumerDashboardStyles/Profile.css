@@ -1,32 +1,7 @@
-.Profile-Header{
-    background-color:#dd2817c6;
-    height: 140px;
-    border-radius: 3px;
-    margin: 2px;
-   color: whitesmoke;
-}
 
-.Profile-Header h3{
-    padding: 2rem 3rem;
-}
 
-.Profile-container{
-	display: flex;
-	align-items: center;
-    margin-top: 0.5rem;
-    margin-left: 3rem;
 
-    
-}
-.profile-image{
-	border-radius: 10px;
-    margin-right: 2rem;
-    position: relative;
-    bottom: 2rem;
-    width: 100px;
-    height: 100px;
-	
-}
+
 .name{
 	font-size: 15px;
 	font-weight: bold;

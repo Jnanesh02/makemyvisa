@@ -29,6 +29,10 @@ button.action-button.edit {
   border-radius: 20px;
   padding: 20px;
   border: 1px solid #dd281761;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 30%;
 }
 .create-account-dashboard h3 {
   font-size: 24px;
