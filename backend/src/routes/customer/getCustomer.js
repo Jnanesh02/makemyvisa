@@ -15,5 +15,16 @@ router.get("/customer/getuserdetails/:id",async(req,res)=>{
         return res.status(500).json({message:"Internal error"});
 
     }
+});
+
+router.get("/customer",async(req,res)=>{
+    try {
+        const existingUser= await customer.find();
+        return res.status(200).json({existingUser});
+
+    } catch (error) {
+        return res.status(500).json({message:"Internal error"});
+
+    }
 })
 module.exports = router
