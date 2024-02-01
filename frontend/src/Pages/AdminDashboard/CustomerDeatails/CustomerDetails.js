@@ -191,14 +191,14 @@ export const CustomerDetails = () => {
 
             {/* Pagination controls */}
             <div className="pagination">
-                <button
+                <button class="previouss"
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
                     Previous
                 </button>
-                <span>{currentPage}</span>
-                <button
+                <span class="pagination-count">{currentPage}</span>
+                <button class="next"
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={indexOfLastItem >= filteredEmployees.length}
                 >

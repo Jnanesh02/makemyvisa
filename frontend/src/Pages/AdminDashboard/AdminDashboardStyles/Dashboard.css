@@ -314,6 +314,8 @@ ul.list-unstyled.components .accordion-body {
     padding: 0px;
     border: none !important;
     background: #b11c09;
+    width: 90%;
+    margin: auto;
 }
 ul.list-unstyled.components button.accordion-button.custom-button {
     padding-left: 10px !important;
@@ -322,6 +324,34 @@ svg.arrows-dashboard {
     color: white;
     fill: white;
     float: right;
+}
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+.pagination button.previouss {
+    background: #dd2817;
+    border: none;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    margin-right: 11px;
+    font-size: 14px;
+}
+.pagination button.next {
+    background: #dd2817;
+    border: none;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    margin-right: 0px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+span.pagination-count {
+    color: black;
 }
 @media only screen and (max-width: 1100px) {
     div#navbarSupportedContent {
