@@ -111,7 +111,7 @@ const ProfileForm = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
-                placeholder="First Name "
+                placeholder=""
                 disabled={!editMode}
               />
               <label htmlFor="firstName" className="form-label">

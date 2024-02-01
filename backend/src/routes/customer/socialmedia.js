@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const axios = require("axios");
 const Customer = require("../../models/customerSchema");
+const jwt=require('jsonwebtoken');
 
 router.get("/customer/auth/facebook", passport.authenticate("facebook"));
 router.get(
@@ -92,8 +93,13 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
       // User already exists, update the Google account information
       existingUser.social_media.linkedinId = user_info.sub;
       await existingUser.save();
+      
+      const token = jwt.sign(
+        { LinkedinID: existingUser._id },
+        process.env.JWT_SECRET
+       );
       // res.status(200).json({ message: existingUser_id });
-      res.redirect('http://localhost:3001/dashboard?userId=' + existingUser._id);
+      res.redirect(`http://localhost:3001/dashboard?token=${token}`);
     } else {
       // User does not exist, create a new user account
       const newCustomer = new Customer({
@@ -107,10 +113,13 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
       });
 
       await newCustomer.save();
-
-      // res.status(200).json({ message:  newCustomer});
-      res.redirect('http://localhost:3001/dashboard?userId=' + newCustomer._id);
-
+      const token = jwt.sign(
+        { LinkedinID: newCustomer._id },
+        process.env.JWT_SECRET
+       );
+      // // res.status(200).json({ message:  newCustomer});
+      // redirect('http://localhost:3001/dashboard?userId=' + newCustomer._id);
+      res.redirect(`http://localhost:3001/dashboard?token=${token}`)
     }
   } catch (error) {
     console.error("Error:", error.message);
@@ -123,6 +132,25 @@ router.get("/login", (req, res) => {
   res.status(401).json({
     message: "Login failed",
   });
+});
+
+
+router.post("/customer/auth/getinfo", (req, res) => {
+  try {
+
+      console.log("body:",req.body)
+      const payload = jwt.verify(req.body.token, process.env.JWT_SECRET);
+      console.log("payload.", payload);
+      res.status(200).json({
+          message: "User Verified",
+          user: payload,
+      });
+  } catch (error) {
+      res.status(500).json({
+          message: "Internal Server Error",
+          error: error,
+      });
+  }
 });
 
 module.exports = router;
