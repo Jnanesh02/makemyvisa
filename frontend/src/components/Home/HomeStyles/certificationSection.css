@@ -158,7 +158,7 @@ ul.list-group.states-links li {
 }
 .flip-card-back
 {
-    /* background-image: url("../../assets/images/usa.jpg"); */
+    background-image: url("../../../assets/images/usa.jpg");
     background-size: contain;
 }
 h3.counter-name-backflip {
@@ -760,4 +760,27 @@ section.visa-category h2 {
     font-weight: bold !important;
     font-size: 42px;
     margin-bottom: 30px;
+}
+li.list-group-item.countries-list {
+    background: none;
+    text-align: left;
+    color: white !important;
+    border-radius: 0px;
+    padding: 12px;
+    padding-left: 25px;
+    border: 1px solid #ffffff38;
+}
+  li.list-group-item.countries-list a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+h3.country-heading-nm {
+    text-align: left;
+    padding-left: 19px;
+    font-weight: normal;
+    font-size: 24px;
+    padding-top: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
 }
