@@ -164,7 +164,7 @@ export const CustomerDetails = () => {
                                 <td key={`${employee._id}-${field}`}>
                                     {field === 'social_media' && typeof employee[field] === 'object' ? (
                                         <>
-                                            {employee[field].facebookId  && (
+                                            {employee[field].facebookId && (
                                                 <span>Login with Facebook</span>
                                             )}
                                             {employee[field].linkedinId && (
@@ -172,6 +172,9 @@ export const CustomerDetails = () => {
                                             )}
                                             {employee[field].googleId && (
                                                 <span>Login with Google</span>
+                                            )}
+                                            {!employee[field].facebookId && !employee[field].linkedinId && !employee[field].googleId && (
+                                                <span>No social media IDs</span>
                                             )}
                                         </>
                                     ) : (
@@ -183,7 +186,6 @@ export const CustomerDetails = () => {
                                     )}
                                 </td>
                             ))}
-                            <td></td>
                         </tr>
                     ))}
                 </tbody>

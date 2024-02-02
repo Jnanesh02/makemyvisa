@@ -5,23 +5,26 @@ import "../AdminDashboardStyles/Employee.css";
 const CountryServices = () => {
     const initialFormData = {
         countryName: '',
-        description: '',
+        descriptions: '',
+        countryImage: '',
+        flagImage:'',
         serviceTypes: [
-          {
-            serviceName: '',
-            description: '',
-            subServiceTypes: [
-              {
-                subServiceName: '',
-                description: ''
-              }
-            ]
-          }
+            {
+                serviceName: '',
+                description: '',
+                subServiceTypes: [
+                    {
+                        subServiceName: '',
+                        description: ''
+                    }
+                ]
+            }
         ]
-      };
+    };
     const [countriesServiceType, setCountriesServiceType] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState(initialFormData);
+    const [editIndex, setEditIndex] = useState(null);
 
     const getcountriesServiceDetails = async () => {
         try {
@@ -40,37 +43,150 @@ const CountryServices = () => {
 
     const handleCreateDepartment = async () => {
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employee/create/department`, formData);
+            if (editIndex !== null && editIndex !== undefined) {
+                console.log("editing", formData);
+                // Handle update logic for existing country
+                // await axios.put(`${process.env.REACT_APP_BACKEND_URL}/employee/update/department`, formData);
+            } else {
+                console.log("123", formData);
+                // Handle create logic for new country
+                // await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employee/create/department`, formData);
+            }
             getcountriesServiceDetails(); // Fetch updated data
             setShowModal(false); // Close the modal
         } catch (error) {
             alert(error.message);
         }
     };
+    const reSetForm = () => {
+        setFormData(initialFormData);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    }
+    const handleCloseModal = () => {
+        setShowModal(false);
+        reSetForm();
+    };
+    const handleInputChanges = (name, value, serviceIndex = 0) => {
+        setFormData((previous) => ({
+            ...previous,
+            [name]: value,
+        }));
+    };
+    const handleServiceFieldChange = (field, value, serviceIndex) => {
+        setFormData((previous) => {
+            const updatedServiceTypes = [...previous.serviceTypes];
+            const updatedService = { ...updatedServiceTypes[serviceIndex] };
 
-        // Split the name into keys to navigate the nested structure
-        const keys = name.split('.');
-      
-        // Create a deep copy of the form data to avoid directly modifying the state
-        const updatedFormData = { ...formData };
-      
-        // Update the form data based on the nested structure
-        keys.reduce((nestedObj, key, index) => {
-          if (index === keys.length - 1) {
-            // Last key, update the value
-            nestedObj[key] = value;
-          } else {
-            // Create nested structures if they don't exist
-            nestedObj[key] = nestedObj[key] || (isNaN(keys[index + 1]) ? {} : []);
-          }
-          return nestedObj[key];
-        }, updatedFormData);
-      
-        // Set the updated form data
-        setFormData(updatedFormData);
+            if (field === 'serviceName' || field === 'description') {
+                updatedService[field] = value;
+            }
+
+            updatedServiceTypes[serviceIndex] = updatedService;
+
+            return {
+                ...previous,
+                serviceTypes: updatedServiceTypes,
+            };
+        });
+    };
+    const handleInputChange = (field, value, serviceIndex = 0, subServiceIndex = 0) => {
+        setFormData((previous) => {
+            const updatedServiceTypes = [...previous.serviceTypes];
+            const updatedService = { ...updatedServiceTypes[serviceIndex] };
+
+            if (subServiceIndex !== null && subServiceIndex !== undefined) {
+                const updatedSubServiceTypes = [...updatedService.subServiceTypes];
+                updatedSubServiceTypes[subServiceIndex][field] = value;
+                updatedService.subServiceTypes = updatedSubServiceTypes;
+            } else {
+                // For main fields (countryName, description, serviceName, description)
+                updatedService[field] = value;
+            }
+
+            updatedServiceTypes[serviceIndex] = updatedService;
+
+            return {
+                ...previous,
+                serviceTypes: updatedServiceTypes,
+            };
+        });
+    };
+
+    const handleFileChange = (fieldName, e) => {
+        const file = e.target.files[0];
+        setFormData((previous) => ({
+            ...previous,
+            [fieldName]: file,
+        }));
+    };
+    const handleAddSubService = (serviceIndex) => {
+        setFormData((previous) => {
+            const updatedServiceTypes = [...previous.serviceTypes];
+            const updatedService = { ...updatedServiceTypes[serviceIndex] };
+
+            // Add a new sub-service with empty values
+            updatedService.subServiceTypes = [
+                ...updatedService.subServiceTypes,
+                {
+                    subServiceName: '',
+                    description: '',
+                },
+            ];
+
+            updatedServiceTypes[serviceIndex] = updatedService;
+
+            return {
+                ...previous,
+                serviceTypes: updatedServiceTypes,
+            };
+        });
+    };
+
+    const handleAddServiceName = (serviceIndex) => {
+        setFormData((previous) => {
+            const updatedServiceTypes = [...previous.serviceTypes];
+
+            // Add a new service type with an empty array of sub-service types
+            updatedServiceTypes.push({
+                serviceName: '',
+                description: '',
+                subServiceTypes: [
+                    {
+                        subServiceName: '',
+                        description: '',
+                    },
+                ],
+            });
+
+            return {
+                ...previous,
+                serviceTypes: updatedServiceTypes,
+            };
+        });
+    };
+    const handleShowEditModal = (index) => {
+        setEditIndex(index);
+        setShowModal(true);
+
+        // Set initial form data with country details for editing
+        if (index !== null && index !== undefined) {
+            const editedCountry = countriesServiceType[index];
+            setFormData({
+                countryName: editedCountry.countryName,
+                descriptions: editedCountry.description,
+                serviceTypes: editedCountry.serviceTypes.map((serviceType) => ({
+                    serviceName: serviceType.serviceName,
+                    description: serviceType.description,
+                    subServiceTypes: serviceType.subServiceTypes.map((subServiceType) => ({
+                        subServiceName: subServiceType.subServiceName,
+                        description: subServiceType.description,
+                    })),
+                })),
+            });
+        } else {
+            // If not editing, reset form data
+            reSetForm();
+        }
     };
     return (
         <>
@@ -84,8 +200,11 @@ const CountryServices = () => {
                         <tr>
                             <th>countryName</th>
                             <th>Description</th>
+                            <th>Country Image</th>
                             <th>serviceNames</th>
                             <th>serviceType</th>
+                            <th>actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +212,6 @@ const CountryServices = () => {
                             <tr key={index}>
                                 <td>{country.countryName}</td>
                                 <td>{country.description}</td>
-
                                 <td>
                                     <ul>
                                         {country.serviceTypes && country.serviceTypes.map((serviceType, innerIndex) => (
@@ -117,6 +235,9 @@ const CountryServices = () => {
                                         ))}
                                     </ul>
                                 </td>
+                                <td>
+                                    <button onClick={() => handleShowEditModal(index)}>Edit</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -129,50 +250,90 @@ const CountryServices = () => {
                 <div>
                     <div className='create-account-dashboard'>
                         <div className='account-heading'>
-                            <h3>Create </h3>
-                            <button className="close-buttonss" onClick={() => setShowModal(false)}> x </button>
+                            <h3>{editIndex !== null && editIndex !== undefined ? 'Edit' : 'Create'}</h3>
+                            <button className="close-buttonss" onClick={handleCloseModal}> x </button>
                         </div>
                         <div className='create-dep-labels mb-3'>
-                            <label className="form-label">countryName: </label>
-                            <input className="form-control" type="text" name="countryName" value={formData.countryName} onChange={handleInputChange} />
+                            <input className="form-control"
+                                placeholder="countryName"
+                                type="text"
+                                name="countryName"
+                                value={formData.countryName}
+                                onChange={(e) => handleInputChanges('countryName', e.target.value)} />
                         </div>
                         <div className='create-dep-labels mb-3'>
-                            <label className="form-label">Description: </label>
-                            <input className="form-control" type="text" name="description" value={formData.description} onChange={handleInputChange} />
+                            <input className="form-control" placeholder="Country Description" type="text" name="descriptions" value={formData.descriptions}
+                                onChange={(e) => handleInputChanges('descriptions', e.target.value)} />
                         </div>
-
-                        {/* Service Types */}
-                        {formData.serviceTypes.map((service, index) => (
-                            <div key={index}>
-                                <div className='create-dep-labels mb-3'>
-                                    <label className="form-label">Service Name: </label>
-                                    <input className="form-control" type="text" name={`serviceTypes[${index}].serviceName`} value={service.serviceName} onChange={handleInputChange} />
-                                </div>
-                                <div className='create-dep-labels mb-3'>
-                                    <label className="form-label">Service Description: </label>
-                                    <input className="form-control" type="text" name={`serviceTypes[${index}].description`} value={service.description} onChange={handleInputChange} />
-                                </div>
-
-                                {/* Sub Service Types */}
-                                {service.subServiceTypes.map((subService, subIndex) => (
-                                    <div key={subIndex}>
-                                        <div className='create-dep-labels mb-3'>
-                                            <label className="form-label">Sub Service Name: </label>
-                                            <input className="form-control" type="text" name={`serviceTypes[${index}].subServiceTypes[${subIndex}].subServiceName`} value={subService.subServiceName} onChange={handleInputChange} />
+                        <div className='create-dep-labels mb-3'>
+                            <input className="form-control"
+                                placeholder="Country Image"
+                                type="file"
+                                accept="image/*"
+                                name="countryImage"
+                                onChange={(e) => handleFileChange('countryImage', e)} />
+                        </div>
+                        <div className='create-dep-labels mb-3'>
+                            <label htmlFor="flagImage" className="form-label">Flag Image</label>
+                            <input className="form-control"
+                                placeholder="Flag Image"
+                                type="file"
+                                accept="image/*"
+                                name="flagImage"
+                                onChange={(e) => handleFileChange('flagImage', e)} />
+                        </div>
+                        <div className='create-dep-labels mb-3'>
+                            {formData.serviceTypes.map((service, serviceIndex) => (
+                                <div key={serviceIndex}>
+                                    <input
+                                        className="form-control"
+                                        placeholder="Service Name"
+                                        type="text"
+                                        name={`serviceTypes[${serviceIndex}].serviceName`}
+                                        value={service.serviceName}
+                                        onChange={(e) => handleServiceFieldChange('serviceName', e.target.value, serviceIndex)}
+                                    />
+                                    <input
+                                        className="form-control"
+                                        placeholder="Service Description"
+                                        type="text"
+                                        name={`serviceTypes[${serviceIndex}].description`}
+                                        value={service.description}
+                                        onChange={(e) => handleServiceFieldChange('description', e.target.value, serviceIndex)}
+                                    />
+                                    {service.subServiceTypes.map((subService, subServiceIndex) => (
+                                        <div key={subServiceIndex}>
+                                            <input
+                                                className="form-control"
+                                                placeholder="Sub-Service Name"
+                                                type="text"
+                                                name={`serviceTypes[${serviceIndex}].subServiceTypes[${subServiceIndex}].subServiceName`}
+                                                value={subService.subServiceName}
+                                                onChange={(e) => handleInputChange('subServiceName', e.target.value, serviceIndex, subServiceIndex)}
+                                            />
+                                            <input
+                                                className="form-control"
+                                                placeholder="Sub-Service Description"
+                                                type="text"
+                                                name={`serviceTypes[${serviceIndex}].subServiceTypes[${subServiceIndex}].description`}
+                                                value={subService.description}
+                                                onChange={(e) => handleInputChange('description', e.target.value, serviceIndex, subServiceIndex)}
+                                            />
                                         </div>
-                                        <div className='create-dep-labels mb-3'>
-                                            <label className="form-label">Sub Service Description: </label>
-                                            <input className="form-control" type="text" name={`serviceTypes[${index}].subServiceTypes[${subIndex}].description`} value={subService.description} onChange={handleInputChange} />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
+                                    ))}
+                                    <button onClick={() => handleAddServiceName(serviceIndex)}>Add Service Name</button>
+                                    <button onClick={() => handleAddSubService(serviceIndex)}>Add Sub-Service</button>
+                                </div>
+                            ))}
+                        </div>
 
                         <div className="form-button-dashboard">
-                            <button className="btn btn-primary create" onClick={handleCreateDepartment}>Create</button>
-                            <button className="btn btn-primary cancel" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button className="btn btn-primary create" onClick={handleCreateDepartment}>
+                                {editIndex !== null && editIndex !== undefined ? 'Update' : 'Create'}
+                            </button>
+                            <button className="btn btn-primary cancel" onClick={reSetForm}>Cancel</button>
                         </div>
+
                     </div>
                 </div>
             )}

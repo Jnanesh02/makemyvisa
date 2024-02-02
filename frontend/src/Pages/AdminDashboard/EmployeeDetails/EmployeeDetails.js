@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../AdminDashboardStyles/Employee.css";
 import CreateAccountForm from "./CreateAccountForm";
@@ -20,6 +20,8 @@ const EmployeeDetails = () => {
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [roles, setRoles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const displayFields = [
     "firstName",
@@ -53,7 +55,7 @@ const EmployeeDetails = () => {
   };
   const fetchRolesAndStatuses = async () => {
     try {
-     
+
       const departmentsResponse = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/employee/get/department`
       );
@@ -84,10 +86,10 @@ const EmployeeDetails = () => {
         value.toString().toLowerCase().includes(term.toLowerCase())
     );
 
-    const filterByRole = (employee, role) => {
-      return role === "" || (employee && employee.role && employee.role.toLowerCase() === role.toLowerCase());
-    };
-  const filterByStatus = (employee, status) =>{
+  const filterByRole = (employee, role) => {
+    return role === "" || (employee && employee.role && employee.role.toLowerCase() === role.toLowerCase());
+  };
+  const filterByStatus = (employee, status) => {
     return status === "" || (employee && employee.status && employee.status.toLowerCase() === status.toLowerCase());
 
   }
@@ -175,6 +177,15 @@ const EmployeeDetails = () => {
     setEditingEmployee(null);
     setIsAccountCreated(true);
   };
+
+  // Calculate the index range for the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredEmployees.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
   useEffect(() => {
     fetchEmployeeDetails();
   }, [isAccountCreated, isEditing]);
@@ -187,44 +198,44 @@ const EmployeeDetails = () => {
 
   return (
     <div class="main-department-section">
-        <div class="dep-tbl">
-      <h2>Employee Details</h2>
+      <div class="dep-tbl">
+        <h2>Employee Details</h2>
 
-      <div>
-        <input 
-          type="text"
-          placeholder="Search..."
-          className="Searchbar form-control"
-          value={searchTerm}
-          onChange={handleSearchChange}
-         
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Search..."
+            className="Searchbar form-control"
+            value={searchTerm}
+            onChange={handleSearchChange}
 
-        <label class="table-bar-label">
-      
-          <select class="form-select"  value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
-          <option value="">  Role Filter: </option>
-    {roles.map((role) => (
-      <option key={role._id} value={role.role}>
-        {role.role}
-      </option>
-    ))}
-          </select>
-        </label>
+          />
 
-        <label class="table-bar-label">
-    
-          <select class="form-select"  value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
-            <option value=""> Status Filter: </option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
-        </label>
+          <label class="table-bar-label">
 
-        <button class="btn btn-primary create-button" onClick={() => setShowCreateForm(!showCreateForm)}>
-          {showCreateForm ? "Cancel" : "Create Account"}
-        </button>
-      </div>
+            <select class="form-select" value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
+              <option value=""> Role Filter:  </option>
+              {roles.map((role) => (
+                <option key={role._id} value={role.role}>
+                  {role.role}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label class="table-bar-label">
+
+            <select class="form-select" value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
+              <option value=""> Status Filter: </option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </label>
+
+          <button class="btn btn-primary create-button" onClick={() => setShowCreateForm(!showCreateForm)}>
+            {showCreateForm ? "Cancel" : "Create Account"}
+          </button>
+        </div>
       </div>
       <Modal open={showCreateForm} onClose={handleCancelEdit}>
         <CreateAccountForm
@@ -252,36 +263,53 @@ const EmployeeDetails = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredEmployees.map((employee, key) => (
-            <tr key={`${employee._id}-${key}`}>
-              {displayFields.map((field) => (
-                <td key={`${employee._id}-${field}`}>
-                  <span>{employee[field]}</span>
-                </td>
-              ))}
-              <td>
-                {!editingEmployee && (
-                  <>
-                    <button
-                      className="action-button edit"
-                      onClick={() => handleEdit(employee._id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="action-button delete"
-                      onClick={() => handleDelete(employee._id)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
+  {currentItems.map((employee, key) => (
+    <tr key={`${employee._id}-${key}`}>
+      {displayFields.map((field) => (
+        <td key={`${employee._id}-${field}`}>
+          <span>{employee[field]}</span>
+        </td>
+      ))}
+      <td>
+        {!editingEmployee && (
+          <>
+            <button
+              className="action-button edit"
+              onClick={() => handleEdit(employee._id)}
+            >
+              Edit
+            </button>
+            <button
+              className="action-button delete"
+              onClick={() => handleDelete(employee._id)}
+            >
+              Delete
+            </button>
+          </>
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
       </table>
-
+      {/* Pagination controls */}
+      <div className="pagination">
+        <button
+          className="previouss"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="pagination-count">{currentPage}</span>
+        <button
+          className="next"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={indexOfLastItem >= filteredEmployees.length}
+        >
+          Next
+        </button>
+      </div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
     </div>

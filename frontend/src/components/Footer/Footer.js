@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import image from "../../assets/images/logo.png"
 import "./Footer.css"
 // Constants
@@ -50,9 +52,9 @@ const Column = ({ title, items }) => (
     <ul className="list-unstyled text-small footer-list">
       {items.map((item, index) => (
         <li className="mb-1" key={index}>
-          <a className="link-secondary text-decoration-none" href={item.link}>
+          <NavLink to={`/countries/${item.label}`} className="link-secondary text-decoration-none">
             {item.label}
-          </a>
+          </NavLink>
         </li>
       ))}
     </ul>
@@ -61,14 +63,28 @@ const Column = ({ title, items }) => (
 
 // Main Footer component
 const Footer = () => {
-  const migrateItems = [
-    { label: "Canada", link: "/" },
-    { label: "United States", link: "/" },
-    { label: "United Kingdom", link: "/" },
-    { label: "Australia", link: "/" },
-    { label: "Ireland", link: "/" },
-    { label: "European-Schengen", link: "/" },
-  ];
+  const [countriesData, setCountriesData] = useState([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
+        if (response.status === 200) {
+          if(response.data.message === "No countries found"){
+            setCountriesData([])
+          }
+          setCountriesData(response.data.message);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+  const migrateItems = countriesData.map(country =>({
+    label:country.countryName,
+  }));
 
   const sitemapItems = [
     { label: "Home", link: "/" },
