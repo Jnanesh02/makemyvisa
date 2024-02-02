@@ -3,9 +3,13 @@ import "./CostumerDashboardStyles/Dashboard.css";
 import { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { NavLink, Link, Outlet } from "react-router-dom";
-
+import { NavLink, Link, Outlet,useLocation  } from "react-router-dom";
+import axios from "axios";
 function Dashboard() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
+  console.log(token);
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -25,6 +29,42 @@ function Dashboard() {
       }
     };
   }, []);
+
+
+
+  const getUser = async () => {
+		try {
+			const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
+			const { data } = await axios.get(url, { withCredentials: true });
+      //console.log("google data:",data)
+			localStorage.setItem("userId",data.user.userid);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	useEffect(() => {
+		getUser().then(console.log("getuser called")).catch(err=>console.log(err))
+	}, []);
+
+  
+  
+
+  const getLinkedInuser = async () => {
+    try {
+      const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/getinfo`;
+      const postData ={token} ; // Add any other required data in the request body
+      const { data } = await axios.post(url, postData, { withCredentials: true });
+      console.log("LinkedIn data:", data);
+      localStorage.setItem("userId",data.user.LinkedinID);
+      // localStorage.setItem("userId", data.user.userid);
+    } catch (err) {
+      console.log(err);
+    }}
+
+	useEffect(() => {
+		getLinkedInuser();
+	}, [token]);
 
   return (
     <div>
