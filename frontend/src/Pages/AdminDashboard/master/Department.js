@@ -38,10 +38,10 @@ const Department = () => {
   };
   return (
     <>
-    <div class="main-department-section">
-      <div class="dep-tbl">
+    <div className="main-department-section">
+      <div className="dep-tbl">
         <h2 >Department</h2>
-        <button class="btn btn-primary create-button" onClick={() => setShowModal(true)}>Create</button> 
+        <button className="btn btn-primary create-button" onClick={() => setShowModal(true)}>Create</button> 
       </div>
       <table className="employee-table">
       <thead>
@@ -67,19 +67,19 @@ const Department = () => {
           <div className='create-account-dashboard'>
             <div className='account-heading'>
             <h3>Create Department</h3>
-            <button class="close-buttonss" onClick={() => setShowModal(false)}> x </button>
+            <button className="close-buttonss" onClick={() => setShowModal(false)}> x </button>
             </div>
             <div className='create-dep-labels mb-3'>
-            <label class="form-label" > Department:   </label>
-              <input class="form-control" type="text" name="department" value={formData.department} onChange={handleInputChange} />
+            <label className="form-label" > Department:   </label>
+              <input className="form-control" type="text" name="department" value={formData.department} onChange={handleInputChange} />
               </div>
               <div className='create-dep-labels mb-3'>
             <label>  Description:  </label>
-              <input class="form-control" type="text" name="description" value={formData.description} onChange={handleInputChange} />
+              <input className="form-control" type="text" name="description" value={formData.description} onChange={handleInputChange} />
           </div>
-          <div class="form-button-dashboard">
-            <button class="btn btn-primary create" onClick={handleCreateDepartment}>Create</button>
-            <button class="btn btn-primary cancel" onClick={() => setShowModal(false)}>Cancel</button>
+          <div className="form-button-dashboard">
+            <button className="btn btn-primary create" onClick={handleCreateDepartment}>Create</button>
+            <button className="btn btn-primary cancel" onClick={() => setShowModal(false)}>Cancel</button>
             </div>
           </div>
         </div>

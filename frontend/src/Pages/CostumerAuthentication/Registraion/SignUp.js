@@ -160,7 +160,7 @@ function SignUp() {
         alert(error.response.data.message);
       }
     } else {
-      console.log("Form contains errors. Please fix them.");
+      alert("Form contains errors. Please fix them.");
     }
   };
 

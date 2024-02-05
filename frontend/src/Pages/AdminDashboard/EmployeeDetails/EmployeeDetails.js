@@ -198,8 +198,8 @@ const EmployeeDetails = () => {
   }, [employees, departmentFilter, statusFilter, searchTerm, applyFilters]);
 
   return (
-    <div class="main-department-section">
-      <div class="dep-tbl">
+    <div className="main-department-section">
+      <div className="dep-tbl">
         <h2>Employee Details</h2>
 
         <div>
@@ -212,9 +212,9 @@ const EmployeeDetails = () => {
 
           />
 
-          <label class="table-bar-label">
+          <label className="table-bar-label">
 
-            <select class="form-select" value={departmentFilter} onChange={(e) => handleFilterChange(e, setDepartmentFilter)}>
+            <select className="form-select" value={departmentFilter} onChange={(e) => handleFilterChange(e, setDepartmentFilter)}>
               <option value=""> Department Filter:  </option>
               {department.map((department) => (
                 <option key={department._id} value={department.department}>
@@ -224,16 +224,16 @@ const EmployeeDetails = () => {
             </select>
           </label>
 
-          <label class="table-bar-label">
+          <label className="table-bar-label">
 
-            <select class="form-select" value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
+            <select className="form-select" value={statusFilter} onChange={(e) => handleFilterChange(e, setStatusFilter)}>
               <option value=""> Status Filter: </option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
           </label>
 
-          <button class="btn btn-primary create-button" onClick={() => setShowCreateForm(!showCreateForm)}>
+          <button className="btn btn-primary create-button" onClick={() => setShowCreateForm(!showCreateForm)}>
             {showCreateForm ? "Cancel" : "Create Account"}
           </button>
         </div>

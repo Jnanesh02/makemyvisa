@@ -35,7 +35,6 @@ export const CountriesDetails = () => {
         fetchData();
     }, [countryName, serviceName]);
 
-    console.log("response", countryData);
 
     const handlePrev = () => {
         setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));

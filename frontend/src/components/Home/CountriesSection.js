@@ -28,10 +28,10 @@ const renderFlipCard = (country) => (
         </div>
         <div className="flip-card-back">
         {country.serviceTypes ? (
-            <ul class="list-group countries-list">
-              <h3 class="country-heading-nm"> {country.countryName} </h3>
+            <ul className="list-group countries-list">
+              <h3 className="country-heading-nm"> {country.countryName} </h3>
               {country.serviceTypes.map((service, index) => (
-                <li class="list-group-item countries-list" key={index}>
+                <li className="list-group-item countries-list" key={index}>
                   <NavLink to={`/countries/${country.countryName}/${service.serviceName}`}>
                     {service.serviceName}
                   </NavLink>

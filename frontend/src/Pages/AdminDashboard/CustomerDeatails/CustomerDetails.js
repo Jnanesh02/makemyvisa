@@ -122,8 +122,8 @@ export const CustomerDetails = () => {
     const currentItems = filteredEmployees.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
-        <div class="main-department-section">
-            <div class="dep-tbl">
+        <div className="main-department-section">
+            <div className="dep-tbl">
                 <h2>Customer Details</h2>
 
                 <div>
@@ -135,9 +135,9 @@ export const CustomerDetails = () => {
                         onChange={handleSearchChange}
                     />
 
-                    <label class="table-bar-label">
+                    <label className="table-bar-label">
                         <select
-                            class="form-select"
+                            className="form-select"
                             value={statusFilter}
                             onChange={(e) => handleFilterChange(e, setStatusFilter)}
                         >
@@ -193,14 +193,14 @@ export const CustomerDetails = () => {
 
             {/* Pagination controls */}
             <div className="pagination">
-                <button class="previouss"
+                <button className="previouss"
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
                     Previous
                 </button>
-                <span class="pagination-count">{currentPage}</span>
-                <button class="next"
+                <span className="pagination-count">{currentPage}</span>
+                <button className="next"
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={indexOfLastItem >= filteredEmployees.length}
                 >

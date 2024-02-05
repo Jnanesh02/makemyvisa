@@ -9,7 +9,6 @@ function Dashboard() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token');
-  console.log(token);
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -36,7 +35,6 @@ function Dashboard() {
 		try {
 			const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
 			const { data } = await axios.get(url, { withCredentials: true });
-      //console.log("google data:",data)
 			localStorage.setItem("userId",data.user.userid);
 		} catch (err) {
 			console.log(err);
@@ -55,11 +53,10 @@ function Dashboard() {
       const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/getinfo`;
       const postData ={token} ; // Add any other required data in the request body
       const { data } = await axios.post(url, postData, { withCredentials: true });
-      console.log("LinkedIn data:", data);
       localStorage.setItem("userId",data.user.LinkedinID);
       // localStorage.setItem("userId", data.user.userid);
     } catch (err) {
-      console.log(err);
+      alert(err.message);
     }}
 
 	useEffect(() => {

@@ -9,7 +9,6 @@ const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
     // Check if the user exists
     const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {

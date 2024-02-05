@@ -20,7 +20,6 @@ passport.use(
       scope: ['profile', 'email'],
     },
     async function(accessToken, refreshToken, profile, done) {
-    console.log("success");
       try {
         // Check if the user already exists in the database based on their Google ID
         const existingUser = await Customer.findOne({
