@@ -82,3 +82,72 @@ button.action-button {
 .delete-button {
   background-color: #f44336; /* Red color for delete button, customize as needed */
 }
+
+.create-account-dashboard.create-country {
+}
+/* width */
+.create-account-dashboard.create-country::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.create-account-dashboard.create-country::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.create-account-dashboard.create-country::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.create-account-dashboard.create-country::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+.create-account-dashboard.create-country {
+  overflow: scroll;
+  height: 400px;
+  overflow-x: hidden;
+}
+.create-country-buttons {
+  margin-bottom: 20px;
+}
+.create-account-dashboard.create-country
+{
+  top: 20%;
+}
+.create-country-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+.services-country {
+  display: -webkit-inline-box;
+}
+.country-form-input.mb-3 {
+  width: 48%;
+}
+.services-country {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+button.btn.btn-primary.btn-service-name {
+  background: #dd2817;
+  border: none;
+  border-radius: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+button.btn.btn-primary.btn-service-name:hover {
+  background: #a31103;
+}
+button.btn.btn-primary.btn-cont-edit {
+  background: #1e7e00;
+  padding: 2px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border: none;
+}

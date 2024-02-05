@@ -236,7 +236,7 @@ const CountryServices = () => {
                                     </ul>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleShowEditModal(index)}>Edit</button>
+                                    <button class="btn btn-primary btn-cont-edit" onClick={() => handleShowEditModal(index)}>Edit</button>
                                 </td>
                             </tr>
                         ))}
@@ -248,12 +248,13 @@ const CountryServices = () => {
             {/* Modal */}
             {showModal && (
                 <div>
-                    <div className='create-account-dashboard'>
+                    <div className='create-account-dashboard create-country'>
                         <div className='account-heading'>
-                            <h3>{editIndex !== null && editIndex !== undefined ? 'Edit' : 'Create'}</h3>
+                            <h3>  {editIndex !== null && editIndex !== undefined ? 'Edit' : 'Create'}</h3>
                             <button className="close-buttonss" onClick={handleCloseModal}> x </button>
                         </div>
-                        <div className='create-dep-labels mb-3'>
+                        <div className='create-country-form'>
+                        <div class="country-form-input mb-3">
                             <input className="form-control"
                                 placeholder="countryName"
                                 type="text"
@@ -261,11 +262,11 @@ const CountryServices = () => {
                                 value={formData.countryName}
                                 onChange={(e) => handleInputChanges('countryName', e.target.value)} />
                         </div>
-                        <div className='create-dep-labels mb-3'>
+                        <div class="country-form-input mb-3">
                             <input className="form-control" placeholder="Country Description" type="text" name="descriptions" value={formData.descriptions}
                                 onChange={(e) => handleInputChanges('descriptions', e.target.value)} />
                         </div>
-                        <div className='create-dep-labels mb-3'>
+                        <div class="country-form-input mb-3">
                             <input className="form-control"
                                 placeholder="Country Image"
                                 type="file"
@@ -273,8 +274,8 @@ const CountryServices = () => {
                                 name="countryImage"
                                 onChange={(e) => handleFileChange('countryImage', e)} />
                         </div>
-                        <div className='create-dep-labels mb-3'>
-                            <label htmlFor="flagImage" className="form-label">Flag Image</label>
+                        <div class="country-form-input mb-3">
+                            {/* <label htmlFor="flagImage" className="form-label">Flag Image</label> */}
                             <input className="form-control"
                                 placeholder="Flag Image"
                                 type="file"
@@ -282,9 +283,10 @@ const CountryServices = () => {
                                 name="flagImage"
                                 onChange={(e) => handleFileChange('flagImage', e)} />
                         </div>
-                        <div className='create-dep-labels mb-3'>
+                     
                             {formData.serviceTypes.map((service, serviceIndex) => (
-                                <div key={serviceIndex}>
+                                <div  class="services-country" key={serviceIndex}>
+                                    <div class="country-form-input mb-3">
                                     <input
                                         className="form-control"
                                         placeholder="Service Name"
@@ -293,6 +295,8 @@ const CountryServices = () => {
                                         value={service.serviceName}
                                         onChange={(e) => handleServiceFieldChange('serviceName', e.target.value, serviceIndex)}
                                     />
+                                    </div>
+                                    <div class="country-form-input mb-3">
                                     <input
                                         className="form-control"
                                         placeholder="Service Description"
@@ -301,8 +305,10 @@ const CountryServices = () => {
                                         value={service.description}
                                         onChange={(e) => handleServiceFieldChange('description', e.target.value, serviceIndex)}
                                     />
+                                    </div>
                                     {service.subServiceTypes.map((subService, subServiceIndex) => (
-                                        <div key={subServiceIndex}>
+                                        <div  class="create-country-form" key={subServiceIndex}>
+                                                <div class="country-form-input mb-3">
                                             <input
                                                 className="form-control"
                                                 placeholder="Sub-Service Name"
@@ -311,6 +317,8 @@ const CountryServices = () => {
                                                 value={subService.subServiceName}
                                                 onChange={(e) => handleInputChange('subServiceName', e.target.value, serviceIndex, subServiceIndex)}
                                             />
+                                            </div>
+                                            <div class="country-form-input mb-3">
                                             <input
                                                 className="form-control"
                                                 placeholder="Sub-Service Description"
@@ -319,14 +327,17 @@ const CountryServices = () => {
                                                 value={subService.description}
                                                 onChange={(e) => handleInputChange('description', e.target.value, serviceIndex, subServiceIndex)}
                                             />
+                                            </div>
                                         </div>
                                     ))}
-                                    <button onClick={() => handleAddServiceName(serviceIndex)}>Add Service Name</button>
-                                    <button onClick={() => handleAddSubService(serviceIndex)}>Add Sub-Service</button>
+                                    <div className='create-country-buttons'>
+                                    <button class="btn btn-primary btn-service-name" onClick={() => handleAddServiceName(serviceIndex)}>Add Service Name</button>
+                                    <button class="btn btn-primary btn-service-name" onClick={() => handleAddSubService(serviceIndex)}>Add Sub-Service</button>
+                                    </div>
                                 </div>
                             ))}
+                        
                         </div>
-
                         <div className="form-button-dashboard">
                             <button className="btn btn-primary create" onClick={handleCreateDepartment}>
                                 {editIndex !== null && editIndex !== undefined ? 'Update' : 'Create'}

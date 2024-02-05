@@ -129,6 +129,7 @@ a[aria-expanded="true"] {
     border: none !important; /* Remove border */
     border-radius: 0 !important; /* Remove border-radius */
     box-shadow:none;
+    
 }
 .accordion-item{
     border: none;
@@ -146,8 +147,10 @@ a[aria-expanded="true"] {
     display: block !important;
     color: white !important;
     text-decoration: none !important;
-    border-bottom: 1px solid #dddddd6b !important;
+    border: none !important;
 }
+
+
 ul.list-unstyled.components .accordion {
     padding: 0px;
 }
@@ -316,6 +319,8 @@ ul.list-unstyled.components .accordion-body {
     background: #b11c09;
     width: 90%;
     margin: auto;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }
 ul.list-unstyled.components button.accordion-button.custom-button {
     padding-left: 10px !important;

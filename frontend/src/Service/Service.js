@@ -13,6 +13,7 @@ import services13 from "../assets/images/servicesImages/13.png";
 import services14 from "../assets/images/servicesImages/14.png";
 import services15 from "../assets/images/servicesImages/15.png";
 import services16 from "../assets/images/servicesImages/16.png";
+import servicessmall from "../assets/images/servicesImages/small.png";
 
 const Service = () => {
   return (
@@ -50,81 +51,57 @@ const Service = () => {
                 id="carouselExample"
                 className="carousel slide carousal-slider-services"
               >
-                <div className="carousel-inner services-icons-fd">
-                <div className="carousel-item active">
-                    <img className="services-images" src={services4} alt="Service 4" />
-                    <p> Hotel Reservation </p>
-                  </div>
-                  <div className="carousel-item ">
-                    <img className="services-images" src={services2} alt="Service 2" />
-                    <p> Visa Assistance </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services3} alt="Service 3" />
-                    <p> Ticketing </p>
-                  </div>
-                 
-                  <div className="carousel-item">
-                    <img className="services-images" src={services5} alt="Service 5" />
-                    <p> Travel Health Insurance </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services6} alt="Service 6" />
-                    <p> Immigration Advice </p>
-                  </div>
-                  <div className="carousel-item ">
-                    <img className="services-images" src={services1} alt="Service 1" />
-                    <p> Forex Services </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services11} alt="Service 11" />
-                    <p> Apostille & Attestation Services </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services12} alt="Service 12" />
-                    <p> Translation & Notary Services </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services13} alt="Service 13" />
-                    <p> Courier, Pick-up & Drop Services </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services14} alt="Service 14" />
-                    <p> International Student Accommodation</p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services15} alt="Service 15" />
-                    <p> Travel Packages </p>
-                  </div>
-                  <div className="carousel-item">
-                    <img className="services-images" src={services16} alt="Service 16" />
-                    <p> Student Admissions </p>
-                  </div>
-                </div>
-                <button
-                  className="carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                  className="carousel-control-next"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
+              
+             <div class="clients-cricle-section">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+      <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+    <img src={servicessmall}/>
+    </button>
+  </li>
+
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">addhaadaskdldadkh</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">aldadjadasdl.asdj</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+</div>
+</div>
+
               </div>
             </div>
           </div>
