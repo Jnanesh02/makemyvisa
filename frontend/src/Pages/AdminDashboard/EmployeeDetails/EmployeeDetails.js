@@ -11,7 +11,7 @@ const EmployeeDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [roleFilter, setRoleFilter] = useState("");
+  const [departmentFilter, setDepartmentFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
@@ -19,7 +19,7 @@ const EmployeeDetails = () => {
   const [confirmationEmployeeId, setConfirmationEmployeeId] = useState(null);
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [roles, setRoles] = useState([]);
+  const [department, setDepartment] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -27,6 +27,7 @@ const EmployeeDetails = () => {
     "firstName",
     "lastName",
     "email",
+    "department",
     "role",
     "contact_Details",
     "status",
@@ -59,7 +60,7 @@ const EmployeeDetails = () => {
       const departmentsResponse = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/employee/get/department`
       );
-      setRoles(departmentsResponse.data.message);
+      setDepartment(departmentsResponse.data.message);
     } catch (error) {
       console.error("Error fetching roles and departments:", error.message);
     }
@@ -68,10 +69,10 @@ const EmployeeDetails = () => {
     return data.filter(
       (employee) =>
         filterBySearchTerm(employee, searchTerm) &&
-        filterByRole(employee, roleFilter) &&
+        filterByRole(employee, departmentFilter) &&
         filterByStatus(employee, statusFilter)
     );
-  }, [searchTerm, roleFilter, statusFilter]);
+  }, [searchTerm,departmentFilter, statusFilter]);
 
   const applyAndFetch = (data, filterFunction, setFunction) => {
     const filteredData = filterFunction(data);
@@ -86,8 +87,8 @@ const EmployeeDetails = () => {
         value.toString().toLowerCase().includes(term.toLowerCase())
     );
 
-  const filterByRole = (employee, role) => {
-    return role === "" || (employee && employee.role && employee.role.toLowerCase() === role.toLowerCase());
+  const filterByRole = (employee, department) => {
+    return department === "" || (employee && employee.department && employee.department.toLowerCase() === department.toLowerCase());
   };
   const filterByStatus = (employee, status) => {
     return status === "" || (employee && employee.status && employee.status.toLowerCase() === status.toLowerCase());
@@ -194,7 +195,7 @@ const EmployeeDetails = () => {
   }, []);
   useEffect(() => {
     applyAndFetch(employees, applyFilters, setFilteredEmployees);
-  }, [employees, roleFilter, statusFilter, searchTerm, applyFilters]);
+  }, [employees, departmentFilter, statusFilter, searchTerm, applyFilters]);
 
   return (
     <div class="main-department-section">
@@ -213,11 +214,11 @@ const EmployeeDetails = () => {
 
           <label class="table-bar-label">
 
-            <select class="form-select" value={roleFilter} onChange={(e) => handleFilterChange(e, setRoleFilter)}>
-              <option value=""> Role Filter:  </option>
-              {roles.map((role) => (
-                <option key={role._id} value={role.role}>
-                  {role.role}
+            <select class="form-select" value={departmentFilter} onChange={(e) => handleFilterChange(e, setDepartmentFilter)}>
+              <option value=""> Department Filter:  </option>
+              {department.map((department) => (
+                <option key={department._id} value={department.department}>
+                  {department.department}
                 </option>
               ))}
             </select>

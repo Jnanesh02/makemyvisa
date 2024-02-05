@@ -8,6 +8,7 @@ const createRoleBasedModel = (role) => {
       lastName: { type: 'string', default: '' },
       contact_Details: { type: 'string', default: '' },
       email: { type: 'string', unique:true, default: '' },
+      department:{type: 'string', unique:true, default: '' },
       role: { type: 'string', default: role || '' },
     });
   

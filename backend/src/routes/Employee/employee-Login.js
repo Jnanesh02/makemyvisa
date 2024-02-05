@@ -50,7 +50,7 @@ router.post("/employee/login", async (req, res) => {
 // Route to create a new employee account (accessible to admins only)
 router.post("/employee/createEmployee", async (req, res) => {
   try {
-    const { firstName, lastName, contactDetails, address, email, role } =  req.body;
+    const { firstName, lastName, contactDetails, address, email,department, role } =  req.body;
     // Check if the user with the given email already exists
     const existingUser = await Employee.findOne({ email: email });
     if (existingUser) {
@@ -68,6 +68,7 @@ router.post("/employee/createEmployee", async (req, res) => {
       Address: address,
       email: email,
       password: generatePassword,
+      department:department,
       role: role,
     });
 
@@ -79,9 +80,8 @@ router.post("/employee/createEmployee", async (req, res) => {
       firstName: firstName,
       lastName: lastName,
       contact_Details: contactDetails,
-      Address: address,
+      department: department,
       email: email,
-      password: generatePassword,
       role: role,
     });
 

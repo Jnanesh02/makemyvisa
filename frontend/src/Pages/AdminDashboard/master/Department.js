@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "../AdminDashboardStyles/Employee.css";
 const Department = () => {
-  const [role, setRole] = useState([]);
+  const [department, setDepartment] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    role: '',
+    department: '',
     description: '',
   });
 
@@ -13,7 +13,7 @@ const Department = () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/department`);
       
-      setRole(response.data.message);
+      setDepartment(response.data.message);
     } catch (error) {
       alert(error.message);
     }
@@ -51,9 +51,9 @@ const Department = () => {
         </tr>
       </thead>
       <tbody>
-        {role.map((department, index) => (
+        {department.map((department, index) => (
           <tr key={index}>
-            <td>{department.role}</td>
+            <td>{department.department}</td>
             <td>{department.description}</td>
           </tr>
         ))}
@@ -71,7 +71,7 @@ const Department = () => {
             </div>
             <div className='create-dep-labels mb-3'>
             <label class="form-label" > Department:   </label>
-              <input class="form-control" type="text" name="role" value={formData.role} onChange={handleInputChange} />
+              <input class="form-control" type="text" name="department" value={formData.department} onChange={handleInputChange} />
               </div>
               <div className='create-dep-labels mb-3'>
             <label>  Description:  </label>

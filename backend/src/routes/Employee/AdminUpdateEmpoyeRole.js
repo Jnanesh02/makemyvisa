@@ -5,7 +5,7 @@ const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
 
 router.put("/employee/update/:id", async (req, res) => {
   const object_id = req.params.id;
-  const { firstName, lastName, email, phoneNumber, role, status } = req.body;
+  const { firstName, lastName, email, phoneNumber,department, role, status } = req.body;
 
   try {
     const existingEmployee = await Employee.findById({ _id: object_id });
@@ -14,23 +14,24 @@ router.put("/employee/update/:id", async (req, res) => {
       return res.status(400).json({ message: "User not Found" });
     }
 
-    if (existingEmployee.role !== role) {
+    if (existingEmployee.department !== department) {
       // Remove the old document from the old collection
-      const oldCollectionModel = createRoleBasedModel(existingEmployee.role);
+      const oldCollectionModel = createRoleBasedModel(existingEmployee.department);
       await oldCollectionModel.findByIdAndDelete(object_id);
 
       try {
         // Create a new document in the new collection
-        const newModel = createRoleBasedModel(role);
+        const newModel = createRoleBasedModel(department);
         const newSchemaDocument = await newModel.create({
           firstName,
           lastName,
           email,
           phoneNumber,
+          department,
           role,
           status,
         });
-        existingEmployee.role = role;
+        existingEmployee.department = department;
         await existingEmployee.save();
       } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -43,6 +44,7 @@ router.put("/employee/update/:id", async (req, res) => {
       existingEmployee.email = email;
       existingEmployee.phoneNumber = phoneNumber;
       existingEmployee.status = status;
+      existingEmployee.department=department;
       existingEmployee.role = role;
 
       await existingEmployee.save();

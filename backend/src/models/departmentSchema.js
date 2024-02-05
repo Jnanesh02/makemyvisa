@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const departmentSchema = new mongoose.Schema({
-    role: {
+    department: {
         type: String,
         unique: true,
       },

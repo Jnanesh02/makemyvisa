@@ -9,16 +9,16 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
     lastName: "",
     contactDetails: "",
     email: "",
-    role: "",
+    department: "",
     address: "",
   }), []);
 
   const [employeeData, setEmployeeData] = useState(initialEmployeeData);
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-  const [roles,setRoles]=useState([]);
-  const EDIT_FIELDS = ["firstName", "lastName", "email", "role", "contact_Details", "status"];
-  const CREATE_FIELDS = ["firstName", "lastName", "email", "role", "contactDetails", "address"];
+  const [department,setDepartment]=useState([]);
+  const EDIT_FIELDS = ["firstName", "email","department", "role", "contact_Details", "status"];
+  const CREATE_FIELDS = ["firstName", "lastName", "email","department", "role", "contactDetails"];
 
   useEffect(() => {
     if (editingEmployee) {
@@ -32,17 +32,17 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   }, [editingEmployee, initialEmployeeData]);
 
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchDepartment = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/department`);
       
-        setRoles(response.data.message); 
+        setDepartment(response.data.message); 
       } catch (error) {
-        console.error("Error fetching roles:", error.message);
+        console.error("Error fetching department:", error.message);
       }
     };
 
-    fetchRoles();
+    fetchDepartment();
   }, []);
   const onChangeInput = (event) => {
     event.preventDefault();
@@ -57,8 +57,8 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
       <option value="">Select {options.label}</option>
       {options.values &&
         options.values.map((value) => (
-          <option key={value._id} value={value.role}>
-                      {options.label === "role" ? value.role : value.status}
+          <option key={value._id} value={value.department}>
+                      {options.label === "department" ? value.department : value.status}
         </option>
         ))}
     </>
@@ -78,7 +78,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   const renderFormFields = (fields) =>
   fields.map((field) => (
     <div class="input-fileds-account" key={field}>
-      {field === "role" || field === "status" ? (
+      {field === "department" || field === "status" ? (
         <select
           name={field}
           className="form-control create-account-frm"
@@ -86,8 +86,8 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
           required
           onChange={(e) => onChangeInput(e)}
         >
-          {field === "role"
-            ? renderSelectOptions({ label: "role", values: roles })
+          {field === "department"
+            ? renderSelectOptions({ label: "department", values: department })
             : renderStatusSelectOptions(["active", "inactive"])}
         </select>
       ) : (
