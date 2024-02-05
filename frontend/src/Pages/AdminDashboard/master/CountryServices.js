@@ -6,8 +6,8 @@ const CountryServices = () => {
     const initialFormData = {
         countryName: '',
         descriptions: '',
-        countryImage: '',
-        flagImage:'',
+        countryImage: null,
+        flagImage:null,
         serviceTypes: [
             {
                 serviceName: '',
@@ -43,14 +43,14 @@ const CountryServices = () => {
 
     const handleCreateDepartment = async () => {
         try {
+            
             if (editIndex !== null && editIndex !== undefined) {
                 console.log("editing", formData);
                 // Handle update logic for existing country
                 // await axios.put(`${process.env.REACT_APP_BACKEND_URL}/employee/update/department`, formData);
             } else {
-                console.log("123", formData);
                 // Handle create logic for new country
-                // await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employee/create/department`, formData);
+                await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create/newCountry`, formData);
             }
             getcountriesServiceDetails(); // Fetch updated data
             setShowModal(false); // Close the modal
@@ -64,7 +64,8 @@ const CountryServices = () => {
     }
     const handleCloseModal = () => {
         setShowModal(false);
-        reSetForm();
+        setFormData(initialFormData);
+
     };
     const handleInputChanges = (name, value, serviceIndex = 0) => {
         setFormData((previous) => ({
@@ -114,6 +115,7 @@ const CountryServices = () => {
 
     const handleFileChange = (fieldName, e) => {
         const file = e.target.files[0];
+        console.log("12",file.name);
         setFormData((previous) => ({
             ...previous,
             [fieldName]: file,
@@ -268,10 +270,8 @@ const CountryServices = () => {
                         </div>
                         <div className="country-form-input mb-3">
                             <input className="form-control"
-                                placeholder="Country Image"
                                 type="file"
                                 accept="image/*"
-                                name="countryImage"
                                 onChange={(e) => handleFileChange('countryImage', e)} />
                         </div>
                         <div className="country-form-input mb-3">

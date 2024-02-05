@@ -8,7 +8,7 @@ const makeMyVisa = require("./src/routes");
 const crypto = require("crypto");
 const { connect } = require("./config/database");
 const app = express();
-
+app.use('/uploads/countryImages', express.static('uploads/countryImages'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.FRONTEND_URL , methods: "GET,POST,PUT,DELETE", credentials: true }));
