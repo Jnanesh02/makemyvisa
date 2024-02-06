@@ -1,11 +1,5 @@
 
-// import Canada from "../../assets/images/01.png";
 import Australia from "../../assets/images/02.png";
-
-// import UK from "../../assets/images/03.png";
-// import Ireland from "../../assets/images/04.png";
-// import USA from "../../assets/images/05.png";
-// import European from "../../assets/images/06.png";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -55,11 +49,10 @@ const CountriesSection = () => {
     const fetchCountries = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
-        if (response.status === 200) {
-          if(response.data.message === "No countries found"){
-            setCountriesData([])
-          }
+        if (Array.isArray(response.data.message)) {
           setCountriesData(response.data.message);
+        } else {
+          setCountriesData([]);
         }
       } catch (error) {
         alert(error.message);
@@ -103,11 +96,15 @@ const CountriesSection = () => {
             </div>
             <div className="col-lg-12">
               <div className="row">
-                {filteredCountries.map((country) => (
-                  <React.Fragment key={country.countryName}>
-                    {renderFlipCard(country)}
-                  </React.Fragment>
-                ))}
+              {filteredCountries.length > 0 ? (
+                  filteredCountries.map((country) => (
+                    <React.Fragment key={country.countryName}>
+                      {renderFlipCard(country)}
+                    </React.Fragment>
+                  ))
+                ) : (
+                  <p>No countries available</p>
+                )}
               </div>
             </div>
           </div>
