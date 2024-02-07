@@ -2,11 +2,12 @@ const express = require("express");
 const path = require('path');
 const router = express.Router();
 const countryServiceSchema = require("../models/countryServiceModel");
+
 const multer = require('multer');
 const fs = require('fs');
 const countryStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads/countryIamges');
+    const uploadPath = path.join(__dirname, '../../uploads/countryImages');
     fs.mkdirSync(uploadPath, { recursive: true });
     cb(null, uploadPath);
   },

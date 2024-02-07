@@ -235,6 +235,7 @@ formData.append('serviceTypes', JSON.stringify(countryFormData.serviceTypes));
               <th>countryName</th>
               <th>Description</th>
               <th>Country Image</th>
+              <th>Flag Image</th>
               <th>serviceNames</th>
               <th>serviceType</th>
               <th>actions</th>
@@ -246,6 +247,10 @@ formData.append('serviceTypes', JSON.stringify(countryFormData.serviceTypes));
                 <tr key={index}>
                   <td>{country.countryName}</td>
                   <td>{country.description}</td>
+                  <td><img src={`http://localhost:3000/uploads/countryImages/${country.countryImagePath}`} style={{ width: "100px", height: "100px" }} alt="Placeholder Image" /></td>
+                  <td><img src={`http://localhost:3000/uploads/countryImages/${country.flagImagePath}`} style={{ width: "100px", height: "100px" }} alt="Placeholder Image" /></td>
+
+
                   <td>
                     <ul>
                       {country.serviceTypes &&

@@ -65,7 +65,7 @@ export const CountriesServiceDetails = () => {
                             </div>
                         </div>
                         <div className="col-lg-7">
-                            <img className="banner-flag" src={countryFlagImage} alt="Country Flag" />
+                            <img className="banner-flag" src={`http://localhost:3000/uploads/countryImages/${countryData?.flagImagePath}`} alt="Country Flag" />
                         </div>
                     </div>
                 </div>

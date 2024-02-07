@@ -9,7 +9,7 @@ const crypto = require("crypto");
 const path = require('path');
 const { connect } = require("./config/database");
 const app = express();
-app.use('/uploads/countryImages', express.static(path.join(__dirname, )));
+app.use('/uploads/countryImages', express.static('uploads/countryImages/'));
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();

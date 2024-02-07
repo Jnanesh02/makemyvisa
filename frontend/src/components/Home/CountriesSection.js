@@ -9,7 +9,7 @@ const renderFlipCard = (country) => (
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <img
-         src={`${process.env.REACT_APP_BACKEND_URL}/uploads/countryImages/${country.countryImagePath}`}
+         src={`http://localhost:3000/uploads/countryImages/${country.countryImagePath}`}
          alt={`Avatar for ${country.countryName}`}
          style={{ width: "300px", height: "300px" }}
           />
