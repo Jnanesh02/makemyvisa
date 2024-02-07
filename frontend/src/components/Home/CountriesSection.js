@@ -1,5 +1,4 @@
 
-import Australia from "../../assets/images/02.png";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +9,7 @@ const renderFlipCard = (country) => (
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <img
-         src={Australia}
+         src={`${process.env.REACT_APP_BACKEND_URL}/uploads/countryImages/${country.countryImagePath}`}
          alt={`Avatar for ${country.countryName}`}
          style={{ width: "300px", height: "300px" }}
           />
@@ -50,6 +49,7 @@ const CountriesSection = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
         if (Array.isArray(response.data.message)) {
+          console.log(response.data.message);
           setCountriesData(response.data.message);
         } else {
           setCountriesData([]);
