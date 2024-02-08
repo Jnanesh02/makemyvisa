@@ -17,6 +17,8 @@ const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile");
 const departments = require("./Employee/departments");
 
 const countryService = require("./countryService");
+const updatecountryService = require("./updatecountryservice");
+
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -35,5 +37,6 @@ module.exports = {
   adminUpdateEmployee,
   updateEmpoyeeProfile,
   departments,
-  countryService
+  countryService,
+  updatecountryService
 };

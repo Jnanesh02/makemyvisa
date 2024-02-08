@@ -18,10 +18,9 @@ const countryStorage = multer.diskStorage({
 
 
 const countryUpload = multer({ storage: countryStorage });
-router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImage' }, { name: 'flagImage' }]), async (req, res) => {
+router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImagePath' }, { name: 'flagImagePath' }]), async (req, res) => {
   try {
-    console.log("body:", req.body);
-    console.log("country:", req.body.countryName);
+ 
 
     const { countryName, descriptions, serviceTypes } = req.body; // Changed description to descriptions
     const existingCountry = await countryServiceSchema.findOne({
@@ -35,8 +34,8 @@ router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImage' }
     const newCountry = new countryServiceSchema({
       countryName,
       description: descriptions, // Changed description to descriptions
-      countryImagePath: req.files['countryImage'][0].filename,
-      flagImagePath: req.files['flagImage'][0].filename,
+      countryImagePath: req.files['countryImagePath'][0].filename,
+      flagImagePath: req.files['flagImagePath'][0].filename,
       serviceTypes: JSON.parse(serviceTypes) // Parse serviceTypes string as JSON
     });
 
@@ -54,7 +53,6 @@ router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImage' }
       });
     }
 
-    console.log("newCountry", newCountry);
     await newCountry.save();
     return res.status(200).json({ message: "New country created successfully", data: newCountry });
   } catch (error) {

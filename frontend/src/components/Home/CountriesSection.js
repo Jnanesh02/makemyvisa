@@ -49,7 +49,6 @@ const CountriesSection = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
         if (Array.isArray(response.data.message)) {
-          console.log(response.data.message);
           setCountriesData(response.data.message);
         } else {
           setCountriesData([]);
