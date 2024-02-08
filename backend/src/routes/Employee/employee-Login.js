@@ -73,7 +73,7 @@ router.post("/employee/createEmployee", async (req, res) => {
 
     // Save the new employee to the database
     await newEmployee.save();
-    const EmployeeModel = createRoleBasedModel(role); // Use the dynamic model
+    const EmployeeModel = createRoleBasedModel(department); 
     const newEmployeeRoleData = new EmployeeModel({
       _id:newEmployee._id,
       firstName: firstName,
