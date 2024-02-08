@@ -8,8 +8,9 @@ const CountryServices = () => {
   const [countriesServiceType, setCountriesServiceType] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [editingEmployee, setEditingEmployee] = useState(null);
-  const [isDeleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(false);
+  const [isDeleteConfirmationModalOpen, setDeleteConfirmationModalOpen] =
+    useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const getcountriesServiceDetails = async () => {
@@ -28,36 +29,34 @@ const CountryServices = () => {
     getcountriesServiceDetails();
   }, [isEditing]);
   const handleCreate = () => {
-    setSelectedCountry(null); 
-    setEditingEmployee(null); 
+    setSelectedCountry(null);
     setShowModal(true);
   };
   const handleEdit = (countryId) => {
-  const countryToEdit = countriesServiceType.find(
-    (country) => country._id === countryId
-  );
-  setSelectedCountry(countryToEdit);
-    setEditingEmployee(countryToEdit);
-    setShowModal(true); 
+    const countryToEdit = countriesServiceType.find(
+      (country) => country._id === countryId
+    );
+    setSelectedCountry(countryToEdit);
+    setShowModal(true);
   };
   const handleDelete = async (countryId) => {
     try {
-      setSelectedCountry(countryId); 
+      setSelectedCountry(countryId);
       setDeleteConfirmationModalOpen(true);
     } catch (error) {
       alert(error.message);
     }
   };
-  
+
   // const handleDeleteService = async (serviceId) => {
   //   try {
-  //     setSelectedCountry(serviceId); 
+  //     setSelectedCountry(serviceId);
   //     setDeleteConfirmationModalOpen(true);
   //   } catch (error) {
   //     alert(error.message);
   //   }
   // };
-  
+
   // const handleDeleteSubService = async (serviceId, subServiceId) => {
   //   try {
   //     setSelectedCountry({ serviceId, subServiceId }); // Store the IDs for deletion
@@ -81,14 +80,14 @@ const CountryServices = () => {
       //     `${process.env.REACT_APP_BACKEND_URL}/services/${selectedCountry.serviceId}`
       //   );
       // } else {
-        await axios.delete(
-          `${process.env.REACT_APP_BACKEND_URL}/countries/${selectedCountry}`
-        );
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/countries/${selectedCountry}`
+      );
       // }
       await getcountriesServiceDetails();
     } catch (error) {
       alert(error.message);
-    }finally{
+    } finally {
       setDeleteConfirmationModalOpen(false);
     }
   };
@@ -104,14 +103,14 @@ const CountryServices = () => {
             Create
           </button>
         </div>
-        
-      {isDeleteConfirmationModalOpen && (
-        <ConfirmationModal
-          message="Are you sure you want to delete this countryservice?"
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-        />
-      )}
+
+        {isDeleteConfirmationModalOpen && (
+          <ConfirmationModal
+            message="Are you sure you want to delete this countryservice?"
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+          />
+        )}
         <table className="employee-table">
           <thead>
             <tr>
@@ -175,24 +174,23 @@ const CountryServices = () => {
                     </ul>
                   </td>
                   <td>
-                  {!editingEmployee && (
-          <>
-            <button
-              className="action-button edit"
-              onClick={() => handleEdit(country._id)}
-            >
-              Edit
-            </button>
-            <button
-              className="action-button delete"
-              onClick={() => handleDelete(country._id)}
-            >
-              Delete
-            </button>
-          </>
-        )}
-      </td>
-                 
+                    {!editingEmployee && (
+                      <>
+                        <button
+                          className="action-button edit"
+                          onClick={() => handleEdit(country._id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="action-button delete"
+                          onClick={() => handleDelete(country._id)}
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -200,13 +198,15 @@ const CountryServices = () => {
       </div>
 
       {/* Modal */}
-      {showModal && <CreateCountryService  handleCloseModal={() => setShowModal(false)}
-      countryDetailsToEdit={selectedCountry}
-      onEmployeeUpdate={handleEdit}
-              setIsEdit={setIsEditing}
-
-         />}
-
+      {showModal && (
+        <CreateCountryService
+          handleCloseModal={() => setShowModal(false)}
+          countryDetailsToEdit={selectedCountry}
+          onEmployeeUpdate={handleEdit}
+          setIsEdit={setIsEditing}
+          setActionrender={setEditingEmployee}
+        />
+      )}
     </>
   );
 };

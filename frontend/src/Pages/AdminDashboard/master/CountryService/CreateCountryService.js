@@ -7,6 +7,7 @@ export const CreateCountryService = ({
   handleCloseModal,
   setIsEdit,
   countryDetailsToEdit,
+  setActionrender
 }) => {
   const initialFormData = useMemo(
     () => ({
@@ -187,6 +188,7 @@ export const CreateCountryService = ({
         setConfirmationModalOpen(false);
         handleCloseModal();
         setIsEdit(true);
+        setActionrender(false);
 
       } else if (response.status === 409) {
         setConfirmationModalOpen(false);

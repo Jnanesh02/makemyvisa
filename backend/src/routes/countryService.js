@@ -22,7 +22,7 @@ router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImagePat
   try {
  
 
-    const { countryName, descriptions, serviceTypes } = req.body; // Changed description to descriptions
+    const { countryName, description, serviceTypes } = req.body; // Changed description to descriptions
     const existingCountry = await countryServiceSchema.findOne({
       countryName: countryName,
     });
@@ -33,7 +33,7 @@ router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImagePat
 
     const newCountry = new countryServiceSchema({
       countryName,
-      description: descriptions, // Changed description to descriptions
+      description: description, // Changed description to descriptions
       countryImagePath: req.files['countryImagePath'][0].filename,
       flagImagePath: req.files['flagImagePath'][0].filename,
       serviceTypes: JSON.parse(serviceTypes) // Parse serviceTypes string as JSON
