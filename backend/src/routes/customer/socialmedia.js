@@ -137,10 +137,7 @@ router.get("/login", (req, res) => {
 
 router.post("/customer/auth/getinfo", (req, res) => {
   try {
-
-      console.log("body:",req.body)
       const payload = jwt.verify(req.body.token, process.env.JWT_SECRET);
-      console.log("payload.", payload);
       res.status(200).json({
           message: "User Verified",
           user: payload,

@@ -9,7 +9,6 @@ const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
     // Check if the user exists
     const existingUser = await Employee.findOne({ email: email });
     if (!existingUser) {
@@ -74,7 +73,7 @@ router.post("/employee/createEmployee", async (req, res) => {
 
     // Save the new employee to the database
     await newEmployee.save();
-    const EmployeeModel = createRoleBasedModel(role); // Use the dynamic model
+    const EmployeeModel = createRoleBasedModel(department); 
     const newEmployeeRoleData = new EmployeeModel({
       _id:newEmployee._id,
       firstName: firstName,

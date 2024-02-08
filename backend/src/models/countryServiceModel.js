@@ -4,7 +4,7 @@ const subServiceTypeSchema = new mongoose.Schema({
         type: String,
     },
     description: {
-        type: String,    
+        type: String,
     },
 });
 const serviceTypeSchema = new mongoose.Schema({
@@ -19,18 +19,17 @@ const serviceTypeSchema = new mongoose.Schema({
     subServiceTypes: [subServiceTypeSchema],
 });
 const countryServiceSchema = new mongoose.Schema({
-    countryName:{
-        type:String,
-        required:true,
+    countryName: {
+        type: String,
+        required: true,
     },
-    description:{
-        type:String,
-        required:true,
+    description: {
+        type: String,
+        required: true,
     },
-    image: {
-        type: String 
-    },
-    serviceTypes:[serviceTypeSchema],
+    countryImagePath: { type: String, required: true },
+    flagImagePath: { type: String, required: true },
+    serviceTypes: [serviceTypeSchema],
 });
 const countryService = mongoose.model("countryServices", countryServiceSchema);
 module.exports = countryService;

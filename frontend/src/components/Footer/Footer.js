@@ -69,11 +69,10 @@ const Footer = () => {
     const fetchCountries = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
-        if (response.status === 200) {
-          if(response.data.message === "No countries found"){
-            setCountriesData([])
-          }
+        if (Array.isArray(response.data.message)) {
           setCountriesData(response.data.message);
+        } else {
+          setCountriesData([]);
         }
       } catch (error) {
         alert(error.message);

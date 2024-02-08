@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
-const createRoleBasedModel = (role) => {
-    if (mongoose.models[role]) {
-        return mongoose.model(role);
+const createRoleBasedModel = (department) => {
+    if (mongoose.models[department]) {
+        return mongoose.model(department);
       }
     const schema = new mongoose.Schema({
       firstName: { type: 'string', default: '' },
       lastName: { type: 'string', default: '' },
       contact_Details: { type: 'string', default: '' },
       email: { type: 'string', unique:true, default: '' },
-      department:{type: 'string', unique:true, default: '' },
-      role: { type: 'string', default: role || '' },
+      department:{type: 'string', default:department || '' },
+      role: { type: 'string', default:  '' },
     });
   
-    return mongoose.model(role, schema);
+    return mongoose.model(department, schema);
   };
 
 module.exports= {createRoleBasedModel};

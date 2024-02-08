@@ -79,7 +79,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 
   const renderFormFields = (fields) =>
   fields.map((field) => (
-    <div class="input-fileds-account" key={field}>
+    <div className="input-fileds-account" key={field}>
       {field === "department" || field === "status" ? (
         <select
           name={field}

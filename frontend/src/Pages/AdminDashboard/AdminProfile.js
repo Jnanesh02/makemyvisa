@@ -38,7 +38,7 @@ export const AdminProfile = () => {
       }
     };
     fetchUserData();
-  }, [formData]);
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -83,7 +83,7 @@ export const AdminProfile = () => {
 
   return (
     <>
-    <div class="profile-dashboard-header">
+    <div className="profile-dashboard-header">
       <div className="Profile-Header">
         <h3>My Profile</h3>
       </div>
@@ -188,7 +188,7 @@ export const AdminProfile = () => {
               </div>
             </div>
           </div>
-          <div class="profile-button-db">
+          <div className="profile-button-db">
           <button
             type="submit"
             className="btn btn-primary me-2 btn-profile-cancel"
