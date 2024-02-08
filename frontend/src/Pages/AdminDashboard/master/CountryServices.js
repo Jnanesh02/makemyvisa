@@ -249,6 +249,7 @@ const CountryServices = () => {
             {showModal && (
                 <div>
                     <div className='create-account-dashboard create-country'>
+                        <div className='country-form-dashboard-form'>
                         <div className='account-heading'>
                             <h3>  {editIndex !== null && editIndex !== undefined ? 'Edit' : 'Create'}</h3>
                             <button className="close-buttonss" onClick={handleCloseModal}> x </button>
@@ -344,7 +345,7 @@ const CountryServices = () => {
                             </button>
                             <button className="btn btn-primary cancel" onClick={reSetForm}>Cancel</button>
                         </div>
-
+                        </div>
                     </div>
                 </div>
             )}

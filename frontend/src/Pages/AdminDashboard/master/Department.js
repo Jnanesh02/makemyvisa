@@ -65,6 +65,7 @@ const Department = () => {
       {showModal && (
         <div >
           <div className='create-account-dashboard'>
+<div className='create-dep-form'>
             <div className='account-heading'>
             <h3>Create Department</h3>
             <button class="close-buttonss" onClick={() => setShowModal(false)}> x </button>
@@ -81,6 +82,7 @@ const Department = () => {
             <button class="btn btn-primary create" onClick={handleCreateDepartment}>Create</button>
             <button class="btn btn-primary cancel" onClick={() => setShowModal(false)}>Cancel</button>
             </div>
+</div>
           </div>
         </div>
       )}
