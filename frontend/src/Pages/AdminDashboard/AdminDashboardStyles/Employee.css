@@ -23,22 +23,42 @@ button.action-button.edit {
   background: #226600;
 }
 .create-account-dashboard {
-  background: #ffffff;
-  width: 50%;
+  background: #0000008c;
+  width: 100%;
   margin: auto;
-  border-radius: 20px;
-  padding: 20px;
-  border: 1px solid #dd281761;
+  border-radius: 0px;
+  padding: inherit;
+  border: none;
   position: fixed;
   left: 0px;
   right: 0px;
-  top: 30%;
+  top: 0px;
+  height: 100% !important;
 }
 .create-account-dashboard h3 {
   font-size: 24px;
   color: #dd2817;
   padding-bottom: 10px 
 ;
+}
+button.close-buttonss {
+  background: #dd2817;
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  float: right;
+  z-index: 9999999;
+}
+.create-dep-form {
+  background: white;
+  width: 50%;
+  margin: auto;
+  padding: 22px;
+  border-radius: 5px;
+  margin-top: 10%;
 }
 .form-button-dashboard {
   display: flex;
@@ -51,6 +71,7 @@ button.btn.btn-primary.create {
   padding-right: 20px;
   margin-right: 20px;
 }
+
 button.btn.btn-primary.cancel {
   background: #dd2817;
   border: none;
@@ -113,15 +134,27 @@ button.action-button {
 .create-country-buttons {
   margin-bottom: 20px;
 }
-.create-account-dashboard.create-country
-{
-  top: 20%;
+.create-account-dashboard.create-country {
+  top: 0%;
+  background: #0000008c;
+  height: 100%;
 }
 .create-country-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
+}
+.country-form-dashboard-form {
+  background: white;
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  padding: 15px;
+  height: 300px;
+  margin-top: 10%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .services-country {
   display: -webkit-inline-box;
@@ -150,4 +183,11 @@ button.btn.btn-primary.btn-cont-edit {
   padding-left: 14px;
   padding-right: 14px;
   border: none;
+}
+.country-services-card-category {
+  width: 50%;
+}
+.row.services-country-card {
+  display: flex !important;
+  flex-wrap: wrap;
 }

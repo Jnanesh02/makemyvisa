@@ -29,28 +29,32 @@
 
 .create-account-dsh {
   border-radius: 20px;
-  background: #ffffff;
-  width: 50%;
+  background: rgb(0 0 0 / 64%) !important;
+  width: 100% !important;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 0px;
   padding: 20px;
-  border: 1px solid #dd2817;
+  border:none;
   opacity: 1;
   box-shadow: none !important;
+  height:100%;
 }
 input.form-control.create-account-frm {
   margin-bottom: 20px;
 }
 .create-account-dsh form.admin-form {
   display: flex;
-  width: 100%;
+  width: 50%;
   flex-wrap: wrap;
+  padding: 20px;
+  margin-top: 10%;
+  padding-top: 60px;
 }
 .input-fileds-account {
   width: 47%;
   margin-right: 15px;
 }
-button.close-buttonss {
+button.close-buttonsss {
   background: #dd2817;
   color: white;
   border: none;
@@ -59,6 +63,10 @@ button.close-buttonss {
   margin-bottom: 12px;
   border-radius: 50%;
   float: right;
+  position: fixed;
+  z-index: 9999999;
+  right: 26%;
+  top: 23%;
 }
 button.btn.btn-primary.create-account-btn {
   background: #dd2817;

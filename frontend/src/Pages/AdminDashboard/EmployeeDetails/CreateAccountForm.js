@@ -3,6 +3,8 @@ import "../AdminDashboardStyles/CreateAccountForm.css";
 import ConfirmationModal from "./ConfirmationAccountModel";
 import axios from "axios";
 
+
+
 const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee }) => {
   const initialEmployeeData = useMemo(() => ({
     firstName: "",
@@ -152,6 +154,10 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   return (
     <>
       <form className="admin-form" onSubmit={handleSubmit}>
+         {/* <button class="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+          X
+        </button>  */}
+   
         {renderFormFields(isEditing ? EDIT_FIELDS : CREATE_FIELDS)}
         <button type="submit" className="btn btn-primary create-account-btn">
           {isEditing ? "Update Employee" : "Create Account"}
