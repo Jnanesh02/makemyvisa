@@ -86,6 +86,7 @@ export const AdminProfile = () => {
     <div className="profile-dashboard-header">
       <div className="Profile-Header">
         <h3>My Profile</h3>
+        
       </div>
       <div className="Profile-container">
         <img

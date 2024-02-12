@@ -305,7 +305,7 @@ a.nav-link.notification {
     display: none;
 }
 span.profile-name {
-    font-size: 14px;
+    font-size: 20px;
     color: #dd2817;
 }
 button.btn.btn-primary.logout-button {
