@@ -118,9 +118,9 @@ const CountryServices = () => {
               <th>Description</th>
               <th>Country Image</th>
               <th>Flag Image</th>
-              <th>serviceNames</th>
-              <th>serviceType</th>
-              <th>actions</th>
+              <th>ServiceNames</th>
+              <th>ServiceType</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

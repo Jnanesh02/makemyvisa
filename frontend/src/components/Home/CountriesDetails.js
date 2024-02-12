@@ -78,7 +78,7 @@ export const CountriesDetails = () => {
                                 <div className="row">
                                     {countryData.serviceTypes ? (
                                         countryData.serviceTypes.map((serviceName, index) => (
-                                            <div key={index} className="col-lg-4">
+                                            <div key={index} className="country-services-card-category">
                                                 <div className="card country-cards">
                                                     <img src={card} className="card-img-top" alt={serviceName.serviceName} />
                                                     <div className="card-body">

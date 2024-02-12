@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
-import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
 import { useParams } from 'react-router-dom';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
@@ -86,7 +85,7 @@ export const CountriesServiceDetails = () => {
                                 <div className="row">
                                     {filteredSubServiceType ? (
                                         filteredSubServiceType.map((subServiceType, index) => (
-                                            <div key={index} className="col-lg-4">
+                                            <div key={index} className="country-services-card-category">
                                                 <div className="card country-cards">
                                                     <img src={card} className="card-img-top" alt={subServiceType.subServiceName} />
                                                     <div className="card-body">
@@ -94,7 +93,6 @@ export const CountriesServiceDetails = () => {
                                                             <img src={icon} alt="" />
                                                         </div>
                                                         <h5 className="card-title">{subServiceType.subServiceName}</h5>
-                                                        <p className="card-text">{subServiceType.description}</p>
                                                     </div>
                                                 </div>
                                             </div>

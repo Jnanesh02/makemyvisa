@@ -257,9 +257,13 @@ const EmployeeDetails = () => {
       <table className="employee-table">
         <thead>
           <tr>
-            {displayFields.map((field) => (
-              <th key={field}>{field}</th>
-            ))}
+           <th>FirstName</th>
+           <th>LastName</th>
+           <th>Email</th>
+           <th>Department</th>
+           <th>Role</th>
+           <th>PhoneNumber</th>
+           <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
