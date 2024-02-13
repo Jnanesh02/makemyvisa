@@ -9,6 +9,7 @@ function Dashboard() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token');
+  // console.log(token);
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -35,32 +36,35 @@ function Dashboard() {
 		try {
 			const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
 			const { data } = await axios.get(url, { withCredentials: true });
+      //console.log("google data:",data)
 			localStorage.setItem("userId",data.user.userid);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	useEffect(() => {
-		getUser().then(console.log("getuser called")).catch(err=>console.log(err))
-	}, []);
 
   
   
-
+  
   const getLinkedInuser = async () => {
     try {
       const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/getinfo`;
       const postData ={token} ; // Add any other required data in the request body
       const { data } = await axios.post(url, postData, { withCredentials: true });
+      console.log("LinkedIn data:", data);
       localStorage.setItem("userId",data.user.LinkedinID);
       // localStorage.setItem("userId", data.user.userid);
     } catch (err) {
-      alert(err.message);
+      console.log(err);
     }}
 
 	useEffect(() => {
-		getLinkedInuser();
+    if (token) {
+		getLinkedInuser().then(console.log("GetLinkedInuser function Called!👍")).catch(err=>console.log(err));
+    }else{
+      getUser().then(console.log("Getuser function Called!👍")).catch(err=>console.log(err))
+    }
 	}, [token]);
 
   return (
@@ -213,7 +217,12 @@ function Dashboard() {
                       <div className="card card-body card-avatar">
                         <ul className="list-group">
                           <li className="list-group-item">
-                            <span className="profile-name">Profile</span>
+                          
+                          <NavLink className="custom-link" to="profile">
+                      {" "}
+                      <i className="fa-solid fa-user m-2 " style={{color:"#dd2817"}}></i><span style={{color:"#dd2817"}}>Profile</span>
+                    </NavLink>
+                           
                           </li>
                           <li className="list-group-item">
                             <Link to="/CustomerLogout">

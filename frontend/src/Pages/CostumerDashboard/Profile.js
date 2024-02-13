@@ -87,6 +87,7 @@ const ProfileForm = () => {
 
   return (
     <>
+     <div className="profile-dashboard-header">
       <div className="Profile-Header">
         <h3>My Profile</h3>
       </div>
@@ -98,7 +99,8 @@ const ProfileForm = () => {
           width="70"
         />
       </div>
-    <div className="container mt-2">
+      </div>
+    <div className="container mt-2 profile-form">
       <h4>Basic Details :</h4>
       <form>
       <div className="row mb-3">
@@ -236,7 +238,7 @@ const ProfileForm = () => {
           onClick={handleCancel}          
 
         >
-          <i className="fa-solid fa-save me-1"></i>
+          <i className="fa-solid fa-times me-1"></i>
           cancel 
         </button>
         <button
@@ -246,7 +248,7 @@ const ProfileForm = () => {
         >
           {editMode ? (
             <>
-              <i className="fa-solid fa-times me-1"></i>
+              <i className="fa-solid   fa-save me-1"></i>
               save
             </>
           ) : (

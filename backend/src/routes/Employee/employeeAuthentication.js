@@ -6,6 +6,8 @@ const Employee = require("../../models/employeeSchema");
 const { isAdmin } = require("../../middleware/authenication");
 const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
 // Route for user login
+
+
 router.post("/employee/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -86,6 +88,7 @@ router.post("/employee/createEmployee", async (req, res) => {
 
     // Save the new employee to the database
     await newEmployeeRoleData.save();
+  
     return res.status(200).json({ message: newEmployee });
   } catch (error) {
     console.error(error);
@@ -98,6 +101,7 @@ router.post("/employee/createEmployee", async (req, res) => {
 router.get("/employee/employeData", isAdmin, async (req, res) => {
   try {
     const employeeData = await Employee.find();
+    
     return res.status(200).json({ employeeData });
   } catch (error) {
     return res.status(500).json({ message: error.message });

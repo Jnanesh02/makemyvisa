@@ -37,6 +37,12 @@ return (
                       <i className="fa-solid fa-user m-2"></i>Countries Services
                     </NavLink>
                   </div>
+                  <div className="accordion-body">
+                    <NavLink style={{ textDecoration: "none" }} className="custom-link" to="ServicesPage">
+                      {" "}
+                      <i className="fa-solid fa-user m-2"></i>Services Page
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>

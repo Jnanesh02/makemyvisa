@@ -1,13 +1,13 @@
 const express = require("express");
 const path = require('path');
 const router = express.Router();
-const countryServiceSchema = require("../models/countryServiceModel");
+const countryServiceSchema = require("../../models/countryServiceModel");
 
 const multer = require('multer');
 const fs = require('fs');
 const countryStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../../uploads/countryImages');
+    const uploadPath = path.join(__dirname, '../../../uploads/countryImages');
     fs.mkdirSync(uploadPath, { recursive: true });
     cb(null, uploadPath);
   },
@@ -18,9 +18,11 @@ const countryStorage = multer.diskStorage({
 
 
 const countryUpload = multer({ storage: countryStorage });
+
 router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImagePath' }, { name: 'flagImagePath' }]), async (req, res) => {
   try {
- 
+    console.log("file:",req.files);
+    console.log("body:",req.body);
 
     const { countryName, description, serviceTypes } = req.body; // Changed description to descriptions
     const existingCountry = await countryServiceSchema.findOne({

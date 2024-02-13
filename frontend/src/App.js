@@ -20,6 +20,7 @@ import CountryServices from "./Pages/AdminDashboard/master/CountryServices";
 import { CountriesServiceDetails } from "./components/Home/CountriesServiceDetails";
 import { CustomerDetails } from "./Pages/AdminDashboard/CustomerDeatails/CustomerDetails";
 import { CountriesDetails } from "./components/Home/CountriesDetails";
+import ServicePage from "./Pages/AdminDashboard/master/DummyServices/service"
 function App() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
@@ -67,7 +68,7 @@ function App() {
             </Route>
             <Route path="countryServices" element={<CountryServices />}>
             </Route>
-            <Route path="profile" element={<AdminProfile />}>
+            <Route path="ServicesPage" element={<ServicePage />}>
             </Route>
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />

@@ -41,6 +41,9 @@ const CountryServices = () => {
   };
   const handleDelete = async (countryId) => {
     try {
+      await axios.delete(
+            `${process.env.REACT_APP_BACKEND_URL}/deleteCountry/${countryId}`
+          );
       setSelectedCountry(countryId);
       setDeleteConfirmationModalOpen(true);
     } catch (error) {
@@ -80,10 +83,11 @@ const CountryServices = () => {
       //     `${process.env.REACT_APP_BACKEND_URL}/services/${selectedCountry.serviceId}`
       //   );
       // } else {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/countries/${selectedCountry}`
-      );
+      // await axios.delete(
+      //   `${process.env.REACT_APP_BACKEND_URL}/countries/${selectedCountry}`
+      // );
       // }
+      
       await getcountriesServiceDetails();
     } catch (error) {
       alert(error.message);
