@@ -159,7 +159,7 @@ ul.list-group.states-links li {
 .flip-card-back
 {
     background-image: url("../../../assets/images/usa.jpg");
-    background-size: contain;
+    background-size: cover;
 }
 h3.counter-name-backflip {
     font-weight: bold;

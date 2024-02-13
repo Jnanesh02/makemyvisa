@@ -210,6 +210,7 @@ export const CreateCountryService = ({
   return (
     <>
       <div className="create-account-dashboard create-country">
+        <div className="create-dep-form scrl-frm">
       <button className="close-buttonss" onClick={handleCloseModal}>X</button>
         <div className="create-country-form">
           <div className="country-form-input mb-3">
@@ -356,7 +357,9 @@ export const CreateCountryService = ({
             Cancel
           </button>
         </div>
+        </div>
       </div>
+  
 
       {isConfirmationModalOpen && (
         <ConfirmationModal
