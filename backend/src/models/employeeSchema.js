@@ -20,6 +20,17 @@ const employeeSchema = new mongoose.Schema({
     enum: ["active", "inactive"], 
     default: "active", 
   },
+
 });
+
+
+
+
+
+
+
+
+
+
 const employeeDetails = mongoose.model("employeeschemas", employeeSchema);
 module.exports = employeeDetails;

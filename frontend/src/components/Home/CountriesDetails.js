@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
-import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
 import { useParams } from 'react-router-dom';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
@@ -35,7 +34,7 @@ export const CountriesDetails = () => {
         fetchData();
     }, [countryName, serviceName]);
 
-
+console.log("countryData",countryData?.flagImagePath);
     const handlePrev = () => {
         setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
     };
@@ -57,7 +56,7 @@ export const CountriesDetails = () => {
                             </div>
                         </div>
                         <div className="col-lg-7">
-                            <img className="banner-flag" src={countryFlagImage} alt="Country Flag" />
+                            <img className="banner-flag" src={`http://localhost:3000/uploads/countryImages/${countryData.flagImagePath}`} alt="Country Flag" />
                         </div>
                     </div>
                 </div>

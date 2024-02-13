@@ -79,10 +79,10 @@ export const CountriesServiceDetails = () => {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row">
+                    <div className="row ">
                         <div className="col-lg-12">
                             <div id="carouselExampleDark" className="carousel carousel-dark slide">
-                                <div className="row">
+                                <div className="row services-country-card">
                                     {filteredSubServiceType ? (
                                         filteredSubServiceType.map((subServiceType, index) => (
                                             <div key={index} className="country-services-card-category">
@@ -96,6 +96,7 @@ export const CountriesServiceDetails = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                           
                                         ))
                                     ) : (
                                         <p>No data available</p>

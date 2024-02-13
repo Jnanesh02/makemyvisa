@@ -28,7 +28,7 @@ export default function Modal({ open, children, onClose }) {
     <>
       <div  style={OVERLAY_STYLES} />
       <div className="create-account-dsh" style={MODAL_STYLES}>
-        <button className="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+        <button className="close-buttonsss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
           X
         </button>
         {children}

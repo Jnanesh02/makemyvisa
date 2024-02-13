@@ -2,33 +2,37 @@ const customerRegistration = require("./customer/registration");
 const customerLogin = require("./customer/login");
 const customerLogout = require("./customer/logout");
 const customerDetails = require("./customer/getCustomer");
-const forgotpassword = require("./customer/forgotpassword");
-const resetPassword = require("./customer/resetpassword");
+const forgotPassword = require("./customer/forgotPassword");
+const resetPassword = require("./customer/resetPassword");
 const updateCustomerDetails = require("./customer/updateCustomer");
-const enquiries = require("./enquiry");
-const socialmedia = require("./customer/socialmedia");
-const employees = require("./Employee/employee-Login");
-const employeesLogout = require("./Employee/logout");
-const getEmployeedetail = require("./Employee/getEmployee");
-const deleteEmployeeData = require("./Employee/delete-employee");
-const updateEmployeePassword = require("./Employee/update-password");
-const adminUpdateEmployee= require("./Employee/AdminUpdateEmpoyeRole");
-const updateEmpoyeeProfile = require("./Employee/updateEmpoyeeProfile");
-const departments = require("./Employee/departments");
+const socialMedia = require("./customer/socialMedia");
 
-const countryService = require("./countryService");
-const updatecountryService = require("./updatecountryservice");
+const enquiries = require("./enquiry/enquiry");
+
+
+const employees = require("./employee/employeeAuthentication");
+const employeesLogout = require("./employee/logout");
+const getEmployeedetail = require("./employee/getEmployee");
+const deleteEmployeeData = require("./employee/deleteEmployee");
+const updateEmployeePassword = require("./employee/updatePassword");
+const adminUpdateEmployee= require("./employee/adminUpdate");
+const updateEmpoyeeProfile = require("./employee/updateEmpoyeeProfile");
+const departments = require("./employee/departments");
+
+const countryService = require("./country/countryService");
+const updatecountryService = require("./country/updateCountryService");
+const deleteCountryService=require("./country/deleteCountryService")
 
 module.exports = {
   customerRegistration,
   customerLogin,
   customerLogout,
-  forgotpassword,
+  forgotPassword,
   resetPassword,
   updateCustomerDetails,
   employees,
   enquiries,
-  socialmedia,
+  socialMedia,
   employeesLogout,
   deleteEmployeeData,
   updateEmployeePassword,
@@ -38,5 +42,6 @@ module.exports = {
   updateEmpoyeeProfile,
   departments,
   countryService,
-  updatecountryService
+  updatecountryService,
+  deleteCountryService,
 };

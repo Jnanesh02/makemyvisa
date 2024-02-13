@@ -52,15 +52,7 @@ export const AdminDashboard = () => {
               </p>
             </NavLink>
           <Master/>
-            <div className="accordion" id="accordionExample2">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="profile">
-                    profile
-                  </NavLink>
-                </h2>
-              </div>
-            </div>
+           
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
@@ -168,7 +160,9 @@ export const AdminDashboard = () => {
                       <div className="card card-body card-avatar">
                         <ul className="list-group dashboard-avt">
                           <li className="list-group-item">
-                            <span className="profile-name">Profile</span>
+                          
+                          <NavLink className="profile-name" to="profile"><i className="fa-solid fa-user m-2 " style={{color:"#dd2817"}}></i>Profile</NavLink>
+     
                           </li>
                           <li className="list-group-item">
                             {" "}

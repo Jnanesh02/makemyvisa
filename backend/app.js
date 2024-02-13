@@ -44,11 +44,11 @@ app.use("/makemyvisa", makeMyVisa.customerRegistration);
 app.use("/makemyvisa", makeMyVisa.customerLogin);
 app.use("/makemyvisa", makeMyVisa.customerLogout);
 app.use("/makemyvisa", makeMyVisa.customerDetails);
-app.use("/makemyvisa", makeMyVisa.forgotpassword);
+app.use("/makemyvisa", makeMyVisa.forgotPassword);
 app.use("/makemyvisa", makeMyVisa.resetPassword);
 app.use("/makemyvisa", makeMyVisa.updateCustomerDetails);
 app.use("/makemyvisa", makeMyVisa.enquiries);
-app.use("/makemyvisa", makeMyVisa.socialmedia);
+app.use("/makemyvisa", makeMyVisa.socialMedia);
 //Employee Routes
 app.use("/makemyvisa", makeMyVisa.employees);
 app.use("/makemyvisa", makeMyVisa.employeesLogout);
@@ -58,8 +58,10 @@ app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
 app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
 app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
 app.use("/makemyvisa", makeMyVisa.departments);
+//Country Routes
 app.use("/makemyvisa",makeMyVisa.countryService);
 app.use("/makemyvisa",makeMyVisa.updatecountryService);
+app.use("/makemyvisa",makeMyVisa.deleteCountryService);
 
 
 
