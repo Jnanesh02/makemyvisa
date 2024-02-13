@@ -157,7 +157,7 @@ div#pills-tabContent {
     top: -15px;
 }
 button.nav-link.active {
-    background: #fe5141 !important;
+    background: #e12912 !important;
 }
 button.nav-link.active img {
     filter: brightness(0) invert(1);

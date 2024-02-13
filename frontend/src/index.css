@@ -55,7 +55,7 @@ section.header-section {
     margin: 6px;
     border-radius: 20px;
     padding: 8px 30px;
-    background: #fe5141;
+    background: #e12912;
     border: none;
    
     
@@ -96,7 +96,7 @@ img.side-img {
     padding: 12px;
 }
 button.btn.btn-primary.submit {
-    background: #fe5141;
+    background: #e12912;
     border: none;
     width: auto !important;
     padding-left: 30px !important;
@@ -251,7 +251,7 @@ button.btn.btn-primary.btn-sidenavbar-b {
     right: -26px;
     rotate: 90deg;
     top: 300px;
-    background: #fe5141;
+    background: #e12912 !important;
     border: none;
 }
 .modal.show .modal-dialog {
@@ -577,6 +577,17 @@ ul.list-group.states-links li {
 ul.list-group.states-links li  a {
     color: white;
     text-decoration: none;
+}
+p.pills-tab-text {
+    margin: 0px;
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+img.services-main-imagess {
+    margin: auto;
+    display: block;
 }
 @media only screen and (max-width: 600px)
 {

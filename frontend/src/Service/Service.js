@@ -127,43 +127,52 @@ const Service = () => {
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
      <img class="services-main-imagess" src={servicesmain1}/>
-     <p> Hello World </p>
+     <p className="pills-tab-text"> Forex <br/> Services </p>
       </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain2}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">   Visa <br/> Assistance </p>
+
   </div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain3}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">   Ticketing </p>
   </div>
   <div class="tab-pane fade" id="pills-profile-1" role="tabpanel" aria-labelledby="pills-profile-1-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain4}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">   Hotel <br/> Reservation </p>
+
   </div>
   <div class="tab-pane fade" id="pills-contact-1" role="tabpanel" aria-labelledby="pills-contact-1-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain5}/>
-  <p> Hello World </p>
+  <p className="pills-tab-text">     Travel Health <br/>  Insurance </p>
+
    </div>
   <div class="tab-pane fade" id="pills-profile-2" role="tabpanel" aria-labelledby="pills-profile-2-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain6}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">       Immigration <br/>  Advice </p>
+
   </div>
   <div class="tab-pane fade" id="pills-contact-2" role="tabpanel" aria-labelledby="pills-contact-2-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain11}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">       Apostille & <br/> Attestation </p>
+  
   </div>
   <div class="tab-pane fade" id="pills-contact-3" role="tabpanel" aria-labelledby="pills-contact-3-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain12}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">       Translation & <br/> Notary  </p>
+  
   </div>
   <div class="tab-pane fade" id="pills-contact-4" role="tabpanel" aria-labelledby="pills-contact-4-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain13}/> 
-  <p> Hello World </p>
+  <p className="pills-tab-text">       Courier, <br/> Pickup  </p>
+ 
   </div>
   <div class="tab-pane fade" id="pills-contact-5" role="tabpanel" aria-labelledby="pills-contact-5-tab" tabindex="0"> 
   <img class="services-main-imagess" src={servicesmain14}/> 
-    <p> Hello World </p>
+    
+    <p className="pills-tab-text">         International <br/> Student  </p>
+  
   </div>
 
 </div>
