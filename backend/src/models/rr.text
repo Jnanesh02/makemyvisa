@@ -1,0 +1,3 @@
+
+
+I have two collection in mongodb first  collectionname insurance and second  collectionname sales . in insurance collection i have multiple document each document i have ticketstatus (submited,assignto,completed)default is submit  . in sale collection i have no of employee maintain employeestatus(occupied,null) default null. i need to assign each document to each employee  who's status is null and according which insurance document assign to ticket status chnages to assignto . if insurance document status is completed when i dont to assign to any employee . i need to create api for this in nodejs 
