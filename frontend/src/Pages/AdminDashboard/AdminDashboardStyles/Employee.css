@@ -185,9 +185,15 @@ button.btn.btn-primary.btn-cont-edit {
   border: none;
 }
 .country-services-card-category {
-  width: 50%;
+  width: 31%;
+  margin: auto;
 }
 .row.services-country-card {
   display: flex !important;
   flex-wrap: wrap;
+}
+.create-dep-form.scrl-frm {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 420px;
 }
