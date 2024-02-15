@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
 
-const Login = ({ userData }) => {
+const Login = () => {
   const navigate = useNavigate();
   const initialState = { email: "", password: "" };
   const [showPassword, setShowPassword] = useState(false);
@@ -26,14 +26,15 @@ const Login = ({ userData }) => {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/customer/login`,
         data
-      );
+      );  
 
       
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
         // alert("successfully logged in ");
-        localStorage.setItem("userId",response.data.message.data._id);
+        console.log("response",response);
+        localStorage.setItem("userId",response.data.message.token);
         navigate("/dashboard");
       }
     } catch (err) {
@@ -57,9 +58,7 @@ const Login = ({ userData }) => {
                   <div className="login-forms  login  shadow-sm">
                     <form method="post" action="login">
                       <div className="mb-2">
-                        {/* <label htmlFor="email" className="form-label">
-                          Email
-                        </label> */}
+                        
                         <input
                           type="email"
                           placeholder="Email"
@@ -132,3 +131,9 @@ const Login = ({ userData }) => {
 };
 
 export default Login;
+
+
+
+
+
+

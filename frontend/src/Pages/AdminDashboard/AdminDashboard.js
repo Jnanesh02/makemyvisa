@@ -1,12 +1,15 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./AdminDashboardStyles/Dashboard.css";
-import { useEffect } from "react";
+
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { NavLink, Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet,Navigate, useNavigate } from "react-router-dom";
 import { Master } from "./master/Master";
 
 export const AdminDashboard = () => {
+ 
+
+  
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -26,6 +29,9 @@ export const AdminDashboard = () => {
       }
     };
   }, []);
+
+
+
 
   return (
     <div>

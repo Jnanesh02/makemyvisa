@@ -42,7 +42,7 @@ router.get("/customer/auth/google", passport.authenticate('google', { scope: ['p
 router.get(
   "/customer/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: `${process.env.FRONTEND_URL}/dashboard`,
+    successRedirect: `${process.env.FRONTEND_URL}/google`,
     failureRedirect: "/login/failed",
   })
 );
@@ -99,7 +99,7 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
         process.env.JWT_SECRET
        );
       // res.status(200).json({ message: existingUser_id });
-      res.redirect(`http://localhost:3001/dashboard?token=${token}`);
+      res.redirect(`http://localhost:3001/linkedin?token=${token}`);
     } else {
       // User does not exist, create a new user account
       const newCustomer = new Customer({

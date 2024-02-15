@@ -21,7 +21,10 @@ const ProfileForm = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const employeeId = localStorage.getItem("userId");
+        const token = localStorage.getItem("userId");
+        const tokenData = JSON.parse(atob(token.split('.')[1]));
+        console.log("tokenData:",tokenData);
+        const employeeId= tokenData.id
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/customer/getuserdetails/${employeeId}`);
         const userData = response.data.existingUser;
         

@@ -1,10 +1,9 @@
 import "./App.css";
-import { useState,useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./Pages/CostumerAuthentication/Login/Login";
+import SignUp from "./Pages/CostumerAuthentication/Registraion/SignUp";
 import Layout from "./Pages/Layout";
 import Home from "./components/Home/Home";
-import SignUp from "./Pages/CostumerAuthentication/Registraion/SignUp";
 import Dashboard from "./Pages/CostumerDashboard/Dashboard";
 import CostumerHomePage from "./Pages/CostumerDashboard/CostumerHomePage";
 import AdminHomePage from "./Pages/AdminDashboard/AdminHomePage";
@@ -21,25 +20,30 @@ import { CountriesServiceDetails } from "./components/Home/CountriesServiceDetai
 import { CustomerDetails } from "./Pages/AdminDashboard/CustomerDeatails/CustomerDetails";
 import { CountriesDetails } from "./components/Home/CountriesDetails";
 import ServicePage from "./Pages/AdminDashboard/master/DummyServices/service"
-function App() {
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
-    const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-    return !!adminToken?.AdminToken;
-  });
 
-  useEffect(() => {
-    const checkAdminLogin = async () => {
-      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-      await setIsAdminLoggedIn(!!adminToken?.AdminToken);
-    };
-  
-    checkAdminLogin();
-  }, []);
+import CustomerPrivateRoute from "./components/PrivateRoutes/CustomerPrivateRoute";
+import AdminPrivateRoute from "./components/PrivateRoutes/AdminPrivateRoute"
+
+
+import Google from "./components/Google";
+import LinkedIn from "./components/LinkedIn";
+import EmployeePrivateRoute from "./components/PrivateRoutes/EmployeePrivateRoute";
+import EmployeeLogin from './Pages/EmployeeDashboard/EmployeeAuthentication/Login/Employeelogin'
+
+function App() {
   const Visa = () => <h1>visa is working</h1>;
   const Travel = () => <h1>travel is working</h1>;
   const AA = () => <h1>AA is working</h1>;
   const ContactUs = () => <h1>contactus is working</h1>;
   const Study = () => <h1>study is working</h1>;
+
+
+  
+    
+  
+    
+
+
 
   return (
     <div className="App">
@@ -50,29 +54,39 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-           <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
-           <Route path="/countries/:countryName"  element={<CountriesDetails />} />
 
+            <Route path="employeelogin" element={<EmployeeLogin/>}/>
+            <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
+            <Route path="/countries/:countryName"  element={<CountriesDetails />} />
+          </Route>
+          <Route path="/google" element={<Google/>}/>
+          <Route path="/linkedin" element={<LinkedIn/>}/>
+          <Route path='dashboard' element={<CustomerPrivateRoute/>}>
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route index element={<CostumerHomePage />} />
+                <Route path="profile" element={<Profile />}/>
+              </Route>
+              
           </Route>
 
-          <Route path="dashboard" element={<Dashboard />}>
-            <Route index element={<CostumerHomePage />} />
-            <Route path="profile" element={<Profile />}>
-            </Route>
-          </Route>
           <Route path="CustomerLogout" element={<CustomerLogout />} />
 
-          <Route path="Admindashboard" element={isAdminLoggedIn?(<AdminDashboard/>):(<Navigate to="../Admin" replace={true}/>)}>
+          <Route path="Admindashboard" element={<AdminPrivateRoute/>}>
+            <Route path="/Admindashboard" element={<AdminDashboard/>}>
             <Route index element={<AdminHomePage />} />
             <Route path="Department" element={<Department />}>
             </Route>
             <Route path="countryServices" element={<CountryServices />}>
             </Route>
+            <Route path="profile" element={<AdminProfile/>}/>
             <Route path="ServicesPage" element={<ServicePage />}>
             </Route>
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
+            </Route>
+            
           </Route>
+
           <Route path="AdminLogout" element={<AdminLogout />} />
 
           <Route path="visa" element={<Visa />} />
@@ -80,6 +94,15 @@ function App() {
           <Route path="aa" element={<AA />} />
           <Route path="contactus" element={<ContactUs />} />
           <Route path="travel" element={<Travel />} />
+
+
+
+
+          <Route path='employeeDashboard' element={<EmployeePrivateRoute/>}>
+
+
+
+          </Route>
 
         </Routes>
       </Router>

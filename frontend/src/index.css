@@ -522,7 +522,7 @@ ul.list-group.list-group-horizontal.ul-hz-list.w-100 {
     width: 80% !important;
     margin: auto;
 }
-li.list-group-item.ul-hz-list.w-100.fb {
+li.list-group-item.ul-hz-list.w-100.facebook {
     background: #0165E1;
     fill: white;
 }
@@ -539,7 +539,7 @@ h5.social-media {
     margin-top: 0px;
     color: #fe5141;
 }
-li.list-group-item.ul-hz-list.w-100.fb:hover {
+li.list-group-item.ul-hz-list.w-100.facebook:hover {
     background: #004fb1;
     fill: white;
 }

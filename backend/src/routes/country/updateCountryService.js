@@ -21,8 +21,7 @@ const countryStorage = multer.diskStorage({
 const countryUpload = multer({ storage: countryStorage });
 router.put("/updateCountry/:id", countryUpload.fields([{ name: 'countryImagePath' }, { name: 'flagImagePath' }]), async (req, res) => {
   try {
-    console.log("file:",req.files);
-    console.log("body:",req.body);
+   
     const object_id = req.params.id;
     const { countryName, description, serviceTypes } = req.body; 
     const existingCountry = await countryServiceSchema.findById(object_id);
