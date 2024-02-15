@@ -8,7 +8,6 @@ import icon from "../../assets/countriesserviceImages/countries-icons.png";
 import axios from 'axios';
 import "./HomeStyles/countriesserviceDetails.css";
 export const CountriesDetails = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
     const { countryName, serviceName } = useParams();
     const [countryData, setCountryData] = useState([]);
     useEffect(() => {
@@ -19,9 +18,6 @@ export const CountriesDetails = () => {
 
                 if (filteredCountries.length > 0) {
                     setCountryData(filteredCountries[0]);
-
-                    // Filter and store sub-service types based on the selected serviceName
-                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName);
                 } else {
                     setCountryData(null);
                 }
@@ -34,14 +30,7 @@ export const CountriesDetails = () => {
         fetchData();
     }, [countryName, serviceName]);
 
-console.log("countryData",countryData?.flagImagePath);
-    const handlePrev = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
-    };
 
-    const handleNext = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
-    };
     return (
         <main className="content">
             <section className="country-banner-section" style={{ backgroundImage: `url(${countryBannerImage})` }}>
@@ -93,14 +82,6 @@ console.log("countryData",countryData?.flagImagePath);
                                         <p>No data available</p>
                                     )}
                                 </div>
-                                <button className="carousel-control-prev" type="button" onClick={handlePrev}>
-                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button className="carousel-control-next" type="button" onClick={handleNext}>
-                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Next</span>
-                                </button>
                             </div>
                         </div>
                     </div>

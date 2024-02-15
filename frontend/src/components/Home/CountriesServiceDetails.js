@@ -20,9 +20,7 @@ export const CountriesServiceDetails = () => {
 
                 if (filteredCountries.length > 0) {
                     setCountryData(filteredCountries[0]);
-
-                    // Filter and store sub-service types based on the selected serviceName
-                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName);
+                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName.replace(/-/g, ' '));
 
                     if (selectedService) {
                         setFilteredSubServiceTypes(selectedService.subServiceTypes);
