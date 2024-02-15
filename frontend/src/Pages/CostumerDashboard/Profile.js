@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CostumerDashboardStyles/Profile.css";
 import axios from "axios";
 import ConfirmationModal from "../AdminDashboard/EmployeeDetails/ConfirmationAccountModel";
-
+import { useLocation } from "react-router-dom";
 const ProfileForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,14 +17,15 @@ const ProfileForm = () => {
   const [editMode, setEditMode] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
+  const location = useLocation();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("userId");
+       
         const tokenData = JSON.parse(atob(token.split('.')[1]));
         console.log("tokenData:",tokenData);
-        const employeeId= tokenData.id
+        const employeeId= tokenData.id||tokenData.LinkedinID
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/customer/getuserdetails/${employeeId}`);
         const userData = response.data.existingUser;
         
@@ -137,6 +138,7 @@ const ProfileForm = () => {
                 placeholder=""
                 disabled={!editMode}
               />
+              
 <label htmlFor="lastName" className="form-label">
             Last Name
           </label>

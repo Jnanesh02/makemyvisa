@@ -3,12 +3,13 @@ import "./CostumerDashboardStyles/Dashboard.css";
 import { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { NavLink, Link, Outlet} from "react-router-dom";
+import { NavLink, Link, Outlet,useLocation} from "react-router-dom";
+import axios from "axios";
 
 function Dashboard() {
-  // const location = useLocation();
-  // const searchParams = new URLSearchParams(location.search);
-  // const token = searchParams.get('token');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
 
   useEffect(() => {
     const handleSidebarToggle = () => {
@@ -63,8 +64,6 @@ function Dashboard() {
 	// useEffect(() => {
   //   if (token) {
 	// 	getLinkedInuser()
-  //   }else{
-  //     getUser()
   //   }
 	// }, [token]);
 
