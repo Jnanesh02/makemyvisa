@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
+import backgroundImage from "../../../../assets/images/OJO4YQ0.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const AdminLogin = () => {
+const EmployeeLogin = () => {
   const navigate = useNavigate();
   const initialState = { email: "", password: "" };
   const [showPassword, setShowPassword] = useState(false);
@@ -126,4 +126,4 @@ const AdminLogin = () => {
   );
 }
 
-export default AdminLogin
+export default EmployeeLogin

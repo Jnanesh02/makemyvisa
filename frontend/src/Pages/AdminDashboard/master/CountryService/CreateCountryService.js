@@ -176,9 +176,7 @@ export const CreateCountryService = ({
         ? `${process.env.REACT_APP_BACKEND_URL}/updateCountry/${countryDetailsToEdit._id}`
         : `${process.env.REACT_APP_BACKEND_URL}/create/newCountry`;
       
-        for (const pair of formData.entries()) {
-          console.log(pair[0], pair[1]);
-        }
+       
       const response = await axios({
         method: isEditing ? "put" : "post",
         url: url,

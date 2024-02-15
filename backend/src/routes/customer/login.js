@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const customer = require("../../models/customerSchema");
 // const session = require("express-session");
 router.post("/customer/login", async (req, res) => {
@@ -17,8 +18,15 @@ router.post("/customer/login", async (req, res) => {
     }
 
     req.session.userId = existingUser._id;
-    
-    res.json({ message: { message: "login successful", data: existingUser } });
+    const token = jwt.sign(
+      {
+        id: existingUser._id,
+        
+      },
+      "your-secret-key",
+      { expiresIn: "7000" }
+    );
+    res.json({ message: { message: "login successful", token: token } });
     // return res.json({ existingUser });
   } catch (error) {
     console.error(error);
@@ -27,6 +35,7 @@ router.post("/customer/login", async (req, res) => {
 });
 
 router.get("/customer/dashboard", (req, res) => {
+
   if (!req.session.userId) {
     return res.json({ message: "unauthourised" });
   }

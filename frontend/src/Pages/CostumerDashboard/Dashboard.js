@@ -3,13 +3,13 @@ import "./CostumerDashboardStyles/Dashboard.css";
 import { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { NavLink, Link, Outlet,useLocation  } from "react-router-dom";
-import axios from "axios";
+import { NavLink, Link, Outlet} from "react-router-dom";
+
 function Dashboard() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token');
-  // console.log(token);
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
+  // const token = searchParams.get('token');
+
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -32,40 +32,41 @@ function Dashboard() {
 
 
 
-  const getUser = async () => {
-		try {
-			const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
-      //console.log("google data:",data)
-			localStorage.setItem("userId",data.user.userid);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+  // const getUser = async () => {
+	// 	try {
+	// 		const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
+	// 		const { data } = await axios.get(url, { withCredentials: true });
+    
+	// 		localStorage.setItem("userId",data.user.userid);
+      
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 
   
   
   
-  const getLinkedInuser = async () => {
-    try {
-      const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/getinfo`;
-      const postData ={token} ; // Add any other required data in the request body
-      const { data } = await axios.post(url, postData, { withCredentials: true });
-      console.log("LinkedIn data:", data);
-      localStorage.setItem("userId",data.user.LinkedinID);
-      // localStorage.setItem("userId", data.user.userid);
-    } catch (err) {
-      console.log(err);
-    }}
+  // const getLinkedInuser = async () => {
+  //   try {
+  //     const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/getinfo`;
+  //     const postData ={token} ; // Add any other required data in the request body
+  //     const { data } = await axios.post(url, postData, { withCredentials: true });
+      
+  //     localStorage.setItem("userId",data.user.LinkedinID);
+  //     // localStorage.setItem("userId", data.user.userid);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }}
 
-	useEffect(() => {
-    if (token) {
-		getLinkedInuser().then(console.log("GetLinkedInuser function Called!👍")).catch(err=>console.log(err));
-    }else{
-      getUser().then(console.log("Getuser function Called!👍")).catch(err=>console.log(err))
-    }
-	}, [token]);
+	// useEffect(() => {
+  //   if (token) {
+	// 	getLinkedInuser()
+  //   }else{
+  //     getUser()
+  //   }
+	// }, [token]);
 
   return (
     <div>
@@ -126,26 +127,7 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* <div className="accordion" id="accordionExample2">
-        <div className="accordion-item">
-            <h2 className="accordion-header" id="headingOne2">
-                <button className="accordion-button custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu2" aria-expanded="false" aria-controls="homeSubmenu2">
-                <i className="fas fa-power-off"></i> Logout
-                </button>
-            </h2>
-            <div id="homeSubmenu2" className="accordion-collapse collapse" aria-labelledby="headingOne2" data-bs-parent="#accordionExample2">
-                <div className="accordion-body">
-                    <a className="custom-link" href="/">Home 4</a>
-                </div>
-                <div className="accordion-body">
-                    <a className="custom-link" href="/">Home 5</a>
-                </div>
-                <div className="accordion-body">
-                    <a className="custom-link" href="/">Home 6</a>
-                </div>
-            </div>
-        </div>
-    </div> */}
+            
           </ul>
         </nav>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./service.css";
 import Bgservices from "../assets/images/servicesImages/bg-services.png";
 import services1 from "../assets/images/servicesImages/1.png";
@@ -256,7 +257,9 @@ const Service = () => {
                         src={servicesmain3}
                         alt="/"
                       />
+                      <Link to="Ticketing">
                       <p className="pills-tab-text"> Ticketing </p>
+                      </Link>
                     </div>
                     <div
                       class="tab-pane fade"

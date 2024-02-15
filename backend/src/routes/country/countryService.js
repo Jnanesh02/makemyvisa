@@ -21,9 +21,6 @@ const countryUpload = multer({ storage: countryStorage });
 
 router.post("/create/newCountry", countryUpload.fields([{ name: 'countryImagePath' }, { name: 'flagImagePath' }]), async (req, res) => {
   try {
-    console.log("file:",req.files);
-    console.log("body:",req.body);
-
     const { countryName, description, serviceTypes } = req.body; // Changed description to descriptions
     const existingCountry = await countryServiceSchema.findOne({
       countryName: countryName,

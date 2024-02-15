@@ -10,8 +10,8 @@ const path = require('path');
 const { connect } = require("./config/database");
 const app = express();
 app.use('/uploads/countryImages', express.static('uploads/countryImages/'));
-const  createServiceBasedSchema= require('./src/models/serviceModel');
-const createServicesCollection = require('./src/models/serviceCollection');
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.FRONTEND_URL , methods: "GET,POST,PUT,DELETE", credentials: true }));

@@ -19,6 +19,8 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   const [isEditing, setIsEditing] = useState(false);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [department,setDepartment]=useState([]);
+  const [departmentRoles, setDepartmentRoles] = useState([]);
+
   const EDIT_FIELDS = ["firstName", "email","department", "role", "contact_Details", "status"];
   const CREATE_FIELDS = ["firstName", "lastName", "email","department", "role", "contactDetails"];
 
@@ -53,9 +55,10 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
       [event.target.name]: event.target.value,
     });
   };
-
+ 
   const renderSelectOptions = (options) => (
     <>
+        {console.log("department options", options)}
       <option value="">Select {options.label}</option>
       {options.values &&
         options.values.map((value) => (
@@ -86,11 +89,39 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
           className="form-control create-account-frm"
           value={employeeData[field] || ""}
           required
-          onChange={(e) => onChangeInput(e)}
+          onChange={(e) => {
+            onChangeInput(e);
+            if (field === "department") {
+              const selectedDepartment = e.target.value;
+              // eslint-disable-next-line no-lone-blocks
+              {console.log("11",selectedDepartment)}
+              const departmentRoles = department.find(dep => dep.department === selectedDepartment)?.roles || [];
+              setEmployeeData(prevState => ({
+                ...prevState,
+                role: "", // Reset role when department changes
+              }));
+              setDepartmentRoles(departmentRoles);
+            }
+          }}
         >
           {field === "department"
             ? renderSelectOptions({ label: "department", values: department })
             : renderStatusSelectOptions(["active", "inactive"])}
+        </select>
+      ) : field === "role" ? (
+        <select
+          name={field}
+          className="form-control create-account-frm"
+          value={employeeData[field] || ""}
+          required
+          onChange={(e) => onChangeInput(e)}
+        >
+          <option value="">Select role</option>
+          {departmentRoles.map((role) => (
+            <option key={role} value={role}>
+              {role}
+            </option>
+          ))}
         </select>
       ) : (
         <input
