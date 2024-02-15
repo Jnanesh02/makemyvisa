@@ -15,30 +15,30 @@ export const AdminProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+ 
+  const fetchUserData = async () => {
+    try {
+      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${adminToken._Id}`);
+      
+      const userData = response.data.message;
+      setFormData({
+        ...formData,
+        firstName: userData.firstName || "",
+        lastName: userData.lastName || "",
+        email: userData.email || "",
+        phoneNumber: userData.contact_Details || "",
+        address: userData.Address || "",
+      });
 
+      setOriginalFormData({ ...formData });
+    } catch (error) {
+      console.error("Error fetching user data:", error.message);
+    }
+  };
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${adminToken._Id}`);
-        
-        const userData = response.data.message;
-        setFormData({
-          ...formData,
-          firstName: userData.firstName || "",
-          lastName: userData.lastName || "",
-          email: userData.email || "",
-          phoneNumber: userData.contact_Details || "",
-          address: userData.Address || "",
-        });
-
-        setOriginalFormData({ ...formData });
-      } catch (error) {
-        console.error("Error fetching user data:", error.message);
-      }
-    };
     fetchUserData();
-  }, []);
+  },[]);
 
   const handleInputChange = (e) => {
     setFormData({

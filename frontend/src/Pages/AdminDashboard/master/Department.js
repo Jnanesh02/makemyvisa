@@ -10,7 +10,7 @@ const Department = () => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     department: "",
-    roles:[],
+    role:[],
     description: "",
   });
 
@@ -32,15 +32,15 @@ const Department = () => {
 
   const handleCreateDepartment = async () => {
     try {
-      const roleArray = role.map((roleItem)=> roleItem.value);
+      const roleArray = roles.map((roleItem)=> roleItem.value);
       const postData={
         ...formData,
-        roles:roleArray
+        role:roleArray
       }
       
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/employee/create/department`,
-        formData
+        postData,
       );
       fetchDetails(); // Fetch updated data
       setShowModal(false); // Close the modal
@@ -55,11 +55,11 @@ const Department = () => {
 
 
   const [inputValue, setInputValue] = useState('');
-  const [role, setRole] = useState([]);
+  const [roles, setRoles] = useState([]);
 
   const handleKeyDown = (event) => {
     if (!inputValue || !['Enter', 'Tab'].includes(event.key)) return;
-    setRole((prev) => [...prev, { label:inputValue,value: inputValue }]);
+    setRoles((prev) => [...prev, { label:inputValue,value: inputValue }]);
     setInputValue('');
     event.preventDefault();
   };
@@ -83,6 +83,7 @@ const Department = () => {
           <thead>
             <tr>
               <th>Department</th>
+              <th>Roles</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -90,6 +91,7 @@ const Department = () => {
             {department.map((department, index) => (
               <tr key={index}>
                 <td>{department.department}</td>
+                <td>{department.role}</td>
                 <td>{department.description}</td>
               </tr>
             ))}
@@ -131,11 +133,11 @@ const Department = () => {
       isClearable
       isMulti
       menuIsOpen={false}
-      onChange={(newValue) => setRole(newValue)}
+      onChange={(newValue) => setRoles(newValue)}
       onInputChange={(newValue) => setInputValue(newValue)}
       onKeyDown={handleKeyDown}
       placeholder="Type something and press enter..."
-      value={role}
+      value={roles}
     />
               </div>
 

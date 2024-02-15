@@ -27,6 +27,10 @@ section.visa-category h2 {
 .card.country-cards {
     padding: 15px;
 }
+.country-services-card-category {
+    width: 31%;
+    margin: auto;
+  }
 .card.country-cards h5.card-title {
     text-align: center;
     color: #fe5140;

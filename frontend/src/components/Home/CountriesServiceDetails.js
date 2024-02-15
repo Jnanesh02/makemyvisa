@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
-import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
 import { useParams } from 'react-router-dom';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
@@ -21,9 +20,7 @@ export const CountriesServiceDetails = () => {
 
                 if (filteredCountries.length > 0) {
                     setCountryData(filteredCountries[0]);
-
-                    // Filter and store sub-service types based on the selected serviceName
-                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName);
+                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName.replace(/-/g, ' '));
 
                     if (selectedService) {
                         setFilteredSubServiceTypes(selectedService.subServiceTypes);
@@ -86,7 +83,6 @@ export const CountriesServiceDetails = () => {
                                 <div className="row services-country-card">
                                     {filteredSubServiceType ? (
                                         filteredSubServiceType.map((subServiceType, index) => (
-                                           
                                             <div key={index} className="country-services-card-category">
                                                 <div className="card country-cards">
                                                     <img src={card} className="card-img-top" alt={subServiceType.subServiceName} />
@@ -95,7 +91,6 @@ export const CountriesServiceDetails = () => {
                                                             <img src={icon} alt="" />
                                                         </div>
                                                         <h5 className="card-title">{subServiceType.subServiceName}</h5>
-                                                        <p className="card-text">{subServiceType.description}</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -8,7 +8,6 @@ export const CustomerDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
-    const [statusFilter, setStatusFilter] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(12);
 
@@ -44,24 +43,14 @@ export const CustomerDetails = () => {
         }
     };
 
-    const fetchRolesAndStatuses = async () => {
-        try {
-            const departmentsResponse = await axios.get(
-                `${process.env.REACT_APP_BACKEND_URL}/customer`
-            );
-            // setRoles(departmentsResponse.data.message);
-        } catch (error) {
-            console.error("Error fetching roles and departments:", error.message);
-        }
-    };
+    
 
     const applyFilters = useCallback((data) => {
         return data.filter(
             (employee) =>
-                filterBySearchTerm(employee, searchTerm) &&
-                filterByStatus(employee, statusFilter)
+                filterBySearchTerm(employee, searchTerm) 
         );
-    }, [searchTerm, statusFilter]);
+    }, [searchTerm]);
 
     const applyAndFetch = (data, filterFunction, setFunction) => {
         const filteredData = filterFunction(data);
@@ -76,14 +65,6 @@ export const CustomerDetails = () => {
                 value.toString().toLowerCase().includes(term.toLowerCase())
         );
 
-    const filterByStatus = (employee, status) => {
-        return (
-            status === "" ||
-            (employee &&
-                employee.status &&
-                employee.status.toLowerCase() === status.toLowerCase())
-        );
-    };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -91,12 +72,6 @@ export const CustomerDetails = () => {
         applyAndFetch(employees, applyFilters, setFilteredEmployees);
     };
 
-    const handleFilterChange = (event, setFilterFunction) => {
-        const filterValue = event.target.value;
-        setFilterFunction(filterValue);
-        setCurrentPage(1); // Reset current page when the filter changes
-        applyAndFetch(employees, applyFilters, setFilteredEmployees);
-    };
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -106,15 +81,12 @@ export const CustomerDetails = () => {
         fetchEmployeeDetails();
     }, []);
 
-    useEffect(() => {
-        fetchRolesAndStatuses();
-    }, []);
 
     useEffect(() => {
         if (employees) {
             applyAndFetch(employees, applyFilters, setFilteredEmployees);
         }
-    }, [employees, statusFilter, searchTerm, applyFilters]);
+    }, [employees, searchTerm, applyFilters]);
 
     // Calculate the index range for the current page
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -134,27 +106,19 @@ export const CustomerDetails = () => {
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
-
-                    <label className="table-bar-label">
-                        <select
-                            className="form-select"
-                            value={statusFilter}
-                            onChange={(e) => handleFilterChange(e, setStatusFilter)}
-                        >
-                            <option value=""> Status Filter: </option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </label>
                 </div>
             </div>
 
             <table className="employee-table">
                 <thead>
                     <tr>
-                        {displayFields.map((field) => (
-                            <th key={field}>{field}</th>
-                        ))}
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>SocialMedia</th>
                     </tr>
                 </thead>
                 <tbody>

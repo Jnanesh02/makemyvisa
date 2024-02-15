@@ -37,6 +37,7 @@ app.use(
     credentials: true,
   })
 );
+
 //Customers Routes
 app.use("/makemyvisa", makeMyVisa.customerRegistration);
 app.use("/makemyvisa", makeMyVisa.customerLogin);

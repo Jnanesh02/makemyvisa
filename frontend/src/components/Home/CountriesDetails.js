@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
-import countryFlagImage from "../../assets/countriesserviceImages/Flag-1.png";
 import { useParams } from 'react-router-dom';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
@@ -9,7 +8,6 @@ import icon from "../../assets/countriesserviceImages/countries-icons.png";
 import axios from 'axios';
 import "./HomeStyles/countriesserviceDetails.css";
 export const CountriesDetails = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
     const { countryName, serviceName } = useParams();
     const [countryData, setCountryData] = useState([]);
     useEffect(() => {
@@ -20,9 +18,6 @@ export const CountriesDetails = () => {
 
                 if (filteredCountries.length > 0) {
                     setCountryData(filteredCountries[0]);
-
-                    // Filter and store sub-service types based on the selected serviceName
-                    const selectedService = filteredCountries[0].serviceTypes.find(service => service.serviceName === serviceName);
                 } else {
                     setCountryData(null);
                 }
@@ -36,13 +31,6 @@ export const CountriesDetails = () => {
     }, [countryName, serviceName]);
 
 
-    const handlePrev = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
-    };
-
-    const handleNext = () => {
-        setActiveIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
-    };
     return (
         <main className="content">
             <section className="country-banner-section" style={{ backgroundImage: `url(${countryBannerImage})` }}>
@@ -57,7 +45,7 @@ export const CountriesDetails = () => {
                             </div>
                         </div>
                         <div className="col-lg-7">
-                            <img className="banner-flag" src={countryFlagImage} alt="Country Flag" />
+                            <img className="banner-flag" src={`http://localhost:3000/uploads/countryImages/${countryData.flagImagePath}`} alt="Country Flag" />
                         </div>
                     </div>
                 </div>
@@ -78,7 +66,7 @@ export const CountriesDetails = () => {
                                 <div className="row">
                                     {countryData.serviceTypes ? (
                                         countryData.serviceTypes.map((serviceName, index) => (
-                                            <div key={index} className="col-lg-4">
+                                            <div key={index} className="country-services-card-category">
                                                 <div className="card country-cards">
                                                     <img src={card} className="card-img-top" alt={serviceName.serviceName} />
                                                     <div className="card-body">
@@ -94,14 +82,6 @@ export const CountriesDetails = () => {
                                         <p>No data available</p>
                                     )}
                                 </div>
-                                <button className="carousel-control-prev" type="button" onClick={handlePrev}>
-                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button className="carousel-control-next" type="button" onClick={handleNext}>
-                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Next</span>
-                                </button>
                             </div>
                         </div>
                     </div>
