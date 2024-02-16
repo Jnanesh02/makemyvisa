@@ -29,6 +29,11 @@ import Google from "./components/Google";
 import LinkedIn from "./components/LinkedIn";
 import EmployeePrivateRoute from "./components/PrivateRoutes/EmployeePrivateRoute";
 import EmployeeLogin from './Pages/EmployeeDashboard/EmployeeAuthentication/Login/Employeelogin'
+import DummyTicketForm from "./Pages/sevices/DummyTickets/DummyTicketForm";
+import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
+import VisaStatus from "./Pages/CostumerDashboard/VisaStatus";
+
+
 
 function App() {
   const Visa = () => <h1>visa is working</h1>;
@@ -54,7 +59,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-
+            <Route path="dummyticket" element={<DummyTicketForm/>} />
             <Route path="employeelogin" element={<EmployeeLogin/>}/>
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />
@@ -65,6 +70,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<CostumerHomePage />} />
                 <Route path="profile" element={<Profile />}/>
+                <Route path="TicketStatus" element={<TicketStatus/>}/>
+                <Route path="VisaStatus" element={<VisaStatus/>}/>
+                
               </Route>
               
           </Route>

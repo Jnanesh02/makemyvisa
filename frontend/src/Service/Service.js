@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./service.css";
 import Bgservices from "../assets/images/servicesImages/bg-services.png";
 import services1 from "../assets/images/servicesImages/1.png";
@@ -63,15 +63,15 @@ const Service = () => {
                 id="carouselExample"
                 className="carousel slide carousal-slider-services"
               >
-                <div class="clients-cricle-section">
+                <div className="clients-cricle-section">
                   <ul
-                    class="nav nav-pills mb-3 nav-services-circle"
+                    className="nav nav-pills mb-3 nav-services-circle"
                     id="pills-tab"
                     role="tablist"
                   >
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link active btn-circle-services-1"
+                        className="nav-link active btn-circle-services-1"
                         id="pills-home-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-home"
@@ -83,9 +83,9 @@ const Service = () => {
                         <img src={services1} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-2"
+                        className="nav-link btn-circle-services-2"
                         id="pills-profile-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-profile"
@@ -97,9 +97,9 @@ const Service = () => {
                         <img src={services2} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-3"
+                        className="nav-link btn-circle-services-3"
                         id="pills-contact-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact"
@@ -111,9 +111,9 @@ const Service = () => {
                         <img src={services3} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-4"
+                        className="nav-link btn-circle-services-4"
                         id="pills-profile-1-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-profile-1"
@@ -125,9 +125,9 @@ const Service = () => {
                         <img src={services4} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-5"
+                        className="nav-link btn-circle-services-5"
                         id="pills-contact-1-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact-1"
@@ -139,9 +139,9 @@ const Service = () => {
                         <img src={services5} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-6"
+                        className="nav-link btn-circle-services-6"
                         id="pills-profile-2-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-profile-2"
@@ -153,9 +153,9 @@ const Service = () => {
                         <img src={services6} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-7"
+                        className="nav-link btn-circle-services-7"
                         id="pills-contact-2-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact-2"
@@ -167,9 +167,9 @@ const Service = () => {
                         <img src={services11} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-8"
+                        className="nav-link btn-circle-services-8"
                         id="pills-contact-3-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact-3"
@@ -181,9 +181,9 @@ const Service = () => {
                         <img src={services12} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-9"
+                        className="nav-link btn-circle-services-9"
                         id="pills-contact-4-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact-4"
@@ -195,9 +195,9 @@ const Service = () => {
                         <img src={services13} alt="/" />
                       </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item" role="presentation">
                       <button
-                        class="nav-link btn-circle-services-10"
+                        className="nav-link btn-circle-services-10"
                         id="pills-contact-5-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-contact-5"
@@ -210,16 +210,16 @@ const Service = () => {
                       </button>
                     </li>
                   </ul>
-                  <div class="tab-content" id="pills-tabContent">
+                  <div className="tab-content" id="pills-tabContent">
                     <div
-                      class="tab-pane fade show active"
+                      className="tab-pane fade show active"
                       id="pills-home"
                       role="tabpanel"
                       aria-labelledby="pills-home-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain1}
                         alt="/"
                       />
@@ -229,14 +229,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-profile"
                       role="tabpanel"
                       aria-labelledby="pills-profile-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain2}
                         alt="/"
                       />
@@ -246,30 +246,30 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact"
                       role="tabpanel"
                       aria-labelledby="pills-contact-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain3}
                         alt="/"
                       />
-                      <Link to="Ticketing">
+                      <Link to="/dummyticket">
                       <p className="pills-tab-text"> Ticketing </p>
                       </Link>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-profile-1"
                       role="tabpanel"
                       aria-labelledby="pills-profile-1-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain4}
                         alt="/"
                       />
@@ -279,14 +279,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact-1"
                       role="tabpanel"
                       aria-labelledby="pills-contact-1-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain5}
                         alt="/"
                       />
@@ -296,14 +296,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-profile-2"
                       role="tabpanel"
                       aria-labelledby="pills-profile-2-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain6}
                         alt="/"
                       />
@@ -313,14 +313,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact-2"
                       role="tabpanel"
                       aria-labelledby="pills-contact-2-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain11}
                         alt="/"
                       />
@@ -330,14 +330,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact-3"
                       role="tabpanel"
                       aria-labelledby="pills-contact-3-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain12}
                         alt="/"
                       />
@@ -347,14 +347,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact-4"
                       role="tabpanel"
                       aria-labelledby="pills-contact-4-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain13}
                         alt="/"
                       />
@@ -364,14 +364,14 @@ const Service = () => {
                       </p>
                     </div>
                     <div
-                      class="tab-pane fade"
+                      className="tab-pane fade"
                       id="pills-contact-5"
                       role="tabpanel"
                       aria-labelledby="pills-contact-5-tab"
                       tabindex="0"
                     >
                       <img
-                        class="services-main-imagess"
+                        className="services-main-imagess"
                         src={servicesmain14}
                         alt="/"
                       />

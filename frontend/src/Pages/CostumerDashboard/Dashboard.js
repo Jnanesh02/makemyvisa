@@ -117,6 +117,19 @@ function Dashboard() {
                     </NavLink>
                   </div>
                   <div className="accordion-body">
+                    <NavLink className="custom-link" to="TicketStatus">
+                      {" "}
+                      <i class="fa-solid fa-ticket m-2"></i>Dummy Ticket
+                    </NavLink>
+                  </div>
+
+                  <div className="accordion-body">
+                    <NavLink className="custom-link" to="VisaStatus">
+                      {" "}
+                      <i class="fa-solid fa-passport m-2"></i>Visa Status
+                    </NavLink>
+                  </div>
+                  <div className="accordion-body">
                     <NavLink className="custom-link" to="/CustomerLogout">
                       {" "}
                       <i className="fas fa-power-off m-2"></i>Logout
