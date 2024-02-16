@@ -22,7 +22,7 @@ const departments = require("./employee/departments");
 const countryService = require("./country/countryService");
 const updatecountryService = require("./country/updateCountryService");
 const deleteCountryService=require("./country/deleteCountryService")
-
+const services = require("./makemyvisa-services/services");
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -44,4 +44,5 @@ module.exports = {
   countryService,
   updatecountryService,
   deleteCountryService,
+  services
 };

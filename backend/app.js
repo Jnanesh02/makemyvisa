@@ -48,6 +48,8 @@ app.use("/makemyvisa", makeMyVisa.resetPassword);
 app.use("/makemyvisa", makeMyVisa.updateCustomerDetails);
 app.use("/makemyvisa", makeMyVisa.enquiries);
 app.use("/makemyvisa", makeMyVisa.socialMedia);
+app.use("/makemyvisa", makeMyVisa.services);
+
 //Employee Routes
 app.use("/makemyvisa", makeMyVisa.employees);
 app.use("/makemyvisa", makeMyVisa.employeesLogout);
