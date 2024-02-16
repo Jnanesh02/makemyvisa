@@ -19,7 +19,7 @@ const PrivateRoute = () => {
         if (isTokenExpired()) {
           navigateToAdminLogin();
         }
-      }, 6000);
+      }, 600000);
   
       return () => clearInterval(interval);
     });

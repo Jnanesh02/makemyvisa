@@ -7,8 +7,8 @@ const Google = () => {
 		try {
 			const url = `${process.env.REACT_APP_BACKEND_URL}/customer/auth/login/success`;
 			const { data } = await axios.get(url, { withCredentials: true });
-    
-			localStorage.setItem("userId",data.user.userid);
+      console.log(data);
+			localStorage.setItem("userId",data.message.token);
             navigate('/dashboard')
       
 		} catch (err) {

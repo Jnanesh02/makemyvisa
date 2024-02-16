@@ -15,14 +15,21 @@ router.get(
 );
 
 router.get("/customer/auth/login/success", (req, res) => {
-
+  
   if (req.user) {
-    res.status(200).json({
-      success: true,
-      message: "successful",
-      user: req.user,
-    });
+
+    const token = jwt.sign(
+      {
+        id: req.user.userid,
+        
+      },
+      "your-secret-key",
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({ message: { message: "login successful", token: token } });
   }
+    
+  
 });
 
 router.get("/customer/auth/login/failed", (req, res) => {
@@ -119,7 +126,7 @@ router.get("/customer/auth/linkedin/callback", async (req, res) => {
        );
       // // res.status(200).json({ message:  newCustomer});
       // redirect('http://localhost:3001/dashboard?userId=' + newCustomer._id);
-      res.redirect(`http://localhost:3001/dashboard?token=${token}`)
+      res.redirect(`http://localhost:3001/linkedin?token=${token}`)
     }
   } catch (error) {
     console.error("Error:", error.message);
