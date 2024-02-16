@@ -8,13 +8,7 @@ const createServiceCollectionSchema = (serviceType) => {
       serviceTypeName: {
         type: String,
         required: true,
-      },
-      serviceNameCollection: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: serviceType, 
-        },
-      ],
+      }
     });
   
     return mongoose.model("servicesCollection", serviceCollectionSchema);
