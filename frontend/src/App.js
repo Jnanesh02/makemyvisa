@@ -31,7 +31,8 @@ import EmployeePrivateRoute from "./components/PrivateRoutes/EmployeePrivateRout
 import EmployeeLogin from './Pages/EmployeeDashboard/EmployeeAuthentication/Login/Employeelogin'
 import DummyTicketForm from "./Pages/sevices/DummyTickets/DummyTicketForm";
 import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
-import VisaStatus from "./Pages/CostumerDashboard/VisaStatus";
+
+import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 
 
 

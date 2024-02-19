@@ -7,16 +7,9 @@
     /* Add additional styling as needed */
   }
   .dummytickets{
-    background-image: url('R:\MAKEMYVISA\code\makemyvisa\frontend\src\assets\images\OJO4YQ0.jpg');
+    background-image: url('../../../assets/images/OJO4YQ0.jpg');
   }
-  .coverdummyticket{
-    background-image: url('R:\MAKEMYVISA\code\makemyvisa\frontend\src\assets\images\Pic-1-1024x683.png');
-    background-size: cover; 
-    background-position: center;
-    height: 250px;
-    background-repeat:no-repeat;
-    
-  }
+  
   .from-to-group {
     display: flex;
     justify-content: space-between;

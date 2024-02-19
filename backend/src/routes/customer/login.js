@@ -24,7 +24,7 @@ router.post("/customer/login", async (req, res) => {
         
       },
       "your-secret-key",
-      { expiresIn: "7000" }
+      { expiresIn: "1h" }
     );
     res.json({ message: { message: "login successful", token: token } });
     // return res.json({ existingUser });

@@ -6,6 +6,7 @@ import './DummyTicketForm.css';
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
     tripType: 'oneWay',
+    DepartureDate:'',
     returnDate: '',
     numberOfPassengers: 1,
     passengerDetails: [{ name: '', age: '', passportNumber: '' }],
@@ -13,7 +14,7 @@ function DummyTicketForm() {
     to: '',
   });
 
-  const { tripType, returnDate, passengerDetails, from, to } = formData;
+  const { tripType,DepartureDate, returnDate, passengerDetails, from, to } = formData;
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -45,14 +46,15 @@ function DummyTicketForm() {
   };
 
   const handleSubmit = async () => {
+    console.log("data:",formData)
     try {
-      const response = await axios.post('your-api-endpoint', {
-        tripType,
-        returnDate,
-        passengerDetails,
-        from,
-        to
-      });
+      // const response = await axios.post('your-api-endpoint', {
+      //   tripType,
+      //   returnDate,
+      //   passengerDetails,
+      //   from,
+      //   to
+      // });
   
       if (localStorage.getItem('userId')) {
         navigate('/dashboard');
@@ -97,7 +99,7 @@ function DummyTicketForm() {
           <div className="date-group">
             <div className='Departure_date'>
               <h4 className="label_Departure">Departure Date:</h4>
-              <input type="date" className="dummy-form-control" />
+              <input type="date" className="dummy-form-control" value={DepartureDate} name="DepartureDate" onChange={handleChange}/>
             </div>
             {tripType === 'roundTrip' && (
               <>
