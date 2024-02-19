@@ -1,0 +1,22 @@
+.step {
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    background-color: #dd2817;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .vs-container{
+    width: 90% !important;
+    align-content: center;
+  }
+  .step.completed {
+    background-color: indigo;
+  }
+
+  .step-label{
+    margin-top: 1rem;
+  }
