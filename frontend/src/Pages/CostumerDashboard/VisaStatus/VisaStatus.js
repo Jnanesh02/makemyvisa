@@ -1,49 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MultiStepProgressBar from './MultiStepProgressBar';
-import Step1Form from './Step1Form';
-import Step2Form from './Step2Form';
-import Step3Form from './Step3Form';
 
 function VisaStatus() {
   const [index, setIndex] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const totalPages = 3;
 
-  const handleNext = () => {
-    if (index < totalPages) {
-      setIndex(index + 1);
-    } else {
-      setSubmitted(true);
+  useEffect(() => {
+    // Set the initial index based on data.status when the component mounts
+    const data = {
+      "status": "assign"
+    };
+    switch (data.status) {
+      case "submitted":
+        setIndex(2);
+        break;
+      case "assign":
+        setIndex(3);
+        break;
+      case "completed":
+        setIndex(4);
+        break;
+      default:
+        setIndex(1);
+        break;
     }
-  };
+  }, []);
 
-  const handlePrev = () => {
-    if (index > 1) {
-      setIndex(index - 1);
-    }
-  };
+ 
+
 
   const handleReset = () => {
     setIndex(1);
     setSubmitted(false);
   };
 
-  const handlePageUpdate = (formData) => {
-    console.log(`Step ${index} data:`, formData);
-    // You can update state or perform any action with the form data here
-  };
-
   const renderFormStep = () => {
     switch (index) {
-      case 1:
-        return <Step1Form onPageUpdate={handlePageUpdate} />;
       case 2:
-        return <Step2Form onPageUpdate={handlePageUpdate} />;
+        return <Step stepNumber={2} stepName="Document Submitted" />;
       case 3:
-        return <Step3Form onPageUpdate={handlePageUpdate} />;
+        return <Step stepNumber={3} stepName="Document Assigned" />;
+      case 4:
+        return <Step stepNumber={4} stepName="Document Completed" />;
       default:
         return null;
     }
+  };
+
+  const Step = ({ stepNumber, stepName }) => {
+    return (
+      <div>
+        <p>Step {stepNumber}: {stepName}</p>
+      </div>
+    );
   };
 
   return (
@@ -65,10 +74,6 @@ function VisaStatus() {
               ) : renderFormStep()}
             </div>
             <div className="card-footer d-flex justify-content-between">
-              <button className="btn btn-secondary" onClick={handlePrev} disabled={index === 1}>Previous</button>
-              <button className="btn btn-primary" onClick={handleNext}>
-                {index === totalPages ? 'Submit' : 'Next'}
-              </button>
             </div>
           </div>
         </div>

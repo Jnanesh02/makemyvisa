@@ -56,7 +56,33 @@ function Dashboard() {
                 Dashboard{" "}
               </p>
             </NavLink>
-
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="TicketStatus/dummytickets">
+                  Dummy Ticket
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="VisaStatus">
+                  Visa Status
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="/CustomerLogout">
+                  Logout
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
             <div className="accordion" id="accordionExample1">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne1">
@@ -75,31 +101,18 @@ function Dashboard() {
                   className="accordion-collapse collapse  custom-collapse"
                   aria-labelledby="headingOne1"
                   data-bs-parent="#accordionExample1">
-                  <div className="accordion-body">
+                  {/* <div className="accordion-body">
                     <NavLink className="custom-link" to="profile">
                       {" "}
                       <i className="fa-solid fa-user m-2"></i>Profile
                     </NavLink>
-                  </div>
-                  <div className="accordion-body">
-                    <NavLink className="custom-link" to="TicketStatus/dummytickets">
-                      {" "}
-                      <i class="fa-solid fa-ticket m-2"></i>Dummy Ticket
-                    </NavLink>
-                  </div>
-
-                  <div className="accordion-body">
-                    <NavLink className="custom-link" to="VisaStatus">
-                      {" "}
-                      <i class="fa-solid fa-passport m-2"></i>Visa Status
-                    </NavLink>
-                  </div>
-                  <div className="accordion-body">
+                  </div> */}
+                  {/* <div className="accordion-body">
                     <NavLink className="custom-link" to="/CustomerLogout">
                       {" "}
                       <i className="fas fa-power-off m-2"></i>Logout
                     </NavLink>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
