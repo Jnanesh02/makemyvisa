@@ -60,7 +60,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-            <Route path="dummyticket" element={<DummyTicketForm/>} />
+            <Route path="/services/:dummyticket" element={<DummyTicketForm/>} />
             <Route path="employeelogin" element={<EmployeeLogin/>}/>
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />
@@ -71,7 +71,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<CostumerHomePage />} />
                 <Route path="profile" element={<Profile />}/>
-                <Route path="TicketStatus" element={<TicketStatus/>}/>
+                <Route path="TicketStatus/:dummytickets" element={<TicketStatus/>}/>
                 <Route path="VisaStatus" element={<VisaStatus/>}/>
                 
               </Route>

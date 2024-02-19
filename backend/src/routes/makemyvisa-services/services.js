@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
  router.post('/create/newserviceType/:serviceName',async(req,res)=>{
    try {
       const serviceName = req.params.serviceName;
-      const { data,customerId } = req.body;
+      const { data,customerID } = req.body;
       const ServiceModel = createServiceBasedSchema(serviceName);
   
-      const serviceCollections = await ServiceModel.create({ data,customerId });
+      const serviceCollections = await ServiceModel.create({ data,customerID});
       const ServiceCollectionModel = createServicesCollection(serviceName);
      const existingServiceCollection = await ServiceCollectionModel.findOne({serviceTypeName: serviceName});
        if(!existingServiceCollection){
@@ -26,13 +26,15 @@ const mongoose = require("mongoose");
  });
 
 
- router.get("/getservice/servicename",async(req,res)=>{
+ router.get("/getservice/:servicename",async(req,res)=>{
    try {
-    const { serviceName,customerID} = req.body;
+    console.log(req.params.servicename,req.query);
+    const  serviceName  = req.params.servicename;
+    const { customerID } = req.query;
     const db = mongoose.connection;
    const collection = db.collection(serviceName);
     const results = await collection.find({}).toArray();
-    const filteredResult = results.filter(doc => doc.customerId.equals(customerID));
+    const filteredResult = results.filter(doc => doc.customerID.equals(customerID));
     return res.status(200).json(filteredResult);
    } catch (error) {
     return res.status(500).json({message: error.message});

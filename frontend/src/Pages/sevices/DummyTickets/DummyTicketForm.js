@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './DummyTicketForm.css';
-
+import CookieUtils from '../../../components/cookie/Cookies';
+import { useParams } from 'react-router-dom';
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
     tripType: 'oneWay',
     DepartureDate:'',
     returnDate: '',
+    departureDate: '',
     numberOfPassengers: 1,
     passengerDetails: [{ name: '', age: '', passportNumber: '' }],
     from: '',
     to: '',
   });
-
-  const { tripType,DepartureDate, returnDate, passengerDetails, from, to } = formData;
+  const {dummyticket} = useParams({});
+  const { tripType, returnDate,departureDate, passengerDetails, from, to } = formData;
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -59,6 +60,11 @@ function DummyTicketForm() {
       if (localStorage.getItem('userId')) {
         navigate('/dashboard');
       } else {
+        const cookieData = {
+          formData: formData,
+          dummyTicket: dummyticket
+      };
+        CookieUtils.setCookies('dummyTicket',JSON.stringify(cookieData));
         navigate('/login');
       }
     } catch (error) {
@@ -99,7 +105,7 @@ function DummyTicketForm() {
           <div className="date-group">
             <div className='Departure_date'>
               <h4 className="label_Departure">Departure Date:</h4>
-              <input type="date" className="dummy-form-control" value={DepartureDate} name="DepartureDate" onChange={handleChange}/>
+              <input type="date" className="dummy-form-control" value={departureDate} name="departureDate" onChange={handleChange}/>
             </div>
             {tripType === 'roundTrip' && (
               <>
