@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MultiStepProgressBar from './MultiStepProgressBar';
+import ApplicationForm from './ApplicationForm';
+
 
 function VisaStatus() {
   const [index, setIndex] = useState(1);
@@ -36,12 +38,12 @@ function VisaStatus() {
 
   const renderFormStep = () => {
     switch (index) {
+      case 1:
+        return <ApplicationForm  />;
       case 2:
-        return <Step stepNumber={2} stepName="Document Submitted" />;
+        return <Step stepNumber={3} stepName="Document Assigned" />;
       case 3:
         return <Step stepNumber={3} stepName="Document Assigned" />;
-      case 4:
-        return <Step stepNumber={4} stepName="Document Completed" />;
       default:
         return null;
     }
@@ -57,7 +59,7 @@ function VisaStatus() {
 
   return (
     <div className="App">
-      <div className="container h-100">
+      <div className="container">
         <div className="row m-5">
           <div className="col align-self-center">
             <MultiStepProgressBar step={index} />
