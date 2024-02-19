@@ -3,6 +3,8 @@ import backgroundImage from "../../../assets/images/OJO4YQ0.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
+import postServiceCollectionApi from "../../../components/ApiServices/ApiService";
+import CookieUtils from "../../../components/cookie/Cookies";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,9 +34,11 @@ const Login = () => {
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
-        // alert("successfully logged in ");
-        console.log("response",response);
         localStorage.setItem("userId",response.data.message.token);
+      const dummyTicketCookie = CookieUtils.getCookies("dummyTicket");
+      if (dummyTicketCookie) {
+        await postServiceCollectionApi(dummyTicketCookie, localStorage.getItem("userId"));
+      }
         navigate("/dashboard");
       }
     } catch (err) {
@@ -73,9 +77,6 @@ const Login = () => {
                         />
                       </div>
                       <div className="mb-2">
-                        {/* <label htmlFor="email" className="form-label">
-                          Password
-                        </label> */}
                         <div style={{ position: "relative" }}>
                           <input
                             type={showPassword ? "text" : "password"}

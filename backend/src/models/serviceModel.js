@@ -21,7 +21,7 @@ const createServiceBasedSchema = (serviceType) => {
       default: "",
 
     },
-    customerId: 
+    customerID: 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "customers",
