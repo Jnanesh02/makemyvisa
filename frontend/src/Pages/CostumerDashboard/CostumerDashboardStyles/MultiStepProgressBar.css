@@ -1,22 +1,29 @@
 .step {
-    color: white;
+    color: black;
     width: 40px;
     height: 40px;
     font-size: 12px;
-    background-color: #dd2817;
+    background-color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid  #dd2817;
   }
   .vs-container{
     width: 90% !important;
     align-content: center;
   }
   .step.completed {
-    background-color: indigo;
+    background-color: #dd2817;
   }
 
-  .step-label{
-    margin-top: 1rem;
+  .step-label {
+    position: absolute;
+    top: 100%; /* Position label below the circle */
+    left: 50%; /* Position label centered horizontally */
+    transform: translateX(-50%);
+    margin-top: 5px; /* Adjust as needed to control the distance between circle and label */
+    color: #dd2817;
+    text-align: center;
   }
