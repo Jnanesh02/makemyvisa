@@ -2,8 +2,7 @@ import React from 'react';
 import "react-step-progress-bar/styles.css";
 import '../CostumerDashboardStyles/MultiStepProgressBar.css';
 import { ProgressBar, Step } from "react-step-progress-bar";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCog, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 const MultiStepProgressBar = (props) => {
   return (
@@ -13,7 +12,7 @@ const MultiStepProgressBar = (props) => {
           {({ accomplished, index }) => (
             <div className={`step ${accomplished ? "completed" : null}`}>
               <div className="step-indicator">
-                {index === 0 ? <FontAwesomeIcon icon={faUser} /> : <FontAwesomeIcon icon={faCheckCircle} />}
+                {index === 0 ?<i class="fa-solid fa-user"></i> : <i class="fa-solid fa-check"></i>}
               </div>
               <div className="step-label">Application Form</div>
             </div>
@@ -23,7 +22,7 @@ const MultiStepProgressBar = (props) => {
           {({ accomplished, index }) => (
             <div className={`step ${accomplished ? "completed" : null}`}>
               <div className="step-indicator">
-                {index === 1 ? <FontAwesomeIcon icon={faCog} /> : <FontAwesomeIcon icon={faCheckCircle} />}
+                {index === 1 ? <i class="fa-solid fa-gear"></i> : <i class="fa-solid fa-check"></i>}
               </div>
               <div className="step-label">Processing</div>
             </div>
@@ -33,7 +32,7 @@ const MultiStepProgressBar = (props) => {
           {({ accomplished, index }) => (
             <div className={`step ${accomplished ? "completed" : null}`}>
               <div className="step-indicator">
-                {index === 2 ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />}
+                {index === 2 ? <i class="fa-solid fa-users"></i>: <i class="fa-solid fa-check"></i>}
               </div>
               <div className="step-label">Decision</div>
             </div>
@@ -43,7 +42,7 @@ const MultiStepProgressBar = (props) => {
           {({ accomplished, index }) => (
             <div className={`step ${accomplished ? "completed" : null}`}>
               <div className="step-indicator">
-                {index === 3 ? <FontAwesomeIcon icon={faCheckCircle} /> : <FontAwesomeIcon icon={faTimesCircle} />}
+                {index === 3 ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-users"></i>}
               </div>
               <div className="step-label">Final Step</div>
             </div>

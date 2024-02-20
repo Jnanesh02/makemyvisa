@@ -33,6 +33,7 @@ import DummyTicketForm from "./Pages/sevices/DummyTickets/DummyTicketForm";
 import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
 
 import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
+import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
 
 
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
             <Route path="/services/:dummyticket" element={<DummyTicketForm/>} />
+            <Route path="/services/TravelHealthInsurance" element={<TravelHealthInsurance/>} />
             <Route path="employeelogin" element={<EmployeeLogin/>}/>
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />

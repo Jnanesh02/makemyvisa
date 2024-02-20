@@ -89,7 +89,7 @@ const HomeLink = () => {
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" to="/travel">
+                          <Link className="nav-link" to="/services/TravelHealthInsurance">
                             {" "}
                             Travel ItineraryInsurance
                           </Link>

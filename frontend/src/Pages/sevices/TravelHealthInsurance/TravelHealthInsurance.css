@@ -1,0 +1,114 @@
+/* styles.css */
+
+  .travel-Insurance-container-form{
+    background-image: url('../../../assets/images/OJO4YQ0.jpg');
+    width: 75%;
+    margin: 0 auto;
+    background-position: center;
+  
+  }
+  
+  .travel-Insurance-header {
+    border-bottom: 2px solid white;
+  }
+
+  .travel-Insurance-container-sub{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+
+  }
+  
+  .travel-Insurance-body {
+    padding: 20px;
+  }
+  
+  .travel-Insurance-label {
+    color: black;
+    font-size: large;
+  }
+  .travel-Insurance-h1{
+    color: #dd2817;
+  }
+  .travel-Insurance-input {
+    color: black;
+  }
+  .travel-Insurance-plans {
+    position: relative;
+}
+
+.travel-Insurance-plans::before,
+.travel-Insurance-plans::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 1px;
+    background-color: #dd2817;
+}
+.travel-Insurance-card-body{
+    color: black;
+}
+.travel-Insurance-plans::before {
+    left: 500px; /* Adjust this value to position the line properly */
+    transform: translateY(-50%);
+}
+
+.travel-Insurance-plans::after {
+    right: 500px; /* Adjust this value to position the line properly */
+    transform: translateY(-50%);
+}
+
+
+  .travel-Insurance-button {
+    margin: 10px 300px;
+    width: 300px;
+  }
+  
+  .travel-Insurance-card {
+    border: 2px solid white;
+    border-radius: 10px;
+  }
+  
+  .travel-Insurance-card-title {
+    color: black;
+  }
+  
+  .travel-Insurance-card-text {
+    color: black;
+  }
+  
+  .travel-Insurance-link {
+    margin-top: 10px;
+  }
+ 
+
+
+  .modal.show .travel-Insurance__modal-dialog{
+    transform: none;
+    /* display: flex; */
+    position: absolute;
+    width: 100%;
+    margin: 10px auto;
+    right: 21rem;
+    top: 1rem;
+}
+
+button.btn-close {
+  position: absolute;
+  right: 21px;
+  top: 17px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.travel-Insurance-checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  right: 1px;
+  top: -3px;
+
+}
+

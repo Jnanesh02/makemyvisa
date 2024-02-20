@@ -273,6 +273,7 @@ const Service = () => {
                         src={servicesmain4}
                         alt="/"
                       />
+                      
                       <p className="pills-tab-text">
                         {" "}
                         Hotel <br /> Reservation{" "}
@@ -290,10 +291,11 @@ const Service = () => {
                         src={servicesmain5}
                         alt="/"
                       />
+                      <Link to="services/TravelHealthInsurance">
                       <p className="pills-tab-text">
-                        {" "}
-                        Travel Health <br /> Insurance{" "}
+                        Travel Health <br /> Insurance
                       </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"

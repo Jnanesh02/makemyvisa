@@ -42,7 +42,7 @@ const ApplicationForm = () => {
     newDocuments.splice(index, 1);
     setFormData({ ...formData, documents: newDocuments });
   };
-  console.log("Form Data:",formData);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
