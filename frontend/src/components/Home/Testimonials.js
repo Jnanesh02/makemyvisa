@@ -22,7 +22,7 @@ const testimonials = () => {
                             <div className="col-lg-4 testimoinal-lg-four col-md-6 col-sm-6">
                                 <div className="card testiomal-cards">
                                     <div className="card-body">
-                                        <img className="testimonals" src={testimonial}/>
+                                        <img className="testimonals"  src={testimonial} alt='/'/>
                                      
 <svg className="star-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m183-11 79-338L-1-577l346-29 135-319 135 319 346 29-263 228 79 338-297-180L183-11Z"/></svg>
 
@@ -50,7 +50,7 @@ const testimonials = () => {
                             <div className="col-lg-4 testimoinal-lg-four col-md-6 col-sm-6">
                                 <div className="card testiomal-cards">
                                     <div className="card-body">
-                                      <img className="testimonals" src={testimonial}/>
+                                      <img className="testimonals" src={testimonial} alt='/'/>
                                      
 <svg className="star-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m183-11 79-338L-1-577l346-29 135-319 135 319 346 29-263 228 79 338-297-180L183-11Z"/></svg>
 
@@ -75,7 +75,7 @@ gladly recommend them to everyone.
                             <div className="col-lg-4 testimoinal-lg-four col-md-6 col-sm-6">
                                 <div className="card testiomal-cards">
                                     <div className="card-body">
-                                      <img className="testimonals" src={testimonial}/>
+                                      <img className="testimonals" src={testimonial} alt='/'/>
                                      
 <svg className="star-icons" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m183-11 79-338L-1-577l346-29 135-319 135 319 346 29-263 228 79 338-297-180L183-11Z"/></svg>
 

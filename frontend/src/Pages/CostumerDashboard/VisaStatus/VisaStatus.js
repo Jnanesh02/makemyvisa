@@ -1,45 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MultiStepProgressBar from './MultiStepProgressBar';
 import ApplicationForm from './ApplicationForm';
 
-
 function VisaStatus() {
   const [index, setIndex] = useState(1);
-  const [submitted, setSubmitted] = useState(false);
-  const totalPages = 3;
+  const [status, setStatus] = useState("");
+  const cardRef = useRef(null); // Create a ref for the card element
 
-  const handleNext = () => {
-    if (index < totalPages) {
-      setIndex(index + 1);
-    } else {
-      setSubmitted(true);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = {
+          status: 'submitted',
+        };
 
-  const handlePrev = () => {
-    if (index > 1) {
-      setIndex(index - 1);
-    }
-  };
+        setStatus(data.status);
 
-  const handleReset = () => {
-    setIndex(1);
-    setSubmitted(false);
-  };
+        switch (data.status) {
+          case "submitted":
+            setIndex(2);
+            break;
+          case "assign":
+            setIndex(3);
+            break;
+          case "completed":
+            setIndex(4);
+            break;
+          default:
+            setIndex(1);
+            break;
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIndex(1);
+      }
+    };
 
-  const handlePageUpdate = (formData) => {
-    console.log(`Step ${index} data:`, formData);
-    // You can update state or perform any action with the form data here
-  };
+    fetchData();
+  }, []);
 
   const renderFormStep = () => {
     switch (index) {
       case 1:
-        return <ApplicationForm onPageUpdate={handlePageUpdate} />;
-      case 2:
-        return 0;
-      case 3:
-        return 0;
+        return <ApplicationForm />;
+      case 4:
+        return <p>Application completed!</p>;
       default:
         return null;
     }
@@ -54,22 +59,15 @@ function VisaStatus() {
           </div>
         </div>
         <div className="row">
-          <div className="card">
-            <div className="card-body">
-              {submitted ? (
-                <div>
-                  <p>Your answers have been submitted!</p>
-                  <button className="btn btn-primary" onClick={handleReset}>Start Over</button>
-                </div>
-              ) : renderFormStep()}
+          {status === "" && (
+            <div className="card" ref={cardRef}> 
+              <div className="card-body">
+                {renderFormStep()}
+              </div>
+              <div className="card-footer d-flex justify-content-between">
+              </div>
             </div>
-            <div className="card-footer d-flex justify-content-between">
-              <button className="btn btn-secondary" onClick={handlePrev} disabled={index === 1}>Previous</button>
-              <button className="btn btn-primary" onClick={handleNext}>
-                {index === totalPages ? 'Submit' : 'Next'}
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

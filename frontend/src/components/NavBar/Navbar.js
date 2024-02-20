@@ -29,13 +29,7 @@ const Logout = () => {
     </Link>
   );
 };
-const DashboardLink = () => {
-  return (
-    <Link className="dropdown-item" to="/dashboard">
-      Dashboard
-    </Link>
-  );
-};
+
 const Signup = () => {
   return (
     <Link className="dropdown-item" to="/registration">
@@ -125,7 +119,7 @@ const HomeLink = () => {
               </div>
               <div className="col-lg-2">
               <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
-              <img className="header-googlwe-review" src={googlereview}/> 
+              <img className="header-googlwe-review" src={googlereview} alt="/"/> 
               </a>
     <div className="dropdown drp-navbar">
                         <button

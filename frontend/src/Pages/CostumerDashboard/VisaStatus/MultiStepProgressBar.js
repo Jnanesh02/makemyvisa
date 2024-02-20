@@ -1,54 +1,36 @@
-import React from 'react';
+import React, { useState,createContext } from 'react';
 import "react-step-progress-bar/styles.css";
 import '../CostumerDashboardStyles/MultiStepProgressBar.css';
 import { ProgressBar, Step } from "react-step-progress-bar";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faCog, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 const MultiStepProgressBar = (props) => {
+  const [steps] = useState([
+    { icon: faUser, label: "Application Form" },
+    { icon: faCog, label: "Processing" },
+    { icon: faCheckCircle, label: "Decision" },
+    { icon: faCheckCircle, label: "Final Step" }
+  ]);
+  const context = createContext();
+
   return (
     <div>
+      <context.Provider value={steps}>
       <ProgressBar percent={((props.step - 1) * 100) / 3} filledBackground="#dd2817c8">
-        <Step transition="scale">
-          {({ accomplished, index }) => (
-            <div className={`step ${accomplished ? "completed" : null}`}>
-              <div className="step-indicator">
-                {index === 0 ?<i class="fa-solid fa-user"></i> : <i class="fa-solid fa-check"></i>}
+        {steps.map((step, index) => (
+          <Step key={index} transition="scale">
+            {({ accomplished }) => (
+              <div className={`step ${accomplished ? "completed" : null}`}>
+                <div className="step-indicator">
+                  <FontAwesomeIcon icon={step.icon} />
+                </div>
+                <div className="step-label">{step.label}</div>
               </div>
-              <div className="step-label">Application Form</div>
-            </div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished, index }) => (
-            <div className={`step ${accomplished ? "completed" : null}`}>
-              <div className="step-indicator">
-                {index === 1 ? <i class="fa-solid fa-gear"></i> : <i class="fa-solid fa-check"></i>}
-              </div>
-              <div className="step-label">Processing</div>
-            </div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished, index }) => (
-            <div className={`step ${accomplished ? "completed" : null}`}>
-              <div className="step-indicator">
-                {index === 2 ? <i class="fa-solid fa-users"></i>: <i class="fa-solid fa-check"></i>}
-              </div>
-              <div className="step-label">Decision</div>
-            </div>
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished, index }) => (
-            <div className={`step ${accomplished ? "completed" : null}`}>
-              <div className="step-indicator">
-                {index === 3 ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-users"></i>}
-              </div>
-              <div className="step-label">Final Step</div>
-            </div>
-          )}
-        </Step>
+            )}
+          </Step>
+        ))}
       </ProgressBar>
+      </context.Provider>
     </div>
   );
 }

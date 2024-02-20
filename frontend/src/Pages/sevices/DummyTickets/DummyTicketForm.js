@@ -49,14 +49,6 @@ function DummyTicketForm() {
   const handleSubmit = async () => {
     console.log("data:",formData)
     try {
-      // const response = await axios.post('your-api-endpoint', {
-      //   tripType,
-      //   returnDate,
-      //   passengerDetails,
-      //   from,
-      //   to
-      // });
-  
       if (localStorage.getItem('userId')) {
         navigate('/dashboard');
       } else {
@@ -75,7 +67,7 @@ function DummyTicketForm() {
   return (
     <div className='dummy-ticket-form-container'>
       <div className="container mx-auto shadow bg-body rounded p-5 dummytickets">
-        <h2 className='text-center'><i className="fas fa-plane"></i> Dummy Ticket Form</h2>
+        <h2 className='text-center'><i className="fas fa-plane"></i> Dummy Ticket</h2>
         <div className="form-group">
           <div className="form-group triptype">
             <h4 className="form-label">Trip Type:</h4>

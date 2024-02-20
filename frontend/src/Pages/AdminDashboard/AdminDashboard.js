@@ -3,7 +3,7 @@ import "./AdminDashboardStyles/Dashboard.css";
 
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
-import { NavLink, Link, Outlet,Navigate, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import { Master } from "./master/Master";
 
 export const AdminDashboard = () => {
