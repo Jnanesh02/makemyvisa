@@ -5,17 +5,14 @@ import CookieUtils from '../../components/cookie/Cookies';
 import { useParams } from 'react-router-dom';
 export const HotelBooking = () => {
     const [formData, setFormData] = useState({
-        tripType: 'oneWay',
-        DepartureDate:'',
-        returnDate: '',
-        departureDate: '',
+        arrivalCountry:'',
+        checkIn: '',
+        checkOut: '',
         numberOfPassengers: 1,
         passengerDetails: [{ name: '', age: '', passportNumber: '' }],
-        from: '',
-        to: '',
       });
-      const {dummyticket} = useParams({});
-      const {  passengerDetails, from } = formData;
+      const {hotelReservation} = useParams();
+      console.log(hotelReservation);
       const navigate = useNavigate();
     
       const handleChange = (e) => {
@@ -24,7 +21,7 @@ export const HotelBooking = () => {
       };
     
       const handlePassengerChange = (index, field, value) => {
-        const updatedPassengerDetails = [...passengerDetails];
+        const updatedPassengerDetails = [...formData.passengerDetails];
         updatedPassengerDetails[index][field] = value;
         setFormData({ ...formData, passengerDetails: updatedPassengerDetails });
       };
@@ -33,12 +30,12 @@ export const HotelBooking = () => {
         setFormData({
           ...formData,
           numberOfPassengers: formData.numberOfPassengers + 1,
-          passengerDetails: [...passengerDetails, { name: '', age: '', passportNumber: '' }],
+          passengerDetails: [...formData.passengerDetails, { name: '', age: '', passportNumber: '' }],
         });
       };
     
       const handleRemovePassenger = (index) => {
-        const updatedPassengerDetails = passengerDetails.filter((_, i) => i !== index);
+        const updatedPassengerDetails = formData.passengerDetails.filter((_, i) => i !== index);
         setFormData({
           ...formData,
           numberOfPassengers: formData.numberOfPassengers - 1,
@@ -54,9 +51,9 @@ export const HotelBooking = () => {
           } else {
             const cookieData = {
               formData: formData,
-              dummyTicket: dummyticket
+              dummyTicket: hotelReservation
           };
-            CookieUtils.setCookies('dummyTicket',JSON.stringify(cookieData));
+            CookieUtils.setCookies('servicename',JSON.stringify(cookieData));
             navigate('/login');
           }
         } catch (error) {
@@ -72,11 +69,26 @@ export const HotelBooking = () => {
               <div className="from-to-group">
                 <div className='fromto'>
                   <h4 className="form-label">Arrival City:</h4>
-                  <input type="text" className="dummy-form-control" name="from" placeholder="Country Name" value={from} onChange={handleChange} />
+                  <input type="text" className="dummy-form-control" name="arrivalCountry" placeholder="Country Name" value={formData.arrivalCountry} onChange={handleChange} />
                 </div>
               </div>
             </div>
-    
+            <div className="form-group">
+          <div className="date-group">
+            <div className='Departure_date'>
+              <h4 className="label_Departure">Check In:</h4>
+              <input type="date" className="dummy-form-control" value={formData.checkIn} name="checkIn" onChange={handleChange}/>
+            </div>
+            </div>
+            </div>
+            <div className="form-group">
+          <div className="date-group">
+            <div className='Departure_date'>
+              <h4 className="label_Departure">Check out:</h4>
+              <input type="date" className="dummy-form-control" value={formData.checkOut} name="checkOut" onChange={handleChange}/>
+            </div>
+            </div>
+            </div>
             <div>
               <div className='d-flex justify-content-between mb-2'>
                 <h3>Passenger Details:</h3>
@@ -92,7 +104,7 @@ export const HotelBooking = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {passengerDetails.map((passenger, index) => (
+                  {formData?.passengerDetails.map((passenger, index) => (
                     <tr key={index}>
                       <td><input type="text" className="dummy-form-control" value={passenger.name} onChange={(e) => handlePassengerChange(index, 'name', e.target.value)} /></td>
                       <td><input type="text" className="dummy-form-control" value={passenger.age} onChange={(e) => handlePassengerChange(index, 'age', e.target.value)} /></td>

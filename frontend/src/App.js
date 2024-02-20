@@ -61,8 +61,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-            <Route path="/services/:dummyticket" element={<DummyTicketForm/>} />
-            <Route path="/services/hotelReservation" element={<HotelBooking/>} />
+            <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
+            <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
             <Route path="employeelogin" element={<EmployeeLogin/>}/>
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />

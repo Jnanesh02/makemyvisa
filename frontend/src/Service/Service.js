@@ -257,7 +257,7 @@ const Service = () => {
                         src={servicesmain3}
                         alt="/"
                       />
-                      <Link to="services/dummyticket">
+                      <Link to="services/dummy/dummyticket">
                       <p className="pills-tab-text"> Ticketing </p>
                       </Link>
                     </div>
@@ -273,7 +273,7 @@ const Service = () => {
                         src={servicesmain4}
                         alt="/"
                       />
-                      <Link to="services/hotelReservation">
+                      <Link to="services/hotel/hotelReservation">
                       <p className="pills-tab-text"> Hotel <br /> Reservation </p>
                       </Link>
                     </div>
