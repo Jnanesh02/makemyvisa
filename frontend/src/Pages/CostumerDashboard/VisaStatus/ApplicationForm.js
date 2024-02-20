@@ -76,7 +76,7 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 id="firstname"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
@@ -87,7 +87,7 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 id="lastname"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleInputChange}
@@ -100,7 +100,7 @@ const ApplicationForm = () => {
               <input
                 type="email"
                 id="email"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
@@ -111,7 +111,7 @@ const ApplicationForm = () => {
               <input
                 type="tel"
                 id="phone"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
@@ -123,7 +123,7 @@ const ApplicationForm = () => {
               <label htmlFor="gender" className="visaApplication-label">Gender</label>
               <select
                 id="gender"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="gender"
                 value={formData.gender}
                 onChange={handleInputChange}
@@ -140,7 +140,7 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 id="country"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
@@ -151,7 +151,7 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 id="state"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="state"
                 value={formData.state}
                 onChange={handleInputChange}
@@ -163,7 +163,7 @@ const ApplicationForm = () => {
               <label htmlFor="visaType" className="visaApplication-label">Type of Visa</label>
               <select
                 id="visaType"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 name="visaType"
                 value={formData.visaType}
                 onChange={handleInputChange}
@@ -178,7 +178,7 @@ const ApplicationForm = () => {
             <input
               type="text"
               id="destination"
-              className="visaApplication-input"
+              className="visaApplication-input  form-control"
               name="destination"
               value={formData.destination}
               onChange={handleInputChange}
@@ -189,12 +189,12 @@ const ApplicationForm = () => {
           
           <div>
   <div className="visaApplication-form-group-doc">
-    <div className='d-flex m-2'>
-    <h3 className="visaApplication-label">Documents:</h3>
-    <button type="button" style={{width:200}} className='btn btn-danger' onClick={handleAddDocument}>Add Document</button>
+    <div className='document-add-btns'>
+    <h5 className="visaApplication-label">Documents:</h5>
+    <button type="button" className='btn btn-danger add-dcoument-danger' onClick={handleAddDocument}>Add Document</button>
     </div>
-    
-    <table className="visaApplication-table m-2">
+    <div class="table-responsive">
+    <table className="table">
       <thead>
         <tr>
           <th>Document Name</th>
@@ -208,7 +208,7 @@ const ApplicationForm = () => {
             <td>
               <input
                 type="text"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 placeholder="Document Name"
                 value={document.name}
                 onChange={(event) => handleDocumentNameChange(index, event)}
@@ -217,7 +217,7 @@ const ApplicationForm = () => {
             <td>
               <input
                 type="file"
-                className="visaApplication-input"
+                className="visaApplication-input  form-control"
                 onChange={(event) => handleFileChange(index, event)}
               />
             </td>
@@ -228,11 +228,12 @@ const ApplicationForm = () => {
         ))}
       </tbody>
     </table>
+    </div>
     
   </div>
 </div>
 
-          <button type="submit" className="visaApplication-submit-btn">Submit</button>
+          <button type="submit" className="btn btn-danger btn-danger-submit">Submit</button>
         </form>
       </div>
     </div>

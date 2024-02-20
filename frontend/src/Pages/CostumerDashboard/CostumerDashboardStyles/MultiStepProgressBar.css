@@ -16,7 +16,8 @@
   }
   .step.completed {
     background-color: #dd2817;
-  }
+    color: white !important;
+}
 
   .step-label {
     position: absolute;

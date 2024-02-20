@@ -11,7 +11,7 @@ function VisaStatus() {
     const fetchData = async () => {
       try {
         const data = {
-          status: 'submitted',
+          status: '',
         };
 
         setStatus(data.status);
@@ -64,8 +64,8 @@ function VisaStatus() {
               <div className="card-body">
                 {renderFormStep()}
               </div>
-              <div className="card-footer d-flex justify-content-between">
-              </div>
+              {/* <div className="card-footer d-flex justify-content-between">
+              </div> */}
             </div>
           )}
         </div>
