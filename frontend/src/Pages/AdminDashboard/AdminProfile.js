@@ -38,7 +38,7 @@ export const AdminProfile = () => {
   };
   useEffect(() => {
     fetchUserData();
-  },[]);
+  });
 
   const handleInputChange = (e) => {
     setFormData({
