@@ -23,7 +23,6 @@ const TicketStatus = () => {
           `${process.env.REACT_APP_BACKEND_URL}/getservice/${dummytickets}`,
           { params: { customerID } }
         );
-
         if (response.status === 200) {
           setTicketDetails(response.data);
         } else {

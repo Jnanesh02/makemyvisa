@@ -10,7 +10,8 @@ const postServiceCollectionApi = async(serviceDetails,customerId) =>{
         }
     
         const services = JSON.parse(serviceDetails);
-        const serviceName = services.dummyTicket;
+        console.log(services);
+        const serviceName = services.serviceType;
         const data = services.formData;
     
         const response = await axios.post(

@@ -35,7 +35,7 @@ const Login = () => {
         alert(response.data.error.message);
       } else {
         localStorage.setItem("userId",response.data.message.token);
-      const dummyTicketCookie = CookieUtils.getCookies();
+      const dummyTicketCookie = CookieUtils.getCookies("servicename");
       if (dummyTicketCookie) {
         await postServiceCollectionApi(dummyTicketCookie, localStorage.getItem("userId"));
       }

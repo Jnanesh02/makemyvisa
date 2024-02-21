@@ -35,6 +35,7 @@ import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
 import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
 import { HotelBooking } from "./Pages/sevices/HotelBooking";
+import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservationTicket";
 
 
 
@@ -75,7 +76,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<CostumerHomePage />} />
                 <Route path="profile" element={<Profile />}/>
-                <Route path="TicketStatus/:dummytickets" element={<TicketStatus/>}/>
+                <Route path="ticket/dummy/:dummytickets" element={<TicketStatus/>}/>
+                <Route path="ticket/hotel/:hotelreservations" element={<HotelReservationTicket/>}/>
                 <Route path="VisaStatus" element={<VisaStatus/>}/>
                 
               </Route>
