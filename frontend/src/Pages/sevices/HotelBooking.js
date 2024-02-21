@@ -44,14 +44,13 @@ export const HotelBooking = () => {
       };
     
       const handleSubmit = async () => {
-        console.log("data:",formData)
         try {
           if (localStorage.getItem('userId')) {
             navigate('/dashboard');
           } else {
             const cookieData = {
               formData: formData,
-              dummyTicket: hotelReservation
+              serviceType: hotelReservation
           };
             CookieUtils.setCookies('servicename',JSON.stringify(cookieData));
             navigate('/login');

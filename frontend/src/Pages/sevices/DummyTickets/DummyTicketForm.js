@@ -54,9 +54,9 @@ function DummyTicketForm() {
       } else {
         const cookieData = {
           formData: formData,
-          dummyTicket: dummyticket
+          serviceType: dummyticket
       };
-        CookieUtils.setCookies('dummyTicket',JSON.stringify(cookieData));
+        CookieUtils.setCookies('servicename',JSON.stringify(cookieData));
         navigate('/login');
       }
     } catch (error) {

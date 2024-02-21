@@ -28,7 +28,6 @@ const mongoose = require("mongoose");
 
  router.get("/getservice/:servicename",async(req,res)=>{
    try {
-    console.log(req.params.servicename,req.query);
     const  serviceName  = req.params.servicename;
     const { customerID } = req.query;
     const db = mongoose.connection;

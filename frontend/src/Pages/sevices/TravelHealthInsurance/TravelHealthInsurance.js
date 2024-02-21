@@ -3,32 +3,32 @@ import './TravelHealthInsurance.css';
 
 const visaPlans = [
   {
-    title: 'Tourist Visa',
+    title: 'Travel Insurance for Individuals',
     document: '/Documents/visa.pdf',
     country: ['India', 'USA'],
     months: 12,
-    fee: '2000/-'
+    fee: '$2000'
   },
   {
-    title: 'Student Visa',
+    title: 'Travel Insurance for Families',
     document: '/path/to/document2.pdf',
     country: ['India', 'USA', 'Australia'],
     months: 24,
-    fee: '4000/-'
+    fee: '$4000'
   },
   {
-    title: 'Normal Visa',
+    title: 'Travel Insurance for Frequent Fliers',
     document: '/path/to/document1.pdf',
     country: ['India', 'USA'],
     months: 12,
-    fee: '2000/-'
+    fee: '$2000'
   },
   {
-    title: 'EWW Visa',
+    title: 'Travel Insurance for Students',
     document: '/path/to/document2.pdf',
     country: ['India', 'USA', 'Australia'],
     months: 24,
-    fee: '4000/-'
+    fee: '$4000'
   }
 ];
 
