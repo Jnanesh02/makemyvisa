@@ -1,19 +1,8 @@
-.visaApplication-container {
-    background-color: #f8f9fa; /* Light gray background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
+
   
   .visaApplication-form-container {
     background-image: url('../../../assets/images/OJO4YQ0.jpg');
-    background-color: #ffffff; /* White background */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-    padding: 40px;
-    width: 95%; /* Adjust form width as needed */
+
   }
   
   .visaApplication-title {
@@ -43,49 +32,12 @@
     align-items: center;
     justify-content: space-between;
   }
-  .visaApplication-label {
-    color: #333333; /* Dark gray label color */
-    font-size: 16px;
-    margin-bottom: 5px;
-    width: calc(100% - 10px); /* Adjust label width as needed */
-  }
+
+
   
-  .visaApplication-input {
-    border: 1px solid #ced4da; /* Light gray border */
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    padding: 10px;
-    width: calc(100% - 10px); /* Adjust input width as needed */
-  }
-  
-  .visaApplication-submit-btn {
-    background-color: #dc3545; /* Red submit button */
-    border: none;
-    border-radius: 5px;
-    color: #ffffff; /* White button text */
-    cursor: pointer;
-    font-size: 16px;
-    padding: 12px 20px;
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  
-  .visaApplication-submit-btn:hover {
-    background-color: #c82333; 
-  }
-  
-  .visaApplication-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .visaApplication-table th, .visaApplication-table td {
-    border: 1px solid #dddddd; /* Light gray border */
-    padding: 8px;
-    text-align: left;
-  }
-  
+ 
+
+ 
   .visaApplication-table th {
     background-color: #f2f2f2; /* Light gray background for table header */
   }
@@ -98,4 +50,17 @@
     background-color: #f0f0f0; /* Hover background color */
   }
   
-  
+  .document-add-btns {
+    display: flex;
+    justify-content: space-between;
+}
+input.visaApplication-input.form-control {
+  width: 97%;
+}
+select.visaApplication-input.form-control {
+  width: 97%;
+}
+button.btn.btn-danger.add-dcoument-danger {
+  background: #e12912;
+  font-size: 14px;
+}
