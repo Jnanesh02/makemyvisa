@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/avatar.png";
 import googlereview from "../../assets/images/review.png";
+import axios from "axios";
 import "./Navbar.css";
 import { Link, useLocation } from "react-router-dom";
 // import Dashboard from "../Dashboard/Dashboard";
@@ -12,7 +13,25 @@ const location = useLocation();
 const onLoginPage = location.pathname === "/login";
 const onSignupPage = location.pathname === "/registration";
 const onHomePage = location.pathname === "/";
+const [countriesData, setCountriesData] = useState([]);
 
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
+        if (Array.isArray(response.data.message)) {
+          setCountriesData(response.data.message);
+          console.log(response.data.message);
+        } else {
+          setCountriesData([]);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 const Login = () => {
   // setIsLoggedIn(true);
   return (
@@ -88,9 +107,12 @@ const HomeLink = () => {
     Countries 
   </button>
   <ul class="dropdown-menu dropdown-countries">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    {countriesData.map((country,index)=>(
+      <li key={index}>
+         <Link to={`/countries/${country.countryName}`} className="dropdown-item">{country.countryName}</Link>
+      </li>
+    ))}
+   
   </ul>
 </div>
         </li>
