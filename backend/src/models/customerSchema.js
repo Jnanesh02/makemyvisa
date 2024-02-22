@@ -40,16 +40,16 @@ const customerSchema = new mongoose.Schema({
       type: String,
       default: "",
     },
-    facebook: {
-      facebookId: {
-        type: String,
-        default: "",
-      },
-      token: {
-        type: String,
-        default: "",
-      },
-    },
+    // facebook: {
+    //   facebookId: {
+    //     type: String,
+    //     default: "",
+    //   },
+    //   token: {
+    //     type: String,
+    //     default: "",
+    //   },
+    // },
     googleId: {
       type: String,
       default: "",

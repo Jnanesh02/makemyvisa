@@ -1,7 +1,7 @@
 // passport.js
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
+// const FacebookStrategy = require("passport-facebook").Strategy;
 const passport = require("passport");
 const Customer = require("./src/models/customerSchema");
 
@@ -35,6 +35,7 @@ passport.use(
           await existingUser.save();
           return done(null, existingUser._id);
         } else {
+          console.log(profile);
           // User does not exist, create a new user account
           const newCustomer = new Customer({
             first_name: profile.name.givenName,
@@ -43,7 +44,7 @@ passport.use(
             social_media: {
               googleId: profile.id,
             },
-            phone_number: "000000000",
+            // phone_number: "",
           });
 
           await newCustomer.save();

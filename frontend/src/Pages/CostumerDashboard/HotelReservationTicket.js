@@ -2,11 +2,12 @@ import axios from 'axios';
 import React ,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import "./CostumerDashboardStyles/Employee.css"
+import CookieUtils from '../../components/cookie/Cookies';
 
 export const HotelReservationTicket = () => {
     const [ticketDetails, setTicketDetails] = useState([]);
-    const [isLoading, setIsLoading] = useState(false); // Track loading state
-    const [error, setError] = useState(null); // Handle errors
+    const [isLoading, setIsLoading] = useState(false); 
+    const [error, setError] = useState(null); 
     const {hotelreservations} = useParams({});
   
   
@@ -16,11 +17,9 @@ export const HotelReservationTicket = () => {
         setError(null); 
   
         try {
-          const customerId = localStorage.getItem('userId');
+          const customerId = CookieUtils.getCookies('userId');
           const objectID = JSON.parse(atob(customerId.split('.')[1]));
           const customerID = objectID.id;
-          console.log(customerID ,hotelreservations);
-
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/getservice/${hotelreservations}`,
             { params: { customerID } }
@@ -39,7 +38,7 @@ export const HotelReservationTicket = () => {
       };
   
       fetchTicketDetails();
-    }, []);
+    }, [hotelreservations]);
     return (
       <div>
       {isLoading ? (
