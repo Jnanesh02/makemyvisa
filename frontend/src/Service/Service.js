@@ -235,6 +235,7 @@ const Service = () => {
                       aria-labelledby="pills-profile-tab"
                       tabindex="0"
                     >
+                      <Link to="services/VisaAssistance">
                       <img
                         className="services-main-imagess"
                         src={servicesmain2}
@@ -244,6 +245,7 @@ const Service = () => {
                         {" "}
                         Visa <br /> Assistance{" "}
                       </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -322,6 +324,7 @@ const Service = () => {
                       aria-labelledby="pills-contact-2-tab"
                       tabindex="0"
                     >
+                    <Link to="services/AppostileAndAttestation"> 
                       <img
                         className="services-main-imagess"
                         src={servicesmain11}
@@ -331,6 +334,7 @@ const Service = () => {
                         {" "}
                         Apostille & <br /> Attestation{" "}
                       </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"

@@ -23,7 +23,7 @@ const PrivateRoute = () => {
       }, 600000);
   
       return () => clearInterval(interval);
-    });
+    },[]);
   
     function navigateToAdminLogin() {
       CookieUtils.removeCookies('userId');

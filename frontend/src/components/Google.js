@@ -27,7 +27,7 @@ const Google = () => {
      
           getUser()
        
-        });
+        },[]);
   return (
     <div>
       

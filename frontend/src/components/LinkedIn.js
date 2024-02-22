@@ -29,7 +29,7 @@ const LinkedIn = () => {
      
             getLinkedInuser()
          
-          });
+          },[]);
 
   return (
     <div>
