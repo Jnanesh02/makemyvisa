@@ -22,7 +22,7 @@ const PrivateRoute = () => {
       }, 600000);
   
       return () => clearInterval(interval);
-    });
+    },[]);
   
     function navigateToAdminLogin() {
       localStorage.removeItem('userId');

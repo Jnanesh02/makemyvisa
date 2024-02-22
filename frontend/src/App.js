@@ -28,7 +28,6 @@ import AdminPrivateRoute from "./components/PrivateRoutes/AdminPrivateRoute"
 import Google from "./components/Google";
 import LinkedIn from "./components/LinkedIn";
 import EmployeePrivateRoute from "./components/PrivateRoutes/EmployeePrivateRoute";
-import EmployeeLogin from './Pages/EmployeeDashboard/EmployeeAuthentication/Login/Employeelogin'
 import DummyTicketForm from "./Pages/sevices/DummyTickets/DummyTicketForm";
 import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
 
@@ -36,6 +35,10 @@ import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
 import { HotelBooking } from "./Pages/sevices/HotelBooking";
 import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservationTicket";
+
+import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
+import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"
+import VisaAssistance from "./Pages/sevices/VisaAssistance/VisaAssistance";
 
 
 
@@ -66,7 +69,10 @@ function App() {
             <Route path="/services/TravelHealthInsurance" element={<TravelHealthInsurance/>} />
             <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
             <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
-            <Route path="employeelogin" element={<EmployeeLogin/>}/>
+            <Route path="/services/VisaAssistance/" element={<VisaAssistance/>} />
+
+
+
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />
           </Route>
@@ -99,8 +105,19 @@ function App() {
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
             </Route>
+
+
             
           </Route>
+
+          <Route path="/Employeedashboard" element={<EmployeeDashboard/>}>
+              <Route index element={<EmployeeHomePage />} />
+              <Route path="profile" element={<AdminProfile/>}/>
+    
+  </Route>
+
+
+
 
           <Route path="AdminLogout" element={<AdminLogout />} />
 

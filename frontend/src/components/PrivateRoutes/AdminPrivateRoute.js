@@ -21,7 +21,7 @@ const AdminPrivateRoute = () => {
       }, 6000);
   
       return () => clearInterval(interval);
-    });
+    },[]);
   
     function navigateToAdminLogin() {
       localStorage.removeItem('adminToken');

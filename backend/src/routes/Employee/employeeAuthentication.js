@@ -42,7 +42,7 @@ router.post("/employee/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    return res.status(200).json({ message: existingUser, token: token });
+    return res.status(200).json({ token: token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

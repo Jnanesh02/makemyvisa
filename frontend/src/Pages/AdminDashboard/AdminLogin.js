@@ -25,16 +25,30 @@ const AdminLogin = () => {
         `${process.env.REACT_APP_BACKEND_URL}/employee/login`,
         data
       );
-
+      console.log("response:",response);
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
         const adminTokens = JSON.stringify({
           "AdminToken": response.data.token,
-          "_Id":response.data.message._id
         })
         localStorage.setItem("adminToken",adminTokens );
-        navigate("/Admindashboard");
+        
+
+        const token = localStorage.getItem('adminToken');
+        const tokenData = JSON.parse(atob(token.split('.')[1]));
+        console.log(tokenData);
+
+        
+        if(tokenData.role==='admin'){
+          navigate("/Admindashboard")
+        }else{
+          
+          navigate("/Employeedashboard")
+          
+        }
+        
+        
       }
     } catch (err) {
       alert(err.message);
