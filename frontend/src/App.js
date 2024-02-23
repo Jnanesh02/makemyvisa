@@ -35,6 +35,7 @@ import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
 import { HotelBooking } from "./Pages/sevices/HotelBooking";
 import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservationTicket";
+import { Immigration } from "./Pages/sevices/Immigration";
 
 import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
 import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"
@@ -71,6 +72,7 @@ function App() {
             <Route path="/services/TravelHealthInsurance" element={<TravelHealthInsurance/>} />
             <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
             <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
+            <Route path="service/immigration/immigrationAdvice" element={<Immigration/>} />
             <Route path="/services/VisaAssistance/" element={<VisaAssistance/>} />
             <Route path="/services/CourierPickup/" element={<CourierPickup/>} />
 

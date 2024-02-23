@@ -2,6 +2,7 @@ import axios from 'axios';
 import React ,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import "./CostumerDashboardStyles/Employee.css"
+import CookieUtils from '../../components/cookie/Cookies';
 const TicketStatus = () => {
   const [ticketDetails, setTicketDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Track loading state
@@ -15,7 +16,7 @@ const TicketStatus = () => {
       setError(null); 
 
       try {
-        const customerId = localStorage.getItem('userId');
+        const customerId = CookieUtils.getCookies("userId");
         const objectID = JSON.parse(atob(customerId.split('.')[1]));
         const customerID = objectID.id;
 
@@ -36,7 +37,7 @@ const TicketStatus = () => {
     };
 
     fetchTicketDetails();
-  }, []);
+  }, [dummytickets]);
   return (
     <div>
     {isLoading ? (

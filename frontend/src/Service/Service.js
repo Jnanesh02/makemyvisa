@@ -254,14 +254,14 @@ const Service = () => {
                       aria-labelledby="pills-contact-tab"
                       tabindex="0"
                     >
+                      <Link to="services/dummy/dummyticket">
                       <img
                         className="services-main-imagess"
                         src={servicesmain3}
                         alt="/"
                       />
-                      <Link to="services/dummy/dummyticket">
-                      <p className="pills-tab-text"> Ticketing </p>
                       </Link>
+                      <p className="pills-tab-text"> Ticketing </p>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -270,14 +270,15 @@ const Service = () => {
                       aria-labelledby="pills-profile-1-tab"
                       tabindex="0"
                     >
+                      <Link to="services/hotel/hotelReservation">
                       <img
                         className="services-main-imagess"
                         src={servicesmain4}
                         alt="/"
                       />
-                      <Link to="services/hotel/hotelReservation">
-                      <p className="pills-tab-text"> Hotel <br /> Reservation </p>
+                         <p className="pills-tab-text"> Hotel <br /> Reservation </p>
                       </Link>
+                   
                     </div>
                     <div
                       className="tab-pane fade"
@@ -286,16 +287,15 @@ const Service = () => {
                       aria-labelledby="pills-contact-1-tab"
                       tabindex="0"
                     >
-                      <img
+                     <Link  to="services/TravelHealthInsurance"> <img
                         className="services-main-imagess"
                         src={servicesmain5}
                         alt="/"
                       />
-                      <Link to="services/TravelHealthInsurance">
+                      </Link>
                       <p className="pills-tab-text">
                         Travel Health <br /> Insurance
                       </p>
-                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -304,6 +304,7 @@ const Service = () => {
                       aria-labelledby="pills-profile-2-tab"
                       tabindex="0"
                     >
+                      <Link to="service/immigration/immigrationAdvice">
                       <img
                         className="services-main-imagess"
                         src={servicesmain6}
@@ -313,7 +314,8 @@ const Service = () => {
                         {" "}
                         Immigration <br /> Advice{" "}
                       </p>
-                      
+                      </Link>
+                
                     </div>
                     <div
                       className="tab-pane fade"

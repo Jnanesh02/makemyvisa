@@ -63,7 +63,8 @@ app.use("/makemyvisa", makeMyVisa.departments);
 app.use("/makemyvisa",makeMyVisa.countryService);
 app.use("/makemyvisa",makeMyVisa.updatecountryService);
 app.use("/makemyvisa",makeMyVisa.deleteCountryService);
-
+//notofication
+app.use("/makemyvisa",makeMyVisa.notifications);
 
 
 // Health check endpoint

@@ -11,7 +11,7 @@ function VisaStatus() {
     const fetchData = async () => {
       try {
         const data = {
-          status: '',
+          status: 'submitted',
         };
 
         setStatus(data.status);
