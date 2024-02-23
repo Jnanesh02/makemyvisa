@@ -70,7 +70,7 @@ function App() {
             <Route path="/services/TravelHealthInsurance" element={<TravelHealthInsurance/>} />
             <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
             <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
-            <Route path="service/immigration/immigrationAdvice" element={<Immigration/>} />
+            <Route path="service/immigration/:immigrationAdvice" element={<Immigration/>} />
             <Route path="/services/VisaAssistance/" element={<VisaAssistance/>} />
 
 
