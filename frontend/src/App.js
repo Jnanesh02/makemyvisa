@@ -39,6 +39,8 @@ import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservati
 import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
 import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"
 import VisaAssistance from "./Pages/sevices/VisaAssistance/VisaAssistance";
+import CourierPickup from "./Pages/sevices/CourierPickup/CourierPickup";
+import TravelInsuranceMaster from "./Pages/AdminDashboard/master/TravelInsuranceService/TravelInsuranceMaster";
 
 
 
@@ -70,7 +72,7 @@ function App() {
             <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
             <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
             <Route path="/services/VisaAssistance/" element={<VisaAssistance/>} />
-
+            <Route path="/services/CourierPickup/" element={<CourierPickup/>} />
 
 
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
@@ -101,7 +103,9 @@ function App() {
             </Route>
             <Route path="profile" element={<AdminProfile/>}/>
             <Route path="ServicesPage" element={<ServicePage />}>
+            
             </Route>
+            <Route path="TravelInsuranceService" element={<TravelInsuranceMaster />}/>
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
             </Route>

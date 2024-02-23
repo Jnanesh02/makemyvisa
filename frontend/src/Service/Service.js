@@ -358,6 +358,8 @@ const Service = () => {
                       aria-labelledby="pills-contact-4-tab"
                       tabindex="0"
                     >
+
+                    <Link to='services/CourierPickup'>
                       <img
                         className="services-main-imagess"
                         src={servicesmain13}
@@ -367,6 +369,7 @@ const Service = () => {
                         {" "}
                         Courier, <br /> Pickup{" "}
                       </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"
