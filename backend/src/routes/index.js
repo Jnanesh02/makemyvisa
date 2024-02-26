@@ -24,6 +24,7 @@ const updatecountryService = require("./country/updateCountryService");
 const deleteCountryService=require("./country/deleteCountryService")
 const services = require("./makemyvisa-services/services");
 const notifications = require("./notification/notification");
+const uploadTravelInsurance = require("./makemyvisa-services/uploadTravelInsurance");
 module.exports = {
   customerRegistration,
   customerLogin,
@@ -46,5 +47,6 @@ module.exports = {
   updatecountryService,
   deleteCountryService,
   services,
-  notifications
+  notifications,
+  uploadTravelInsurance
 };

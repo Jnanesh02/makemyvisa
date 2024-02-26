@@ -65,6 +65,8 @@ app.use("/makemyvisa",makeMyVisa.updatecountryService);
 app.use("/makemyvisa",makeMyVisa.deleteCountryService);
 //notofication
 app.use("/makemyvisa",makeMyVisa.notifications);
+app.use("/makemyvisa",makeMyVisa.uploadTravelInsurance);
+
 
 
 // Health check endpoint
