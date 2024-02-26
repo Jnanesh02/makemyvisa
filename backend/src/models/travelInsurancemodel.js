@@ -4,6 +4,9 @@ const travelInsuranceSchema = new mongoose.Schema({
     fileName: {
         type:String,
     },
+    key:{
+        type:String,
+    },
     countriesApplicable:[
         {
             type:String,
