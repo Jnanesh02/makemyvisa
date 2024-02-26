@@ -12,6 +12,7 @@ const VisaAssistance = () => {
   };
   const [formData, setFormData] = useState(initialData);
   const [countriesData, setCountriesData] = useState([]);
+  console.log("Countries:",countriesData);
 
   useEffect(() => {
     const fetchCountries = async () => {

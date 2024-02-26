@@ -41,7 +41,7 @@ import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
 import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"
 import VisaAssistance from "./Pages/sevices/VisaAssistance/VisaAssistance";
 import CourierPickup from "./Pages/sevices/CourierPickup/CourierPickup";
-import TravelInsuranceMaster from "./Pages/AdminDashboard/master/TravelInsuranceService/TravelInsuranceMaster";
+import TravelInsuranceService from "./Pages/AdminDashboard/master/TravelInsuranceService/TravelInsuranceService";
 
 
 
@@ -107,7 +107,7 @@ function App() {
             <Route path="ServicesPage" element={<ServicePage />}>
             
             </Route>
-            <Route path="TravelInsuranceService" element={<TravelInsuranceMaster />}/>
+            <Route path="TravelInsuranceService" element={<TravelInsuranceService/>}/>
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
             </Route>
