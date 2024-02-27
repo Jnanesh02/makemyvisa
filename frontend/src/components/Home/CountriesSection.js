@@ -25,7 +25,7 @@ const renderFlipCard = (country) => (
               <h3 className="country-heading-nm"> {country.countryName} </h3>
               {country.serviceTypes.map((service, index) => (
                 <li className="list-group-item countries-list" key={index}>
-                  <NavLink to={`/countries/${country.countryName}/${service.serviceName.replace(/\s/g,"-")}`}>
+                  <NavLink to={`/countries/${country.countryName.replace(/\s/g,"-")}/${service.serviceName.replace(/\s/g,"-")}`}>
                     {service.serviceName}
                   </NavLink>
                 </li>

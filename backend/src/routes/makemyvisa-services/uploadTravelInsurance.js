@@ -8,16 +8,11 @@ const s3 = new aws.S3();
 
 router.post("/api/upload", upload.single("fileUpload"), async (req, res) => {
   try {
-    // aws.config.update({
-    //   accessKeyId: process.env.AWS_ACCESS_KEY,
-    //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    //   region: process.env.AWS_REGION,
-    // });
+   
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
     }
-
-    const { countryName } = req.body;
+    const { insuranceName,duration,cost,countries} = req.body;
     const file = req.file;
     const params = {
       Bucket: "makemyvisa-public-assets",
@@ -29,7 +24,10 @@ router.post("/api/upload", upload.single("fileUpload"), async (req, res) => {
       const newFile = new travelInsuranceModel({
         filename: req.file.originalname,
         key:params.Key,
-        countriesApplicable: countryName,
+        insuranceName:insuranceName,
+        duration:duration,
+        cost:cost,
+        countriesApplicable: countries.split(',').map((country) => country.trim()),
       });
       await newFile.save();
       return res.status(200).json({ message: "Upload successful" });
@@ -38,7 +36,16 @@ router.post("/api/upload", upload.single("fileUpload"), async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Upload failed" });
-  }c
+  }
+});
+router.get("/allTravelInsurance",async(req, res)=>{
+try {
+  const InsuranceCollection = await travelInsuranceModel.find();
+  res.status(200).json(InsuranceCollection);
+} catch (error) {
+  res.status(500).json({message: error.message});
+
+}
 });
 router.get("/api/files/:countryName", async (req, res) => {
     try {

@@ -12,7 +12,6 @@ const VisaAssistance = () => {
   };
   const [formData, setFormData] = useState(initialData);
   const [countriesData, setCountriesData] = useState([]);
-  console.log("Countries:",countriesData);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -44,7 +43,6 @@ const VisaAssistance = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('submit',formData);
       const response = await axios.post("/api/submit", formData);
       console.log(response.data);
     } catch (error) {

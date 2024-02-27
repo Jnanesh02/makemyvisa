@@ -7,17 +7,17 @@ import ConfirmationModal from "../../EmployeeDetails/ConfirmationAccountModel";
 const TravelInsuranceServices = () => {
   const [travelInsuranceData, setTravelInsuranceData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedInsurance, setSelectedInsurance] = useState(null);
-  const [isDeleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
+  const [isDeleteConfirmationModalOpen, setDeleteConfirmationModalOpen] =
+    useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const getTravelInsuranceData = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getTravelInsurance`
+        `${process.env.REACT_APP_BACKEND_URL}/allTravelInsurance`
       );
       if (response.status === 200) {
-        setTravelInsuranceData(response.data.message);
+        setTravelInsuranceData(response.data);
       }
     } catch (error) {
       alert(error.message);
@@ -29,17 +29,9 @@ const TravelInsuranceServices = () => {
   }, [isEditing]);
 
   const handleCreate = () => {
-    setSelectedInsurance(null);
     setShowModal(true);
   };
 
-  const handleEdit = (insuranceId) => {
-    const insuranceToEdit = travelInsuranceData.find(
-      (insurance) => insurance._id === insuranceId
-    );
-    setSelectedInsurance(insuranceToEdit);
-    setShowModal(true);
-  };
 
   const handleDelete = async (insuranceId) => {
     try {
@@ -71,7 +63,10 @@ const TravelInsuranceServices = () => {
       <div className="main-department-section">
         <div className="dep-tbl">
           <h2>Travel Insurance</h2>
-          <button className="btn btn-primary create-button" onClick={handleCreate}>
+          <button
+            className="btn btn-primary create-button"
+            onClick={handleCreate}
+          >
             Create
           </button>
         </div>
@@ -96,24 +91,34 @@ const TravelInsuranceServices = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(travelInsuranceData) &&
-              travelInsuranceData.map((insurance, index) => (
-                <tr key={index}>
+            {Array.isArray(travelInsuranceData) ? (
+              travelInsuranceData.map((insurance) => (
+                <tr key={insurance._id}>
                   <td>{insurance.insuranceName}</td>
-                  <td>{insurance.fileUpload ? "Uploaded" : "Not Uploaded"}</td>
-                  <td>{insurance.Countries.join(", ")}</td>
-                  <td>{insurance.noOfMonths}</td>
+                  <td>{insurance.key}</td>
+                  <td>
+                    {insurance?.countriesApplicable.map((country,index) => (
+                      <span key={index}>{country}<br/></span>
+                      
+                    ))}{" "}
+                  </td>
+                  <td>{insurance.duration}</td>
                   <td>{insurance.cost}</td>
                   <td>
-                    <button className="action-button edit" onClick={() => handleEdit(insurance._id)}>
-                      Edit
-                    </button>
-                    <button className="action-button delete" onClick={() => handleDelete(insurance._id)}>
+                    <button
+                      className="action-button delete"
+                      onClick={() => handleDelete(insurance._id)}
+                    >
                       Delete
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6">No travel insurance data available</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -122,8 +127,6 @@ const TravelInsuranceServices = () => {
       {showModal && (
         <CreateTravelInsurance
           handleCloseModal={() => setShowModal(false)}
-          travelInsuranceDetailsToEdit={selectedInsurance}
-          setIsEdit={setIsEditing}
           setActionrender={setIsEditing}
         />
       )}
