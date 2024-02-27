@@ -193,7 +193,7 @@ const ApplicationForm = () => {
     <h5 className="visaApplication-label">Documents:</h5>
     <button type="button" className='btn btn-danger add-dcoument-danger' onClick={handleAddDocument}>Add Document</button>
     </div>
-    <div class="table-responsive">
+    <div className="table-responsive">
     <table className="table">
       <thead>
         <tr>

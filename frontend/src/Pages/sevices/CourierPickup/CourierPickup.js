@@ -241,73 +241,8 @@ const CourierPickup = () => {
             </div>
           </div>
         </div>
-        <div className="courierpickupform__sendingdetails mt-3 ">
-          <div className="card p-3">
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                name="sendingDetails"
-                value={formData.sendingDetails}
-                onChange={handleInputChange}
-                placeholder="what are you sending?"
-              />
-            </div>
-            <div >
-              <span
-                className="name-link mx-2"
-                onClick={() => handleNameClick("Food")}
-                style={{color:"#e12912"}}
-              >
-                Food
-              </span>
-              <span
-                className="name-link mx-2"
-                onClick={() => handleNameClick("Cloth")}
-                style={{color:"#e12912"}}
-              >
-                Cloth
-              </span>
-              <span
-                className="name-link mx-2"
-                onClick={() => handleNameClick("Groceries")}
-                style={{color:"#e12912"}}
-              >
-                Groceries
-              </span>
-              <span
-                className="name-link mx-2"
-                onClick={() => handleNameClick("Flowers")}
-                style={{color:"#e12912"}}
-              >
-                Flowers
-              </span>
-              <span
-                className="name-link mx-2"
-                onClick={() => handleNameClick("CakeParcel")}
-                style={{color:"#e12912"}}
-              >
-                CakeParcel
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="courierpickupform__courierbag mt-4">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value={formData.preferCourierWithBag}
-              id="flexCheckDefault"
-              onChange={handleInputChange}
-              name="preferCourierWithBag"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault">
-              Prefer Courier with Delivery Bag
-            </label>
-          </div>
-        </div>
-        <div className="courierpickupform__submitbutton mt-3 text-center">
+        
+        <div className="courierpickupform__submitbutton mt-3 text-center mb-3">
           <button
             type="button"
             className="btn btn-danger"

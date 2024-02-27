@@ -33,9 +33,9 @@ import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
 
 import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
-import { HotelBooking } from "./Pages/sevices/HotelBooking";
+import { HotelBooking } from "./Pages/sevices/HotelReservation/HotelBooking";
 import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservationTicket";
-import { Immigration } from "./Pages/sevices/Immigration";
+import { Immigration } from "./Pages/sevices/ImmigrationAdvice/Immigration";
 
 import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
 import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"

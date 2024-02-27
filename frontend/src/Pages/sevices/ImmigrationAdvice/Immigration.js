@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ImmigrationImg from "../../../assets/images/Immigration-Lawyer-Kent-UK-Picture.jpg";
 import PhoneInput from "react-phone-input-2";
-import "./VisaAssistance.css";
-const VisaAssistance = () => {
+export const Immigration = () => {
   const initialData = {
     fullName: "",
     email: "",
@@ -13,7 +13,7 @@ const VisaAssistance = () => {
   };
   const [formData, setFormData] = useState(initialData);
   const [countriesData, setCountriesData] = useState([]);
-  
+
   const handlePhoneChange = (value, country) => {
     setFormData((prev) => ({
       ...prev,
@@ -21,6 +21,7 @@ const VisaAssistance = () => {
       
     }));
   };
+
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -39,20 +40,18 @@ const VisaAssistance = () => {
 
     fetchCountries();
   }, []);
-  const handleChange = (event) => {
-    event.preventDefault();
+  const onchangeInput = (event) => {
+    
     const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
-      console.log('submit',formData);
+      console.log("submit", formData);
       const response = await axios.post("/api/submit", formData);
       console.log(response.data);
     } catch (error) {
@@ -67,36 +66,32 @@ const VisaAssistance = () => {
   const toggleText = () => {
     setShowFullText(!showFullText);
   };
-
   return (
     <div>
-      <div
-        style={{
-          backgroundImage:
-            "url('https://hsconsultants.net/assets/images/student-visa-assistance-header.jpg')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          height: "400px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div style={{ position: "relative", textAlign: "center" }}>
+        <img
+          src={ImmigrationImg}
+          className="w-100"
+          style={{ height: "400px" }}
+          alt="/"
+        />
         <h2
-          className="text-center"
-          style={{ color: "#fe5141", fontSize: "60px" }}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "#fe5141",
+            fontSize: "60px",
+          }}
         >
-          Visa Assistance
+          Immigration Advice
         </h2>
       </div>
 
       <div
         className="VisaAssistance__box p-5 d-flex justify-content-around"
-        style={{
-          backgroundImage: "url('')",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
+        
       >
         <div
           className="VisaAssistance__Content w-50"
@@ -106,7 +101,7 @@ const VisaAssistance = () => {
             className="VisaAssistance__title"
             style={{ textTransform: "capitalize" }}
           >
-            Visa Assistance
+            Immigration Advice
           </h3>
           <p
             style={{
@@ -123,7 +118,7 @@ const VisaAssistance = () => {
             {showFullText ? "Read Less" : "Read More"}
           </button>
         </div>
-        <div className="VisaAssistance__FormApplication card p-3">
+        <div className="VisaAssistance__FormApplication card p-3 ">
           <div className="VisaAssistance__Form">
             <h3 className="VisaAssistance__Form--title">
               Request a call back from our Visa Assistance experts
@@ -136,7 +131,7 @@ const VisaAssistance = () => {
                   id="FullName"
                   name="fullName"
                   value={formData.fullName}
-                  onChange={handleChange}
+                  onChange={onchangeInput}
                   placeholder="Full Name"
                   required
                 />
@@ -149,13 +144,14 @@ const VisaAssistance = () => {
                     id="Email"
                     name="email"
                     value={formData.email}
-                    onChange={handleChange}
+                    onChange={onchangeInput}
                     placeholder="name@example.com"
                     required
                   />
                 </div>
                 <div className="col">
-                 
+                  
+
                   <PhoneInput
                     placeholder="Phone Number"
                     name="phoneNumber"
@@ -167,8 +163,6 @@ const VisaAssistance = () => {
                     }
                     required
                   />
-
-
                 </div>
               </div>
               <div className="mb-3">
@@ -178,7 +172,7 @@ const VisaAssistance = () => {
                   name="visaExperts"
                   placeholder="Please explain your situation to our Visa Assistance Experts"
                   value={formData.visaExperts}
-                  onChange={handleChange}
+                  onChange={onchangeInput}
                   rows="3"
                   required
                 ></textarea>
@@ -190,17 +184,21 @@ const VisaAssistance = () => {
                     id="country"
                     name="country"
                     value={formData.country}
-                    onChange={handleChange}
+                    onChange={onchangeInput}
                     required
                   >
                     <option value="">Choose your country</option>
                     <option value="India">India</option>
-                    {countriesData.filter(country => country.countryName !== formData.destination)
-                    .map((country) => (
-                      <option key={country._id} value={country.countryCode}>
-                        {country.countryName}
-                      </option>
-                    ))}
+                    {countriesData
+                      .filter(
+                        (country) =>
+                          country.countryName !== formData.destination
+                      )
+                      .map((country) => (
+                        <option key={country._id} value={country.countryCode}>
+                          {country.countryName}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="col">
@@ -210,16 +208,19 @@ const VisaAssistance = () => {
                     name="destination"
                     value={formData.destination}
                     placeholder="Choose a destination"
-                    onChange={handleChange}
+                    onChange={onchangeInput}
                     required
                   >
                     <option value="">Choose your destination</option>
-                    {countriesData.filter((country) => country.countryName !== formData.country)
-                    .map((country) => (
-                      <option key={country._id} value={country.countryName}>
-                        {country.countryName}
-                      </option>
-                    ))}
+                    {countriesData
+                      .filter(
+                        (country) => country.countryName !== formData.country
+                      )
+                      .map((country) => (
+                        <option key={country._id} value={country.countryName}>
+                          {country.countryName}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -234,5 +235,3 @@ const VisaAssistance = () => {
     </div>
   );
 };
-
-export default VisaAssistance;

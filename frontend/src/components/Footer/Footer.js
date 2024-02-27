@@ -109,12 +109,14 @@ const Footer = () => {
   ];
 
   const servicesItems = [
-    { label: "Flight Tickets", link: "/" },
+    { label: "Flight Tickets", link: "/services/dummy/:dummyticket" },
     { label: "Hotel Bookings", link: "/services/hotel/hotelReservation" },
-    { label: "Travel Insurance", link: "/" },
+    { label: "Travel Insurance", link: "/services/TravelHealthInsurance" },
     { label: "Apostille/Attestation ", link: "/" },
     { label: "Forex Services", link: "/" },
-
+    { label: "Immigration Advice", link: "service/immigration/:immigrationAdvice" },
+    { label: "Visa Assistance", link: "/services/VisaAssistance/" },
+    { label: "Courier & Pickup", link: "/services/CourierPickup/" },
   ];
 
   return (

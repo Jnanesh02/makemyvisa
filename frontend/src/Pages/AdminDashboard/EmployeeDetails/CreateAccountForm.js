@@ -182,7 +182,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   return (
     <>
       <form className="admin-form" onSubmit={handleSubmit}>
-         {/* <button class="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+         {/* <button className="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
           X
         </button>  */}
    
