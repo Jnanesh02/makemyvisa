@@ -52,7 +52,6 @@ const VisaAssistance = () => {
     e.preventDefault();
     
     try {
-      console.log('submit',formData);
       const response = await axios.post("/api/submit", formData);
       console.log(response.data);
     } catch (error) {

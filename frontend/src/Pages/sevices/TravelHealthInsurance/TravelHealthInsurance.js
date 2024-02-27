@@ -91,12 +91,12 @@ const TravelHealthInsurance = () => {
                 onChange={handleInputChange}
               >
                 <option value="">Select Country</option>
-                {console.log(typeof countriesData)}
-  {/* {typeof countriesData === "object" && (
-    <option key={countriesData.countryName} value={countriesData.countryName}>
-      {countriesData.countryName}
-    </option>
-  )} */}
+                {
+                  Array.isArray(countriesData) &&
+                  countriesData.map((country)=>(
+                    <option value={country.countryName}>{country.countryName}</option>
+                  ))
+                  }
               </select>
             </div>
             <div>
@@ -153,6 +153,7 @@ const TravelHealthInsurance = () => {
             <div className="row">
               {insurance?.map((document) => (
                 <div key={document?._doc?._id} className="col-md-6 mb-3">
+                  {console.log(document)}
                   <div className="travel-Insurance-card shadow-sm card bg-light text-white">
                     <div className="card-body">
                       <div className="d-flex align-items-center">
@@ -163,14 +164,14 @@ const TravelHealthInsurance = () => {
                         />
 
                         <h4 className="travel-Insurance-card-title card-title">
-                          {document.title || "no title"}
+                          {document._doc.insuranceName || "no title"}
                         </h4>
                       </div>
                       <p className="travel-Insurance-card-text card-text">
-                        Months: {document.months || "--"}
+                        Months: {document._doc.duration || "--"}
                       </p>
                       <p className="travel-Insurance-card-text card-text">
-                        Fee: {document.fee || "--"}
+                        Fee: {document._doc.cost || "--"}
                       </p>
                       <button
                         className="travel-Insurance-link btn btn-danger"

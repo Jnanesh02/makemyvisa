@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/avatar.png";
 import googlereview from "../../assets/images/review.png";
@@ -8,17 +8,19 @@ import { Link, useLocation } from "react-router-dom";
 // import Dashboard from "../Dashboard/Dashboard";
 
 const Navbar = () => {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
-const location = useLocation();
-const onLoginPage = location.pathname === "/login";
-const onSignupPage = location.pathname === "/registration";
-const onHomePage = location.pathname === "/";
-const [countriesData, setCountriesData] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
+  const onLoginPage = location.pathname === "/login";
+  const onSignupPage = location.pathname === "/registration";
+  const onHomePage = location.pathname === "/";
+  const [countriesData, setCountriesData] = useState([]);
 
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/getcountries`
+        );
         if (Array.isArray(response.data.message)) {
           setCountriesData(response.data.message);
         } else {
@@ -31,38 +33,38 @@ const [countriesData, setCountriesData] = useState([]);
 
     fetchCountries();
   }, []);
-const Login = () => {
-  // setIsLoggedIn(true);
-  return (
-    <Link className="dropdown-item" to="/login">
-      Login
-    </Link>
-  );
-};
-const Logout = () => {
-  // setIsLoggedIn(false);
-  return (
-    <Link className="dropdown-item" to="/logout">
-      Logout
-    </Link>
-  );
-};
+  const Login = () => {
+    // setIsLoggedIn(true);
+    return (
+      <Link className="dropdown-item" to="/login">
+        Login
+      </Link>
+    );
+  };
+  const Logout = () => {
+    // setIsLoggedIn(false);
+    return (
+      <Link className="dropdown-item" to="/logout">
+        Logout
+      </Link>
+    );
+  };
 
-const Signup = () => {
-  return (
-    <Link className="dropdown-item" to="/registration">
-      signup
-    </Link>
-  );
-};
+  const Signup = () => {
+    return (
+      <Link className="dropdown-item" to="/registration">
+        signup
+      </Link>
+    );
+  };
 
-const HomeLink = () => {
-  return (
-    <Link className="dropdown-item" to="/">
-      Home
-    </Link>
-  );
-};
+  const HomeLink = () => {
+    return (
+      <Link className="dropdown-item" to="/">
+        Home
+      </Link>
+    );
+  };
   return (
     <main className="content">
       <header>
@@ -84,39 +86,57 @@ const HomeLink = () => {
                       data-bs-target="#navbarSupportedContent"
                       aria-controls="navbarSupportedContent"
                       aria-expanded="false"
-                      aria-label="Toggle navigation">
+                      aria-label="Toggle navigation"
+                    >
                       <span className="navbar-toggler-icon"></span>
                     </button>
                     <div
                       className="collapse navbar-collapse"
-                      id="navbarSupportedContent">
+                      id="navbarSupportedContent"
+                    >
                       <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
                         <li className="nav-item">
                           <Link
                             className="nav-link active"
                             aria-current="page"
-                            to="/visa">
+                            to="/visa"
+                          >
                             {" "}
                             Visa{" "}
                           </Link>
                         </li>
+                        <li class="nav-item">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-secondary dropdown-toggle country-tgl"
+                              type="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              Countries
+                            </button>
+                            <ul class="dropdown-menu dropdown-countries">
+                              {countriesData.map((country, index) => (
+                                <li key={index}>
+                                  <Link
+                                    to={`/countries/${country.countryName.replace(
+                                      /\s/g,
+                                      "-"
+                                    )}`}
+                                    className="dropdown-item"
+                                  >
+                                    {country.countryName}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </li>
                         <li className="nav-item">
-                        <div className="dropdown">
-  <button className="btn btn-secondary dropdown-toggle country-tgl" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Countries 
-  </button>
-  <ul className="dropdown-menu dropdown-countries">
-    {countriesData.map((country,index)=>(
-      <li key={index}>
-         <Link to={`/countries/${country.countryName}`} className="dropdown-item">{country.countryName}</Link>
-      </li>
-    ))}
-   
-  </ul>
-</div>
-        </li>
-                        <li className="nav-item">
-                          <Link className="nav-link" to="/services/TravelHealthInsurance">
+                          <Link
+                            className="nav-link"
+                            to="/services/TravelHealthInsurance"
+                          >
                             {" "}
                             Travel ItineraryInsurance
                           </Link>
@@ -142,51 +162,55 @@ const HomeLink = () => {
                       </ul>
 
                       {/* Googlereview */}
-               
-
-                     
                     </div>
                   </div>
                 </nav>
-               
               </div>
               <div className="col-lg-2">
-              <a className="google-review-link" href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,">
-              <img className="header-googlwe-review" src={googlereview} alt="/"/> 
-              </a>
-    <div className="dropdown drp-navbar">
-                        <button
-                          className="btn btn-secondary dropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false">
-                          <img src={avatar} alt="Avatar" />
-                        </button>
-                        <ul className="dropdown-menu">
-                          {onLoginPage && (
-                            <>
-                              <HomeLink></HomeLink>
+                <a
+                  className="google-review-link"
+                  href="https://www.google.com/search?q=makemyvisa+bengaluru+office&sz=0&biw=1223&bih=601&sxsrf=APwXEdfOY3HgsgzHxLH3PfoTtx5JH8mu7g%3A1682505920799&ei=wABJZNevMOSfseMPi9SN-Ak&ved=0ahUKEwjXj_f9rsf-AhXkT2wGHQtqA58Q4dUDCBA&uact=5&oq=makemyvisa+bengaluru+office&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoHCCMQsAMQJzoCCCZKBAhBGAFQugVYggxg8Q1oAHAAeACAAeUBiAGUCpIBBTAuNy4xmAEAoAEByAEBwAEB&sclient=gws-wiz-serp#lrd=0x3bae13c0e4d75019:0x343d6bccc4336492,1,,,,"
+                >
+                  <img
+                    className="header-googlwe-review"
+                    src={googlereview}
+                    alt="/"
+                  />
+                </a>
+                <div className="dropdown drp-navbar">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img src={avatar} alt="Avatar" />
+                  </button>
+                  <ul className="dropdown-menu">
+                    {onLoginPage && (
+                      <>
+                        <HomeLink></HomeLink>
 
-        <Signup></Signup>
-      </>
-    )}
+                        <Signup></Signup>
+                      </>
+                    )}
 
-    {onSignupPage && (
-      <>
-        <HomeLink></HomeLink>
+                    {onSignupPage && (
+                      <>
+                        <HomeLink></HomeLink>
 
-        {isLoggedIn ? <Logout></Logout> : <Login></Login>}
-      </>
-    )}
+                        {isLoggedIn ? <Logout></Logout> : <Login></Login>}
+                      </>
+                    )}
 
-                          {onHomePage && (
-                            <>
-                              <Signup></Signup>
-                              <Login></Login>
-                            </>
-                          )}
-                        </ul>
-                      </div>
+                    {onHomePage && (
+                      <>
+                        <Signup></Signup>
+                        <Login></Login>
+                      </>
+                    )}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
