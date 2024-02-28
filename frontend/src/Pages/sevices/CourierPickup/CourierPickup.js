@@ -27,12 +27,6 @@ const CourierPickup = () => {
     }));
   };
 
-  const handleNameClick = (name) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      sendingDetails: name,
-    }));
-  };
 
   const renderOptions = () => {
     const options = [];
@@ -111,7 +105,7 @@ const CourierPickup = () => {
                 10-digit mobile
               </label>
               <input
-                type="text"
+                type="Number"
                 className="form-control w-50"
                 id="pickUpMobileInput"
                 name="pickUpMobile"

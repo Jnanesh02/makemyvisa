@@ -6,21 +6,15 @@ export const Immigration = () => {
   const initialData = {
     fullName: "",
     email: "",
-    phoneNumber: "91",
-    visaExperts: "",
-    country: "",
-    destination: "",
+    phoneNumber: "+91",
+    visaAssistanceDescription: "",
+    presentcountry: "",
+    destinationCountry: "",
   };
   const [formData, setFormData] = useState(initialData);
   const [countriesData, setCountriesData] = useState([]);
 
-  const handlePhoneChange = (value, country) => {
-    setFormData((prev) => ({
-      ...prev,
-      phoneNumber: value,
-      
-    }));
-  };
+  
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -40,10 +34,8 @@ export const Immigration = () => {
 
     fetchCountries();
   }, []);
-  const onchangeInput = (event) => {
-    
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
+  const onchangeInput = (name,value) => {
+        setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -131,7 +123,7 @@ export const Immigration = () => {
                   id="FullName"
                   name="fullName"
                   value={formData.fullName}
-                  onChange={onchangeInput}
+                  onChange={(e)=> onchangeInput(e.target.name,e.target.value)}
                   placeholder="Full Name"
                   required
                 />
@@ -144,7 +136,7 @@ export const Immigration = () => {
                     id="Email"
                     name="email"
                     value={formData.email}
-                    onChange={onchangeInput}
+                    onChange={(e)=> onchangeInput(e.target.name,e.target.value)}
                     placeholder="name@example.com"
                     required
                   />
@@ -159,7 +151,7 @@ export const Immigration = () => {
                     className='w-100'
                     value={formData.phoneNumber}
                     onChange={(value, country) =>
-                      handlePhoneChange(value, country)
+                      onchangeInput("phoneNumber", value)
                     }
                     required
                   />
@@ -169,10 +161,10 @@ export const Immigration = () => {
                 <textarea
                   className="form-control"
                   id="VisaExperts"
-                  name="visaExperts"
+                  name="visaAssistanceDescription"
                   placeholder="Please explain your situation to our Visa Assistance Experts"
-                  value={formData.visaExperts}
-                  onChange={onchangeInput}
+                  value={formData.visaAssistanceDescription}
+                  onChange={(e)=> onchangeInput(e.target.name,e.target.value)}
                   rows="3"
                   required
                 ></textarea>
@@ -182,9 +174,9 @@ export const Immigration = () => {
                   <select
                     className="form-select"
                     id="country"
-                    name="country"
-                    value={formData.country}
-                    onChange={onchangeInput}
+                    name="presentcountry"
+                    value={formData.presentcountry}
+                    onChange={(e)=> onchangeInput(e.target.name,e.target.value)}
                     required
                   >
                     <option value="">Choose your country</option>
@@ -192,7 +184,7 @@ export const Immigration = () => {
                     {countriesData
                       .filter(
                         (country) =>
-                          country.countryName !== formData.destination
+                          country.countryName !== formData.destinationCountry
                       )
                       .map((country) => (
                         <option key={country._id} value={country.countryCode}>
@@ -205,16 +197,16 @@ export const Immigration = () => {
                   <select
                     className="form-select"
                     id="destination"
-                    name="destination"
-                    value={formData.destination}
+                    name="destinationCountry"
+                    value={formData.destinationCountry}
                     placeholder="Choose a destination"
-                    onChange={onchangeInput}
+                    onChange={(e)=> onchangeInput(e.target.name,e.target.value)}
                     required
                   >
                     <option value="">Choose your destination</option>
                     {countriesData
                       .filter(
-                        (country) => country.countryName !== formData.country
+                        (country) => country.countryName !== formData.presentcountry
                       )
                       .map((country) => (
                         <option key={country._id} value={country.countryName}>

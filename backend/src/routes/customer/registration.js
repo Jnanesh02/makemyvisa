@@ -5,9 +5,8 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 router.post("/customer/register", async (req, res) => {
- 
-
   try {
+    console.log(req.body);
     const {
       firstName,
       lastName,
@@ -52,7 +51,7 @@ router.post("/customer/register", async (req, res) => {
       email: email,
       phone_number: phoneNumber,
       state: state,
-      country: country,
+      country: country.name,
       password: hashedPassword,
     });
     await newUser.save();
