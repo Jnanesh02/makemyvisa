@@ -91,10 +91,10 @@ const TravelHealthInsurance = () => {
                 onChange={handleInputChange}
               >
                 <option value="">Select Country</option>
-                {
+                { 
                   Array.isArray(countriesData) &&
                   countriesData.map((country)=>(
-                    <option value={country.countryName}>{country.countryName}</option>
+                    <option key={country._id} value={country.countryName}>{country.countryName}</option>
                   ))
                   }
               </select>
@@ -151,9 +151,12 @@ const TravelHealthInsurance = () => {
               Choose the most appropriate plan for you and your family.
             </p>
             <div className="row">
-              {insurance?.map((document) => (
+              {insurance.length === 0?(
+                 <div className="col text-center">
+                 <p>No insurance documents found.</p>
+               </div>
+              ):(insurance?.map((document) => (
                 <div key={document?._doc?._id} className="col-md-6 mb-3">
-                  {console.log(document)}
                   <div className="travel-Insurance-card shadow-sm card bg-light text-white">
                     <div className="card-body">
                       <div className="d-flex align-items-center">
@@ -182,7 +185,7 @@ const TravelHealthInsurance = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
             <div className="text-center">
               {" "}

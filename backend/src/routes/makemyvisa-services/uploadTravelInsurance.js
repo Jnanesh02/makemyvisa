@@ -13,6 +13,9 @@ router.post("/api/upload", upload.single("fileUpload"), async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
     const { insuranceName,duration,cost,countries} = req.body;
+    if(!insuranceName && !duration && !cost && !countries) {
+      return res.status(400).json({ message: "Missing required fields in request body" });
+    }
     const file = req.file;
     const params = {
       Bucket: "makemyvisa-public-assets",
@@ -47,6 +50,32 @@ try {
 
 }
 });
+
+router.delete('/delete/insurance/:id',async(req,res)=>{
+try {
+  const objectId = req.params.id;
+ const insuranceDoc = await travelInsuranceModel.findById({_id: objectId});
+ if(!insuranceDoc){
+  return res.status(404).json({message:'Insurance not found'})
+ }
+const insuranceDocKey = insuranceDoc.key;
+ await travelInsuranceModel.findByIdAndDelete({_id: objectId});
+if(insuranceDocKey){
+  const params= {
+    Bucket: "makemyvisa-public-assets",
+    Key: insuranceDocKey,
+  };
+  await s3.deleteObject(params).catch(() => {
+    console.warn(`Failed to delete object from S3 with key: ${insuranceDocKey}`); 
+});
+}
+ return res.status(200).json({message: 'deleted successfully'});
+} catch (error) {
+  return res.status(500).json({message:"Internal Server Error"});
+}
+
+});
+
 router.get("/api/files/:countryName", async (req, res) => {
     try {
       const countryName = req.params.countryName;

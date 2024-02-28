@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
     tripType: "oneWay",
-    DepartureDate: "",
     returnDate: "",
     departureDate: "",
     numberOfPassengers: 1,
@@ -103,13 +102,14 @@ function DummyTicketForm() {
     }
 
     try {
-      if (localStorage.getItem("userId")) {
+      if (CookieUtils.getCookies("userId")) {
         navigate("/dashboard");
       } else {
         const cookieData = {
           formData: formData,
           serviceType: dummyticket,
         };
+        console.log(cookieData);
         CookieUtils.setCookies('servicename', JSON.stringify(cookieData));
         navigate('/login');
       }
@@ -121,10 +121,7 @@ function DummyTicketForm() {
   return (
     <div className="dummy-ticket-form-container">
       <div className="container mx-auto shadow bg-body rounded p-5 dummytickets">
-        {/* Form JSX */}
          <h2 className='text-center dummy-text-heading'>
-         
-          
         <svg className="flight-icon" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40"><path d="m319.5-319-104-49 8.5-8.5 93.5 13.5 170-168.5-269-148 14.5-16 330 89 84.5-88q9.5-9.5 21.75-9.5t22.25 9.5Q701-685 701-672t-9.5 22.5l-85 86.5L696-234l-15.5 16.5-149-268.5L365-319l12.5 95.5-9 9-49-104.5Z"/></svg>
                <span>  Dummy Ticket </span>
                 </h2> 
