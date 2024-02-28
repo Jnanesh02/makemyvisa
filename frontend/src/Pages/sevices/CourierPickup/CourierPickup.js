@@ -1,36 +1,30 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PhoneInput from "react-phone-input-2";
 
 const CourierPickup = () => {
   const [formData, setFormData] = useState({
-    selectedOption: null,
+    ParcelWeight:"",
     pickUpAddress: "",
-    pickUpMobile: "",
+    pickUpMobile: "+91",
     pickUpDepart: "",
-    pickUpTextarea: "",
+    pickUpFrom:"",
+    pickUpTo:"",
     deliveryAddress: "",
-    deliveryMobile: "",
+    deliveryMobile: "+91",
     deliveryArrive: "",
-    deliveryTextarea: "",
-    sendingDetails: "",
-    preferCourierWithBag: false,
+    deliveryFrom:"",
+    deliveryTo:""
   });
 
 
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
+  const handleInputChange = (name,value) => {
+   
+    
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: newValue,
-    }));
-  };
-
-  const handleNameClick = (name) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      sendingDetails: name,
+      [name]: value,
     }));
   };
 
@@ -42,25 +36,16 @@ const CourierPickup = () => {
     }
     return options;
   };
-  console.log("formdata",formData);
-  const handleSubmit = () => {
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("formdata",formData);
+    
+    
     axios
       .post("/api/submit", formData)
       .then((response) => {
-        console.log(response.data);
-        setFormData({
-          selectedOption: null,
-          pickUpAddress: "",
-          pickUpMobile: "",
-          pickUpDepart: "",
-          pickUpTextarea: "",
-          deliveryAddress: "",
-          deliveryMobile: "",
-          deliveryArrive: "",
-          deliveryTextarea: "",
-          sendingDetails: "",
-          preferCourierWithBag: false,
-        });
+        
       })
       .catch((error) => {
         console.error("Error submitting form:", error);
@@ -88,6 +73,7 @@ const CourierPickup = () => {
           Courier And Pickup
         </h2>
       </div>
+      <form onSubmit={handleSubmit}>
       <div className="courierpickupform w-50 mx-auto mt-5">
         <div className="courierpickupform__From mb-3">
           <h4>From</h4>
@@ -102,33 +88,42 @@ const CourierPickup = () => {
                 id="pickUpAddressInput"
                 name="pickUpAddress"
                 value={formData.pickUpAddress}
-                onChange={handleInputChange}
+                onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                 placeholder="Street name & Locality Name"
+                required
               />
             </div>
             <div className="mb-3">
               <label htmlFor="pickUpMobileInput" className="form-label">
                 10-digit mobile
               </label>
-              <input
-                type="text"
-                className="form-control w-50"
-                id="pickUpMobileInput"
-                name="pickUpMobile"
-                value={formData.pickUpMobile}
-                onChange={handleInputChange}
-                placeholder="Mobile number"
-              />
+              
+              <PhoneInput
+                    placeholder="Phone Number"
+                    name="pickUpMobile"
+                    id="pickUpMobileInput"
+                    
+                    value={formData.pickUpMobile}
+                    onChange={(value)=>handleInputChange("pickUpMobile",value)
+                    }
+                    required
+                  />
             </div>
             <div>
-              <label htmlFor="pickUpMobileInput" className="form-label">
+              <label htmlFor="WeightInput" className="form-label">
                 Weight
               </label>
-              <select className="form-select" aria-label="Default select example">
-                <option selected>Weight</option>
-                <option value="1">1kg to 5kg</option>
-                <option value="2">5kg to 10kg</option>
-                <option value="3">10kg to 15kg</option>
+              <select className="form-select" aria-label="Default select example"
+              name="ParcelWeight"
+              value={formData.ParcelWeight}
+              onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
+              required
+              >
+                <option defaultValue>Weight</option>
+                <option value="<5">{`<${5}kg`}</option>
+                <option value="<10">{`<${10}kg`}</option>
+                <option value="<15">{`<${15}kg`}</option>
+                <option value=">15">{`>${15}kg`}</option>
               </select>
             </div>
 
@@ -140,35 +135,23 @@ const CourierPickup = () => {
                   id="departureDate"
                   className="form-control mb-3"
                   value={formData.pickUpDepart}
-                  onChange={handleInputChange}
+                  onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                   name="pickUpDepart"
+                  required
                 />
                 From
-                <select className="form-select mx-2" aria-label="From" name="deliveryFrom" value={formData.pickUpFrom} onChange={handleInputChange}>
+                <select className="form-select mx-2" aria-label="From" name="pickUpFrom" value={formData.pickUpFrom} onChange={(e)=> handleInputChange(e.target.name,e.target.value)} required>
                   <option value="">Select</option>
                   {renderOptions()}
                 </select>
                 To
-                <select className="form-select" aria-label="To" name="deliveryTo" value={formData.pickUpTo} onChange={handleInputChange}>
+                <select className="form-select" aria-label="To" name="pickUpTo" value={formData.pickUpTo} onChange={(e)=> handleInputChange(e.target.name,e.target.value)} required>
                   <option value="">Select</option>
                   {renderOptions()}
                 </select>
               </div>
             </div>
-            <div className="mb-3">
-              <label htmlFor="pickUpTextarea" className="form-label">
-                Pickup Instructions
-              </label>
-              <textarea
-                className="form-control"
-                id="pickUpTextarea"
-                rows="3"
-                name="pickUpTextarea"
-                value={formData.pickUpTextarea}
-                onChange={handleInputChange}
-                placeholder="flat number, floor, building name, street name, landmarks, contact name, etc."
-              ></textarea>
-            </div>
+           
           </div>
         </div>
         <div className="courierpickupform__To">
@@ -184,23 +167,26 @@ const CourierPickup = () => {
                 id="deliveryAddressInput"
                 name="deliveryAddress"
                 value={formData.deliveryAddress}
-                onChange={handleInputChange}
+                onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                 placeholder="Drop off Locality/street"
+                required
               />
             </div>
             <div className="mb-3">
               <label htmlFor="deliveryMobileInput" className="form-label">
                 10-digit mobile
               </label>
-              <input
-                type="text"
-                className="form-control"
-                id="deliveryMobileInput"
-                name="deliveryMobile"
-                value={formData.deliveryMobile}
-                onChange={handleInputChange}
-                placeholder="Mobile number"
-              />
+              
+              <PhoneInput
+                    placeholder="Phone Number"
+                    name="deliveryMobile"
+                    id="deliveryMobileInput"
+                    
+                    value={formData.deliveryMobile}
+                    onChange={(value)=>handleInputChange("deliveryMobile",value)
+                    }
+                    required
+                  />
             </div>
             <div className="mb-3">
               <label className="form-label">Arrive</label>
@@ -210,48 +196,37 @@ const CourierPickup = () => {
                   id="departureDate"
                   className="form-control mb-3"
                   value={formData.deliveryArrive}
-                  onChange={handleInputChange}
+                  onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                   name="deliveryArrive"
+                  required
                 />
                 From
-                <select className="form-select" aria-label="From" name="deliveryFrom" value={formData.deliveryFrom} onChange={handleInputChange}>
+                <select className="form-select" aria-label="From" name="deliveryFrom" value={formData.deliveryFrom} onChange={(e)=> handleInputChange(e.target.name,e.target.value)} required>
                   <option value="">Select</option>
                   {renderOptions()}
                 </select>
                 To
-                <select className="form-select" aria-label="To" name="deliveryTo" value={formData.deliveryTo} onChange={handleInputChange}>
+                <select className="form-select" aria-label="To" name="deliveryTo" value={formData.deliveryTo} onChange={(e)=> handleInputChange(e.target.name,e.target.value)} required>
                   <option value="">Select</option>
                   {renderOptions()}
                 </select>
               </div>
             </div>
-            <div className="mb-3">
-              <label htmlFor="deliveryTextarea" className="form-label">
-                Delivery Instructions
-              </label>
-              <textarea
-                className="form-control"
-                id="deliveryTextarea"
-                rows="3"
-                name="deliveryTextarea"
-                value={formData.deliveryTextarea}
-                onChange={handleInputChange}
-                placeholder="flat number, floor, building name, street name, landmarks, contact name, etc."
-              ></textarea>
-            </div>
+           
           </div>
         </div>
         
         <div className="courierpickupform__submitbutton mt-3 text-center mb-3">
           <button
-            type="button"
+            
             className="btn btn-danger"
-            onClick={handleSubmit}
+            type="submit"
           >
             Submit
           </button>
         </div>
       </div>
+      </form>
     </div>
   );
 };
