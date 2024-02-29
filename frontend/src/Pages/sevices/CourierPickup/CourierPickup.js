@@ -56,11 +56,11 @@ const CourierPickup = () => {
     <div>
       <div
         style={{
-          backgroundImage:
-            "url('https://www.gopackagingstore.com/sites/all/themes/hwcps_zen/images/topper/pickupdelivery_topper.png')",
-          backgroundSize: "50% 100%",
+       
+          backgroundSize: "100% 100%",
+          backgroundColor: "#e0e0e0",
           backgroundRepeat: "no-repeat",
-          height: "400px",
+          height: "250px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -74,7 +74,7 @@ const CourierPickup = () => {
         </h2>
       </div>
       <form onSubmit={handleSubmit}>
-      <div className="courierpickupform w-50 mx-auto mt-5">
+      <div className="courierpickupform">
         <div className="courierpickupform__From mb-3">
           <h4>From</h4>
           <div className="card p-3">
@@ -93,7 +93,9 @@ const CourierPickup = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+
+<div className="ed">
+            <div className="mb-3 w-50">
               <label htmlFor="pickUpMobileInput" className="form-label">
                 10-digit mobile
               </label>
@@ -109,7 +111,7 @@ const CourierPickup = () => {
                     required
                   />
             </div>
-            <div>
+            <div className="w-50">
               <label htmlFor="WeightInput" className="form-label">
                 Weight
               </label>
@@ -126,6 +128,8 @@ const CourierPickup = () => {
                 <option value=">15">{`>${15}kg`}</option>
               </select>
             </div>
+            </div>
+
 
             <div className="mb-3">
               <label className="form-label">Depart</label>
@@ -133,7 +137,7 @@ const CourierPickup = () => {
                 <input
                   type="date"
                   id="departureDate"
-                  className="form-control mb-3"
+                  className="form-control"
                   value={formData.pickUpDepart}
                   onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                   name="pickUpDepart"
@@ -194,7 +198,7 @@ const CourierPickup = () => {
                 <input
                   type="date"
                   id="departureDate"
-                  className="form-control mb-3"
+                  className="form-control"
                   value={formData.deliveryArrive}
                   onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                   name="deliveryArrive"
@@ -216,7 +220,10 @@ const CourierPickup = () => {
           </div>
         </div>
         
-        <div className="courierpickupform__submitbutton mt-3 text-center mb-3">
+       
+      </div>
+      </form>
+      <div className="courierpickupform__submitbutton mt-3 text-center mb-3">
           <button
             
             className="btn btn-danger"
@@ -225,8 +232,6 @@ const CourierPickup = () => {
             Submit
           </button>
         </div>
-      </div>
-      </form>
     </div>
   );
 };

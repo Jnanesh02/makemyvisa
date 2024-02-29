@@ -27,7 +27,7 @@ const Service = () => {
     <>
 
 
-<img class="serv-c" src={services1} alt="/" />
+
       <button
         type="button"
         className="btn btn-primary btn-sidenavbar-b"
@@ -67,335 +67,109 @@ const Service = () => {
                 className="carousel slide carousal-slider-services"
               >
                 <div className="clients-cricle-section">
-                  <ul
-                    className="nav nav-pills mb-3 nav-services-circle"
-                    id="pills-tab"
-                    role="tablist"
-                  >
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link active btn-circle-services-1"
-                        id="pills-home-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-home"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-home"
-                        aria-selected="true"
-                      >
-                        
-                        <img src={services1} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-2"
-                        id="pills-profile-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-profile"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-profile"
-                        aria-selected="false"
-                      >
-                        <img src={services2} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-3"
-                        id="pills-contact-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact"
-                        aria-selected="false"
-                      >
-                        <img src={services3} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-4"
-                        id="pills-profile-1-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-profile-1"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-profile-1"
-                        aria-selected="false"
-                      >
-                        <img src={services4} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-5"
-                        id="pills-contact-1-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact-1"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact-1"
-                        aria-selected="false"
-                      >
-                        <img src={services5} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-6"
-                        id="pills-profile-2-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-profile-2"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-profile-2"
-                        aria-selected="false"
-                      >
-                        <img src={services6} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-7"
-                        id="pills-contact-2-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact-2"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact-2"
-                        aria-selected="false"
-                      >
-                        <img src={services11} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-8"
-                        id="pills-contact-3-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact-3"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact-3"
-                        aria-selected="false"
-                      >
-                        <img src={services12} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-9"
-                        id="pills-contact-4-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact-4"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact-4"
-                        aria-selected="false"
-                      >
-                        <img src={services13} alt="/" />
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link btn-circle-services-10"
-                        id="pills-contact-5-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact-5"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-contact-5"
-                        aria-selected="false"
-                      >
-                        <img src={services14} alt="/" />
-                      </button>
-                    </li>
-                  </ul>
-                  <div className="tab-content" id="pills-tabContent">
-                    <div
-                      className="tab-pane fade show active"
-                      id="pills-home"
-                      role="tabpanel"
-                      aria-labelledby="pills-home-tab"
-                      tabindex="0"
-                    >
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain1}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Forex <br /> Services{" "}
-                      </p>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-profile"
-                      role="tabpanel"
-                      aria-labelledby="pills-profile-tab"
-                      tabindex="0"
-                    >
-                      <Link to="services/VisaAssistance">
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain2}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Visa <br /> Assistance{" "}
-                      </p>
-                      </Link>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-tab"
-                      tabindex="0"
-                    >
-                      <Link to="services/dummy/dummyticket">
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain3}
-                        alt="/"
-                      />
-                      </Link>
-                      <p className="pills-tab-text"> Ticketing </p>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-profile-1"
-                      role="tabpanel"
-                      aria-labelledby="pills-profile-1-tab"
-                      tabindex="0"
-                    >
-                      <Link to="services/hotel/hotelReservation">
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain4}
-                        alt="/"
-                      />
-                         <p className="pills-tab-text"> Hotel <br /> Reservation </p>
-                      </Link>
-                   
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-1"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-1-tab"
-                      tabindex="0"
-                    >
-                     <Link  to="services/TravelHealthInsurance"> <img
-                        className="services-main-imagess"
-                        src={servicesmain5}
-                        alt="/"
-                      />
-                      </Link>
-                      <p className="pills-tab-text">
-                        Travel Health <br /> Insurance
-                      </p>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-profile-2"
-                      role="tabpanel"
-                      aria-labelledby="pills-profile-2-tab"
-                      tabindex="0"
-                    >
-                      <Link to="service/immigration/immigrationAdvice">
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain6}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Immigration <br /> Advice{" "}
-                      </p>
-                      </Link>
+
+                <div class="myDIV active"> 
+                <a target="blank" href="https://www.pixelstalk.net/wp-content/uploads/2016/07/Wallpapers-pexels-photo.jpg">
+                <img src={services1}/>
+                </a>
+                </div>
+
+                <div class="hidee"> 
+                <img src={services1}/> 
+                <p>
+                   Forex Services
+                </p>
+                 </div>         
+                <div class="myDIVsecond"> 
+                <img src={services2}/>
+                </div>
+                <div class="hideesecond"> 
+                <img src={services2}/>
+                <p>
+                   Visa Assistance
+                </p>
+                   </div>     
+                <div class="myDIVthree"> 
+                <img src={services3}/>
+                </div>
+                <div class="hideethree"> 
+                <img src={services3}/>  
+                <p>
+                   Ticketing
+                </p>
+                </div>   
+                <div class="myDIVfour"> 
+                <img src={services4}/>
+                </div>
+                <div class="hideefour"> 
+                <img src={services4}/> 
+                <p>
+                   Hotel Reservation
+                </p>
+                 </div>   
+
+                <div class="myDIVfive"> 
+                <img src={services5}/>
+                </div>
+                <div class="hideefive">  
                 
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-2"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-2-tab"
-                      tabindex="0"
-                    >
-                    <Link to="services/AppostileAndAttestation"> 
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain11}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Apostille & <br /> Attestation{" "}
-                      </p>
-                      </Link>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-3"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-3-tab"
-                      tabindex="0"
-                    >
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain12}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Translation & <br /> Notary{" "}
-                      </p>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-4"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-4-tab"
-                      tabindex="0"
-                    >
+                 <img src={services5}/>
+                 <p>
+                   Travel Health
+                </p>
+                  </div>   
 
-                    <Link to='services/CourierPickup'>
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain13}
-                        alt="/"
-                      />
-                      <p className="pills-tab-text">
-                        {" "}
-                        Courier, <br /> Pickup{" "}
-                      </p>
-                      </Link>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-5"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-5-tab"
-                      tabindex="0"
-                    >
-                      <img
-                        className="services-main-imagess"
-                        src={servicesmain14}
-                        alt="/"
-                      />
+                <div class="myDIVsix"> 
+                <img src={services6}/>
+                </div>
+                <div class="hideesix">  
+                <img src={services6}/> 
+                <p>
+                  Immigration Advice
+                </p>
+                </div>   
+                
+                <div class="myDIVsixextra"> 
+                <img src={services11}/>
+                </div>
+                <div class="hideesixextra"> 
+                
+                 <img src={services11}/> 
+                 <p> Apostille & Attestation </p>
+                 </div>   
+                
+                <div class="myDIVseven"> 
+                <img src={services12}/>
+                </div>
+                <div class="hideeseven">
+                  
+                   <img src={services12}/> 
+                   <p>
+                    Translation & Notary
+                   </p>
+                   </div>   
 
-                      <p className="pills-tab-text">
-                        {" "}
-                        International <br /> Student{" "}
-                      </p>
-                    </div>
-                  </div>
+                <div class="myDIVeight"> 
+                <img src={services13}/>
+               
+                </div>
+                <div class="hideeeight">
+                    <img src={services13}/>
+                    <p>
+                       Courier, Pickup & Drop 
+                    </p>
+                     </div>   
+
+                <div class="myDIVnine"> 
+                <img src={services14}/>
+                </div>
+                <div class="hideenine">   
+                 <img src={services14}/> 
+                 <p>
+                   Student Accommodation 
+                 </p>
+                 </div>   
+
                 </div>
               </div>
             </div>
