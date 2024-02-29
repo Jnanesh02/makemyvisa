@@ -61,13 +61,23 @@ try {
 const insuranceDocKey = insuranceDoc.key;
  await travelInsuranceModel.findByIdAndDelete({_id: objectId});
 if(insuranceDocKey){
+  console.log(insuranceDocKey);
   const params= {
     Bucket: "makemyvisa-public-assets",
     Key: insuranceDocKey,
   };
-  await s3.deleteObject(params).catch(() => {
-    console.warn(`Failed to delete object from S3 with key: ${insuranceDocKey}`); 
-});
+  await s3.deleteObject(params).promise()
+  .then(() => console.log("Deletion successful"))
+  .catch((error) => {
+    if (error.code === 'NoSuchKey') {
+      console.log("Object not found:", insuranceDocKey);
+    } else if (error.code === 'AccessDenied') {
+      console.error("Insufficient permissions to delete object:", insuranceDocKey);
+    } else {
+      console.error("Error deleting object:", insuranceDocKey, error);
+    }
+  });
+  
 }
  return res.status(200).json({message: 'deleted successfully'});
 } catch (error) {

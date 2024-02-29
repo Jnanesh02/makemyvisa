@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
 import icon from "../../assets/countriesserviceImages/countries-icons.png";
-
 import axios from "axios";
 import "./HomeStyles/countriesserviceDetails.css";
 export const CountriesServiceDetails = () => {
@@ -28,6 +27,7 @@ export const CountriesServiceDetails = () => {
             (service) => service.serviceName === serviceName.replace(/-/g, " ")
           );
           if (selectedService) {
+            console.log(selectedService);
             setFilteredSubServiceTypes(selectedService.subServiceTypes);
           } else {
             setFilteredSubServiceTypes([]);
@@ -90,15 +90,13 @@ export const CountriesServiceDetails = () => {
                 id="carouselExampleDark"
                 className="carousel carousel-dark slide"
               >
-                <div className="row services-country-card">
-                  {console.log(filteredSubServiceType)}
-                  {filteredSubServiceType ? (
+                             <div className="row services-country-card">
+                  {filteredSubServiceType && filteredSubServiceType.length > 0 ? (
                     filteredSubServiceType.map((subServiceType, index) => (
                       <div
                         key={index}
                         className="country-services-card-category"
                       >
-                        {console.log(subServiceType.index)}
                         <div className="card country-cards">
                           <img src={card} className="card-img-top" alt="/" />
                           <div className="card-body">
@@ -146,6 +144,7 @@ export const CountriesServiceDetails = () => {
       </section>
     );
   };
+  
   const ServiceInformation = (countryData, serviceName) => {
     return (
       <section className="information-visa">
@@ -155,10 +154,6 @@ export const CountriesServiceDetails = () => {
               <h1>Information on {serviceName}</h1>
               {countryData && countryData.serviceTypes ? (
                 <p>
-                  {console.log(
-                    countryData.serviceTypes,
-                    serviceName.replace(/-/g, " ")
-                  )}
                   {countryData.serviceTypes
                     .filter(
                       (serviceType) =>
