@@ -25,6 +25,9 @@ import servicesmain14 from "../assets/images/services-main-images/14-1.png";
 const Service = () => {
   return (
     <>
+
+
+<img class="serv-c" src={services1} alt="/" />
       <button
         type="button"
         className="btn btn-primary btn-sidenavbar-b"
@@ -80,6 +83,7 @@ const Service = () => {
                         aria-controls="pills-home"
                         aria-selected="true"
                       >
+                        
                         <img src={services1} alt="/" />
                       </button>
                     </li>
@@ -391,5 +395,6 @@ const Service = () => {
     </>
   );
 };
+
 
 export default Service;

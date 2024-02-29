@@ -589,6 +589,24 @@ img.services-main-imagess {
     margin: auto;
     display: block;
 }
+img.serv-c {
+    width: 50px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.hide {
+    display: none;
+  }
+      
+  .myDIV:hover + .hide {
+    display: block;
+    color: red;
+  }
+  .myDIV1:hover + .hide {
+    display: block;
+    color: red;
+  }
 @media only screen and (max-width: 600px)
 {
 img.certificate-img {
