@@ -14,17 +14,14 @@ const travelInsuranceSchema = new mongoose.Schema({
   },
   duration: {
     type: String,
-    required: true,
   },
   cost: {
     type: String,
-    required: true,
   },
   countriesApplicable: [
     {
       type: String,
-
-}
+    },
   ],
 });
 const travelInsuranceModel = mongoose.model(

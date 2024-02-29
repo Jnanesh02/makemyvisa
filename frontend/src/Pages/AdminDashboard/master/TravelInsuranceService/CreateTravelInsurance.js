@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ConfirmationModal from "../../EmployeeDetails/ConfirmationAccountModel";
 import axios from "axios";
 import Select from 'react-select';
+import { FadeLoader } from 'react-spinners';
 
 export const CreateTravelInsurance = ({
   handleCloseModal,
@@ -19,11 +20,13 @@ export const CreateTravelInsurance = ({
   const [travelInsuranceFormData, setTravelInsuranceFormData] = useState(initialFormData);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [countryOptions, setCountryOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
  
 
   useEffect(() => {
     // Fetch country data from API
+    setIsLoading(true);
     axios.get( `${process.env.REACT_APP_BACKEND_URL}/getcountries`)
       .then(response => {
         // Transform the response data into the format required by react-select
@@ -36,6 +39,9 @@ export const CreateTravelInsurance = ({
       })
       .catch(error => {
         console.error('Error fetching country data:', error);
+      })
+      .finally(()=>{
+        setIsLoading(false);
       });
   }, []); // Empty dependency array to ensure it only runs once when the component mounts
 
@@ -60,6 +66,7 @@ export const CreateTravelInsurance = ({
 
   const handleConfirm = async () => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("insuranceName", travelInsuranceFormData.insuranceName);
       formData.append("fileUpload", travelInsuranceFormData.fileUpload);
@@ -77,13 +84,16 @@ export const CreateTravelInsurance = ({
           "Content-Type": "multipart/form-data",
         },
       });
-  
       if (response.status === 200) {
         setConfirmationModalOpen(false);
         handleCloseModal();
         setActionrender(true);
+        setIsLoading(false);
       }
     } catch (error) {
+      setIsLoading(false);
+      setConfirmationModalOpen(false);
+      handleCloseModal();
       alert(error.message);
     }
   };
@@ -98,7 +108,9 @@ export const CreateTravelInsurance = ({
 
   return (
     <>
-      <div className="create-account-dashboard create-country">
+      {isLoading?<FadeLoader />:(
+        <>
+        <div className="create-account-dashboard create-country">
         <div className="create-dep-form scrl-frm">
           <button className="close-buttonss" onClick={handleCloseModal}>X</button>
           <div className="create-country-form">
@@ -172,7 +184,6 @@ export const CreateTravelInsurance = ({
           </div>
         </div>
       </div>
-
       {isConfirmationModalOpen && (
         <ConfirmationModal
           message={`Are you sure you want to ${
@@ -182,6 +193,10 @@ export const CreateTravelInsurance = ({
           onCancel={handleCancel}
         />
       )}
+        </>
+      )}
+
+     
     </>
   );
 };

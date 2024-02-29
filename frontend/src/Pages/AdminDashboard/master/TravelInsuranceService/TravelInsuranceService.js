@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FadeLoader } from 'react-spinners';
 import axios from "axios";
 import "../../AdminDashboardStyles/Employee.css";
 import { CreateTravelInsurance } from "./CreateTravelInsurance";
@@ -10,14 +11,18 @@ const TravelInsuranceServices = () => {
   const [isDeleteConfirmationModalOpen, setDeleteConfirmationModalOpen] =
     useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [insuranceIdToDelete, setInsuranceIdToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getTravelInsuranceData = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/allTravelInsurance`
       );
       if (response.status === 200) {
         setTravelInsuranceData(response.data);
+        setIsLoading(false)
       }
     } catch (error) {
       alert(error.message);
@@ -34,14 +39,8 @@ const TravelInsuranceServices = () => {
 
 
   const handleDelete = async (insuranceId) => {
-    try {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/deleteTravelInsurance/${insuranceId}`
-      );
-      setDeleteConfirmationModalOpen(true);
-    } catch (error) {
-      alert(error.message);
-    }
+    setInsuranceIdToDelete(insuranceId);
+    setDeleteConfirmationModalOpen(true);
   };
 
   const handleCancelDelete = () => {
@@ -50,17 +49,28 @@ const TravelInsuranceServices = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await getTravelInsuranceData();
-    } catch (error) {
-      alert(error.message);
-    } finally {
+      setIsLoading(true);
+      const response =  await axios.delete(
+          `${process.env.REACT_APP_BACKEND_URL}/delete/insurance/${insuranceIdToDelete}`
+        );
+        console.log(response);
+    if(response.status === 200){
       setDeleteConfirmationModalOpen(false);
+      setIsLoading(false);
+      setIsEditing(true);
     }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      alert(error);
+    } 
   };
 
   return (
     <>
-      <div className="main-department-section">
+      {isLoading?<FadeLoader/>:(
+        <>
+        <div className="main-department-section">
         <div className="dep-tbl">
           <h2>Travel Insurance</h2>
           <button
@@ -129,6 +139,8 @@ const TravelInsuranceServices = () => {
           handleCloseModal={() => setShowModal(false)}
           setActionrender={setIsEditing}
         />
+      )}
+        </>
       )}
     </>
   );

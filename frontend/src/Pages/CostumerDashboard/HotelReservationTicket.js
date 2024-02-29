@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React ,{useState,useEffect} from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import "./CostumerDashboardStyles/Employee.css"
 import CookieUtils from '../../components/cookie/Cookies';
 
@@ -75,7 +75,17 @@ export const HotelReservationTicket = () => {
                         </span>
                       ))}
                     </td>
-                    <td>{ticket.paymentDetails || '-'}</td>
+                    {/* <td>{ticket.paymentDetails || '-'}</td> */}
+                    {(ticket.price === "" || ticket.price === "awaiting") &&
+                    ticket.ticketStatus !== "completed" ? (
+                      <td>{"awaiting"}</td>
+                    ) : ticket.ticketStatus === "completed" ? (
+                      <td>Payment Completed</td>
+                    ) : (
+                      <td>
+                        <Link to="/payment-link">Payment Link</Link>
+                      </td>
+                    )}
                     <td>{ticket.price || 'awaiting '}</td>
                     <td>{ticket.ticketStatus}</td>
                   </tr>
