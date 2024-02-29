@@ -1,11 +1,12 @@
 import React,{useEffect} from 'react'
 import { Outlet ,Navigate,useNavigate} from 'react-router-dom'
+import CookieUtils from '../cookie/Cookies';
 
 const PrivateRoute = () => {
     const navigate=useNavigate()
     useEffect(() => {
       function isTokenExpired() {
-        const token = localStorage.getItem('userId');
+        const token = CookieUtils.getCookies('userId');
         if (!token) {
           return true;
         }
@@ -22,16 +23,16 @@ const PrivateRoute = () => {
       }, 600000);
   
       return () => clearInterval(interval);
-    });
+    },[]);
   
     function navigateToAdminLogin() {
-      localStorage.removeItem('userId');
+      CookieUtils.removeCookies('userId');
       navigate('/login');
     }
 
 
 
-    const employeeId = localStorage.getItem("userId");
+    const employeeId = CookieUtils.getCookies("userId");
     // const employeeId = true;
     if(!employeeId){
         

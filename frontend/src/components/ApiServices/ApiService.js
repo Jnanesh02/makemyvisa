@@ -10,16 +10,15 @@ const postServiceCollectionApi = async(serviceDetails,customerId) =>{
         }
     
         const services = JSON.parse(serviceDetails);
-        const serviceName = services.dummyTicket;
+        const serviceName = services.serviceType;
         const data = services.formData;
     
         const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${serviceName}`,
           { customerID, data }
         );
-    
         if (response.status === 200) {
-          CookieUtils.removeCookies("dummyTicket");
+          CookieUtils.removeCookies("servicename");
         } else {
           console.error("Service creation failed:", response.data);
         }

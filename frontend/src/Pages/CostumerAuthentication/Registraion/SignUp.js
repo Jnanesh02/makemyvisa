@@ -9,27 +9,27 @@ import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
 
 function SignUp() {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState({
-    firstname: "",
-    lastname: "",
+  const initialData ={
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phonenumber: "91",
-    serviceType: "",
-    country: { countryCode: "in", name: "India" }, // Default country code
-    state: "", // New field for service type
-  });
+    phoneNumber: "",
+    country: { countryCode: "in", name: "India" }, 
+    state: "", 
+  }
+  const [inputs, setInputs] = useState(initialData);
 
   const [states, setStates] = useState([]);
   const [Country, setCountry] = useState("");
   const [errors, setErrors] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phonenumber: "",
+    phoneNumber: "",
     country: "",
     state: "",
   });
@@ -47,26 +47,26 @@ function SignUp() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (inputs.firstname.trim() === "") {
-      newErrors.firstname = "First Name is required";
+    if (inputs.firstName.trim() === "") {
+      newErrors.firstName = "First Name is required";
     } else {
-      if (inputs.firstname.trim().length < 3) {
-        newErrors.firstname = "First Name must be at least 3 characters long";
+      if (inputs.firstName.trim().length < 3) {
+        newErrors.firstName = "First Name must be at least 3 characters long";
       }
       const nameRegex = /^[a-zA-Z]+$/;
-      if (!nameRegex.test(inputs.firstname)) {
-        newErrors.firstname = "First Name should only contain letters";
+      if (!nameRegex.test(inputs.firstName)) {
+        newErrors.firstName = "First Name should only contain letters";
       }
     }
-    if (inputs.lastname.trim() === "") {
-      newErrors.lastname = "Last Name is required";
+    if (inputs.lastName.trim() === "") {
+      newErrors.lastName = "Last Name is required";
     } else {
-      if (inputs.lastname.trim().length < 3) {
-        newErrors.lastname = "Last Name must be at least 3 characters long";
+      if (inputs.lastName.trim().length < 3) {
+        newErrors.lastName = "Last Name must be at least 3 characters long";
       }
       const lastnameRegex = /^[a-zA-Z]+$/;
-      if (!lastnameRegex.test(inputs.lastname)) {
-        newErrors.lastname = "Last Name should only contain letters";
+      if (!lastnameRegex.test(inputs.lastName)) {
+        newErrors.lastName = "Last Name should only contain letters";
       }
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,8 +88,8 @@ function SignUp() {
       newErrors.confirmPassword = "Passwords do not match";
     }
     const mobileNumberRegex = /^\d{10,}$/;
-    if (!mobileNumberRegex.test(inputs.phonenumber)) {
-      newErrors.phonenumber = "Mobile Number should be a 10-digit number";
+    if (!mobileNumberRegex.test(inputs.phoneNumber)) {
+      newErrors.phoneNumber = "Mobile Number should be a 10-digit number";
     }
     if (!inputs.country || !Country) {
       newErrors.country = "Please select a valid country";
@@ -99,20 +99,9 @@ function SignUp() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+ 
 
-  const handleStateChange = (event) => {
-    setInputs((prev) => ({
-      ...prev,
-      state: event.target.value,
-    }));
-  };
+
 
   const handleCountryChange = (event) => {
     const selectedCountryCode = event.target.value;
@@ -126,11 +115,13 @@ function SignUp() {
       },
     }));
   };
-
+const handleInputChange = (name,value) => {
+  setInputs((prev) => ({...prev, [name]: value}));
+};
   const handlePhoneChange = (value, country) => {
     setInputs((prev) => ({
       ...prev,
-      phonenumber: value,
+      phoneNumber: value,
       country: country,
     }));
   };
@@ -138,19 +129,12 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
+    console.log(inputs)
     if (isValid) {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/customer/register`,
-          {
-            firstName: inputs.firstname,
-            lastName: inputs.lastname,
-            email: inputs.email,
-            phoneNumber: inputs.phonenumber,
-            state: inputs.state,
-            country: inputs.country.name,
-            password: inputs.password,
-          }
+           inputs
         );
         if (response.data) {
           alert(response.data.message);
@@ -191,13 +175,13 @@ function SignUp() {
                           type="text"
                           className="form-control"
                           id="firstName"
-                          name="firstname"
-                          value={inputs.firstname}
-                          onChange={handleChange}
+                          name="firstName"
+                          value={inputs.firstName}
+                          onChange={(e) => handleInputChange(e.target.name,e.target.value)}
                         />
-                        {errors.firstname && (
+                        {errors.firstName && (
                           <div className="error-message">
-                            {errors.firstname}
+                            {errors.firstName}
                           </div>
                         )}
                       </div>
@@ -207,12 +191,13 @@ function SignUp() {
                           type="text"
                           className="form-control"
                           id="lastName"
-                          name="lastname"
-                          value={inputs.lastname}
-                          onChange={handleChange}
+                          name="lastName"
+                          value={inputs.lastName}
+                          onChange={(e) => handleInputChange(e.target.name,e.target.value)}
+
                         />
-                        {errors.lastname && (
-                          <div className="error-message">{errors.lastname}</div>
+                        {errors.lastName && (
+                          <div className="error-message">{errors.lastName}</div>
                         )}
                       </div>
                     </div>
@@ -225,7 +210,8 @@ function SignUp() {
                         id="email"
                         name="email"
                         value={inputs.email}
-                        onChange={handleChange}
+                        onChange={(e) => handleInputChange(e.target.name,e.target.value)}
+
                       />
                       {errors.email && (
                         <div className="error-message">{errors.email}</div>
@@ -242,7 +228,8 @@ function SignUp() {
                             id="password"
                             name="password"
                             value={inputs.password}
-                            onChange={handleChange}
+                            onChange={(e) => handleInputChange(e.target.name,e.target.value)}
+
                           />
                           <span
                             className="input-group-text"
@@ -266,7 +253,8 @@ function SignUp() {
                             id="confirmPassword"
                             name="confirmPassword"
                             value={inputs.confirmPassword}
-                            onChange={handleChange}
+                            onChange={(e) => handleInputChange(e.target.name,e.target.value)}
+
                           />
                           <span
                             className="input-group-text"
@@ -289,15 +277,15 @@ function SignUp() {
                       <div className="col-md-6">
                         <PhoneInput
                           placeholder="Phone Number"
-                          name="phonenumber"
-                          value={inputs.phonenumber}
+                          name="phoneNumber"
+                          value={inputs.phoneNumber}
                           onChange={(value, country) =>
                             handlePhoneChange(value, country)
                           }
                         />
-                        {errors.phonenumber && (
+                        {errors.phoneNumber && (
                           <div className="error-message">
-                            {errors.phonenumber}
+                            {errors.phoneNumber}
                           </div>
                         )}
                       </div>
@@ -328,7 +316,7 @@ function SignUp() {
                         placeholder="Select State"
                         className="form-select form-control"
                         name="state"
-                        onChange={handleStateChange}
+                        onChange={(e)=> handleInputChange(e.target.name,e.target.value)}
                         value={inputs.state}>
                         <option value="" disabled>
                           Select State

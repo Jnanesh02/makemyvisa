@@ -46,13 +46,28 @@ const ContactDetail = ({ icon, text }) => (
   </li>
 );
 
-const Column = ({ title, items }) => (
+const CountriesColumn = ({ title, items }) => (
   <div className="col-lg-2">
     <h5 className="footer-menu-one">{title}</h5>
     <ul className="list-unstyled text-small footer-list">
       {items.map((item, index) => (
         <li className="mb-1" key={index}>
           <NavLink to={`/countries/${item.label}`} className="link-secondary text-decoration-none">
+            {item.label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const ServiceColumn = ({ title, items }) => (
+  <div className="col-lg-2">
+    <h5 className="footer-menu-one">{title}</h5>
+    <ul className="list-unstyled text-small footer-list">
+      {items.map((item, index) => (
+        <li className="mb-1" key={index}>
+          <NavLink to={`${item.link}`} className="link-secondary text-decoration-none">
             {item.label}
           </NavLink>
         </li>
@@ -94,12 +109,14 @@ const Footer = () => {
   ];
 
   const servicesItems = [
-    { label: "Flight Tickets", link: "/" },
-    { label: "Hotel Bookings", link: "/" },
-    { label: "Travel Insurance", link: "/" },
+    { label: "Flight Tickets", link: "/services/dummy/:dummyticket" },
+    { label: "Hotel Bookings", link: "/services/hotel/hotelReservation" },
+    { label: "Travel Insurance", link: "/services/TravelHealthInsurance" },
     { label: "Apostille/Attestation ", link: "/" },
     { label: "Forex Services", link: "/" },
-
+    { label: "Immigration Advice", link: "service/immigration/:immigrationAdvice" },
+    { label: "Visa Assistance", link: "/services/VisaAssistance/" },
+    { label: "Courier & Pickup", link: "/services/CourierPickup/" },
   ];
 
   return (
@@ -116,13 +133,13 @@ const Footer = () => {
           </div>
 
         {/* Migrate column */}
-        <Column title="Migrate" items={migrateItems} />
+        <CountriesColumn title="Migrate" items={migrateItems} />
 
         {/* Sitemap column */}
-        <Column title="Sitemap" items={sitemapItems} />
+        <CountriesColumn title="Sitemap" items={sitemapItems} />
 
         {/* Services column */}
-        <Column title="Services" items={servicesItems} />
+        <ServiceColumn title="Services" items={servicesItems} />
 
         {/* Connect with us column */}
         <div className="col-lg-2">

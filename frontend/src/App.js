@@ -28,13 +28,20 @@ import AdminPrivateRoute from "./components/PrivateRoutes/AdminPrivateRoute"
 import Google from "./components/Google";
 import LinkedIn from "./components/LinkedIn";
 import EmployeePrivateRoute from "./components/PrivateRoutes/EmployeePrivateRoute";
-import EmployeeLogin from './Pages/EmployeeDashboard/EmployeeAuthentication/Login/Employeelogin'
 import DummyTicketForm from "./Pages/sevices/DummyTickets/DummyTicketForm";
 import TicketStatus from "./Pages/CostumerDashboard/TicketStatus";
 
 import VisaStatus from "./Pages/CostumerDashboard/VisaStatus/VisaStatus";
 import TravelHealthInsurance from "./Pages/sevices/TravelHealthInsurance/TravelHealthInsurance";
-import { HotelBooking } from "./Pages/sevices/HotelBooking";
+import { HotelBooking } from "./Pages/sevices/HotelReservation/HotelBooking";
+import { HotelReservationTicket } from "./Pages/CostumerDashboard/HotelReservationTicket";
+import { Immigration } from "./Pages/sevices/ImmigrationAdvice/Immigration";
+
+import EmployeeDashboard from "./Pages/EmployeeDashboard/EmployeeDashboard"
+import EmployeeHomePage from "./Pages/EmployeeDashboard/EmployeeHomePage/EmployeeHomePage"
+import VisaAssistance from "./Pages/sevices/VisaAssistance/VisaAssistance";
+import CourierPickup from "./Pages/sevices/CourierPickup/CourierPickup";
+import TravelInsuranceService from "./Pages/AdminDashboard/master/TravelInsuranceService/TravelInsuranceService";
 
 
 
@@ -65,7 +72,11 @@ function App() {
             <Route path="/services/TravelHealthInsurance" element={<TravelHealthInsurance/>} />
             <Route path="/services/hotel/:hotelReservation" element={<HotelBooking/>} />
             <Route path="/services/dummy/:dummyticket" element={<DummyTicketForm/>} />
-            <Route path="employeelogin" element={<EmployeeLogin/>}/>
+            <Route path="service/immigration/:immigrationAdvice" element={<Immigration/>} />
+            <Route path="/services/VisaAssistance/" element={<VisaAssistance/>} />
+            <Route path="/services/CourierPickup/" element={<CourierPickup/>} />
+
+
             <Route path="/countries/:countryName/:serviceName"  element={<CountriesServiceDetails />} />
             <Route path="/countries/:countryName"  element={<CountriesDetails />} />
           </Route>
@@ -75,7 +86,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route index element={<CostumerHomePage />} />
                 <Route path="profile" element={<Profile />}/>
-                <Route path="TicketStatus/:dummytickets" element={<TicketStatus/>}/>
+                <Route path="ticket/dummy/:dummytickets" element={<TicketStatus/>}/>
+                <Route path="ticket/hotel/:hotelreservations" element={<HotelReservationTicket/>}/>
                 <Route path="VisaStatus" element={<VisaStatus/>}/>
                 
               </Route>
@@ -93,12 +105,25 @@ function App() {
             </Route>
             <Route path="profile" element={<AdminProfile/>}/>
             <Route path="ServicesPage" element={<ServicePage />}>
+            
             </Route>
+            <Route path="TravelInsuranceService" element={<TravelInsuranceService/>}/>
             <Route path="customerDetails" element={<CustomerDetails />} />
             <Route path="employeeDetails" element={<EmployeeDetails />} />
             </Route>
+
+
             
           </Route>
+
+          <Route path="/Employeedashboard" element={<EmployeeDashboard/>}>
+              <Route index element={<EmployeeHomePage />} />
+              <Route path="profile" element={<AdminProfile/>}/>
+    
+  </Route>
+
+
+
 
           <Route path="AdminLogout" element={<AdminLogout />} />
 

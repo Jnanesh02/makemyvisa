@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./CostumerDashboardStyles/Profile.css";
 import axios from "axios";
 import ConfirmationModal from "../AdminDashboard/EmployeeDetails/ConfirmationAccountModel";
-import { useLocation } from "react-router-dom";
+import CookieUtils from "../../components/cookie/Cookies";
+
 const ProfileForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,11 +18,11 @@ const ProfileForm = () => {
   const [editMode, setEditMode] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const location = useLocation();
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("userId");
+        const token = CookieUtils.getCookies("userId");
        
         const tokenData = JSON.parse(atob(token.split('.')[1]));
         console.log("tokenData:",tokenData);

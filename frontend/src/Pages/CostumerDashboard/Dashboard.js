@@ -59,8 +59,17 @@ function Dashboard() {
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="TicketStatus/dummytickets">
+                  <NavLink className="accordion-button custom-button" to="ticket/dummy/dummytickets">
                   Dummy Ticket
+                  </NavLink>
+                </h2>
+              </div>
+            </div>
+            <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                  <NavLink className="accordion-button custom-button" to="ticket/hotel/hotelreservations">
+                  Hotel Reservation
                   </NavLink>
                 </h2>
               </div>

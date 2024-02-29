@@ -1,68 +1,72 @@
-import React, { useState } from 'react';
-import './TravelHealthInsurance.css';
-
-const visaPlans = [
-  {
-    title: 'Tourist Visa',
-    document: '/Documents/visa.pdf',
-    country: ['India', 'USA'],
-    months: 12,
-    fee: '2000/-'
-  },
-  {
-    title: 'Student Visa',
-    document: '/path/to/document2.pdf',
-    country: ['India', 'USA', 'Australia'],
-    months: 24,
-    fee: '4000/-'
-  },
-  {
-    title: 'Normal Visa',
-    document: '/path/to/document1.pdf',
-    country: ['India', 'USA'],
-    months: 12,
-    fee: '2000/-'
-  },
-  {
-    title: 'EWW Visa',
-    document: '/path/to/document2.pdf',
-    country: ['India', 'USA', 'Australia'],
-    months: 24,
-    fee: '4000/-'
-  }
-];
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./TravelHealthInsurance.css";
 
 const TravelHealthInsurance = () => {
-  const [destinationCountry, setDestinationCountry] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
-  const [returnDate, setReturnDate] = useState('');
-  const [visaTypes, setVisaTypes] = useState([]);
+  const initialData = {
+    countryName: "",
+    departureDate: "",
+    returnDate: "",
+  };
+  const [formData, setformData] = useState(initialData);
+  const [insurance, setInsurance] = useState([]);
   const [showVisaTypes, setShowVisaTypes] = useState(false);
   const [showPaymentButton, setShowPaymentButton] = useState(false);
-  const handleSearch = () => {
-    // Filter visa plans based on destination country (case-insensitive)
-    const filteredVisaTypes = visaPlans.filter(plan =>
-      plan.country.some(country => country.toLowerCase() === destinationCountry.toLowerCase())
-    );
-    setVisaTypes(filteredVisaTypes);
+
+  const fetchInsurance = async (countryName) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/makemyvisa/api/files/${countryName}`
+      );
+      setInsurance(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [countriesData, setCountriesData] = useState([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
+        if (Array.isArray(response.data.message)) {
+          setCountriesData(response.data.message);
+        } else {
+          setCountriesData([]);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    setformData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+  const handleSearch = (destinationCountry) => {
+    fetchInsurance(destinationCountry);
     setShowVisaTypes(true);
   };
-
-
-/* eslint-disable no-undef */
-  const handleOpenModal = (documentUrl) => {
-    const pdfViewer = document.getElementById('pdfViewer');
-    pdfViewer.src = documentUrl;
-    const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'), {
-      keyboard: false
-    });
-    pdfModal.show();
+  const handleDownload = (documentUrl) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = documentUrl;
+    downloadLink.click();
   };
-/* eslint-enable no-undef */
-
-const handleCheckboxChange = () => {
-  setShowPaymentButton(!showPaymentButton);
-};
+  const isValidDateSelection = () => {
+    const departureDate = new Date(formData.departureDate);
+    const returnDate = new Date(formData.returnDate);
+    return returnDate >= departureDate;
+  };
+  const handleCheckboxChange = () => {
+    setShowPaymentButton(!showPaymentButton);
+  };
   return (
     <div className="travel-Insurance-container">
       <div className="travel-Insurance-header text-white p-4">
@@ -70,87 +74,131 @@ const handleCheckboxChange = () => {
       </div>
       <div className="travel-Insurance-body container">
         <div className="travel-Insurance-container-form shadow p-5 mb-5 bg-body rounded">
-          <div className='travel-Insurance-container-sub'>
+          <div className="travel-Insurance-container-sub">
             <div>
-              <label htmlFor="destinationCountry" className="travel-Insurance-label">Destination Country:</label>
-              <input
+              <label
+                htmlFor="destinationCountry"
+                className="travel-Insurance-label"
+              >
+                Destination Country:
+              </label>
+              <select
                 type="text"
                 id="destinationCountry"
                 className="travel-Insurance-input form-control mb-3"
-                value={destinationCountry}
-                placeholder='Enter Country Name'
-                onChange={e => setDestinationCountry(e.target.value)}
-              />
+                name="countryName"
+                value={formData.countryName}
+                onChange={handleInputChange}
+              >
+                <option value="">Select Country</option>
+                { 
+                  Array.isArray(countriesData) &&
+                  countriesData.map((country)=>(
+                    <option key={country._id} value={country.countryName}>{country.countryName}</option>
+                  ))
+                  }
+              </select>
             </div>
             <div>
-              <label htmlFor="departureDate" className="travel-Insurance-label">Departure Date:</label>
+              <label htmlFor="departureDate" className="travel-Insurance-label">
+                Departure Date:
+              </label>
               <input
                 type="date"
                 id="departureDate"
+                name="departureDate"
                 className="travel-Insurance-input form-control mb-3"
-                value={departureDate}
-                onChange={e => setDepartureDate(e.target.value)}
+                value={formData.departureDate}
+                onChange={handleInputChange}
+                required
+                min={new Date().toISOString().split("T")[0]}
               />
             </div>
             <div>
-              <label htmlFor="returnDate" className="travel-Insurance-label">Return Date:</label>
+              <label htmlFor="returnDate" className="travel-Insurance-label">
+                Return Date:
+              </label>
               <input
                 type="date"
                 id="returnDate"
+                name="returnDate"
                 className="travel-Insurance-input form-control mb-3"
-                value={returnDate}
-                onChange={e => setReturnDate(e.target.value)}
+                value={formData.returnDate}
+                onChange={handleInputChange}
+                required
               />
             </div>
           </div>
-          <button className="travel-Insurance-button btn btn-danger" onClick={handleSearch}>Search</button>
+          <button
+            className="travel-Insurance-button btn btn-danger"
+            onClick={() => handleSearch(formData.countryName)}
+            disabled={
+              !(
+                formData.countryName &&
+                formData.departureDate &&
+                formData.returnDate &&
+                isValidDateSelection()
+              )
+            }
+          >
+            Search
+          </button>
         </div>
         {showVisaTypes && (
           <div className="travel-Insurance-visa-types">
-            <h2 className='travel-Insurance-plans text-center'>Plans</h2>
-            <p className='text-center'>Choose the most appropriate plan for you and your family.</p>
+            <h2 className="travel-Insurance-plans text-center">Plans</h2>
+            <p className="text-center">
+              Choose the most appropriate plan for you and your family.
+            </p>
             <div className="row">
-              {visaTypes.map((visa, index) => (
-                <div key={index} className="col-md-6 mb-3">
-                <div className="travel-Insurance-card shadow-sm card bg-light text-white">
-                  <div className="card-body">
-                      <div className='d-flex align-items-center'>
-                      <input type="checkbox" className='travel-Insurance-checkbox me-3' onChange={handleCheckboxChange} />
-                      
-                    
-                    <h4 className="travel-Insurance-card-title card-title">{visa.title}</h4>
+              {insurance.length === 0?(
+                 <div className="col text-center">
+                 <p>No insurance documents found.</p>
+               </div>
+              ):(insurance?.map((document) => (
+                <div key={document?._doc?._id} className="col-md-6 mb-3">
+                  <div className="travel-Insurance-card shadow-sm card bg-light text-white">
+                    <div className="card-body">
+                      <div className="d-flex align-items-center">
+                        <input
+                          type="checkbox"
+                          className="travel-Insurance-checkbox me-3"
+                          onChange={handleCheckboxChange}
+                        />
+
+                        <h4 className="travel-Insurance-card-title card-title">
+                          {document._doc.insuranceName || "no title"}
+                        </h4>
+                      </div>
+                      <p className="travel-Insurance-card-text card-text">
+                        Months: {document._doc.duration || "--"}
+                      </p>
+                      <p className="travel-Insurance-card-text card-text">
+                        Fee: {document._doc.cost || "--"}
+                      </p>
+                      <button
+                        className="travel-Insurance-link btn btn-danger"
+                        onClick={() => handleDownload(document.url)}
+                      >
+                        Download Document
+                      </button>
                     </div>
-                    <p className="travel-Insurance-card-text card-text">Months: {visa.months}</p>
-                    <p className="travel-Insurance-card-text card-text">Fee: {visa.fee}</p>
-                    
-                    
-                    <button className="travel-Insurance-link btn btn-danger" onClick={() => handleOpenModal(visa.document)}>View Document</button>
                   </div>
                 </div>
-              </div>
-              ))}
-            </div >
-            <div className="text-center"> {/* Center the button */}
-  {showPaymentButton && <button className="travel-Insurance-link btn btn-danger">Pay Payment</button>}
-</div>
+              )))}
+            </div>
+            <div className="text-center">
+              {" "}
+              {/* Center the button */}
+              {showPaymentButton && (
+                <button className="travel-Insurance-link btn btn-danger">
+                  Pay Payment
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>
-      <div className="modal fade " id="pdfModal" tabIndex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-  <div className="modal-dialog modal-lg modal-dialog-centered travel-Insurance__modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="pdfModalLabel">PDF Document</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        <iframe id="pdfViewer" title="PDF Document" width="100%" height="500"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-
-
     </div>
   );
 };

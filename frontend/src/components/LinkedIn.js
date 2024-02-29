@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import axios from "axios";
+
 import {useLocation,useNavigate  } from "react-router-dom";
 
 const LinkedIn = () => {
@@ -29,7 +29,7 @@ const LinkedIn = () => {
      
             getLinkedInuser()
          
-          });
+          },[]);
 
   return (
     <div>

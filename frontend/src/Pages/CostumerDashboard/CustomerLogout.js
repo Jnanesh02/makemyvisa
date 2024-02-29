@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CookieUtils from '../../components/cookie/Cookies';
 
 async function performLogout() {
     try {
@@ -8,7 +9,7 @@ async function performLogout() {
         `${process.env.REACT_APP_BACKEND_URL}/customer/logout`
       );
       if (response.status === 200) {
-        localStorage.removeItem("userId")
+        CookieUtils.removeCookies("userId");
         return true;
       }
       return false;

@@ -34,10 +34,10 @@ const Login = () => {
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
-        localStorage.setItem("userId",response.data.message.token);
-      const dummyTicketCookie = CookieUtils.getCookies();
+        CookieUtils.setCookies("userId",response.data.message.token);
+      const dummyTicketCookie = CookieUtils.getCookies("servicename");
       if (dummyTicketCookie) {
-        await postServiceCollectionApi(dummyTicketCookie, localStorage.getItem("userId"));
+        await postServiceCollectionApi(dummyTicketCookie, CookieUtils.getCookies("userId"));
       }
         navigate("/dashboard");
       }

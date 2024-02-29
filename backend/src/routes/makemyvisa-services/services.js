@@ -19,7 +19,7 @@ const mongoose = require("mongoose");
          });
          await newServiceCollection.save();
        }
-      return res.status(200).json({ serviceCollections });
+      return res.status(200).json({ message:"successfully Created" });
     } catch (error) {
       return res.status(500).json({message: error.message});
     }
@@ -28,7 +28,6 @@ const mongoose = require("mongoose");
 
  router.get("/getservice/:servicename",async(req,res)=>{
    try {
-    console.log(req.params.servicename,req.query);
     const  serviceName  = req.params.servicename;
     const { customerID } = req.query;
     const db = mongoose.connection;

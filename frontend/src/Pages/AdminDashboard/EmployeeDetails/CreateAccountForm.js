@@ -50,15 +50,20 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   }, []);
   const onChangeInput = (event) => {
     event.preventDefault();
-    setEmployeeData({
-      ...employeeData,
-      [event.target.name]: event.target.value,
-    });
+    const {name,value} = event.target;
+    if (name === "department") {
+      const depart = department.find(dept => dept.department === value);
+      const roles = depart?.role || [];
+      setDepartmentRoles(roles);
+    }
+      setEmployeeData({
+        ...employeeData,
+        [name]:value,
+      });
   };
  
   const renderSelectOptions = (options) => (
     <>
-        {console.log("department options", options)}
       <option value="">Select {options.label}</option>
       {options.values &&
         options.values.map((value) => (
@@ -89,20 +94,8 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
           className="form-control create-account-frm"
           value={employeeData[field] || ""}
           required
-          onChange={(e) => {
-            onChangeInput(e);
-            if (field === "department") {
-              const selectedDepartment = e.target.value;
-              // eslint-disable-next-line no-lone-blocks
-              {console.log("11",selectedDepartment)}
-              const departmentRoles = department.find(dep => dep.department === selectedDepartment)?.roles || [];
-              setEmployeeData(prevState => ({
-                ...prevState,
-                role: "", // Reset role when department changes
-              }));
-              setDepartmentRoles(departmentRoles);
-            }
-          }}
+          onChange={(e) => onChangeInput(e)}
+
         >
           {field === "department"
             ? renderSelectOptions({ label: "department", values: department })
@@ -110,19 +103,20 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
         </select>
       ) : field === "role" ? (
         <select
-          name={field}
-          className="form-control create-account-frm"
-          value={employeeData[field] || ""}
-          required
-          onChange={(e) => onChangeInput(e)}
-        >
-          <option value="">Select role</option>
-          {departmentRoles.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
+        name={field}
+        className="form-control create-account-frm"
+        value={employeeData[field] || ""}
+        required
+        onChange={(e) => onChangeInput(e)}
+      >
+        <option value="">Select role</option>
+        {departmentRoles.map((role) => (
+    <option key={role} value={role}>
+      {role}
+    </option>
+  ))}
+       
+      </select>
       ) : (
         <input
           type="text"
@@ -135,6 +129,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
       )}
     </div>
   ));
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -152,8 +147,10 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 
   const handleConfirm = async () => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-
+   console.log(employeeData)
     try {
+      console.log(employeeData)
+
       const response = isEditing
         ? await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/employee/update/${editingEmployee._id}`,
@@ -185,7 +182,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   return (
     <>
       <form className="admin-form" onSubmit={handleSubmit}>
-         {/* <button class="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
+         {/* <button className="close-buttonss" style={CLOSE_BUTTON_STYLES} onClick={onClose}>
           X
         </button>  */}
    
