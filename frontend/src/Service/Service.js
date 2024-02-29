@@ -71,7 +71,7 @@ const Service = () => {
                   >
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link active btn-circle-services-1"
+                        className="nav-link active btn-circle-services-1 "
                         id="pills-home-tab"
                         data-bs-toggle="pill"
                         data-bs-target="#pills-home"
@@ -254,14 +254,14 @@ const Service = () => {
                       aria-labelledby="pills-contact-tab"
                       tabindex="0"
                     >
-                      <Link to="services/dummy/dummyticket">
                       <img
                         className="services-main-imagess"
                         src={servicesmain3}
                         alt="/"
                       />
-                      </Link>
+                      <Link to="services/dummy/dummyticket">
                       <p className="pills-tab-text"> Ticketing </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -270,15 +270,14 @@ const Service = () => {
                       aria-labelledby="pills-profile-1-tab"
                       tabindex="0"
                     >
-                      <Link to="services/hotel/hotelReservation">
                       <img
                         className="services-main-imagess"
                         src={servicesmain4}
                         alt="/"
                       />
-                         <p className="pills-tab-text"> Hotel <br /> Reservation </p>
+                      <Link to="services/hotel/hotelReservation">
+                      <p className="pills-tab-text"> Hotel <br /> Reservation </p>
                       </Link>
-                   
                     </div>
                     <div
                       className="tab-pane fade"
@@ -287,15 +286,16 @@ const Service = () => {
                       aria-labelledby="pills-contact-1-tab"
                       tabindex="0"
                     >
-                     <Link  to="services/TravelHealthInsurance"> <img
+                      <img
                         className="services-main-imagess"
                         src={servicesmain5}
                         alt="/"
                       />
-                      </Link>
+                      <Link to="services/TravelHealthInsurance">
                       <p className="pills-tab-text">
                         Travel Health <br /> Insurance
                       </p>
+                      </Link>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -304,7 +304,6 @@ const Service = () => {
                       aria-labelledby="pills-profile-2-tab"
                       tabindex="0"
                     >
-                      <Link to="service/immigration/immigrationAdvice">
                       <img
                         className="services-main-imagess"
                         src={servicesmain6}
@@ -314,8 +313,7 @@ const Service = () => {
                         {" "}
                         Immigration <br /> Advice{" "}
                       </p>
-                      </Link>
-                
+                      
                     </div>
                     <div
                       className="tab-pane fade"
