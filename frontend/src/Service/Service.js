@@ -12,16 +12,6 @@ import services11 from "../assets/images/servicesImages/11.png";
 import services12 from "../assets/images/servicesImages/12.png";
 import services13 from "../assets/images/servicesImages/13.png";
 import services14 from "../assets/images/servicesImages/14.png";
-import servicesmain1 from "../assets/images/services-main-images/1-1.png";
-import servicesmain2 from "../assets/images/services-main-images/2-1.png";
-import servicesmain3 from "../assets/images/services-main-images/3-1.png";
-import servicesmain4 from "../assets/images/services-main-images/4-1.png";
-import servicesmain5 from "../assets/images/services-main-images/5-1.png";
-import servicesmain6 from "../assets/images/services-main-images/6-1.png";
-import servicesmain11 from "../assets/images/services-main-images/11-1.png";
-import servicesmain12 from "../assets/images/services-main-images/12-1.png";
-import servicesmain13 from "../assets/images/services-main-images/13-1.png";
-import servicesmain14 from "../assets/images/services-main-images/14-1.png";
 const Service = () => {
   return (
     <>
@@ -81,49 +71,52 @@ const Service = () => {
                 </p>
                  </div>         
                 <div class="myDIVsecond"> 
-                <img src={services2}/>
+                <Link to="/services/VisaAssistance/">  <img src={services2} alt="..."/></Link>
                 </div>
                 <div class="hideesecond"> 
-                <img src={services2}/>
+                <img src={services2} alt="..."/>
                 <p>
                    Visa Assistance
                 </p>
                    </div>     
                 <div class="myDIVthree"> 
-                <img src={services3}/>
+                <Link to="/services/dummy/dummyticket">
+                <img src={services3} alt=".."/>
+
+                </Link>
                 </div>
                 <div class="hideethree"> 
-                <img src={services3}/>  
+                <img src={services3} alt="..."/>  
                 <p>
                    Ticketing
                 </p>
                 </div>   
                 <div class="myDIVfour"> 
-                <img src={services4}/>
+                <Link to="/services/hotel/hotelReservation">  <img src={services4} alt="..."/></Link>
                 </div>
                 <div class="hideefour"> 
-                <img src={services4}/> 
+                <img src={services4} alt="..."/> 
                 <p>
                    Hotel Reservation
                 </p>
                  </div>   
 
                 <div class="myDIVfive"> 
-                <img src={services5}/>
+                <Link to="/services/TravelHealthInsurance"><img src={services5} alt="..."/></Link>
                 </div>
                 <div class="hideefive">  
                 
-                 <img src={services5}/>
+                 <img src={services5} alt=""/>
                  <p>
                    Travel Health
                 </p>
                   </div>   
 
                 <div class="myDIVsix"> 
-                <img src={services6}/>
+                <Link to="service/immigration/immigrationAdvice"> <img src={services6} alt="..."/></Link>
                 </div>
                 <div class="hideesix">  
-                <img src={services6}/> 
+                <img src={services6} alt="..."/> 
                 <p>
                   Immigration Advice
                 </p>
@@ -150,11 +143,11 @@ const Service = () => {
                    </div>   
 
                 <div class="myDIVeight"> 
-                <img src={services13}/>
+                <Link to="/services/CourierPickup/"> <img src={services13} alt=".."/></Link>
                
                 </div>
                 <div class="hideeeight">
-                    <img src={services13}/>
+                    <img src={services13} alt="..."/>
                     <p>
                        Courier, Pickup & Drop 
                     </p>
