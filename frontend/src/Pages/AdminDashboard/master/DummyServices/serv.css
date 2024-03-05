@@ -1,0 +1,40 @@
+.services-name-table table {
+    width: 90%;
+    margin: auto;
+}
+table.table.services-tables th {
+    background: #dd2817;
+    color: white;
+    font-weight: 500;
+    width: 25%;
+    text-align: center;
+}
+td.first-section-td {
+    padding: 50px;
+    border: 1px solid #e5e5e5;
+}
+a.list-group-item.list-group-item-action.active {
+    background: none;
+    color: white;
+    border: 1px solid #dd2817;
+    text-align: center;
+    background: red;
+}
+a.list-group-item.list-group-item-action {
+    border: 1px solid #dd2817;
+    text-align: center;
+}
+table.nested-table-services td {
+    padding: 10px;
+    border: 1px solid #cfcfcf;
+    text-align: center;
+}
+table.nested-table-services th {
+    padding: 10px;
+    background: none !important;
+    color: red !important;
+    border: 1px solid #dd281766;
+}
+table.table.services-tables td {
+    border: 1px solid #cacaca;
+}
