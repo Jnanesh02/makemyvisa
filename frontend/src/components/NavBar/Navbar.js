@@ -105,17 +105,17 @@ const Navbar = () => {
                             Visa{" "}
                           </Link>
                         </li>
-                        <li class="nav-item">
-                          <div class="dropdown">
+                        <li className="nav-item">
+                          <div className="dropdown">
                             <button
-                              class="btn btn-secondary dropdown-toggle country-tgl"
+                              className="btn btn-secondary dropdown-toggle country-tgl"
                               type="button"
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
                             >
                               Countries
                             </button>
-                            <ul class="dropdown-menu dropdown-countries">
+                            <ul className="dropdown-menu dropdown-countries">
                               {countriesData.map((country, index) => (
                                 <li key={index}>
                                   <Link

@@ -10,6 +10,16 @@ const createRoleBasedModel = (department) => {
       email: { type: 'string', unique:true, default: '' },
       department:{type: 'string', default:department || '' },
       role: { type: 'string', default:  '' },
+      status: {
+        type: String,
+        enum: ['Available', 'Occupied'],
+        default: 'Available'
+      },
+      assignto:{
+        ticketName: { type: 'string', default:''},
+        ticketId: { type: 'string', default:''}
+      }
+   
     });
   
     return mongoose.model(department, schema);

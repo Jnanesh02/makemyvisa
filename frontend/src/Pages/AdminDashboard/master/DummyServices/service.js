@@ -2,32 +2,48 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./serv.css";
 const Service = () => {
+  const initialData = {
+    customerId: "",
+    department: "",
+    employeeId: "",
+  };
+  const [assignTo, setAssignTo] = useState(initialData);
   const [serviceName, setServiceName] = useState([]);
   const [selectedServiceName, setSelectedServiceName] = useState({});
   const [department, setDepartment] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState([]);
+  const [submitTicket, setSubmitTicket] = useState([]);
+  const [assignTicket, setassignTicket] = useState([]);
+  const [completedTicket, setCompletedTicket] = useState([]);
+  const [employeAvailable, setEmployeAvailable] = useState([]);
+  const [employeOccupied, setEmployeOccupied] = useState([]);
 
-  const [serviceData, setServiceData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/getservices/servicescollections`
-        );
-        setServiceName(response.data);
-      } catch (error) {
-        alert(error.message);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getservices/servicescollections`
+      );
+      setServiceName(response.data);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   useEffect(() => {
     const fetchData1 = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/getservices/${selectedServiceName}s`
         );
-        console.log(response);
-        setServiceData(response.data);
+        setCompletedTicket(
+          response.data.filter((data) => data.ticketStatus === "completed")
+        );
+        setassignTicket(
+          response.data.filter((data) => data.ticketStatus === "assign to")
+        );
+        setSubmitTicket(
+          response.data.filter((data) => data.ticketStatus === "submit")
+        );
       } catch (error) {
         alert(error.message);
       }
@@ -45,9 +61,70 @@ const Service = () => {
       alert(error.message);
     }
   };
+  const fetchDetails1 = async (department) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getDepartmentDetails/${department}s`
+      );
+      return response.data;
+    } catch (error) {
+      alert(error.message);
+      return null;
+    }
+  };
   useEffect(() => {
     fetchDetails();
+    fetchData();
   }, []);
+
+  const handleApply = async () => {
+    try {
+      const combinedDepartments = selectedDepartment.length === 1
+      ? selectedDepartment
+      : [].concat(...selectedDepartment);
+     const response = await Promise.all(
+      combinedDepartments.map(async (department) =>{
+        try {
+          const response = await fetchDetails1(department);
+          return response; 
+        } catch (error) {
+          console.error(`Error fetching details for department ${department}:`, error);
+          return null}
+      })
+     );
+     const flattenresponse =  response.flat();
+     console.log(flattenresponse);
+     setEmployeAvailable(flattenresponse.filter((employeAvailable) => employeAvailable.status === 'Available'));
+     setEmployeOccupied(flattenresponse.filter((employeOccupied) => employeOccupied.status === "occupied"));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleCheckboxChange = (isChecked, departmentName) => {
+    if (isChecked) {
+      setSelectedDepartment([...selectedDepartment, departmentName]);
+    } else {
+      setSelectedDepartment(
+        selectedDepartment.filter((dep) => dep !== departmentName)
+      );
+    }
+  };
+  const selectInputChange = (name, value) => {
+    setAssignTo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const inputChange = (departmentName, employeeId) => {
+    const updatedAssignTo = { ...assignTo };
+    updatedAssignTo.department = departmentName;
+    updatedAssignTo.employeeId = employeeId;
+    setAssignTo(updatedAssignTo);
+  };
+  const assign = async () => {
+    console.log("assign", assignTo);
+  };
   return (
     <>
       <div>
@@ -66,28 +143,28 @@ const Service = () => {
 
                 <tbody>
                   <tr>
-                    {}
-                    {Array.isArray(serviceName) &&
-                      serviceName.map((service) => (
-                        <tr key={service._id}>
-                          <td className="first-section-td" scope="row">
-                            <a
-                              className="list-group-item list-group-item-action"
-                              id="list-home-list"
-                              data-bs-toggle="list"
-                              href="#list-home"
-                              role="tab"
-                              aria-controls="list-home"
-                              onClick={() =>
-                                setSelectedServiceName(service.serviceTypeName)
-                              }
-                            >
-                              {service.serviceTypeName}
-                            </a>
-                          </td>
-                        </tr>
-                      ))}
-
+                      {Array.isArray(serviceName) &&
+                        serviceName.map((service) => (
+                          <tr key={service._id}>
+                            <td className="first-section-td">
+                              <a
+                                className="list-group-item list-group-item-action"
+                                id="list-home-list"
+                                data-bs-toggle="list"
+                                href="#list-home"
+                                role="tab"
+                                aria-controls="list-home"
+                                onClick={() =>
+                                  setSelectedServiceName(
+                                    service.serviceTypeName
+                                  )
+                                }
+                              >
+                                {service.serviceTypeName}
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
                     <td rowSpan="3">
                       {" "}
                       <div className="col-12">
@@ -100,58 +177,98 @@ const Service = () => {
                           >
                             <table className="nested-table-services">
                               <thead>
-                                <tr key={"1"}>
+                                <tr>
                                   <th> Available </th>
+                                  <th> Assign </th>
                                   <th> Completed </th>
                                 </tr>
                               </thead>
-                              {Array.isArray(serviceData) && (
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      {Array.isArray(serviceData) &&
-                                        serviceData.map(
-                                          (data) =>
-                                            data.ticketStatus === "submit" && (
-                                              <div key={data._id}>
-                                                {data._id}
-                                              </div>
-                                            )
-                                        )}
-                                    </td>
-                                    <td>
-                                      {Array.isArray(serviceData) &&
-                                        serviceData.map(
-                                          (data) =>
-                                            data.ticketStatus ===
-                                              "completed" && (
-                                              <div key={data._id}>
-                                                {data._id}
-                                              </div>
-                                            )
-                                        )}
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              )}
+                              <tbody>
+                                <tr key={""}>
+                                  <td
+                                    className="btn-group"
+                                    role="group"
+                                    aria-label="Basic radio toggle button group"
+                                  >
+                                    {Array.isArray(submitTicket) &&
+                                    submitTicket.length > 0 ? (
+                                      submitTicket.map((ticket) => (
+                                        <div key={ticket._id}>
+                                          <input
+                                            className="btn-check"
+                                            name="customerId"
+                                            autoComplete="off"
+                                            type="radio"
+                                            id={ticket._id}
+                                            value={ticket._id}
+                                            onChange={(e) =>
+                                              selectInputChange(
+                                                e.target.name,
+                                                e.target.value
+                                              )
+                                            }
+                                          />
+                                          <label
+                                            className="btn btn-outline-primary"
+                                            htmlFor={ticket._id}
+                                          >
+                                            {ticket._id}
+                                          </label>
+                                        </div>
+                                      ))
+                                    ) : (
+                                      <div>No Ticket available</div>
+                                    )}
+                                  </td>
+                                  <td>
+                                    {Array.isArray(assignTicket) &&
+                                    assignTicket.length > 0 ? (
+                                      assignTicket.map((data) => (
+                                        <div key={data._id}>
+                                          {data._id || "no data available"}
+                                        </div>
+                                      ))
+                                    ) : (
+                                      <div>No Ticket assign</div>
+                                    )}
+                                  </td>
+                                  <td>
+                                    {Array.isArray(completedTicket) &&
+                                    completedTicket.length > 0 ? (
+                                      completedTicket.map((data) => (
+                                        <div key={data._id}>{data._id}</div>
+                                      ))
+                                    ) : (
+                                      <div>No Ticket completed</div>
+                                    )}
+                                  </td>
+                                </tr>
+                              </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
                     </td>
                     <td rowSpan="3">
-                      <select
-                        className="form-select"
-                        aria-label="Default select example"
-                      >
-                        {department.map((dep) => (
-                          <option key={dep._id} value={dep._id}>
-                            {dep.department}
-                          </option>
-                        ))}
-                      </select>
+                      {department.map((dep) => (
+                        <div key={dep._id}>
+                          <input
+                            type="checkbox"
+                            id={dep._id}
+                            value={dep.department}
+                            onChange={(e) =>
+                              handleCheckboxChange(
+                                e.target.checked,
+                                dep.department
+                              )
+                            }
+                          />
+                          <label htmlFor={dep._id}>{dep.department}</label>
+                        </div>
+                      ))}
+                      <button onClick={handleApply}>Apply</button>
                     </td>
-                    <td rowspan="3">
+                    <td rowSpan="3">
                       <table className="nested-table-services">
                         <thead>
                           <tr>
@@ -159,47 +276,68 @@ const Service = () => {
                             <th> Occupied </th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              Cell 1
-                              <div>
-                                {" "}
-                                <button
-                                  type="button"
-                                  className="btn btn-primary"
-                                >
-                                  Primary
-                                </button>
-                              </div>
-                            </td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 2</td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 3</td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 4</td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 2</td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 3</td>
-                            <td>Cell 1</td>
-                          </tr>
-                          <tr>
-                            <td>Cell 4</td>
-                            <td>Cell 1</td>
-                          </tr>
-                        </tbody>
+                          <tbody>
+                            <tr key={""}>
+                              <td
+                                className="btn-group"
+                                role="group"
+                                aria-label="Basic radio toggle button group"
+                              >
+                                {Array.isArray(employeAvailable) &&
+                                employeAvailable.length > 0 ? (
+                                  employeAvailable.map((res) =>
+                                        res.status === "Available" && (
+                                          <div key={res._id}>
+                                            <input
+                                              className="btn-check"
+                                              name="employeeId"
+                                              autoComplete="off"
+                                              type="radio"
+                                              id={res._id}
+                                              value={res._id}
+                                              onChange={() =>
+                                                inputChange(
+                                                  res.department,
+                                                  res._id
+                                                )
+                                              }
+                                            />
+                                            <label
+                                              className="btn btn-outline-primary"
+                                              htmlFor={res._id}
+                                            >
+                                              {res._id}
+                                            </label>
+                                            <button
+                                              type="button"
+                                              className="btn btn-primary"
+                                              onClick={assign}
+                                            >
+                                              assign
+                                            </button>
+                                          </div>
+                                        )
+                                    
+                                  )
+                                ) : (
+                                  <div>No employee available</div>
+                                )}
+                              </td>
+                              <td>
+                                {Array.isArray(employeOccupied) &&
+                                employeOccupied.length > 0 ? (
+                                  employeOccupied.map((res) =>
+                                        res.status === "occupied" && (
+                                          <div key={res._id}>{res._id}</div>
+                                        )
+                                  )
+                                ) : (
+                                  <div>No employee occupied</div>
+                                )}
+                              </td>
+                            </tr>
+                          </tbody>
+                        
                       </table>
                     </td>
                   </tr>
