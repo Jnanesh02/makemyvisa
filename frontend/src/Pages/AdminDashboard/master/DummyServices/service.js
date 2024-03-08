@@ -3,8 +3,9 @@ import axios from "axios";
 import "./serv.css";
 const Service = () => {
   const initialData = {
-    customerId: "",
-    department: "",
+    ticketId: "",
+    ticketName: "",
+    departmentName: "",
     employeeId: "",
   };
   const [assignTo, setAssignTo] = useState(initialData);
@@ -17,6 +18,7 @@ const Service = () => {
   const [completedTicket, setCompletedTicket] = useState([]);
   const [employeAvailable, setEmployeAvailable] = useState([]);
   const [employeOccupied, setEmployeOccupied] = useState([]);
+  const [loading,setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -49,7 +51,7 @@ const Service = () => {
       }
     };
     fetchData1();
-  }, [selectedServiceName]);
+  }, [selectedServiceName,loading]);
   const fetchDetails = async () => {
     try {
       const response = await axios.get(
@@ -79,23 +81,31 @@ const Service = () => {
 
   const handleApply = async () => {
     try {
-      const combinedDepartments = selectedDepartment.length === 1
-      ? selectedDepartment
-      : [].concat(...selectedDepartment);
-     const response = await Promise.all(
-      combinedDepartments.map(async (department) =>{
-        try {
-          const response = await fetchDetails1(department);
-          return response; 
-        } catch (error) {
-          console.error(`Error fetching details for department ${department}:`, error);
-          return null}
-      })
-     );
-     const flattenresponse =  response.flat();
-     console.log(flattenresponse);
-     setEmployeAvailable(flattenresponse.filter((employeAvailable) => employeAvailable.status === 'Available'));
-     setEmployeOccupied(flattenresponse.filter((employeOccupied) => employeOccupied.status === "occupied"));
+      const combinedDepartments =
+        selectedDepartment.length === 1
+          ? selectedDepartment
+          : [].concat(...selectedDepartment);
+      const response = await Promise.all(
+        combinedDepartments.map(async (department) => {
+          try {
+            const response = await fetchDetails1(department);
+            return response;
+          } catch (error) {
+            return null;
+          }
+        })
+      );
+      const flattenresponse = response.flat();
+      setEmployeAvailable(
+        flattenresponse.filter(
+          (employeAvailable) => employeAvailable.status === "Available"
+        )
+      );
+      setEmployeOccupied(
+        flattenresponse.filter(
+          (employeOccupied) => employeOccupied.status === "occupied"
+        )
+      );
     } catch (error) {
       alert(error.message);
     }
@@ -118,12 +128,29 @@ const Service = () => {
   };
   const inputChange = (departmentName, employeeId) => {
     const updatedAssignTo = { ...assignTo };
-    updatedAssignTo.department = departmentName;
+    updatedAssignTo.departmentName = departmentName;
     updatedAssignTo.employeeId = employeeId;
+    updatedAssignTo.ticketName = selectedServiceName;
     setAssignTo(updatedAssignTo);
   };
+  const isObjectEmpty = (obj) => {
+    return !obj.ticketId || !obj.employeeId;
+  };
+  const isButtonDisabled = isObjectEmpty(assignTo);
+  let enableButton = false;
   const assign = async () => {
-    console.log("assign", assignTo);
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/assignTo`,assignTo);
+      console.log(response);
+       if(response.status === 200){
+        setLoading(true);
+        console.log("sss");
+       }
+    } catch (error) {
+      setLoading(false);
+    }finally{
+      setLoading(false);
+    }
   };
   return (
     <>
@@ -143,28 +170,24 @@ const Service = () => {
 
                 <tbody>
                   <tr>
+                    <td className="first-section-td">
                       {Array.isArray(serviceName) &&
                         serviceName.map((service) => (
-                          <tr key={service._id}>
-                            <td className="first-section-td">
-                              <a
-                                className="list-group-item list-group-item-action"
-                                id="list-home-list"
-                                data-bs-toggle="list"
-                                href="#list-home"
-                                role="tab"
-                                aria-controls="list-home"
-                                onClick={() =>
-                                  setSelectedServiceName(
-                                    service.serviceTypeName
-                                  )
-                                }
-                              >
-                                {service.serviceTypeName}
-                              </a>
-                            </td>
-                          </tr>
+                          <a
+                            className="list-group-item list-group-item-action"
+                            id={service._id}
+                            data-bs-toggle="list"
+                            href="#list-home"
+                            role="tab"
+                            aria-controls="list-home"
+                            onClick={() =>
+                              setSelectedServiceName(service.serviceTypeName)
+                            }
+                          >
+                            {service.serviceTypeName}
+                          </a>
                         ))}
+                    </td>
                     <td rowSpan="3">
                       {" "}
                       <div className="col-12">
@@ -196,7 +219,7 @@ const Service = () => {
                                         <div key={ticket._id}>
                                           <input
                                             className="btn-check"
-                                            name="customerId"
+                                            name="ticketId"
                                             autoComplete="off"
                                             type="radio"
                                             id={ticket._id}
@@ -276,68 +299,66 @@ const Service = () => {
                             <th> Occupied </th>
                           </tr>
                         </thead>
-                          <tbody>
-                            <tr key={""}>
-                              <td
-                                className="btn-group"
-                                role="group"
-                                aria-label="Basic radio toggle button group"
-                              >
-                                {Array.isArray(employeAvailable) &&
-                                employeAvailable.length > 0 ? (
-                                  employeAvailable.map((res) =>
-                                        res.status === "Available" && (
-                                          <div key={res._id}>
-                                            <input
-                                              className="btn-check"
-                                              name="employeeId"
-                                              autoComplete="off"
-                                              type="radio"
-                                              id={res._id}
-                                              value={res._id}
-                                              onChange={() =>
-                                                inputChange(
-                                                  res.department,
-                                                  res._id
-                                                )
-                                              }
-                                            />
-                                            <label
-                                              className="btn btn-outline-primary"
-                                              htmlFor={res._id}
-                                            >
-                                              {res._id}
-                                            </label>
-                                            <button
-                                              type="button"
-                                              className="btn btn-primary"
-                                              onClick={assign}
-                                            >
-                                              assign
-                                            </button>
-                                          </div>
-                                        )
-                                    
-                                  )
-                                ) : (
-                                  <div>No employee available</div>
-                                )}
-                              </td>
-                              <td>
-                                {Array.isArray(employeOccupied) &&
-                                employeOccupied.length > 0 ? (
-                                  employeOccupied.map((res) =>
-                                        res.status === "occupied" && (
-                                          <div key={res._id}>{res._id}</div>
-                                        )
-                                  )
-                                ) : (
-                                  <div>No employee occupied</div>
-                                )}
-                              </td>
-                            </tr>
-                          </tbody>
-                        
+                        <tbody>
+                          <tr key={""}>
+                            <td
+                              className="btn-group"
+                              role="group"
+                              aria-label="Basic radio toggle button group"
+                            >
+                              {Array.isArray(employeAvailable) &&
+                              employeAvailable.length > 0 ? (
+                                employeAvailable.map(
+                                  (res) =>
+                                    res.status === "Available" && (
+                                      <div key={res._id}>
+                                        <input
+                                          className="btn-check"
+                                          name="employeeId"
+                                          autoComplete="off"
+                                          type="radio"
+                                          id={res._id}
+                                          value={res._id}
+                                          onChange={() =>
+                                            inputChange(res.department, res._id)
+                                          }
+                                        />
+                                        <label
+                                          className="btn btn-outline-primary"
+                                          htmlFor={res._id}
+                                        >
+                                          {res._id}
+                                        </label>
+                                        <button
+                                          type="button"
+                                          className="btn btn-primary"
+                                          onClick={assign}
+                                          disabled={isButtonDisabled}
+                                        >
+                                          {enableButton ? "Assigned" : "Assign"}
+                                        </button>
+                                      </div>
+                                    )
+                                )
+                              ) : (
+                                <div>No employee available</div>
+                              )}
+                            </td>
+                            <td>
+                              {Array.isArray(employeOccupied) &&
+                              employeOccupied.length > 0 ? (
+                                employeOccupied.map(
+                                  (res) =>
+                                    res.status === "occupied" && (
+                                      <div key={res._id}>{res._id}</div>
+                                    )
+                                )
+                              ) : (
+                                <div>No employee occupied</div>
+                              )}
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </td>
                   </tr>
