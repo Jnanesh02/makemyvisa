@@ -3,27 +3,27 @@ const { default: mongoose } = require("mongoose");
 const router = express.Router();
 
 router.post("/assignTo", async (req, res) => {
-  try {
-    const { serviceName, serviceId, departmentName, EmployeeId } = req.body;
+  try {    
+    const { ticketName, ticketId, departmentName, employeeId } = req.body;
     const validationErrors = [];
-    if (!serviceName) {
+    if (!ticketName) {
       validationErrors.push("service name is required");
     }
-    if (!serviceId) {
-      validationErrors.push("serviceId name is required");
+    if (!ticketId) {
+      validationErrors.push("ticketId name is required");
     }
     if (!departmentName) {
       validationErrors.push("departmentName name is required");
     }
-    if (!EmployeeId) {
+    if (!employeeId) {
       validationErrors.push("EmployeeId name is required");
     }
     if (validationErrors.length > 0) {
         return res.status(400).json({ errors: validationErrors });
       }
     const db = await mongoose.connection;
-    const serviceCollection = db.collection(serviceName);
-    const serviceObjectId = new mongoose.Types.ObjectId(serviceId);
+    const serviceCollection = db.collection(`${ticketName}s`);
+    const serviceObjectId = new mongoose.Types.ObjectId(ticketId);
     const ticketExit = await serviceCollection.findOne({_id:serviceObjectId});
     if (!ticketExit) {
       return res.status(404).json("ticket does not exist");
@@ -31,13 +31,13 @@ router.post("/assignTo", async (req, res) => {
     ticketExit.ticketStatus = "assign to";
     ticketExit.assign = {
       ticketName: departmentName,
-      ticketId: EmployeeId,
+      ticketId: employeeId,
     };
 
     await serviceCollection.updateOne({ _id: serviceObjectId }, { $set: ticketExit });
 
-    const departmentCollection = await db.collection(departmentName);
-    const employeeObjectId = new mongoose.Types.ObjectId(EmployeeId);
+    const departmentCollection = await db.collection(`${departmentName}s`);
+    const employeeObjectId = new mongoose.Types.ObjectId(employeeId);
 
     const departmentExit = await departmentCollection.findOne({ _id: employeeObjectId });
     if (!departmentExit) {
@@ -45,10 +45,9 @@ router.post("/assignTo", async (req, res) => {
     }
     departmentExit.status = "occupied";
     departmentExit.assignto = {
-      ticketName: serviceName,
-      ticketId: serviceId,
+      ticketName: ticketName,
+      ticketId: ticketId,
     };
-    console.log(departmentExit);
 
     await departmentCollection.updateOne({ _id: employeeObjectId }, { $set: departmentExit });
     
