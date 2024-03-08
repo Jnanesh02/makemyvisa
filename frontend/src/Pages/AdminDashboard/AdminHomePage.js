@@ -44,16 +44,24 @@ function AdminHomePage() {
       <h1 className="welcome-dummy-text">Welcome to Admin Dashboard</h1>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 p-0">
+          <div className="flight-graph">
         <h3>flight</h3>
           <div id="flight-piechart">
             <Piechart data={serviceName} />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div id="Insurance-donutChart">
-            <Donutchart data={serviceName} />
           </div>
+        </div>
+        <div className="col-md-6 p-0">
+        <div className="flight-graph">
+        <h3>Hotel Reservation</h3>
+        <div id="flight-piechart">
+         
+          <div id="Insurance-donutChart">
+            <Donutchart data={hotelreservations} />
+          </div>
+</div>
+</div>
         </div>
       </div></>
    

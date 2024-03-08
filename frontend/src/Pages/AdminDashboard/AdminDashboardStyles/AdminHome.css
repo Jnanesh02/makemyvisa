@@ -6,4 +6,8 @@
  
   h1.welcome-dummy-text {
     color: #dd2817;
+    font-size: 30px;
+}
+.flight-graph h3 {
+  font-size: 20px;
 }

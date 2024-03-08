@@ -69,3 +69,43 @@ label.btn.btn-outline-primary.btn-dynamic-services {
 table.table.services-tables th {
     border: 1px solid #d0d0d0;
 }
+.tanle-servies-flexdirection {
+    display: block !important;
+    width: 100% !important;
+    margin: 0px;
+}
+label.btn.btn-outline-primary.btn-dynamic-services {
+    background: #dd2817;
+    color: white;
+    border: none;
+    /* font-size: 14px; */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+table.table.services-tables .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  
+    background: #dd2817;
+    border: none;
+    color:white;
+}
+table.table.services-tables .btn-primary {
+ background: white;
+ border:0px;
+ margin-bottom: 10px;
+ width:100% !important;
+ border: 1px solid red;
+ color:#dd2817;
+}
+.welcome-container {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.flight-graph h3 {
+    text-align: center;
+    color: black;
+    background: none;
+    padding: 10px;
+    border: 1px solid #ff000047;
+    font-weight: 400;
+}

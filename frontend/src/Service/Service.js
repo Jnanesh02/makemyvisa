@@ -58,14 +58,14 @@ const Service = () => {
               >
                 <div className="clients-cricle-section">
 
-                <div class="myDIV active"> 
+                <div class="myDIVthree"> 
                 <a target="blank" href="https://www.pixelstalk.net/wp-content/uploads/2016/07/Wallpapers-pexels-photo.jpg">
-                <img src={services1}/>
+                <img src={services1} alt=".."/>
                 </a>
                 </div>
 
-                <div class="hidee"> 
-                <img src={services1}/> 
+                <div class="hideethree"> 
+                <img src={services1} alt=".."/> 
                 <p>
                    Forex Services
                 </p>
@@ -79,13 +79,13 @@ const Service = () => {
                    Visa Assistance
                 </p>
                    </div>     
-                <div class="myDIVthree"> 
+                <div class="myDIV active"> 
                 <Link to="/services/dummy/dummyticket">
                 <img src={services3} alt=".."/>
 
                 </Link>
                 </div>
-                <div class="hideethree"> 
+                <div class="hidee"> 
                 <img src={services3} alt="..."/>  
                 <p>
                    Ticketing
@@ -123,20 +123,20 @@ const Service = () => {
                 </div>   
                 
                 <div class="myDIVsixextra"> 
-                <img src={services11}/>
+                <img src={services11} alt=".."/>
                 </div>
                 <div class="hideesixextra"> 
                 
-                 <img src={services11}/> 
+                 <img src={services11} alt="..."/> 
                  <p> Apostille & Attestation </p>
                  </div>   
                 
                 <div class="myDIVseven"> 
-                <img src={services12}/>
+                <img src={services12} alt="..."/>
                 </div>
                 <div class="hideeseven">
                   
-                   <img src={services12}/> 
+                   <img src={services12} alt="..."/> 
                    <p>
                     Translation & Notary
                    </p>
@@ -154,10 +154,10 @@ const Service = () => {
                      </div>   
 
                 <div class="myDIVnine"> 
-                <img src={services14}/>
+                <img src={services14} alt=".."/>
                 </div>
                 <div class="hideenine">   
-                 <img src={services14}/> 
+                 <img src={services14} alt=".."/> 
                  <p>
                    Student Accommodation 
                  </p>

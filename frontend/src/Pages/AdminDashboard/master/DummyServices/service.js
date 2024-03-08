@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ConfirmationModal from "../../EmployeeDetails/ConfirmationAccountModel";
 import axios from "axios";
 import "./serv.css";
 const Service = () => {
@@ -18,8 +19,8 @@ const Service = () => {
   const [completedTicket, setCompletedTicket] = useState([]);
   const [employeAvailable, setEmployeAvailable] = useState([]);
   const [employeOccupied, setEmployeOccupied] = useState([]);
+  const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [loading,setLoading] = useState(false);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -138,19 +139,27 @@ const Service = () => {
   };
   const isButtonDisabled = isObjectEmpty(assignTo);
   let enableButton = false;
-  const assign = async () => {
+  const assign = () => {
+    setConfirmationModalOpen(true);
+  };
+  const handleConfirm = async () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/assignTo`,assignTo);
-      console.log(response);
+      console.log(response.status === 200);
        if(response.status === 200){
         setLoading(true);
-        console.log("sss");
        }
+     
     } catch (error) {
+      alert(error.message);
+    } finally{
       setLoading(false);
-    }finally{
-      setLoading(false);
+      setConfirmationModalOpen(false);
     }
+  };
+
+  const handleCancel = () => {
+    setConfirmationModalOpen(false);
   };
   return (
     <>
@@ -158,7 +167,7 @@ const Service = () => {
         <div className="services-name-table">
           <div className="">
             <div className="list-group" id="list-tab" role="tablist">
-            <div class="table-responsive">
+            <div className="table-responsive">
               <table className="table services-tables">
                 <thead>
                   <tr>
@@ -215,21 +224,24 @@ const Service = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr key={""}>
+                                <tr>
                                   <td
                                     className="btn-group"
                                     role="group"
                                     aria-label="Basic radio toggle button group"
                                   >
+                                     <div className="tanle-servies-flexdirection">
                                     {Array.isArray(submitTicket) &&
                                     submitTicket.length > 0 ? (
                                       submitTicket.map((ticket) => (
-                                        <div key={ticket._id}>
+
+                                        <div className="tanle-servies-flexdirection" key={ticket._id}>
                                           <input
                                             className="btn-check"
                                             name="ticketId"
                                             autoComplete="off"
                                             type="radio"
+
                                             id={ticket._id}
                                             value={ticket._id}
                                             onChange={(e) =>
@@ -240,16 +252,18 @@ const Service = () => {
                                             }
                                           />
                                           <label
-                                            className="btn btn-outline-primary btn-dynamic-services"
+                                            className="btn btn-primary"
                                             htmlFor={ticket._id}
                                           >
                                             {ticket._id}
                                           </label>
                                         </div>
+                                        
                                       ))
                                     ) : (
                                       <div>No Ticket available</div>
                                     )}
+                                    </div>
                                   </td>
                                   <td>
                                     {Array.isArray(assignTicket) &&
@@ -283,7 +297,7 @@ const Service = () => {
                     <td rowSpan="3">
                       {department.map((dep) => (
                         <div key={dep._id}>
-                          <input class="checkbox-responsvie"
+                          <input className="checkbox-responsvie"
                             type="checkbox"
                             id={dep._id}
                             value={dep.department}
@@ -297,7 +311,7 @@ const Service = () => {
                           <label htmlFor={dep._id}>{dep.department}</label>
                         </div>
                       ))}
-                      <button class="btn btn-primary apply" onClick={handleApply}>Apply</button>
+                      <button className="btn btn-primary apply" onClick={handleApply}>Apply</button>
                     </td>
                     <td rowSpan="3">
                       <table className="nested-table-services">
@@ -332,7 +346,7 @@ const Service = () => {
                                           }
                                         />
                                         <label
-                                          className="btn btn-outline-primary"
+                                          className="btn btn-primary"
                                           htmlFor={res._id}
                                         >
                                           {res._id}
@@ -377,6 +391,14 @@ const Service = () => {
           </div>
         </div>
       </div>
+      
+      {isConfirmationModalOpen && (
+        <ConfirmationModal
+          message={`Are you sure you want to assign Ticket?`}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
     </>
   );
 };
