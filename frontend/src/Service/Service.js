@@ -70,38 +70,38 @@ const Service = () => {
                    Forex Services
                 </p>
                  </div>         
-                <div className="myDIVsecond"> 
+                <div class="myDIVsecond"> 
                 <Link to="/services/VisaAssistance/">  <img src={services2} alt="..."/></Link>
                 </div>
-                <div className="hideesecond"> 
+                <div class="hideesecond"> 
                 <img src={services2} alt="..."/>
                 <p>
                    Visa Assistance
                 </p>
                    </div>     
-                <div className="myDIVthree"> 
+                <div class="myDIVthree"> 
                 <Link to="/services/dummy/dummyticket">
                 <img src={services3} alt=".."/>
 
                 </Link>
                 </div>
-                <div className="hideethree"> 
+                <div class="hideethree"> 
                 <img src={services3} alt="..."/>  
                 <p>
                    Ticketing
                 </p>
                 </div>   
-                <div className="myDIVfour"> 
+                <div class="myDIVfour"> 
                 <Link to="/services/hotel/hotelReservation">  <img src={services4} alt="..."/></Link>
                 </div>
-                <div className="hideefour"> 
+                <div class="hideefour"> 
                 <img src={services4} alt="..."/> 
                 <p>
                    Hotel Reservation
                 </p>
                  </div>   
 
-                <div className="myDIVfive"> 
+                <div class="myDIVfive"> 
                 <Link to="/services/TravelHealthInsurance"><img src={services5} alt="..."/></Link>
                 </div>
                 <div className="hideefive">  
@@ -112,10 +112,10 @@ const Service = () => {
                 </p>
                   </div>   
 
-                <div className="myDIVsix"> 
+                <div class="myDIVsix"> 
                 <Link to="service/immigration/immigrationAdvice"> <img src={services6} alt="..."/></Link>
                 </div>
-                <div className="hideesix">  
+                <div class="hideesix">  
                 <img src={services6} alt="..."/> 
                 <p>
                   Immigration Advice
@@ -142,11 +142,11 @@ const Service = () => {
                    </p>
                    </div>   
 
-                <div className="myDIVeight"> 
+                <div class="myDIVeight"> 
                 <Link to="/services/CourierPickup/"> <img src={services13} alt=".."/></Link>
                
                 </div>
-                <div className="hideeeight">
+                <div class="hideeeight">
                     <img src={services13} alt="..."/>
                     <p>
                        Courier, Pickup & Drop 

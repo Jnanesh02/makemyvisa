@@ -63,6 +63,9 @@ app.use("/makemyvisa", makeMyVisa.departments);
 app.use("/makemyvisa",makeMyVisa.visaDocName);
 
 
+app.use("/makemyvisa", makeMyVisa.getDepartmentDetails);
+//AssignTicket
+app.use("/makemyvisa", makeMyVisa.assignTo)
 //Country Routes
 app.use("/makemyvisa",makeMyVisa.countryService);
 app.use("/makemyvisa",makeMyVisa.updatecountryService);

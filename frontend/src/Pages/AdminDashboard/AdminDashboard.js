@@ -58,12 +58,21 @@ export const AdminDashboard = () => {
               </p>
             </NavLink>
           <Master/>
-           
+          <div className="accordion" id="accordionExample2">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne2">
+                <NavLink style={{ textDecoration: "none" }}className="accordion-button custom-button"  to="ServicesPage">
+                      {" "}
+                      <i className="fa-solid fa-ticket"></i> Tickets
+                    </NavLink>
+                </h2>
+              </div>
+            </div>  
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
                   <NavLink className="accordion-button custom-button" to="employeeDetails">
-                    Employee Management
+                  <i className="fa-solid fa-users"></i> Employees
                   </NavLink>
                 </h2>
               </div>
@@ -72,7 +81,7 @@ export const AdminDashboard = () => {
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
                   <NavLink className="accordion-button custom-button" to="customerDetails">
-                    Customer Management
+                    Customers
                   </NavLink>
                 </h2>
               </div>
@@ -173,12 +182,6 @@ export const AdminDashboard = () => {
                           <li className="list-group-item">
                             {" "}
                             <Link to="/AdminLogout">
-                              {/* <button
-                                type="button"
-                                className="btn btn-primary logout-button">
-                                {" "}
-                                Logout{" "}
-                              </button> */}
                               logout
                             </Link>
                           </li>

@@ -26,6 +26,10 @@ const createServiceBasedSchema = (serviceType) => {
         type: mongoose.Schema.Types.ObjectId,
         ref: "customers",
       },
+      assign:{
+        ticketName: { type: 'string', default:''},
+        ticketId: { type: 'string', default:''}
+      }
   });
 
   return mongoose.model(serviceType, schema); // Use serviceType as the model name

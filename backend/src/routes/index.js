@@ -18,7 +18,8 @@ const updateEmployeePassword = require("./employee/updatePassword");
 const adminUpdateEmployee= require("./employee/adminUpdate");
 const updateEmpoyeeProfile = require("./employee/updateEmpoyeeProfile");
 const departments = require("./employee/departments");
-
+const getDepartmentDetails = require("./employee/GetDepartmentDetails");
+const assignTo = require("./ticketAssign/ticketAssignTo");
 const countryService = require("./country/countryService");
 const updatecountryService = require("./country/updateCountryService");
 const deleteCountryService=require("./country/deleteCountryService")
@@ -55,5 +56,7 @@ module.exports = {
   services,
   notifications,
   uploadTravelInsurance,
-  visaDocName
+  visaDocName,
+  getDepartmentDetails,
+  assignTo
 };

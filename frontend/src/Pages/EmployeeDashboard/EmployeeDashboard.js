@@ -1,17 +1,14 @@
-import React,{useEffect} from "react";
-// import "./AdminDashboardStyles/Dashboard.css";
+import React, { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
 import { NavLink, Link, Outlet } from "react-router-dom";
-// import { Master } from "./master/Master";
 
 const EmployeeDashboard = () => {
- 
-  const token = localStorage.getItem('adminToken');
-  const tokenData = JSON.parse(atob(token.split('.')[1]));
+  const token = localStorage.getItem("adminToken");
+  const tokenData = JSON.parse(atob(token.split(".")[1]));
 
   const Role = tokenData.role;
-  
+
   useEffect(() => {
     const handleSidebarToggle = () => {
       const sidebar = document.getElementById("sidebar");
@@ -32,9 +29,6 @@ const EmployeeDashboard = () => {
     };
   }, []);
 
-
-
-
   return (
     <div>
       <main className="content" />
@@ -46,90 +40,76 @@ const EmployeeDashboard = () => {
           </div>
 
           <ul className="list-unstyled components">
-          <NavLink style={{ textDecoration: "none" }} to={{
-              pathname: "/Employeedashboard",
-              
-            }}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/Employeedashboard",
+              }}
+            >
               <p>
                 <svg
                   className="dashborad-icons"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
-                  width="24">
+                  width="24"
+                >
                   <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
                 </svg>
                 Dashboard{" "}
               </p>
             </NavLink>
-         
-            {Role === "HR" ? (
-  <div className="accordion" id="accordionExample2">
-    <div className="accordion-item">
-      <h2 className="accordion-header" id="headingOne2">
-        <NavLink className="accordion-button custom-button" to="employeeDetails">
-          HR Management
-        </NavLink>
-      </h2>
-    </div>
-  </div>
-) : Role === "Sales" ? (
-  <div className="accordion" id="accordionExample2">
-  <div className="accordion-item">
-    <h2 className="accordion-header" id="headingOne2">
-      <NavLink className="accordion-button custom-button" to="employeeDetails">
-        Sales Management
-      </NavLink>
-    </h2>
-  </div>
-</div>
-) : Role === "Accounting" ? (
-  <div className="accordion" id="accordionExample2">
-  <div className="accordion-item">
-    <h2 className="accordion-header" id="headingOne2">
-      <NavLink className="accordion-button custom-button" to="employeeDetails">
-        Accounting Management
-      </NavLink>
-    </h2>
-  </div>
-</div>
-) : (
-  <div>
-    Default Content for other roles or no role specified
-  </div>
-)}
 
-            {/* <div className="accordion" id="accordionExample2">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="employeeDetails">
-                    Employee Management
-                  </NavLink>
-                </h2>
+            {Role === "HR" ? (
+              <div className="accordion" id="accordionExample2">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne2">
+                    <NavLink
+                      className="accordion-button custom-button"
+                      to="employeeDetails"
+                    >
+                      HR Management
+                    </NavLink>
+                  </h2>
+                </div>
               </div>
-            </div>
+            ) : Role === "Sales" ? (
+              <div className="accordion" id="accordionExample2">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne2">
+                    <NavLink
+                      className="accordion-button custom-button"
+                      to="employeeDetails"
+                    >
+                      Sales Management
+                    </NavLink>
+                  </h2>
+                </div>
+              </div>
+            ) : Role === "Accounting" ? (
+              <div className="accordion" id="accordionExample2">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne2">
+                    <NavLink
+                      className="accordion-button custom-button"
+                      to="employeeDetails"
+                    >
+                      Accounting Management
+                    </NavLink>
+                  </h2>
+                </div>
+              </div>
+            ) : (
+              <div>Default Content for other roles or no role specified</div>
+            )}
+
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="customerDetails">
-                    Customer Management
-                  </NavLink>
-                </h2>
-              </div>
-            </div>
-            <div className="accordion" id="accordionExample2">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="employeeDetails">
-                    <i className="fas fa-gear"></i> Settings
-                  </NavLink>
-                </h2>
-              </div>
-            </div> */}
-            <div className="accordion" id="accordionExample2">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="/AdminLogout">
+                  <NavLink
+                    className="accordion-button custom-button"
+                    to="/AdminLogout"
+                  >
                     Logout
                   </NavLink>
                 </h2>
@@ -145,13 +125,15 @@ const EmployeeDashboard = () => {
               <button
                 type="button"
                 id="sidebarCollapse"
-                className="btn btn-info ">
+                className="btn btn-info "
+              >
                 <svg
                   className="mb-bl"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
-                  width="24">
+                  width="24"
+                >
                   <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                 </svg>
 
@@ -160,7 +142,8 @@ const EmployeeDashboard = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     height="24"
                     viewBox="0 -960 960 960"
-                    width="24">
+                    width="24"
+                  >
                     <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                   </svg>
                 </span>
@@ -172,13 +155,15 @@ const EmployeeDashboard = () => {
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation"
+              >
                 <i className="fas fa-align-justify"></i>
               </button>
 
               <div
                 className="collapse navbar-collapse"
-                id="navbarSupportedContent">
+                id="navbarSupportedContent"
+              >
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item">
                     <a className="nav-link notification" href="/">
@@ -186,7 +171,8 @@ const EmployeeDashboard = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         height="24"
                         viewBox="0 -960 960 960"
-                        width="24">
+                        width="24"
+                      >
                         <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
                       </svg>
                     </a>
@@ -198,7 +184,8 @@ const EmployeeDashboard = () => {
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseExample"
                       aria-expanded="false"
-                      aria-controls="collapseExample">
+                      aria-controls="collapseExample"
+                    >
                       <img className="avatar-icons" src={Avatar} alt="" />
                     </button>
 
@@ -206,19 +193,17 @@ const EmployeeDashboard = () => {
                       <div className="card card-body card-avatar">
                         <ul className="list-group dashboard-avt">
                           <li className="list-group-item">
-                          
-                          <NavLink className="profile-name" to="profile"><i className="fa-solid fa-user m-2 " style={{color:"#dd2817"}}></i>Profile</NavLink>
-     
+                            <NavLink className="profile-name" to="profile">
+                              <i
+                                className="fa-solid fa-user m-2 "
+                                style={{ color: "#dd2817" }}
+                              ></i>
+                              Profile
+                            </NavLink>
                           </li>
                           <li className="list-group-item">
                             {" "}
                             <Link to="/AdminLogout">
-                              {/* <button
-                                type="button"
-                                className="btn btn-primary logout-button">
-                                {" "}
-                                Logout{" "}
-                              </button> */}
                               logout
                             </Link>
                           </li>
@@ -236,7 +221,6 @@ const EmployeeDashboard = () => {
       </div>
     </div>
   );
-}
-
+};
 
 export default EmployeeDashboard;

@@ -38,12 +38,6 @@ return (
                     </NavLink>
                   </div>
                   <div className="accordion-body">
-                    <NavLink style={{ textDecoration: "none" }} className="custom-link" to="ServicesPage">
-                      {" "}
-                      <i className="fa-solid fa-user m-2"></i>Services Page
-                    </NavLink>
-                  </div>
-                  <div className="accordion-body">
                     <NavLink style={{ textDecoration: "none" }} className="custom-link" to="TravelInsuranceService">
                       {" "}
                       <i className="fa-solid fa-user m-2"></i>Travel Insurance
