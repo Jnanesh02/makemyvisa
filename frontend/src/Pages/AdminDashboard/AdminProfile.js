@@ -21,7 +21,7 @@ export const AdminProfile = () => {
       const token = localStorage.getItem("adminToken");
        
       const tokenData = JSON.parse(atob(token.split('.')[1]));
-      console.log("tokenData:",tokenData);
+     
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${tokenData.id}`);
       
       const userData = response.data.message;

@@ -16,7 +16,6 @@ function AdminHomePage() {
   const [serviceName, setServiceName] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hotelreservations, setHotelReservations] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

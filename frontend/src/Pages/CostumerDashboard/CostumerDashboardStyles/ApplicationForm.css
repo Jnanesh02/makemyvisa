@@ -55,10 +55,12 @@
     justify-content: space-between;
 }
 input.visaApplication-input.form-control {
-  width: 97%;
+  width: 90%;
+  border: 0.7px solid #3b3c36;
 }
 select.visaApplication-input.form-control {
-  width: 97%;
+  width: 90%;
+  border: 0.7px solid #3b3c36;
 }
 button.btn.btn-danger.add-dcoument-danger {
   background: #e12912;

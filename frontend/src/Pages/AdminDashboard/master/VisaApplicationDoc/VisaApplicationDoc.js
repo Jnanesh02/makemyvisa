@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../AdminDashboardStyles/Employee.css";
-import CreatableSelect from 'react-select/creatable';
+import "../../AdminDashboardStyles/Employee.css";
 
-const components = { DropdownIndicator: null };
-
-const Department = () => {
-  const [department, setDepartment] = useState([]);
+const VisaApplicationDoc = () => {
+const [visaDocName, setVisaDocName] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    department: "",
-    role:[],
+    documentName: "",
     description: "",
   });
 
   const fetchDetails = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/employee/get/department`
+        `${process.env.REACT_APP_BACKEND_URL}/employee/get/visaDocumentName`
       );
-
-      setDepartment(response.data.message);
+        
+        setVisaDocName(response.data.message);
     } catch (error) {
       alert(error.message);
     }
@@ -32,15 +28,11 @@ const Department = () => {
 
   const handleCreateDepartment = async () => {
     try {
-      const roleArray = roles.map((roleItem)=> roleItem.value);
-      const postData={
-        ...formData,
-        role:roleArray
-      }
       
+      console.log("formdata",formData);
       await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/employee/create/department`,
-        postData,
+        `${process.env.REACT_APP_BACKEND_URL}/employee/create/visaDocumentName`,
+        formData,
       );
       fetchDetails(); // Fetch updated data
       setShowModal(false); // Close the modal
@@ -54,24 +46,16 @@ const Department = () => {
   };
 
 
-  const [inputValue, setInputValue] = useState('');
-  const [roles, setRoles] = useState([]);
-
-  const handleKeyDown = (event) => {
-    if (!inputValue || !['Enter', 'Tab'].includes(event.key)) return;
-    setRoles((prev) => [...prev, { label:inputValue,value: inputValue }]);
-    setInputValue('');
-    event.preventDefault();
-  };
+ 
 
   
 
-
+  
   return (
     <>
       <div className="main-department-section">
         <div className="dep-tbl">
-          <h2>Department</h2>
+          <h2>Visa Application Docs</h2>
           <button
             className="btn btn-primary create-button"
             onClick={() => setShowModal(true)}
@@ -82,17 +66,15 @@ const Department = () => {
         <table className="employee-table">
           <thead>
             <tr>
-              <th>Department</th>
-              <th>Roles</th>
+              <th>Document Name</th>
               <th>Description</th>
             </tr>
           </thead>
           <tbody>
-            {department.map((department, index) => (
+            {visaDocName.map((DocName, index) => (
               <tr key={index}>
-                <td>{department.department}</td>
-                <td>{department.role}</td>
-                <td>{department.description}</td>
+                <td>{DocName.documentName}</td>
+                <td>{DocName.description}</td>
               </tr>
             ))}
           </tbody>
@@ -105,7 +87,7 @@ const Department = () => {
           <div className="create-account-dashboard">
             <div className="create-dep-form">
               <div className="account-heading">
-                <h3>Create Department</h3>
+                <h3>Create Document Name</h3>
                 <button
                   className="close-buttonss"
                   onClick={() => setShowModal(false)}
@@ -115,30 +97,14 @@ const Department = () => {
                 </button>
               </div>
               <div className="create-dep-labels mb-3">
-                <label className="form-label"> Department: </label>
+                <label className="form-label"> Document Name: </label>
                 <input
                   className="form-control"
                   type="text"
-                  name="department"
-                  value={formData.department}
+                  name="documentName"
+                  value={formData.documentName}
                   onChange={handleInputChange}
                 />
-              </div>
-
-              <div className="create-dep-labels mb-3">
-                <label className="form-label"> Role: </label>
-                <CreatableSelect
-      components={components}
-      inputValue={inputValue}
-      isClearable
-      isMulti
-      menuIsOpen={false}
-      onChange={(newValue) => setRoles(newValue)}
-      onInputChange={(newValue) => setInputValue(newValue)}
-      onKeyDown={handleKeyDown}
-      placeholder="Type something and press enter..."
-      value={roles}
-    />
               </div>
 
               <div className="create-dep-labels mb-3">
@@ -170,7 +136,7 @@ const Department = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Department;
+export default VisaApplicationDoc

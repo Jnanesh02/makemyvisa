@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../DummyTickets/DummyTicketForm.css";
-import CookieUtils from "../../../components/cookie/Cookies";
+import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
 
 export const HotelBooking = () => {

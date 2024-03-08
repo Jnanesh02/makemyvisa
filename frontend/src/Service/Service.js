@@ -104,7 +104,7 @@ const Service = () => {
                 <div class="myDIVfive"> 
                 <Link to="/services/TravelHealthInsurance"><img src={services5} alt="..."/></Link>
                 </div>
-                <div class="hideefive">  
+                <div className="hideefive">  
                 
                  <img src={services5} alt=""/>
                  <p>
@@ -125,7 +125,7 @@ const Service = () => {
                 <div class="myDIVsixextra"> 
                 <img src={services11} alt=".."/>
                 </div>
-                <div class="hideesixextra"> 
+                <div className="hideesixextra"> 
                 
                  <img src={services11} alt="..."/> 
                  <p> Apostille & Attestation </p>
@@ -134,7 +134,7 @@ const Service = () => {
                 <div class="myDIVseven"> 
                 <img src={services12} alt="..."/>
                 </div>
-                <div class="hideeseven">
+                <div className="hideeseven">
                   
                    <img src={services12} alt="..."/> 
                    <p>

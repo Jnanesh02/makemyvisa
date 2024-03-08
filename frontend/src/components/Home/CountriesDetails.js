@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import countryBannerImage from "../../assets/countriesserviceImages/country-banner.jpg";
 import { useParams } from 'react-router-dom';
-import ReactCardSlider from 'react-card-slider-component';
 import Banner from "../../assets/countriesserviceImages/information-visa.png";
 import card from "../../assets/countriesserviceImages/countries-card.jpg";
 import icon from "../../assets/countriesserviceImages/countries-icons.png";

@@ -59,6 +59,10 @@ app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
 app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
 app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
 app.use("/makemyvisa", makeMyVisa.departments);
+
+app.use("/makemyvisa",makeMyVisa.visaDocName);
+
+
 app.use("/makemyvisa", makeMyVisa.getDepartmentDetails);
 //AssignTicket
 app.use("/makemyvisa", makeMyVisa.assignTo)

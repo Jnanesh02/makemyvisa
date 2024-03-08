@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SocialMediaAccount from "../SocialAccount/SocialMediaAccount";
 import postServiceCollectionApi from "../../../components/ApiServices/ApiService";
-import CookieUtils from "../../../components/cookie/Cookies";
+import CookieUtils from "../../../components/Cookie/Cookies";
 
 const Login = () => {
   const navigate = useNavigate();

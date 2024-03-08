@@ -1,5 +1,5 @@
 import axios from "axios";
-import CookieUtils from "../cookie/Cookies";
+import CookieUtils from "../Cookie/Cookies";
 
 const postServiceCollectionApi = async(serviceDetails,customerId) =>{
     try {

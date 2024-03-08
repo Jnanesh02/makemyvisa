@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../AdminDashboardStyles/Employee.css";
+import "../../AdminDashboardStyles/Employee.css";
 import CreatableSelect from 'react-select/creatable';
 
 const components = { DropdownIndicator: null };
@@ -33,9 +33,12 @@ const Department = () => {
   const handleCreateDepartment = async () => {
     try {
       const roleArray = roles.map((roleItem)=> roleItem.value);
+      const trimDeperatment=formData.department.trim();
       const postData={
         ...formData,
-        role:roleArray
+        role:roleArray,
+        department:trimDeperatment,
+
       }
       
       await axios.post(
@@ -64,7 +67,7 @@ const Department = () => {
     event.preventDefault();
   };
 
-  
+
 
 
   return (

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./CostumerDashboardStyles/Employee.css";
-import CookieUtils from "../../components/cookie/Cookies";
+import CookieUtils from "../../components/Cookie/Cookies";
 const TicketStatus = () => {
   const [ticketDetails, setTicketDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Track loading state

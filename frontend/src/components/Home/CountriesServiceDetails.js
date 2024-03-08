@@ -6,11 +6,29 @@ import card from "../../assets/countriesserviceImages/countries-card.jpg";
 import icon from "../../assets/countriesserviceImages/countries-icons.png";
 import axios from "axios";
 import "./HomeStyles/countriesserviceDetails.css";
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 export const CountriesServiceDetails = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+ 
   const { countryName, serviceName } = useParams();
   const [countryData, setCountryData] = useState([]);
   const [filteredSubServiceType, setFilteredSubServiceTypes] = useState([]);
+
+
+  const settings = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    gap:3,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  
+  };
+
+  var a=5;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -84,18 +102,14 @@ export const CountriesServiceDetails = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row ">
-            <div className="col-lg-12">
-              <div
-                id="carouselExampleDark"
-                className="carousel carousel-dark slide"
-              >
-                             <div className="row services-country-card">
-                  {filteredSubServiceType && filteredSubServiceType.length > 0 ? (
-                    filteredSubServiceType.map((subServiceType, index) => (
+          
+            
+              
+                             <div className="services-country-card">
+                                {filteredSubServiceType && filteredSubServiceType.length ===1 ?(filteredSubServiceType.map((subServiceType, index) => (
                       <div
                         key={index}
-                        className="country-services-card-category"
+                        className="country-services-card-category p-2"
                       >
                         <div className="card country-cards">
                           <img src={card} className="card-img-top" alt="/" />
@@ -110,41 +124,69 @@ export const CountriesServiceDetails = () => {
                           </div>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <p>No data available</p>
-                  )}
+                      
+                    ))):<Slider className="autoplay mx-auto mt-3" {...settings}>{(filteredSubServiceType.map((subServiceType, index) => (
+                      <div
+                        key={index}
+                        className="country-services-card-category p-2"
+                      >
+                        <div className="card country-cards">
+                          <img src={card} className="card-img-top" alt="/" />
+                          <div className="card-body">
+                            <div className="country-icons">
+                              <img src={icon} alt="" />
+                            </div>
+                            <h5 className="card-title">
+                              {subServiceType.subServiceName ||
+                                "No Service Name"}
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    )))}</Slider>}
+
+
+
+                             
                 </div>
-                <button
-                  className="carousel-control-prev"
-                  type="button"
-                  onClick={handlePrev}
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                  className="carousel-control-next"
-                  type="button"
-                  onClick={handleNext}
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
-          </div>
+               
+                
+              
+              
+            
         </div>
       </section>
     );
   };
   
+
+  {/* <Slider className="autoplay mx-auto mt-3" {...settings}>
+                  {filteredSubServiceType && filteredSubServiceType.length > 1 ? (
+                    filteredSubServiceType.map((subServiceType, index) => (
+                      <div
+                        key={index}
+                        className="country-services-card-category p-2"
+                      >
+                        <div className="card country-cards">
+                          <img src={card} className="card-img-top" alt="/" />
+                          <div className="card-body">
+                            <div className="country-icons">
+                              <img src={icon} alt="" />
+                            </div>
+                            <h5 className="card-title">
+                              {subServiceType.subServiceName ||
+                                "No Service Name"}
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    ))
+                  ) : (
+                    <p>No data available</p>
+                  )}
+                   </Slider> */}
   const ServiceInformation = (countryData, serviceName) => {
     return (
       <section className="information-visa">
@@ -208,13 +250,13 @@ export const CountriesServiceDetails = () => {
       </section>
     );
   };
-  const handlePrev = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
-  };
+  // const handlePrev = () => {
+  //   setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
+  // };
 
-  const handleNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
-  };
+  // const handleNext = () => {
+  //   setActiveIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
+  // };
   return (
     <main className="content">
       {countryData ? (

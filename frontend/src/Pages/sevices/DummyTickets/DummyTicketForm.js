@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DummyTicketForm.css";
-import CookieUtils from "../../../components/cookie/Cookies";
+import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ function DummyTicketForm() {
     from: "",
     to: "",
   });
+  
 
   const { dummyticket } = useParams({});
   const navigate = useNavigate();

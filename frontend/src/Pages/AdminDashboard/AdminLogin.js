@@ -25,7 +25,7 @@ const AdminLogin = () => {
         `${process.env.REACT_APP_BACKEND_URL}/employee/login`,
         data
       );
-      console.log("response:",response);
+      
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
