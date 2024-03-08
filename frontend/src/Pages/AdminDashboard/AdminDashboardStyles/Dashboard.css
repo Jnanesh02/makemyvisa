@@ -212,9 +212,9 @@ img.dashboard-logo {
     #sidebar.active {
         margin-left: 0;
     }
-    #sidebarCollapse span {
+    /* #sidebarCollapse span {
         display: none;
-    }
+    } */
 }
 img.dashboard-logo {
     width: 175px;
@@ -365,10 +365,10 @@ span.pagination-count {
         margin-top: 0px;
         padding: 0px;
     }
-    button#sidebarCollapse {
+    /* button#sidebarCollapse {
         position: absolute;
         right: 20px;
-    }
+    } */
     li.nav-item.avatar-icons-ds {
         position: absolute;
         right: 30px;

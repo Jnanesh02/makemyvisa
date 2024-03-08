@@ -110,18 +110,7 @@ function Dashboard() {
                   className="accordion-collapse collapse  custom-collapse"
                   aria-labelledby="headingOne1"
                   data-bs-parent="#accordionExample1">
-                  {/* <div className="accordion-body">
-                    <NavLink className="custom-link" to="profile">
-                      {" "}
-                      <i className="fa-solid fa-user m-2"></i>Profile
-                    </NavLink>
-                  </div> */}
-                  {/* <div className="accordion-body">
-                    <NavLink className="custom-link" to="/CustomerLogout">
-                      {" "}
-                      <i className="fas fa-power-off m-2"></i>Logout
-                    </NavLink>
-                  </div> */}
+                 
                 </div>
               </div>
             </div>

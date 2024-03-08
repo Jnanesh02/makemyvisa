@@ -59,6 +59,10 @@ app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
 app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
 app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
 app.use("/makemyvisa", makeMyVisa.departments);
+
+app.use("/makemyvisa",makeMyVisa.visaDocName);
+
+
 //Country Routes
 app.use("/makemyvisa",makeMyVisa.countryService);
 app.use("/makemyvisa",makeMyVisa.updatecountryService);

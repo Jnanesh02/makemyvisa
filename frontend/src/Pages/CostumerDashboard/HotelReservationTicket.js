@@ -2,7 +2,7 @@ import axios from 'axios';
 import React ,{useState,useEffect} from 'react'
 import { useParams,Link } from 'react-router-dom';
 import "./CostumerDashboardStyles/Employee.css"
-import CookieUtils from '../../components/cookie/Cookies';
+import CookieUtils from '../../components/Cookie/Cookies';
 
 export const HotelReservationTicket = () => {
     const [ticketDetails, setTicketDetails] = useState([]);

@@ -200,11 +200,11 @@ svg.dashborad-icons {
     fill: white;
     margin-right: 10px;
 }
-button#sidebarCollapse {
+/* button#sidebarCollapse {
     background: none;
     border: 1px solid #e12912;
     fill: #e12912;
-}
+} */
 .main-dashboard-k {
     padding-left: 20px;
     padding-right: 20px;
@@ -288,10 +288,10 @@ button.btn.btn-primary.logout-button {
         margin-top: 0px;
         padding: 0px;
     }
-    button#sidebarCollapse {
+    /* button#sidebarCollapse {
         position: absolute;
         right: 20px;
-    }
+    } */
     li.nav-item.avatar-icons-ds {
         position: absolute;
         right: 30px;

@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import { Outlet ,Navigate,useNavigate} from 'react-router-dom'
-import CookieUtils from '../cookie/Cookies';
+import CookieUtils from '../Cookie/Cookies';
 
 const PrivateRoute = () => {
     const navigate=useNavigate()

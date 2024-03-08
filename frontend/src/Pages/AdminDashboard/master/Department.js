@@ -64,7 +64,7 @@ const Department = () => {
     event.preventDefault();
   };
 
-  console.log("inputvalue:",inputValue);
+  
 
 
   return (

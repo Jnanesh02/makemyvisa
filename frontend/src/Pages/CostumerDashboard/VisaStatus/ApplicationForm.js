@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import '../CostumerDashboardStyles/ApplicationForm.css';
 import { styled } from '@mui/material/styles';
@@ -19,7 +19,6 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
 
 const ApplicationForm = () => {
 
-  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,10 +29,10 @@ const ApplicationForm = () => {
     state: "",
     visaType: "tourist",
     destination: "",
-    documents: [{ name: "", file: null }],
+    documents: [],
   });
 
-  const [FormSubmited,setFormSubmited]=useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(true);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -67,12 +66,12 @@ const ApplicationForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormSubmited(false)
+    setFormSubmitted(false)
     try {
-      
+      console.log("FormData", formData);
       const response = await axios.post("YOUR_API_ENDPOINT", formData);
       console.log("Form submitted successfully:", response.data);
-      
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -83,20 +82,42 @@ const ApplicationForm = () => {
         state: "",
         visaType: "tourist",
         destination: "",
-        documents: [{ name: "", file: null }],
+        documents: [],
       });
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
+  const fetchDetails = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/get/visaDocumentName`);
+      
+      if (response.data.message.length > 0) {
+        const documentNames = response.data.message.map(doc => doc.documentName); // Get all document names
+        setFormData(prevState => ({
+          ...prevState,
+          documents: documentNames.map(name => ({ name, file: null })) // Initialize documents array with names
+        }));
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchDetails();
+  }, []);
+
+  console.log("data", formData);
+
   return (
     <div>
       
 
-      {FormSubmited?<div>
+      {formSubmitted?<div>
 
-        <div className="visaApplication-container mx-auto mb-3 shadow p-3 rounded" style={{width:"1000px"}}>
+        <div className="visaApplication-container mx-auto mb-3 shadow px-5 py-3 rounded" style={{width:"1000px"}}>
       
       <div className="visaApplication-form-container">
         <h2 className="visaApplication-title">Visa Application</h2>
@@ -113,6 +134,7 @@ const ApplicationForm = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
+                
                 required
               />
             </div>
@@ -257,8 +279,8 @@ const ApplicationForm = () => {
                 </button>
               </div>
               <div className="table-responsive">
-                <table className="table">
-                  <thead>
+                <table className="table my-2 table-bordered border-Dark text-center">
+                  <thead className="table-light">
                     <tr>
                       <th>Document Name</th>
                       <th>Upload</th>
@@ -289,10 +311,11 @@ const ApplicationForm = () => {
                         <td>
                           <button
                             type="button"
-                            className="btn btn-danger"
+                            className="btn"
                             onClick={() => handleRemoveDocument(index)}
+                            style={{background:"#e12912",color:'white'}}
                           >
-                            Remove
+                            -
                           </button>
                         </td>
                       </tr>
@@ -303,7 +326,7 @@ const ApplicationForm = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-danger btn-danger-submit">
+          <button type="submit" className="btn btn-danger-submit" style={{background:"#e12912",color:'white'}}>
             Submit
           </button>
         </form>

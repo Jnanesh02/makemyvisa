@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import CookieUtils from './cookie/Cookies';
+import CookieUtils from './Cookie/Cookies';
 import postServiceCollectionApi from './ApiServices/ApiService';
 const Google = () => {
     const navigate=useNavigate();

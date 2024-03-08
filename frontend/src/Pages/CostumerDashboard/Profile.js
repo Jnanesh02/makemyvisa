@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CostumerDashboardStyles/Profile.css";
 import axios from "axios";
 import ConfirmationModal from "../AdminDashboard/EmployeeDetails/ConfirmationAccountModel";
-import CookieUtils from "../../components/cookie/Cookies";
+import CookieUtils from "../../components/Cookie/Cookies";
 
 const ProfileForm = () => {
   const [formData, setFormData] = useState({

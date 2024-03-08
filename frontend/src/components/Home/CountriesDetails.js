@@ -14,9 +14,7 @@ export const CountriesDetails = () => {
         const fetchData = async () => {
             try {
                 const response = await axios(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
-                console.log(response);
                 const filteredCountries = response.data.message.filter(country => country.countryName === countryName.replace(/-/g, ' '));
-                 console.log(filteredCountries);
                 if (filteredCountries.length > 0) {
                     setCountryData(filteredCountries[0]);
                 } else {

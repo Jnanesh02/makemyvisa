@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CookieUtils from '../../components/cookie/Cookies';
+import CookieUtils from '../../components/Cookie/Cookies';
 
 async function performLogout() {
     try {
