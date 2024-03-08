@@ -163,3 +163,10 @@ button.nav-link.active img {
     filter: brightness(0) invert(1);
 }
 
+table.table.services-tables td {
+    width: 25%;
+}
+table.nested-table-services td {
+    width: 100% !important;
+    border-radius: 0px;
+}

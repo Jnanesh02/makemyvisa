@@ -131,6 +131,7 @@ const Service = () => {
         <div className="services-name-table">
           <div className="">
             <div className="list-group" id="list-tab" role="tablist">
+            <div class="table-responsive">
               <table className="table services-tables">
                 <thead>
                   <tr>
@@ -143,10 +144,11 @@ const Service = () => {
 
                 <tbody>
                   <tr>
+                  <td className="first-section-td">
+
                       {Array.isArray(serviceName) &&
                         serviceName.map((service) => (
-                          <tr key={service._id}>
-                            <td className="first-section-td">
+                      
                               <a
                                 className="list-group-item list-group-item-action"
                                 id="list-home-list"
@@ -162,10 +164,12 @@ const Service = () => {
                               >
                                 {service.serviceTypeName}
                               </a>
-                            </td>
-                          </tr>
+                     
                         ))}
-                    <td rowSpan="3">
+                        </td>
+
+                    <td rowSpan="3
+                    ">
                       {" "}
                       <div className="col-12">
                         <div className="tab-content" id="nav-tabContent">
@@ -209,7 +213,7 @@ const Service = () => {
                                             }
                                           />
                                           <label
-                                            className="btn btn-outline-primary"
+                                            className="btn btn-outline-primary btn-dynamic-services"
                                             htmlFor={ticket._id}
                                           >
                                             {ticket._id}
@@ -252,7 +256,7 @@ const Service = () => {
                     <td rowSpan="3">
                       {department.map((dep) => (
                         <div key={dep._id}>
-                          <input
+                          <input class="checkbox-responsvie"
                             type="checkbox"
                             id={dep._id}
                             value={dep.department}
@@ -266,7 +270,7 @@ const Service = () => {
                           <label htmlFor={dep._id}>{dep.department}</label>
                         </div>
                       ))}
-                      <button onClick={handleApply}>Apply</button>
+                      <button class="btn btn-primary apply" onClick={handleApply}>Apply</button>
                     </td>
                     <td rowSpan="3">
                       <table className="nested-table-services">
@@ -303,7 +307,7 @@ const Service = () => {
                                               }
                                             />
                                             <label
-                                              className="btn btn-outline-primary"
+                                              className="btn btn-outline-primary "
                                               htmlFor={res._id}
                                             >
                                               {res._id}
@@ -343,6 +347,7 @@ const Service = () => {
                   </tr>
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </div>

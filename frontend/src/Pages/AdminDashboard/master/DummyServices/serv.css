@@ -23,6 +23,7 @@ a.list-group-item.list-group-item-action.active {
 a.list-group-item.list-group-item-action {
     border: 1px solid #dd2817;
     text-align: center;
+    margin-bottom: 15px;
 }
 table.nested-table-services td {
     padding: 10px;
@@ -37,4 +38,34 @@ table.nested-table-services th {
 }
 table.table.services-tables td {
     border: 1px solid #cacaca;
+}
+.services-name-table table {
+    width: 100%;
+    margin: auto;
+    margin-top: 35px;
+    font-size: 14px;
+}
+.services-name-table {
+    padding: 25px;
+    padding-top: 0px;
+}
+input.checkbox-responsvie {
+    width: 20px;
+    height: 16px;
+    margin-bottom: 13px;
+    margin-right: 15px;
+}
+button.btn.btn-primary.apply {
+    font-size: 14px;
+    background: #dd2817;
+    border: none;
+}
+label.btn.btn-outline-primary.btn-dynamic-services {
+    background: #dd2817;
+    color: white;
+    border: none;
+    /* font-size: 14px; */
+}
+table.table.services-tables th {
+    border: 1px solid #d0d0d0;
 }
