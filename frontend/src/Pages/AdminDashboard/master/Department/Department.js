@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../AdminDashboardStyles/Employee.css";
-import CreatableSelect from 'react-select/creatable';
+import CreatableSelect from "react-select/creatable";
 
 const components = { DropdownIndicator: null };
 
@@ -10,7 +10,7 @@ const Department = () => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     department: "",
-    role:[],
+    role: [],
     description: "",
   });
 
@@ -32,18 +32,17 @@ const Department = () => {
 
   const handleCreateDepartment = async () => {
     try {
-      const roleArray = roles.map((roleItem)=> roleItem.value);
-      const trimDeperatment=formData.department.trim();
-      const postData={
+      const roleArray = roles.map((roleItem) => roleItem.value);
+      const trimDeperatment = formData.department.trim();
+      const postData = {
         ...formData,
-        role:roleArray,
-        department:trimDeperatment,
+        role: roleArray,
+        department: trimDeperatment,
+      };
 
-      }
-      
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/employee/create/department`,
-        postData,
+        postData
       );
       fetchDetails(); // Fetch updated data
       setShowModal(false); // Close the modal
@@ -56,19 +55,15 @@ const Department = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [roles, setRoles] = useState([]);
 
   const handleKeyDown = (event) => {
-    if (!inputValue || !['Enter', 'Tab'].includes(event.key)) return;
-    setRoles((prev) => [...prev, { label:inputValue,value: inputValue }]);
-    setInputValue('');
+    if (!inputValue || !["Enter", "Tab"].includes(event.key)) return;
+    setRoles((prev) => [...prev, { label: inputValue, value: inputValue }]);
+    setInputValue("");
     event.preventDefault();
   };
-
-
-
 
   return (
     <>
@@ -94,7 +89,14 @@ const Department = () => {
             {department.map((department, index) => (
               <tr key={index}>
                 <td>{department.department}</td>
-                <td>{department.role}</td>
+                <td>
+                {department.role.map((role)=>(
+                  <span key={role._id}>
+                    {console.log("111",role)}
+                    {role}<br />
+                  </span>
+                ))}
+                </td>
                 <td>{department.description}</td>
               </tr>
             ))}
@@ -131,17 +133,17 @@ const Department = () => {
               <div className="create-dep-labels mb-3">
                 <label className="form-label"> Role: </label>
                 <CreatableSelect
-      components={components}
-      inputValue={inputValue}
-      isClearable
-      isMulti
-      menuIsOpen={false}
-      onChange={(newValue) => setRoles(newValue)}
-      onInputChange={(newValue) => setInputValue(newValue)}
-      onKeyDown={handleKeyDown}
-      placeholder="Type something and press enter..."
-      value={roles}
-    />
+                  components={components}
+                  inputValue={inputValue}
+                  isClearable
+                  isMulti
+                  menuIsOpen={false}
+                  onChange={(newValue) => setRoles(newValue)}
+                  onInputChange={(newValue) => setInputValue(newValue)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Type something and press enter..."
+                  value={roles}
+                />
               </div>
 
               <div className="create-dep-labels mb-3">

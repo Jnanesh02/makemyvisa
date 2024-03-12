@@ -483,7 +483,7 @@ img.img-banner-fxd {
     border-radius: 50%;
     width: 350px;
     height: 350px;
-    background: #ffffff;
+    background: #ffffff61 !important;
     border: 2px solid #fe5141;
 }
 .modal.modal-em-m .modal-header {
@@ -995,7 +995,7 @@ img.certificate-img {
 }
 /* ..  */
 .hidee p {
-    background: #f0f0f0;
+    background: none;
     margin: 0px;
     position: absolute;
     left: 0px;
@@ -1003,10 +1003,14 @@ img.certificate-img {
     text-align: center;
     margin-top: 12px;
     height: 40px;
-    color:#fe5141;
+    color: #ffffff;
     width: 84px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .hideesecond p {
     background: #f0f0f0;
     margin: 0px;

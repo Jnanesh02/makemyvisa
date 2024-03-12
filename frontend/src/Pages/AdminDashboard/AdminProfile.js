@@ -15,15 +15,17 @@ export const AdminProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
- 
+
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-       
-      const tokenData = JSON.parse(atob(token.split('.')[1]));
-     
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${tokenData.id}`);
-      
+
+      const tokenData = JSON.parse(atob(token.split(".")[1]));
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${tokenData.id}`
+      );
+
       const userData = response.data.message;
       setFormData({
         ...formData,
@@ -41,7 +43,7 @@ export const AdminProfile = () => {
   };
   useEffect(() => {
     fetchUserData();
-  },[]);
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -65,7 +67,10 @@ export const AdminProfile = () => {
 
     try {
       const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/employee/updateprofile/${adminToken._Id}`, formData);
+      await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/employee/updateprofile/${adminToken._Id}`,
+        formData
+      );
       setUpdateUserSuccess("Profile updated successfully");
       setOriginalFormData({ ...formData });
     } catch (error) {
@@ -86,19 +91,18 @@ export const AdminProfile = () => {
 
   return (
     <>
-    <div className="profile-dashboard-header">
-      <div className="Profile-Header">
-        <h3>My Profile</h3>
-        
-      </div>
-      <div className="Profile-container">
-        <img
-          src="https://i.imgur.com/G1pXs7D.jpg"
-          alt="Profile"
-          className="img-fluid profile-image"
-          width="70"
-        />
-      </div>
+      <div className="profile-dashboard-header">
+        <div className="Profile-Header">
+          <h3>My Profile</h3>
+        </div>
+        <div className="Profile-container">
+          <img
+            src="https://i.imgur.com/G1pXs7D.jpg"
+            alt="Profile"
+            className="img-fluid profile-image"
+            width="70"
+          />
+        </div>
       </div>
       <div className="container mt-2 profile-form">
         <h4>Basic Details :</h4>
@@ -179,7 +183,7 @@ export const AdminProfile = () => {
 
           <div className="row mb-1">
             <div className="col">
-              <div className="floating-label" >
+              <div className="floating-label">
                 <textarea
                   className="form-control"
                   id="address"
@@ -193,32 +197,32 @@ export const AdminProfile = () => {
             </div>
           </div>
           <div className="profile-button-db">
-          <button
-            type="submit"
-            className="btn btn-primary me-2 btn-profile-cancel"
-            hidden={!editMode}
-            onClick={handleCancel}
-          >
-            <i className="fa-solid fa-save me-1"></i>
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary btn-profile-save"
-            onClick={toggleEditMode}
-          >
-            {editMode ? (
-              <>
-                <i className="fa-solid fa-times me-1"></i>
-                Save
-              </>
-            ) : (
-              <>
-                <i className="fa-solid fa-edit me-1"></i>
-                Edit
-              </>
-            )}
-          </button>
+            <button
+              type="submit"
+              className="btn btn-primary me-2 btn-profile-cancel"
+              hidden={!editMode}
+              onClick={handleCancel}
+            >
+              <i className="fa-solid fa-save me-1"></i>
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-profile-save"
+              onClick={toggleEditMode}
+            >
+              {editMode ? (
+                <>
+                  <i className="fa-solid fa-times me-1"></i>
+                  Save
+                </>
+              ) : (
+                <>
+                  <i className="fa-solid fa-edit me-1"></i>
+                  Edit
+                </>
+              )}
+            </button>
           </div>
 
           {showConfirmationModal && (
