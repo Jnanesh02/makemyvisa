@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -9,8 +9,8 @@ import Check from '@mui/icons-material/Check';
 
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
-import Form2 from './Form2';
-import Form3 from './Form3';
+import { DocumentUpload } from './DocumentUpload';
+import { AdditionalDocumentUpload } from './AdditionalDocumentUpload';
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -96,20 +96,21 @@ const steps = ['Registration and Onboarding', 'Document Upload', 'Document downl
 
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [applicationStatus, setApplicationStatus] = useState("additional");
 
-  const handleStepClick = (step) => {
-    setActiveStep(step);
-  };
+ 
 
-  const ApplicationStatus = "submitted";
   React.useEffect(
     () => {
-      switch (ApplicationStatus) {
+      switch (applicationStatus) {
         case "completed":
           setActiveStep(2);
           break;
         case "assigned":
           setActiveStep(1);
+          break;
+          case "additional":
+          setActiveStep(4);
           break;
         case "submitted":
           setActiveStep(0);
@@ -118,22 +119,23 @@ export default function CustomizedSteppers() {
           break;
       }
     },
-    [ApplicationStatus]
+    [applicationStatus]
   );
 
   return (
     <Stack sx={{ width: '100%' }} spacing={4} className='mt-3'>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
-          <Step key={label} onClick={() => handleStepClick(index)}>
+          <Step key={label} >
             <StepLabel StepIconComponent={ColorlibStepIcon} icon={index + 1}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
         {activeStep === 0 && <ApplicationForm />}
-        {activeStep === 1 && <Form2 />}
-        {activeStep === 2 && <Form3 />}
+        {activeStep === 1 && <DocumentUpload />}
+        {activeStep === 4 && <AdditionalDocumentUpload />}
+
       </div>
     </Stack>
   );
