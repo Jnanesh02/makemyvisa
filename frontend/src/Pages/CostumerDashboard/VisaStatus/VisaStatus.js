@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -11,8 +11,8 @@ import { useTheme } from '@mui/material/styles';
 
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
-import Form2 from './Form2';
-import Form3 from './Form3';
+import { DocumentUpload } from './DocumentUpload';
+import { AdditionalDocumentUpload } from './AdditionalDocumentUpload';
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -98,10 +98,9 @@ const steps = ['Registration and Onboarding', 'Document Upload', 'Document downl
 
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [applicationStatus, setApplicationStatus] = useState("additional");
 
-  const handleStepClick = (step) => {
-    setActiveStep(step);
-  };
+ 
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
@@ -109,12 +108,15 @@ export default function CustomizedSteppers() {
   const ApplicationStatus = "submitted";
   React.useEffect(
     () => {
-      switch (ApplicationStatus) {
+      switch (applicationStatus) {
         case "completed":
           setActiveStep(2);
           break;
         case "assigned":
           setActiveStep(1);
+          break;
+          case "additional":
+          setActiveStep(4);
           break;
         case "submitted":
           setActiveStep(0);
@@ -123,7 +125,7 @@ export default function CustomizedSteppers() {
           break;
       }
     },
-    [ApplicationStatus]
+    [applicationStatus]
   );
 
   const [data,setData]=React.useState({
