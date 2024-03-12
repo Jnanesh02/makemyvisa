@@ -6,6 +6,8 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Check from '@mui/icons-material/Check';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
@@ -101,6 +103,9 @@ export default function CustomizedSteppers() {
     setActiveStep(step);
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
+
   const ApplicationStatus = "submitted";
   React.useEffect(
     () => {
@@ -121,17 +126,31 @@ export default function CustomizedSteppers() {
     [ApplicationStatus]
   );
 
+  const [data,setData]=React.useState({
+    onboarding:[
+      {
+        FirstName:"Praveen",
+        LastName:"sagar",
+        pay:'200/-'
+      }
+    ]
+  })
   return (
-    <Stack sx={{ width: '100%' }} spacing={4} className='mt-3'>
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+    <Stack sx={{ width: isMobile?'':'100%',display:isMobile?'flex':'',flexDirection:isMobile?'row':'', }} spacing={4} className='mt-3'>
+      <Stepper alternativeLabel orientation={isMobile ? 'vertical' : 'horizontal'} // Set orientation based on screen size
+       activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={label} onClick={() => handleStepClick(index)}>
-            <StepLabel StepIconComponent={ColorlibStepIcon} icon={index + 1}>{label}</StepLabel>
+            <StepLabel StepIconComponent={ColorlibStepIcon} sx={{ 
+              width: isMobile ? '70px' : '100px', // Adjust width for mobile
+              padding: isMobile ? '8px' : '' // Adjust padding for mobile
+            }}
+            icon={index + 1}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <div>
-        {activeStep === 0 && <ApplicationForm />}
+      <div style={{margin:'1rem'}}>
+        {activeStep === 0 && <ApplicationForm Data={data.onboarding}/>}
         {activeStep === 1 && <Form2 />}
         {activeStep === 2 && <Form3 />}
       </div>
