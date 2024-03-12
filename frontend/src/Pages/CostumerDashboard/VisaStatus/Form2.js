@@ -1,10 +1,13 @@
-import React from 'react'
+
+import * as React from 'react';
+
+
 
 const Form2 = () => {
   return (
-    <div>
-      Form2
-    </div>
+    <>
+    hello
+    </>
   )
 }
 

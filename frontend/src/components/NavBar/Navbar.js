@@ -241,8 +241,7 @@ import { Link, useLocation } from "react-router-dom";
 import avatar from "../../assets/images/avatar.png";
 
 import axios from "axios";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

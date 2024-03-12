@@ -89,35 +89,35 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const handleStepClick = (step) => {
+    setActiveStep(step);
+  };
 
-  const ApplicationStatus="submitted"
+  const ApplicationStatus = "submitted";
   React.useEffect(
-    
-    ()=>{
-      
-      switch(ApplicationStatus) {
+    () => {
+      switch (ApplicationStatus) {
         case "completed":
-          setActiveStep(2)
+          setActiveStep(2);
           break;
         case "assigned":
-          setActiveStep(1)
+          setActiveStep(1);
           break;
         case "submitted":
-            setActiveStep(0)
-            break;
+          setActiveStep(0);
+          break;
         default:
           break;
-        
       }
-    },[ApplicationStatus]
-  )
-  
+    },
+    [ApplicationStatus]
+  );
 
   return (
     <Stack sx={{ width: '100%' }} spacing={4} className='mt-3'>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
-          <Step key={label}>
+          <Step key={label} onClick={() => handleStepClick(index)}>
             <StepLabel StepIconComponent={ColorlibStepIcon} icon={index + 1}>{label}</StepLabel>
           </Step>
         ))}
@@ -127,7 +127,6 @@ export default function CustomizedSteppers() {
         {activeStep === 1 && <Form2 />}
         {activeStep === 2 && <Form3 />}
       </div>
-     
     </Stack>
   );
 }
