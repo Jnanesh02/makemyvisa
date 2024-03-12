@@ -7,27 +7,22 @@ import icon from "../../assets/countriesserviceImages/countries-icons.png";
 import axios from "axios";
 import "./HomeStyles/countriesserviceDetails.css";
 
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 export const CountriesServiceDetails = () => {
- 
   const { countryName, serviceName } = useParams();
   const [countryData, setCountryData] = useState([]);
   const [filteredSubServiceType, setFilteredSubServiceTypes] = useState([]);
 
-
   const settings = {
     slidesToShow: 3,
     slidesToScroll: 1,
-    gap:3,
+    gap: 3,
     autoplay: true,
     autoplaySpeed: 2000,
-  
   };
-
-  var a=5;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,91 +97,51 @@ export const CountriesServiceDetails = () => {
           </div>
         </div>
         <div className="container">
-          
-            
-              
-                             <div className="services-country-card">
-                                {filteredSubServiceType && filteredSubServiceType.length ===1 ?(filteredSubServiceType.map((subServiceType, index) => (
-                      <div
-                        key={index}
-                        className="country-services-card-category p-2"
-                      >
-                        <div className="card country-cards">
-                          <img src={card} className="card-img-top" alt="/" />
-                          <div className="card-body">
-                            <div className="country-icons">
-                              <img src={icon} alt="" />
-                            </div>
-                            <h5 className="card-title">
-                              {subServiceType.subServiceName ||
-                                "No Service Name"}
-                            </h5>
-                          </div>
-                        </div>
+          <div className="services-country-card">
+            {filteredSubServiceType && filteredSubServiceType.length === 1 ? (
+              filteredSubServiceType.map((subServiceType, index) => (
+                <div key={index} className="country-services-card-category p-2">
+                  <div className="card country-cards">
+                    <img src={card} className="card-img-top" alt="/" />
+                    <div className="card-body">
+                      <div className="country-icons">
+                        <img src={icon} alt="" />
                       </div>
-                      
-                    ))):<Slider className="autoplay mx-auto mt-3" {...settings}>{(filteredSubServiceType.map((subServiceType, index) => (
-                      <div
-                        key={index}
-                        className="country-services-card-category p-2"
-                      >
-                        <div className="card country-cards">
-                          <img src={card} className="card-img-top" alt="/" />
-                          <div className="card-body">
-                            <div className="country-icons">
-                              <img src={icon} alt="" />
-                            </div>
-                            <h5 className="card-title">
-                              {subServiceType.subServiceName ||
-                                "No Service Name"}
-                            </h5>
-                          </div>
-                        </div>
-                      </div>
-                      
-                    )))}</Slider>}
-
-
-
-                             
+                      <h5 className="card-title">
+                        {subServiceType.subServiceName || "No Service Name"}
+                      </h5>
+                    </div>
+                  </div>
                 </div>
-               
-                
-              
-              
-            
+              ))
+            ) : (
+              <Slider className="autoplay mx-auto mt-3" {...settings}>
+                {filteredSubServiceType.map((subServiceType, index) => (
+                  <div
+                    key={index}
+                    className="country-services-card-category p-2"
+                  >
+                    <div className="card country-cards">
+                      <img src={card} className="card-img-top" alt="/" />
+                      <div className="card-body">
+                        <div className="country-icons">
+                          <img src={icon} alt="" />
+                        </div>
+                        <h5 className="card-title">
+                          {subServiceType.subServiceName || "No Service Name"}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            )}
+          </div>
         </div>
       </section>
     );
   };
-  
 
-  {/* <Slider className="autoplay mx-auto mt-3" {...settings}>
-                  {filteredSubServiceType && filteredSubServiceType.length > 1 ? (
-                    filteredSubServiceType.map((subServiceType, index) => (
-                      <div
-                        key={index}
-                        className="country-services-card-category p-2"
-                      >
-                        <div className="card country-cards">
-                          <img src={card} className="card-img-top" alt="/" />
-                          <div className="card-body">
-                            <div className="country-icons">
-                              <img src={icon} alt="" />
-                            </div>
-                            <h5 className="card-title">
-                              {subServiceType.subServiceName ||
-                                "No Service Name"}
-                            </h5>
-                          </div>
-                        </div>
-                      </div>
-                      
-                    ))
-                  ) : (
-                    <p>No data available</p>
-                  )}
-                   </Slider> */}
   const ServiceInformation = (countryData, serviceName) => {
     return (
       <section className="information-visa">

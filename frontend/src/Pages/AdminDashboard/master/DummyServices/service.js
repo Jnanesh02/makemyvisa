@@ -20,8 +20,8 @@ const Service = () => {
   const [employeAvailable, setEmployeAvailable] = useState([]);
   const [employeOccupied, setEmployeOccupied] = useState([]);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-  const [loading,setLoading] = useState(false);
-  const fetchData = async () => {
+  const [loading,setLoading] = useState(true);
+  const fetchServiceName = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/getservices/servicescollections`
@@ -33,7 +33,7 @@ const Service = () => {
   };
 
   useEffect(() => {
-    const fetchData1 = async () => {
+    const fetchSelectedServiceTicket = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/getservices/${selectedServiceName}s`
@@ -51,9 +51,9 @@ const Service = () => {
         alert(error.message);
       }
     };
-    fetchData1();
+    fetchSelectedServiceTicket();    
   }, [selectedServiceName,loading]);
-  const fetchDetails = async () => {
+  const fetchDepartmentName = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/employee/get/department`
@@ -64,7 +64,7 @@ const Service = () => {
       alert(error.message);
     }
   };
-  const fetchDetails1 = async (department) => {
+  const fetchEmployeeDetails = async (department) => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/getDepartmentDetails/${department}s`
@@ -76,8 +76,8 @@ const Service = () => {
     }
   };
   useEffect(() => {
-    fetchDetails();
-    fetchData();
+    fetchDepartmentName();
+    fetchServiceName();
   }, []);
 
   const handleApply = async () => {
@@ -89,7 +89,7 @@ const Service = () => {
       const response = await Promise.all(
         combinedDepartments.map(async (department) => {
           try {
-            const response = await fetchDetails1(department);
+            const response = await fetchEmployeeDetails(department);
             return response;
           } catch (error) {
             return null;
@@ -144,6 +144,7 @@ const Service = () => {
   };
   const handleConfirm = async () => {
     try {
+      setLoading(false)
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/assignTo`,assignTo);
       console.log(response.status === 200);
        if(response.status === 200){
@@ -153,7 +154,6 @@ const Service = () => {
     } catch (error) {
       alert(error.message);
     } finally{
-      setLoading(false);
       setConfirmationModalOpen(false);
     }
   };
@@ -186,6 +186,7 @@ const Service = () => {
                         serviceName.map((service) => (
                       
                               <a
+                              key={service._id}
                                 className="list-group-item list-group-item-action"
                                 id="list-home-list"
                                 data-bs-toggle="list"

@@ -6,9 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Check from '@mui/icons-material/Check';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
+
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
 import Form2 from './Form2';
@@ -65,9 +63,16 @@ function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
   const icons = {
-    1: <TextSnippetIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1: 1,
+    2: 2,
+    3:3 ,
+    4:4,
+    5:5,
+    6:6,
+    7:7,
+    8:8,
+    9:9,
+    10:10
   };
 
   return (
@@ -84,7 +89,10 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Registration and Onboarding', 'Document Upload', 'Document downloading complete',
+ 'Document Verification','Additional Document Required','Document Under Processing','Document Verification And Approval',
+ 'Payment Due','payment Cleared','File Delivery'
+];
 
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = React.useState(0);
