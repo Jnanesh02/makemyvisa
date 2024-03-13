@@ -111,7 +111,7 @@ function App() {
                 path="ticket/hotel/:hotelreservations"
                 element={<HotelReservationTicket />}
               />
-              <Route path="VisaStatus" element={<VisaStatus />} />
+              <Route path=":visastatus" element={<VisaStatus />} />
             </Route>
           </Route>
 

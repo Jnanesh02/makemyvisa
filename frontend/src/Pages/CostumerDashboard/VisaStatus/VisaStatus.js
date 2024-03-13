@@ -144,13 +144,13 @@ export default function CustomizedSteppers() {
   );
 
   const [data,setData]=React.useState({
-    onboarding:[
-      {
-        FirstName:"Praveen",
-        LastName:"sagar",
-        pay:'200/-'
-      }
-    ]
+    // onboarding:[
+    //   {
+    //     FirstName:"Praveen",
+    //     LastName:"sagar",
+    //     pay:'200/-'
+    //   }
+    // ]
   })
   return (
     <Stack sx={{ width: isMobile?'':'100%',display:isMobile?'flex':'',flexDirection:isMobile?'row':'', }} spacing={4} className='mt-3'>

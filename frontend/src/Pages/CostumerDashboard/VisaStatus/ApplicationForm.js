@@ -7,9 +7,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
-import Button from "@mui/material/Button";
-
+import {useParams} from 'react-router-dom'
+import CookieUtils from '../../../components/Cookie/Cookies';
 const SuccessDiv = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -22,6 +21,7 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
 }));
 const ApplicationForm = ({ Data }) => {
 
+  const { visastatus } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [paymentSubmitted, setPaymentSubmitted] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
@@ -33,13 +33,40 @@ const ApplicationForm = ({ Data }) => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    gender: "",
+    gender: "male",
     country: "",
     state: "",
     visaType: "",
     passport: "",
     destination: "",
   });
+  const postApi = async () => {
+    const customerId = CookieUtils.getCookies('userId');
+    const objectID = JSON.parse(atob(customerId.split('.')[1]));
+    const customerID = objectID.id;
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatus}`, {
+        data:{
+        formData,
+        documentUpload:[
+  
+        ],
+        AdditionDocuments:[
+  
+        ]
+       },
+       "customerID": customerID
+      });
+  
+      if (response.status === 200) {
+        console.log("success");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  
   const handleConfirm = (e) => {
     setPaymentSubmitted(true);
     setShowModal(false); // Close the modal after confirmation
@@ -50,6 +77,7 @@ const ApplicationForm = ({ Data }) => {
     
 
     setPaymentConfirmed(true); // Set payment as confirmed
+    postApi();
     setShowSuccessMessage(true); // Show success message
 
     
@@ -459,3 +487,7 @@ const ApplicationForm = ({ Data }) => {
 };
 
 export default ApplicationForm;
+
+
+
+
