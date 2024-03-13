@@ -1,4 +1,4 @@
-import  React,{useState} from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -11,8 +11,8 @@ import { useTheme } from '@mui/material/styles';
 
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
-import { DocumentUpload } from './DocumentUpload';
-import { AdditionalDocumentUpload } from './AdditionalDocumentUpload';
+import {DocumentUpload} from './DocumentUpload'
+import {AdditionalDocumentUpload} from './AdditionalDocumentUpload'
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -22,13 +22,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,rgb(242,113,39) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,rgb(242,113,56) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -59,15 +59,21 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     backgroundImage:
       'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
   }),
+
 }));
 
 function ColorlibStepIcon(props) {
-  const { active, completed, className } = props;
+  console.log("props",props);
+  const { completed, className, applicationStatus } = props;
 
+  // Determine if the step should be active
+  const isActive = applicationStatus === "completed" || props.active;
+
+  // Define the icons object
   const icons = {
-    1: 1,
-    2: 2,
-    3:3 ,
+    1:1,
+    2:2,
+    3:3, 
     4:4,
     5:5,
     6:6,
@@ -78,7 +84,7 @@ function ColorlibStepIcon(props) {
   };
 
   return (
-    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+    <ColorlibStepIconRoot ownerState={{ completed, active: isActive }} className={className}>
       {completed ? <Check /> : icons[String(props.icon)]}
     </ColorlibStepIconRoot>
   );
@@ -89,6 +95,8 @@ ColorlibStepIcon.propTypes = {
   className: PropTypes.string,
   completed: PropTypes.bool,
   icon: PropTypes.node,
+  extraField: PropTypes.bool,
+  
 };
 
 const steps = ['Registration and Onboarding', 'Document Upload', 'Document downloading complete',
@@ -98,34 +106,41 @@ const steps = ['Registration and Onboarding', 'Document Upload', 'Document downl
 
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [applicationStatus, setApplicationStatus] = useState("additional");
+  const [completeStep, setCompleteStep] = React.useState(0);
+  
+  const handleStepClick = (step) => {
+    
 
- 
+    if (step <= completeStep) { // Check if the clicked step is before the current active step
+      setActiveStep(step);
+    }
+  };
+  
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
 
-  const ApplicationStatus = "submitted";
+  const ApplicationStatus = "completed";
   React.useEffect(
     () => {
-      switch (applicationStatus) {
+      switch (ApplicationStatus) {
         case "completed":
-          setActiveStep(2);
+          setActiveStep(2); // Set activeStep to 2 when ApplicationStatus is "completed"
+          setCompleteStep(2);
           break;
         case "assigned":
           setActiveStep(1);
-          break;
-          case "additional":
-          setActiveStep(4);
+          setCompleteStep(1);
           break;
         case "submitted":
           setActiveStep(0);
+          setCompleteStep(0);
           break;
         default:
           break;
       }
     },
-    [applicationStatus]
+    [ApplicationStatus]
   );
 
   const [data,setData]=React.useState({
@@ -140,7 +155,7 @@ export default function CustomizedSteppers() {
   return (
     <Stack sx={{ width: isMobile?'':'100%',display:isMobile?'flex':'',flexDirection:isMobile?'row':'', }} spacing={4} className='mt-3'>
       <Stepper alternativeLabel orientation={isMobile ? 'vertical' : 'horizontal'} // Set orientation based on screen size
-       activeStep={activeStep} connector={<ColorlibConnector />}>
+       activeStep={completeStep} connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={label} onClick={() => handleStepClick(index)}>
             <StepLabel StepIconComponent={ColorlibStepIcon} sx={{ 
@@ -153,9 +168,9 @@ export default function CustomizedSteppers() {
       </Stepper>
       <div style={{margin:'1rem'}}>
         {activeStep === 0 && <ApplicationForm Data={data.onboarding}/>}
-        {activeStep === 1 && <Form2 />}
-        {activeStep === 2 && <Form3 />}
+        {activeStep === 1 && <DocumentUpload />}
+        {activeStep === 2 && <AdditionalDocumentUpload />}
       </div>
-    </Stack>
+    </Stack> 
   );
 }
