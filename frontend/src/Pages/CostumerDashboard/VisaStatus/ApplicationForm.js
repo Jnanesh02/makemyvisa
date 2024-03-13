@@ -110,8 +110,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
               <>
                 {Data.map((res) => (
                   <div key={res._id}>
-                    FirstName: <span>{ res.data.formData.firstName}</span><br/>
-                    LastName: <span>{ res.data.formData.lastName}</span><br/>
+                    Name: <span>{ res.data.formData.firstName}</span>{" "}
                   </div>
                 ))}
               </>
@@ -406,7 +405,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
             </div>
           </div>
 
-          {/* Payment Div
+          Payment Div
           <div className="d-flex flex-column align-items-center justify-content-center">
             {showSuccessMessage && (
               <div className="d-flex justify-content-center">
@@ -478,7 +477,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
                 </button>
               </div>
             )}
-          </div> */}
+          </div>
         </div>
       )}
     </div>
