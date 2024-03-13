@@ -26,6 +26,7 @@ export const AdditionalDocumentUpload = () => {
     const handleSubmit = async()=>{
       try {
         console.log(formData);
+        
       } catch (error) {
         console.log(error.message);
       }

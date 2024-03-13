@@ -105,7 +105,6 @@ export default function CustomizedSteppers() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
 
-  const ApplicationStatus = "submitted";
   React.useEffect(
     () => {
       switch (applicationStatus) {
@@ -153,8 +152,8 @@ export default function CustomizedSteppers() {
       </Stepper>
       <div style={{margin:'1rem'}}>
         {activeStep === 0 && <ApplicationForm Data={data.onboarding}/>}
-        {activeStep === 1 && <Form2 />}
-        {activeStep === 2 && <Form3 />}
+        {activeStep === 1 && <DocumentUpload />}
+        {activeStep === 2 && <AdditionalDocumentUpload />}
       </div>
     </Stack>
   );

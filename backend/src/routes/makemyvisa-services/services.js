@@ -36,7 +36,9 @@ const mongoose = require("mongoose");
    return res.status(500).json({message: error.message});
   }
 
-}); router.get("/getservice/:servicename",async(req,res)=>{
+}); 
+
+router.get("/getservice/:servicename",async(req,res)=>{
    try {
     const  serviceName  = req.params.servicename;
     const { customerID } = req.query;
