@@ -147,10 +147,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
 
   const handleConfirm = async () => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
-   console.log(employeeData)
     try {
-      console.log(employeeData)
-
       const response = isEditing
         ? await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/employee/update/${editingEmployee._id}`,

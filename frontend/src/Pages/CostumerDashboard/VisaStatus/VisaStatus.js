@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -8,7 +8,8 @@ import StepLabel from '@mui/material/StepLabel';
 import Check from '@mui/icons-material/Check';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import ApplicationForm from './ApplicationForm';
 import {DocumentUpload} from './DocumentUpload'
@@ -63,7 +64,6 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
 }));
 
 function ColorlibStepIcon(props) {
-  console.log("props",props);
   const { completed, className, applicationStatus } = props;
 
   // Determine if the step should be active
@@ -105,34 +105,48 @@ const steps = ['Registration and Onboarding', 'Document Upload', 'Document downl
 ];
 
 export default function CustomizedSteppers() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completeStep, setCompleteStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [completeStep, setCompleteStep] = useState(0);
+  const [applicationStatus, setApplicationStatus] = useState("");
+  const [appicationData, setAppicationData] = useState([]);
+  const [ loading, setLoading] = useState(false);
+
+  const { visastatus } = useParams();
   
   const handleStepClick = (step) => {
-    
-
     if (step <= completeStep) { // Check if the clicked step is before the current active step
       setActiveStep(step);
     }
   };
-  
-
+  useEffect(() => {
+    const fetchSelectedServiceTicket = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}es`,
+          { params: { customerID: "65ddc4c6b2b7c3bf692258a5" } }
+        );
+        setApplicationStatus(response.data.map((response)=> response.ticketStatus));
+        setAppicationData(response.data);
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    fetchSelectedServiceTicket();    
+  }, [visastatus,loading]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
-
-  const ApplicationStatus = "completed";
   React.useEffect(
     () => {
-      switch (ApplicationStatus) {
+      switch (applicationStatus[0]) {
         case "completed":
           setActiveStep(2); // Set activeStep to 2 when ApplicationStatus is "completed"
           setCompleteStep(2);
           break;
-        case "assigned":
+        case "submit":
           setActiveStep(1);
           setCompleteStep(1);
           break;
-        case "submitted":
+        case "":
           setActiveStep(0);
           setCompleteStep(0);
           break;
@@ -140,18 +154,9 @@ export default function CustomizedSteppers() {
           break;
       }
     },
-    [ApplicationStatus]
+    [applicationStatus]
   );
 
-  const [data,setData]=React.useState({
-    onboarding:[
-      {
-        FirstName:"Praveen",
-        LastName:"sagar",
-        pay:'200/-'
-      }
-    ]
-  })
   return (
     <Stack sx={{ width: isMobile?'':'100%',display:isMobile?'flex':'',flexDirection:isMobile?'row':'', }} spacing={4} className='mt-3'>
       <Stepper alternativeLabel orientation={isMobile ? 'vertical' : 'horizontal'} // Set orientation based on screen size
@@ -167,7 +172,7 @@ export default function CustomizedSteppers() {
         ))}
       </Stepper>
       <div style={{margin:'1rem'}}>
-        {activeStep === 0 && <ApplicationForm Data={data.onboarding}/>}
+        {activeStep === 0 && <ApplicationForm Data={appicationData} setLoading={setLoading}/>}
         {activeStep === 1 && <DocumentUpload />}
         {activeStep === 2 && <AdditionalDocumentUpload />}
       </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../CostumerDashboardStyles/ApplicationForm.css";
 import { styled } from "@mui/material/styles";
@@ -7,8 +8,6 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
-import Button from "@mui/material/Button";
 
 const SuccessDiv = styled("div")(({ theme }) => ({
   display: "flex",
@@ -20,8 +19,9 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
   marginRight: theme.spacing(1),
   color: "green",
 }));
-const ApplicationForm = ({ Data }) => {
-
+const ApplicationForm = ({ Data ,setLoading}) => {
+  console.log("111",Data);
+  const { visastatus } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [paymentSubmitted, setPaymentSubmitted] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
@@ -40,19 +40,38 @@ const ApplicationForm = ({ Data }) => {
     passport: "",
     destination: "",
   });
+  const postApi = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatus}`,
+        {
+          data: {
+            formData,
+            documentUpload: [],
+            AdditionDocuments: [],
+          },
+          customerID: "65ddc4c6b2b7c3bf692258a5",
+        }
+      );
+      if (response.status === 200) {
+        setLoading(true);
+        console.log("success");
+      }
+    } catch (error) {
+      console.log("success");
+    }
+  };
   const handleConfirm = (e) => {
-    setPaymentSubmitted(true);
+    // setPaymentSubmitted(true);
     setShowModal(false); // Close the modal after confirmation
-    setModalDisabled(true); // Disable the "Open Modal" button after confirmation
+    // setModalDisabled(true); // Disable the "Open Modal" button after confirmation
+    postApi();
   };
 
   const handleSubmit = () => {
-    
-
-    setPaymentConfirmed(true); // Set payment as confirmed
-    setShowSuccessMessage(true); // Show success message
-
-    
+    setShowModal(true);
+    // setPaymentConfirmed(true); // Set payment as confirmed
+    // setShowSuccessMessage(true); // Show success message
   };
   const [countriesData, setCountriesData] = useState([]);
   const handleInputChange = (event) => {
@@ -80,17 +99,25 @@ const ApplicationForm = ({ Data }) => {
   }, []);
   return (
     <div>
-      {Data ? (
+      {Data.length !== 0  ? (
         <div>
           <div
             className="visaApplication-container mx-auto mb-3 shadow px-5 py-3 rounded"
             style={{ width: "1000px" }}
           >
-            <h2 className="visaApplication-title">
-                        Visa Application
-            </h2>
-            <div>Name: <span>{Data[0].FirstName}</span> </div>
-
+            <h2 className="visaApplication-title">Visa Application</h2>
+            {Array.isArray(Data) ? (
+              <>
+                {Data.map((res) => (
+                  <div key={res._id}>
+                    FirstName: <span>{ res.data.formData.firstName}</span><br/>
+                    LastName: <span>{ res.data.formData.lastName}</span><br/>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>"Visa Application"</>
+            )}
           </div>
         </div>
       ) : (
@@ -275,7 +302,7 @@ const ApplicationForm = ({ Data }) => {
                               name="destination"
                               value={formData.destination}
                               onChange={handleInputChange}
-                              required
+                              // required
                             >
                               <option value="">Select Country</option>
                               {countriesData.map((country, index) => (
@@ -300,7 +327,7 @@ const ApplicationForm = ({ Data }) => {
                                 name="visaType"
                                 value={formData.visaType}
                                 onChange={handleInputChange}
-                                required
+                                // required
                               >
                                 <option>select</option>
                                 {countriesData
@@ -329,6 +356,7 @@ const ApplicationForm = ({ Data }) => {
                           className="btn btn-danger-submit"
                           style={{ background: "#e12912", color: "white" }}
                           disabled={paymentConfirmed}
+                          onClick={handleSubmit}
                         >
                           Submit
                         </button>
@@ -349,7 +377,6 @@ const ApplicationForm = ({ Data }) => {
             <div className="w-50 modal-dialog-centered m-auto">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Confirm Payment</h5>
                   <button
                     type="button"
                     className="btn-close"
@@ -357,7 +384,7 @@ const ApplicationForm = ({ Data }) => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  Are you sure you want to proceed with the payment?
+                  Are you sure you want to submit Application?
                 </div>
                 <div className="modal-footer">
                   <button
@@ -379,7 +406,7 @@ const ApplicationForm = ({ Data }) => {
             </div>
           </div>
 
-          {/* Payment Div */}
+          {/* Payment Div
           <div className="d-flex flex-column align-items-center justify-content-center">
             {showSuccessMessage && (
               <div className="d-flex justify-content-center">
@@ -444,14 +471,14 @@ const ApplicationForm = ({ Data }) => {
                 </div>
                 <button
                   className="btn btn-success"
-                  onClick={handleSubmit}
+                  // onClick={handleSubmit}
                   disabled={paymentConfirmed}
                 >
                   Payment
                 </button>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       )}
     </div>
