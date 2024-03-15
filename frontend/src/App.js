@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Pages/CostumerAuthentication/Login/Login";
-import SignUp from "./Pages/CostumerAuthentication/Registraion/SignUp";
+import Login from "./components/CostumerAuthentication/Login/Login.js";
+import SignUp from "./components/CostumerAuthentication/Registraion/SignUp.js";
 import Layout from "./Pages/Layout";
 import Home from "./components/Home/Home";
 import Dashboard from "./Pages/CostumerDashboard/Dashboard";
@@ -45,6 +45,7 @@ import VisaApplicationDoc from "./Pages/AdminDashboard/master/VisaApplicationDoc
 
 
 import Dummy from './dummy.js'
+import { Services } from "./Pages/EmployeeDashboard/Services.js";
 
 function App() {
   const Visa = () => <h1>visa is working</h1>;
@@ -134,6 +135,8 @@ function App() {
           <Route path="/Employeedashboard" element={<EmployeeDashboard />}>
             <Route index element={<EmployeeHomePage />} />
             <Route path="profile" element={<AdminProfile />} />
+            <Route path="servicetickets/:serviceName" element={<Services />} />
+
           </Route>
 
           <Route path="AdminLogout" element={<AdminLogout />} />

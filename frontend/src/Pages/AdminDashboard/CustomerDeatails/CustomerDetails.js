@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../AdminDashboardStyles/Employee.css";
+import CookieUtils from "../../../components/Cookie/Cookies";
 
 export const CustomerDetails = () => {
     const [employees, setEmployees] = useState([]);
@@ -24,7 +25,7 @@ export const CustomerDetails = () => {
     const fetchEmployeeDetails = async () => {
         try {
             setLoading(true);
-            const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+            const adminToken = JSON.parse(CookieUtils.getCookies("adminToken"));
             const response = await axios.get(
                 `${process.env.REACT_APP_BACKEND_URL}/customer`,
                 {

@@ -38,6 +38,7 @@ const Service = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/getservices/${selectedServiceName}s`
         );
+      
         setCompletedTicket(
           response.data.filter((data) => data.ticketStatus === "completed")
         );

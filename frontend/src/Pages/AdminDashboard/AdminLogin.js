@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import backgroundImage from "../../assets/images/OJO4YQ0.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import CookieUtils from "../../components/Cookie/Cookies";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -15,40 +16,28 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const [email, password] = [
-      userInputDetails.email,
-      userInputDetails.password,
-    ];
-    const data = { email, password };
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/employee/login`,
-        data
+        userInputDetails
       );
-      
+
       if (response.data.error) {
         alert(response.data.error.message);
       } else {
         const adminTokens = JSON.stringify({
-          "AdminToken": response.data.token,
-        })
-        localStorage.setItem("adminToken",adminTokens );
-        
+          AdminToken: response.data.token,
+        });
+        CookieUtils.setCookies("adminToken", adminTokens);
 
-        const token = localStorage.getItem('adminToken');
-        const tokenData = JSON.parse(atob(token.split('.')[1]));
-        console.log(tokenData);
+        const token = CookieUtils.getCookies("adminToken");
+        const tokenData = JSON.parse(atob(token.split(".")[1]));
 
-        
-        if(tokenData.role==='admin'){
-          navigate("/Admindashboard")
-        }else{
-          
-          navigate("/Employeedashboard")
-          
+        if (tokenData.role === "admin") {
+          navigate("/Admindashboard");
+        } else {
+          navigate("/Employeedashboard");
         }
-        
-        
       }
     } catch (err) {
       alert(err.message);
@@ -59,7 +48,8 @@ const AdminLogin = () => {
       <div>
         <section
           className="certificate-section sing-up"
-          style={{ backgroundImage: `url(${backgroundImage})` }}>
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12">
@@ -71,7 +61,6 @@ const AdminLogin = () => {
                   <div className="login-forms  login  shadow-sm">
                     <form method="post" action="login">
                       <div className="mb-2">
-                      
                         <input
                           type="email"
                           placeholder="Email"
@@ -86,7 +75,6 @@ const AdminLogin = () => {
                         />
                       </div>
                       <div className="mb-2">
-                        
                         <div style={{ position: "relative" }}>
                           <input
                             type={showPassword ? "text" : "password"}
@@ -107,16 +95,17 @@ const AdminLogin = () => {
                             style={{
                               position: "absolute",
                               top: "50%",
-                              right:
-                                "10px" ,
+                              right: "10px",
                               transform: "translateY(-50%)",
                               cursor: "pointer",
-                            }}></i>
+                            }}
+                          ></i>
                         </div>
                       </div>
                       <NavLink
                         style={{ color: "#fe5141" }}
-                        to="/forgotpassword">
+                        to="/forgotpassword"
+                      >
                         Forgot Password?
                       </NavLink>
                       <br />
@@ -124,7 +113,8 @@ const AdminLogin = () => {
                       <button
                         type="submit"
                         className="btn btn-primary sign-up-sumbit-button"
-                        onClick={handleSubmit}>
+                        onClick={handleSubmit}
+                      >
                         Submit
                       </button>
                     </form>
@@ -138,6 +128,6 @@ const AdminLogin = () => {
       </div>
     </>
   );
-}
+};
 
-export default AdminLogin
+export default AdminLogin;

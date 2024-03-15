@@ -86,16 +86,16 @@ const Department = () => {
             </tr>
           </thead>
           <tbody>
-            {department.map((department, index) => (
-              <tr key={index}>
+            {department.map((department) => (
+              <tr key={department._id}>
                 <td>{department.department}</td>
                 <td>
-                {department.role.map((role)=>(
-                  <span key={role._id}>
-                    {console.log("111",role)}
-                    {role}<br />
-                  </span>
-                ))}
+                  {department.role.map((role) => (
+                    <span key={role._id}>
+                      {role}
+                      <br />
+                    </span>
+                  ))}
                 </td>
                 <td>{department.description}</td>
               </tr>

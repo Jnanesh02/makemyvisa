@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect } from "react";
 import { Outlet, Navigate, useNavigate } from "react-router-dom";
+import CookieUtils from "../Cookie/Cookies";
 const AdminPrivateRoute = () => {
   const navigate = useNavigate();
   const navigateToAdminLogin = useCallback(() => {
-    localStorage.removeItem("adminToken");
+    CookieUtils.removeCookies("adminToken")
     navigate("/admin");
   },[navigate]);
   useEffect(() => {
     function isTokenExpired() {
-      const token = localStorage.getItem("adminToken");
+      const token = CookieUtils.getCookies("adminToken")
       if (!token) {
         return true;
       }
@@ -27,7 +28,7 @@ const AdminPrivateRoute = () => {
     return () => clearInterval(interval);
   }, [navigateToAdminLogin]);
 
-  const employeeId = localStorage.getItem("adminToken");
+  const employeeId = CookieUtils.getCookies("adminToken");
 
   if (!employeeId) {
     return <Navigate to="/admin" />;

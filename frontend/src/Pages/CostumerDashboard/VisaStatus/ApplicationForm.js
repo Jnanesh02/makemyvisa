@@ -19,8 +19,7 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
   marginRight: theme.spacing(1),
   color: "green",
 }));
-const ApplicationForm = ({ Data ,setLoading}) => {
-  console.log("111",Data);
+const ApplicationForm = ({ Data, setLoading }) => {
   const { visastatus } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [paymentSubmitted, setPaymentSubmitted] = useState(false);
@@ -39,6 +38,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
     visaType: "",
     passport: "",
     destination: "",
+    status:"submit"
   });
   const postApi = async () => {
     try {
@@ -47,8 +47,8 @@ const ApplicationForm = ({ Data ,setLoading}) => {
         {
           data: {
             formData,
-            documentUpload: [],
-            AdditionDocuments: [],
+            documentUpload: "",
+            AdditionDocuments: "",
           },
           customerID: "65ddc4c6b2b7c3bf692258a5",
         }
@@ -99,7 +99,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
   }, []);
   return (
     <div>
-      {Data.length !== 0  ? (
+      {Data.length !== 0 ? (
         <div>
           <div
             className="visaApplication-container mx-auto mb-3 shadow px-5 py-3 rounded"
@@ -110,7 +110,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
               <>
                 {Data.map((res) => (
                   <div key={res._id}>
-                    Name: <span>{ res.data.formData.firstName}</span>{" "}
+                    Name: <span>{res.data.formData.firstName}</span>{" "}
                   </div>
                 ))}
               </>
@@ -366,7 +366,6 @@ const ApplicationForm = ({ Data ,setLoading}) => {
               </div>
             </>
           )}
-
           {/* Confirmation Modal */}
           <div
             className={`modal ${showModal ? "show" : ""}`}
@@ -404,7 +403,6 @@ const ApplicationForm = ({ Data ,setLoading}) => {
               </div>
             </div>
           </div>
-
           Payment Div
           <div className="d-flex flex-column align-items-center justify-content-center">
             {showSuccessMessage && (
