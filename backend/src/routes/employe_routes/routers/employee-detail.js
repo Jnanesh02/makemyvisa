@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Employee = require("../../models/employeeSchema");
+const Employee = require("../../../models/employeeSchema");
 
 router.get("/employee/getEmployedetail/:id",async(req,res)=>{
     const object_id = req.params.id;

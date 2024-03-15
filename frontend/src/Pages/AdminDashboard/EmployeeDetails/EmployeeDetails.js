@@ -4,6 +4,7 @@ import "../AdminDashboardStyles/Employee.css";
 import CreateAccountForm from "./CreateAccountForm";
 import Modal from "./CreateAccountModal";
 import ConfirmationModal from "./ConfirmationAccountModel";
+import CookieUtils from "../../../components/Cookie/Cookies";
 
 const EmployeeDetails = () => {
   const [employees, setEmployees] = useState([]);
@@ -36,7 +37,7 @@ const EmployeeDetails = () => {
   const fetchEmployeeDetails = async () => {
     try {
       setLoading(true);
-      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+      const adminToken = JSON.parse(CookieUtils.getCookies("adminToken"));
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/employee/employeData`,
         {
@@ -126,7 +127,7 @@ const EmployeeDetails = () => {
     setDeleteConfirmationModalOpen(false);
 
     try {
-      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+      const adminToken = JSON.parse(CookieUtils.getCookies("adminToken"));
 
       await axios.delete(
         `${process.env.REACT_APP_BACKEND_URL}/employee/delete/${confirmationEmployeeId}`,

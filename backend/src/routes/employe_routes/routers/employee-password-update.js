@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Employee = require("../../models/employeeSchema");
-const { createRoleBasedModel } = require("../../models/createRoleBasedModel");
+const Employee = require("../../../models/employeeSchema");
+const { createRoleBasedModel } = require("../../../models/createRoleBasedModel");
 const bcrypt = require("bcrypt");
 
 router.put("/employee/updatePassword/:id", async (req, res) => {

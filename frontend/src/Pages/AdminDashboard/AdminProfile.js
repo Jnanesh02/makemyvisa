@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AdminDashboardStyles/Profile.css";
 import axios from "axios";
 import ConfirmationModal from "./EmployeeDetails/ConfirmationAccountModel";
+import CookieUtils from "../../components/Cookie/Cookies";
 
 export const AdminProfile = () => {
   const [formData, setFormData] = useState({
@@ -16,25 +17,15 @@ export const AdminProfile = () => {
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
+  const token = CookieUtils.getCookies("adminToken");
+  const tokenData = JSON.parse(atob(token.split(".")[1]));
+
   const fetchUserData = async () => {
     try {
-      const token = localStorage.getItem("adminToken");
-
-      const tokenData = JSON.parse(atob(token.split(".")[1]));
-
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/employee/getEmployedetail/${tokenData.id}`
       );
-
-      const userData = response.data.message;
-      setFormData({
-        ...formData,
-        firstName: userData.firstName || "",
-        lastName: userData.lastName || "",
-        email: userData.email || "",
-        phoneNumber: userData.contact_Details || "",
-        address: userData.Address || "",
-      });
+      setFormData(response.data.message);
 
       setOriginalFormData({ ...formData });
     } catch (error) {
@@ -66,9 +57,8 @@ export const AdminProfile = () => {
     setShowConfirmationModal(false);
 
     try {
-      const adminToken = JSON.parse(localStorage.getItem("adminToken"));
       await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/employee/updateprofile/${adminToken._Id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/employee/updateprofile/${tokenData.id}`,
         formData
       );
       setUpdateUserSuccess("Profile updated successfully");

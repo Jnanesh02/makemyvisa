@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
 import { NavLink, Link, Outlet } from "react-router-dom";
+import CookieUtils from "../../components/Cookie/Cookies";
 
 const EmployeeDashboard = () => {
-  const token = localStorage.getItem("adminToken");
+  const [serviceName, setServiceName] = useState([]);
+  const token = CookieUtils.getCookies("adminToken");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
-
   const Role = tokenData.role;
+  const department = tokenData.department;
 
   useEffect(() => {
     const handleSidebarToggle = () => {
@@ -28,7 +31,19 @@ const EmployeeDashboard = () => {
       }
     };
   }, []);
-
+  const fetchServiceName = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getservices/servicescollections`
+      );
+      setServiceName(response.data);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+  useEffect(() => {
+    fetchServiceName();
+  }, []);
   return (
     <div>
       <main className="content" />
@@ -59,48 +74,28 @@ const EmployeeDashboard = () => {
                 Dashboard{" "}
               </p>
             </NavLink>
-
-            {Role === "HR" ? (
+            {Array.isArray(serviceName) && serviceName.length > 0 ? (
               <div className="accordion" id="accordionExample2">
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="headingOne2">
-                    <NavLink
-                      className="accordion-button custom-button"
-                      to="employeeDetails"
+                {serviceName.map((service) => (
+                  <div key={service._id} className="accordion-item">
+                    <h2
+                      className="accordion-header"
+                      id={`headingOne2-${service._id}`}
                     >
-                      HR Management
-                    </NavLink>
-                  </h2>
-                </div>
-              </div>
-            ) : Role === "Sales" ? (
-              <div className="accordion" id="accordionExample2">
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="headingOne2">
-                    <NavLink
-                      className="accordion-button custom-button"
-                      to="employeeDetails"
-                    >
-                      Sales Management
-                    </NavLink>
-                  </h2>
-                </div>
-              </div>
-            ) : Role === "Accounting" ? (
-              <div className="accordion" id="accordionExample2">
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="headingOne2">
-                    <NavLink
-                      className="accordion-button custom-button"
-                      to="employeeDetails"
-                    >
-                      Accounting Management
-                    </NavLink>
-                  </h2>
-                </div>
+                      <NavLink
+                        className="accordion-button custom-button"
+                        to={`servicetickets/${service.serviceTypeName}`}
+                      >
+                        {service.serviceTypeName}
+                      </NavLink>
+                    </h2>
+                  </div>
+                ))}
               </div>
             ) : (
-              <div>Default Content for other roles or no role specified</div>
+              <>
+                <h1>no data</h1>
+              </>
             )}
 
             <div className="accordion" id="accordionExample2">
@@ -203,9 +198,7 @@ const EmployeeDashboard = () => {
                           </li>
                           <li className="list-group-item">
                             {" "}
-                            <Link to="/AdminLogout">
-                              logout
-                            </Link>
+                            <Link to="/AdminLogout">logout</Link>
                           </li>
                         </ul>
                       </div>

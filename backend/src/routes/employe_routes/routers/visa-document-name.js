@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const visaDocName = require("../../models/visaDocumentNameSchema");
+const visaDocName = require("../../../models/visaDocumentNameSchema");
 
 router.post("/employee/create/visaDocumentName", async (req, res) => {
   try {

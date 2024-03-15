@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const Employee = require("../../models/employeeSchema");
-const { isAdmin } = require("../../middleware/authenication");
-const {createRoleBasedModel}=require("../../models/createRoleBasedModel");
+const Employee = require("../../../models/employeeSchema");
+const { isAdmin } = require("../../../middleware/authenication");
+const {createRoleBasedModel}=require("../../../models/createRoleBasedModel");
 // Route for user login
 
 
@@ -37,6 +37,7 @@ router.post("/employee/login", async (req, res) => {
       {
         id: existingUser._id,
         role: existingUser.role,
+        department: existingUser.department,
       },
       "your-secret-key",
       { expiresIn: "1h" }

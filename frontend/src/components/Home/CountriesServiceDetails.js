@@ -205,13 +205,6 @@ export const CountriesServiceDetails = () => {
       </section>
     );
   };
-  // const handlePrev = () => {
-  //   setActiveIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
-  // };
-
-  // const handleNext = () => {
-  //   setActiveIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
-  // };
   return (
     <main className="content">
       {countryData ? (

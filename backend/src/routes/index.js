@@ -8,17 +8,10 @@ const updateCustomerDetails = require("./customer/updateCustomer");
 const socialMedia = require("./customer/socialMedia");
 
 const enquiries = require("./enquiry/enquiry");
+// employee Routes
+const employe_Routers = require("./employe_routes");
 
 
-const employees = require("./employee/employeeAuthentication");
-const employeesLogout = require("./employee/logout");
-const getEmployeedetail = require("./employee/getEmployee");
-const deleteEmployeeData = require("./employee/deleteEmployee");
-const updateEmployeePassword = require("./employee/updatePassword");
-const adminUpdateEmployee= require("./employee/adminUpdate");
-const updateEmpoyeeProfile = require("./employee/updateEmpoyeeProfile");
-const departments = require("./employee/departments");
-const getDepartmentDetails = require("./employee/GetDepartmentDetails");
 const assignTo = require("./ticketAssign/ticketAssignTo");
 const countryService = require("./country/countryService");
 const updatecountryService = require("./country/updateCountryService");
@@ -28,9 +21,8 @@ const notifications = require("./notification/notification");
 const uploadTravelInsurance = require("./makemyvisa-services/uploadTravelInsurance");
 
 
-const visaDocName = require("./employee/VisaDocumentsName")
-
-
+const visaStatusUpdate = require("./makemyvisa-services/updatevisastatus");
+const preSignalUrl = require("../routes/makemyvisa-services/customerdocumentupload")
 
 module.exports = {
   customerRegistration,
@@ -39,24 +31,18 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updateCustomerDetails,
-  employees,
   enquiries,
   socialMedia,
-  employeesLogout,
-  deleteEmployeeData,
-  updateEmployeePassword,
   customerDetails,
-  getEmployeedetail,
-  adminUpdateEmployee,
-  updateEmpoyeeProfile,
-  departments,
   countryService,
   updatecountryService,
   deleteCountryService,
   services,
   notifications,
   uploadTravelInsurance,
-  visaDocName,
-  getDepartmentDetails,
-  assignTo
+  assignTo,
+  preSignalUrl,
+  visaStatusUpdate,
+  employe_Routers
+
 };

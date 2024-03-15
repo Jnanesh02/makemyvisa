@@ -7,7 +7,7 @@ function contact() {
   return (
     <div className='contact'>
     <div className='contact-container'>
-      <img className='contactus' src={contactus}></img>
+      <img className='contactus' src={contactus} alt='..'></img>
       <div className="contact-center">Contact Us</div>
     
 

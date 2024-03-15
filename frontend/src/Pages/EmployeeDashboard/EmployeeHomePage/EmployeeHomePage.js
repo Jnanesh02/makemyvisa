@@ -1,9 +1,11 @@
+import CookieUtils from "../../../components/Cookie/Cookies";
 
 const EmployeeHomePage = () => {
-  const token = localStorage.getItem('adminToken');
+  const token = CookieUtils.getCookies('adminToken');
   const tokenData = JSON.parse(atob(token.split('.')[1]));
 
   const Role = tokenData.role;
+
 
   return (
     <div>

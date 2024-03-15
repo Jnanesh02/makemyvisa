@@ -51,19 +51,16 @@ app.use("/makemyvisa", makeMyVisa.socialMedia);
 app.use("/makemyvisa", makeMyVisa.services);
 
 //Employee Routes
-app.use("/makemyvisa", makeMyVisa.employees);
-app.use("/makemyvisa", makeMyVisa.employeesLogout);
-app.use("/makemyvisa", makeMyVisa.getEmployeedetail);
-app.use("/makemyvisa", makeMyVisa.deleteEmployeeData);
-app.use("/makemyvisa", makeMyVisa.updateEmployeePassword);
-app.use("/makemyvisa", makeMyVisa.adminUpdateEmployee);
-app.use("/makemyvisa", makeMyVisa.updateEmpoyeeProfile);
-app.use("/makemyvisa", makeMyVisa.departments);
-
-app.use("/makemyvisa",makeMyVisa.visaDocName);
-
-
-app.use("/makemyvisa", makeMyVisa.getDepartmentDetails);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeAuthentication);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeLogout);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeDetail);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeDelete);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeePasswordUpdate);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.adminUpdateEmployeeRoles);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeProfileUpdate);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentOperation);
+app.use("/makemyvisa",makeMyVisa.employe_Routers.visaDocumentName);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentDetails);
 //AssignTicket
 app.use("/makemyvisa", makeMyVisa.assignTo)
 //Country Routes
@@ -73,6 +70,10 @@ app.use("/makemyvisa",makeMyVisa.deleteCountryService);
 //notofication
 app.use("/makemyvisa",makeMyVisa.notifications);
 app.use("/makemyvisa",makeMyVisa.uploadTravelInsurance);
+//preSingalUrl
+app.use("/makemyvisa",makeMyVisa.preSignalUrl);
+//updatevisaStatusTicket
+app.use("/makemyvisa",makeMyVisa.visaStatusUpdate);
 
 
 

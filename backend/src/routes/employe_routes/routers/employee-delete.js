@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Employee = require("../../models/employeeSchema");
+const Employee = require("../../../models/employeeSchema");
 const mongoose = require("mongoose");
-const { isAdmin } = require("../../middleware/authenication");
+const { isAdmin } = require("../../../middleware/authenication");
 
 router.delete("/employee/delete/:id", async (req, res) => {
   const object_id = req.params.id;

@@ -19,8 +19,7 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
   marginRight: theme.spacing(1),
   color: "green",
 }));
-const ApplicationForm = ({ Data ,setLoading}) => {
-  console.log("Data",Data);
+const ApplicationForm = ({ Data, setLoading }) => {
   const { visastatus } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [paymentSubmitted, setPaymentSubmitted] = useState(false);
@@ -39,6 +38,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
     visaType: "",
     passport: "",
     destination: "",
+    status:"submit"
   });
   const postApi = async () => {
     const customerId = CookieUtils.getCookies('userId');
@@ -109,7 +109,7 @@ const ApplicationForm = ({ Data ,setLoading}) => {
   }, []);
   return (
     <div>
-      {Data.length !== 0  ? (
+      {Data.length !== 0 ? (
         <div>
           <div
             className="visaApplication-container mx-auto mb-3 shadow px-5 py-3 rounded"
@@ -403,7 +403,6 @@ const ApplicationForm = ({ Data ,setLoading}) => {
               </div>
             </>
           )}
-
           {/* Confirmation Modal */}
           <div
             className={`modal ${showModal ? "show" : ""}`}
