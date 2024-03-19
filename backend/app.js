@@ -67,6 +67,8 @@ app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentOperation);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.visaDocumentName);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentDetails);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.employeTicket);
+//employe price update
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employePriceTicket);
 
 //AssignTicket
 app.use("/makemyvisa", makeMyVisa.assignTo);

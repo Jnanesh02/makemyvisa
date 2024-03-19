@@ -231,10 +231,10 @@ export const AdminDashboard = () => {
                       
                     </a>
                     </div> */}
-                    <div class="btn-group nav-link notification">
+                    <div className="btn-group nav-link notification">
                       <span className="notificationNumber">{notifications.length}</span>
                       <button
-                        class="btn btn-secondary"
+                        className="btn btn-secondary"
                         type="button"
                         id="dropdownMenuButton"
                         data-bs-toggle="dropdown"
@@ -250,7 +250,7 @@ export const AdminDashboard = () => {
                         </svg>
                       </button>
                       <ul
-                        class="dropdown-menu"
+                        className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
                         {notifications &&

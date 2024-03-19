@@ -58,50 +58,50 @@ const Service = () => {
               >
                 <div className="clients-cricle-section">
 
-                <div class="myDIVthree"> 
+                <div className="myDIVthree"> 
                 <a target="blank" href="https://www.pixelstalk.net/wp-content/uploads/2016/07/Wallpapers-pexels-photo.jpg">
                 <img src={services1} alt=".."/>
                 </a>
                 </div>
 
-                <div class="hideethree"> 
+                <div className="hideethree"> 
                 <img src={services1} alt=".."/> 
                 <p>
                    Forex Services
                 </p>
                  </div>         
-                <div class="myDIVsecond"> 
+                <div className="myDIVsecond"> 
                 <Link to="/services/VisaAssistance/">  <img src={services2} alt="..."/></Link>
                 </div>
-                <div class="hideesecond"> 
+                <div className="hideesecond"> 
                 <img src={services2} alt="..."/>
                 <p>
                    Visa Assistance
                 </p>
                    </div>     
-                <div class="myDIV active"> 
+                <div className="myDIV active"> 
                 <Link to="/services/dummy/dummyticket">
                 <img src={services3} alt=".."/>
 
                 </Link>
                 </div>
-                <div class="hidee"> 
+                <div className="hidee"> 
                 <img src={services3} alt="..."/>  
                 <p>
                    Ticketing
                 </p>
                 </div>   
-                <div class="myDIVfour"> 
+                <div className="myDIVfour"> 
                 <Link to="/services/hotel/hotelReservation">  <img src={services4} alt="..."/></Link>
                 </div>
-                <div class="hideefour"> 
+                <div className="hideefour"> 
                 <img src={services4} alt="..."/> 
                 <p>
                    Hotel Reservation
                 </p>
                  </div>   
 
-                <div class="myDIVfive"> 
+                <div className="myDIVfive"> 
                 <Link to="/services/TravelHealthInsurance"><img src={services5} alt="..."/></Link>
                 </div>
                 <div className="hideefive">  
@@ -112,17 +112,17 @@ const Service = () => {
                 </p>
                   </div>   
 
-                <div class="myDIVsix"> 
+                <div className="myDIVsix"> 
                 <Link to="service/immigration/immigrationAdvice"> <img src={services6} alt="..."/></Link>
                 </div>
-                <div class="hideesix">  
+                <div className="hideesix">  
                 <img src={services6} alt="..."/> 
                 <p>
                   Immigration Advice
                 </p>
                 </div>   
                 
-                <div class="myDIVsixextra"> 
+                <div className="myDIVsixextra"> 
                 <img src={services11} alt=".."/>
                 </div>
                 <div className="hideesixextra"> 
@@ -131,7 +131,7 @@ const Service = () => {
                  <p> Apostille & Attestation </p>
                  </div>   
                 
-                <div class="myDIVseven"> 
+                <div className="myDIVseven"> 
                 <img src={services12} alt="..."/>
                 </div>
                 <div className="hideeseven">
@@ -142,21 +142,21 @@ const Service = () => {
                    </p>
                    </div>   
 
-                <div class="myDIVeight"> 
+                <div className="myDIVeight"> 
                 <Link to="/services/CourierPickup/"> <img src={services13} alt=".."/></Link>
                
                 </div>
-                <div class="hideeeight">
+                <div className="hideeeight">
                     <img src={services13} alt="..."/>
                     <p>
                        Courier, Pickup & Drop 
                     </p>
                      </div>   
 
-                <div class="myDIVnine"> 
+                <div className="myDIVnine"> 
                 <img src={services14} alt=".."/>
                 </div>
-                <div class="hideenine">   
+                <div className="hideenine">   
                  <img src={services14} alt=".."/> 
                  <p>
                    Student Accommodation 
