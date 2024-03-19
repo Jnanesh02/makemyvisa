@@ -2,19 +2,24 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const googleAuth=require("./passport");
+const googleAuth = require("./passport");
 const session = require("express-session");
 const makeMyVisa = require("./src/routes");
 const crypto = require("crypto");
-const path = require('path');
+const path = require("path");
 const { connect } = require("./config/database");
 const app = express();
-app.use('/uploads/countryImages', express.static('uploads/countryImages/'));
-
+app.use("/uploads/countryImages", express.static("uploads/countryImages/"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: process.env.FRONTEND_URL , methods: "GET,POST,PUT,DELETE", credentials: true }));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 app.use(
   session({
@@ -59,14 +64,16 @@ app.use("/makemyvisa", makeMyVisa.employe_Routers.employeePasswordUpdate);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.adminUpdateEmployeeRoles);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.employeeProfileUpdate);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentOperation);
-app.use("/makemyvisa",makeMyVisa.employe_Routers.visaDocumentName);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.visaDocumentName);
 app.use("/makemyvisa", makeMyVisa.employe_Routers.departmentDetails);
+app.use("/makemyvisa", makeMyVisa.employe_Routers.employeTicket);
+
 //AssignTicket
-app.use("/makemyvisa", makeMyVisa.assignTo)
+app.use("/makemyvisa", makeMyVisa.assignTo);
 //Country Routes
-app.use("/makemyvisa",makeMyVisa.countryService);
-app.use("/makemyvisa",makeMyVisa.updatecountryService);
-app.use("/makemyvisa",makeMyVisa.deleteCountryService);
+app.use("/makemyvisa", makeMyVisa.countryService);
+app.use("/makemyvisa", makeMyVisa.updatecountryService);
+app.use("/makemyvisa", makeMyVisa.deleteCountryService);
 //notofication
 //notification
 app.use("/makemyvisa", makeMyVisa.CustomerToAdminNotifications);
@@ -75,22 +82,17 @@ app.use("/makemyvisa",makeMyVisa.AdminToEmployeeAndCustomerNotifications)
 
 app.use("/makemyvisa",makeMyVisa.uploadTravelInsurance);
 //preSingalUrl
-app.use("/makemyvisa",makeMyVisa.preSignalUrl);
+app.use("/makemyvisa", makeMyVisa.preSignalUrl);
 //updatevisaStatusTicket
-app.use("/makemyvisa",makeMyVisa.visaStatusUpdate);
-
-
+app.use("/makemyvisa", makeMyVisa.visaStatusUpdate);
 
 // Health check endpoint
 app.get("/", function (req, res) {
   res.status(200).json({ status: "OK", message: "Server is healthy" });
 });
 
-
-
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
-  
 });
