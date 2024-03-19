@@ -68,7 +68,11 @@ app.use("/makemyvisa",makeMyVisa.countryService);
 app.use("/makemyvisa",makeMyVisa.updatecountryService);
 app.use("/makemyvisa",makeMyVisa.deleteCountryService);
 //notofication
-app.use("/makemyvisa",makeMyVisa.notifications);
+//notification
+app.use("/makemyvisa", makeMyVisa.CustomerToAdminNotifications);
+app.use("/makemyvisa",makeMyVisa.AdminToEmployeeAndCustomerNotifications)
+
+
 app.use("/makemyvisa",makeMyVisa.uploadTravelInsurance);
 //preSingalUrl
 app.use("/makemyvisa",makeMyVisa.preSignalUrl);

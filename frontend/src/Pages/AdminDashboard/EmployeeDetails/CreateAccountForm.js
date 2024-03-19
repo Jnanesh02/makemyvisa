@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import "../AdminDashboardStyles/CreateAccountForm.css";
 import ConfirmationModal from "./ConfirmationAccountModel";
 import axios from "axios";
+import CookieUtils from "../../../components/Cookie/Cookies";
 
 
 
@@ -146,7 +147,7 @@ const CreateAccountForm = ({ onEmployeeCreate, onEmployeeUpdate, editingEmployee
   };
 
   const handleConfirm = async () => {
-    const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+    const adminToken = JSON.parse(CookieUtils.getCookies("adminToken"));
     try {
       const response = isEditing
         ? await axios.put(

@@ -1,11 +1,64 @@
-import React from "react";
+import React,{ useEffect,useState } from "react";
 import "./CostumerDashboardStyles/Dashboard.css";
-import { useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/avatar.png";
 import { NavLink, Link, Outlet} from "react-router-dom";
-
+import CookieUtils from "../../components/Cookie/Cookies";
+import axios from "axios";
 function Dashboard() {
+  const [notifications, setNotifications] = useState([]);
+  const token = CookieUtils.getCookies("userId");
+  const tokenData = JSON.parse(atob(token.split(".")[1]));
+  console.log(tokenData);
+
+
+  const handleNotificationClick = async (notificationId) => {
+    try {
+      // Send a request to update the notification status
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/${notificationId}`, {
+        read: true,
+        tokenData
+      });
+
+      // If the request is successful, update the notification status in state
+      if (response.status === 200) {
+        const updatedNotifications = notifications.map(notification => {
+          if (notification._id === notificationId) {
+            return { ...notification, read: true };
+          }
+          return notification;
+        });
+        setNotifications(updatedNotifications);
+      }
+    } catch (error) {
+      console.error('Error updating notification status:', error);
+    }
+  }
+
+  // Fetch data from the endpoint when the component mounts
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        // Get adminId from cookies
+        
+
+        // Construct URL for fetching notifications
+        const url = `${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/${tokenData.id}`;
+
+        // Fetch notifications from the backend
+        const response = await axios.get(url, { withCredentials: true });
+
+        // Set notifications in state
+        setNotifications(response.data[0].notificationsData);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
+  console.log("notifications", notifications);
 
 
 
@@ -162,7 +215,7 @@ function Dashboard() {
                 id="navbarSupportedContent">
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item">
-                    <a className="nav-link notification" href="/">
+                    {/* <a className="nav-link notification" href="/">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="24"
@@ -170,7 +223,44 @@ function Dashboard() {
                         width="24">
                         <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
                       </svg>
-                    </a>
+                    </a> */}
+                    <div class="btn-group nav-link notification">
+                      <span className="notificationNumber">{notifications.length}</span>
+                      <button
+                        class="btn btn-secondary"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="24"
+                          viewBox="0 -960 960 960"
+                          width="24"
+                        >
+                          <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
+                        </svg>
+                      </button>
+                      <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        {notifications &&
+                          notifications.map((notification) => (
+                            <a  href="/Admindashboard/ServicesPage" onClick={() => handleNotificationClick(notification._id)}>
+                            <li key={notification._id} className="mx-3 my-4" >
+                              <h6>{notification.senderEmail}</h6>
+                              <p className="dropdown-item" >
+                                {notification.message}
+                              </p>
+                              <hr/>
+                            </li>
+                            
+                            </a>
+                          ))}
+                      </ul>
+                    </div>
                   </li>
                   <li className="nav-item avatar-icons-ds">
                     <button

@@ -31,6 +31,7 @@ const AdminLogin = () => {
         CookieUtils.setCookies("adminToken", adminTokens);
 
         const token = CookieUtils.getCookies("adminToken");
+        console.log("login",token)
         const tokenData = JSON.parse(atob(token.split(".")[1]));
 
         if (tokenData.role === "admin") {

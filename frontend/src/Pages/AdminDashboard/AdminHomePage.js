@@ -42,7 +42,7 @@ function AdminHomePage() {
      <div className="welcome-container">
       <h1 className="welcome-dummy-text">Welcome to Admin Dashboard</h1>
       </div>
-      <div className="row">
+      <div className="row m-5">
         <div className="col-md-6 p-0">
           <div className="flight-graph">
         <h3>flight</h3>

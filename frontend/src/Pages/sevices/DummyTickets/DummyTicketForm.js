@@ -121,12 +121,13 @@ function DummyTicketForm() {
 
   return (
     <div className="dummy-ticket-form-container">
+      <form onSubmit={handleSubmit}>
       <div className="container mx-auto shadow bg-body rounded p-5 dummytickets">
          <h2 className='text-center dummy-text-heading'>
         <svg className="flight-icon" xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40"><path d="m319.5-319-104-49 8.5-8.5 93.5 13.5 170-168.5-269-148 14.5-16 330 89 84.5-88q9.5-9.5 21.75-9.5t22.25 9.5Q701-685 701-672t-9.5 22.5l-85 86.5L696-234l-15.5 16.5-149-268.5L365-319l12.5 95.5-9 9-49-104.5Z"/></svg>
                <span>  Dummy Ticket </span>
                 </h2> 
-        <div className="form-group">
+        <div className="form-group" > 
           {/* Trip Type */}
           <h4 className="form-label">Trip Type:</h4>
           <div className="trip-type-radio">
@@ -216,8 +217,9 @@ function DummyTicketForm() {
           ))}
         </div>
         {/* Submit Button */}
-        <button className="btn btn-success" onClick={handleSubmit}>Submit</button>
+        <button className="btn btn-success" type="submit">Submit</button>
       </div>
+      </form>
     </div>
   );
 }

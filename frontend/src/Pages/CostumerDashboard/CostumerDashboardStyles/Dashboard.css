@@ -245,6 +245,15 @@ a.nav-link.notification {
     text-align: center;
     line-height: 20px;
 }
+
+.notification-number{
+    background-color: black;
+    color: white;
+    padding: 0 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 1rem;
+}
 .main-section-one {
     display: flex;
     justify-content: space-between;

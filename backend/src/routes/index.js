@@ -12,12 +12,15 @@ const enquiries = require("./enquiry/enquiry");
 const employe_Routers = require("./employe_routes");
 
 
+const CustomerToAdminNotifications=require("./notification/CustomerToAdminNotification")
+const AdminToEmployeeAndCustomerNotifications=require("./notification/AdminToEmployeeAndCustomerNotifications")
+
 const assignTo = require("./ticketAssign/ticketAssignTo");
 const countryService = require("./country/countryService");
 const updatecountryService = require("./country/updateCountryService");
 const deleteCountryService=require("./country/deleteCountryService")
 const services = require("./makemyvisa-services/services");
-const notifications = require("./notification/notification");
+
 const uploadTravelInsurance = require("./makemyvisa-services/uploadTravelInsurance");
 
 
@@ -38,11 +41,12 @@ module.exports = {
   updatecountryService,
   deleteCountryService,
   services,
-  notifications,
   uploadTravelInsurance,
   assignTo,
   preSignalUrl,
   visaStatusUpdate,
-  employe_Routers
+  employe_Routers,
+  CustomerToAdminNotifications,
+  AdminToEmployeeAndCustomerNotifications,
 
 };

@@ -136,7 +136,7 @@ export default function CustomizedSteppers() {
     const fetchSelectedServiceTicket = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}es`,
+          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}s`,
           { params: { customerID} }
         );
         setApplicationStatus(

@@ -18,6 +18,10 @@ const postServiceCollectionApi = async(serviceDetails,customerId) =>{
           { customerID, data }
         );
         if (response.status === 200) {
+          const response = await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/CustomerToAdminNotifications/`,
+            { sender:customerID, message:serviceName }
+          );
           CookieUtils.removeCookies("servicename");
         } else {
           console.error("Service creation failed:", response.data);

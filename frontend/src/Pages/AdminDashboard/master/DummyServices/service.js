@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import ConfirmationModal from "../../EmployeeDetails/ConfirmationAccountModel";
 import axios from "axios";
 import "./serv.css";
+import CookieUtils from "../../../../components/Cookie/Cookies";
 const Service = () => {
+  
   const initialData = {
     ticketId: "",
     ticketName: "",
@@ -149,6 +151,15 @@ const Service = () => {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/assignTo`,assignTo);
       console.log(response.status === 200);
        if(response.status === 200){
+        
+        const AdminID = JSON.parse(atob(CookieUtils.getCookies('adminToken').split(".")[1]));
+        console.log("AdminID",AdminID);
+        const response = await axios.post(
+          
+          `${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/`,
+          {assignTo: assignTo,sender:AdminID.id,EmployeeMessage:"Task Assigned",CustomerMessage:"Ticket Assigned"}
+        );
+
         setLoading(true);
        }
      

@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CookieUtils from "../../components/Cookie/Cookies";
+
 
 async function performLogout() {
   try {
@@ -9,7 +11,7 @@ async function performLogout() {
 
     );
     if (response.status === 200) {
-      localStorage.removeItem("adminToken")
+      CookieUtils.removeCookies("adminToken")
       return true;
     }
     return false;
