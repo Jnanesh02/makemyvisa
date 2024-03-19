@@ -11,7 +11,7 @@ const generatePreSignalUrl = (numDocuments, customerId,document)=>{
                     Bucket: 'makemyvisa-private-assets', 
                     Key: uniqueKey,
                     Expires: 3600, 
-                    ContentType: 'application/octet-stream' 
+                    ContentType: 'application/pdf'
                   };
                   const urlPromise = new Promise((resolveurl, rejecturl) =>{
                     s3.getSignedUrl('putObject', params,(err, res) =>{
