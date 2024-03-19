@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { styled } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Check from "@mui/icons-material/Check";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import StepConnector, {
-  stepConnectorClasses,
-} from "@mui/material/StepConnector";
-import ApplicationForm from "./ApplicationForm";
-import { DocumentUpload } from "./DocumentUpload";
-import { AdditionalDocumentUpload } from "./AdditionalDocumentUpload";
+import React,{useState,useEffect} from 'react';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Check from '@mui/icons-material/Check';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import ApplicationForm from './ApplicationForm';
+import {DocumentUpload} from './DocumentUpload'
+import {AdditionalDocumentUpload} from './AdditionalDocumentUpload'
+import CookieUtils from "../../../components/Cookie/Cookies"
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -124,7 +123,9 @@ export default function CustomizedSteppers() {
   const [loading, setLoading] = useState(false);
 
   const { visastatus } = useParams();
-
+  const customerId = CookieUtils.getCookies('userId');
+  const objectID = JSON.parse(atob(customerId.split('.')[1]));
+  const customerID = objectID.id;
   const handleStepClick = (step) => {
     if (step <= completeStep) {
       // Check if the clicked step is before the current active step
@@ -136,7 +137,7 @@ export default function CustomizedSteppers() {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}es`,
-          { params: { customerID: "65ddc4c6b2b7c3bf692258a5" } }
+          { params: { customerID} }
         );
         setApplicationStatus(
           response.data.map((response) => response.data.formData.status)

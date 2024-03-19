@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../CostumerDashboardStyles/ApplicationForm.css";
 import { styled } from "@mui/material/styles";
@@ -8,7 +7,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
+import {useParams} from 'react-router-dom'
+import CookieUtils from '../../../components/Cookie/Cookies';
 const SuccessDiv = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -32,7 +32,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    gender: "",
+    gender: "male",
     country: "",
     state: "",
     visaType: "",
@@ -41,37 +41,47 @@ const ApplicationForm = ({ Data, setLoading }) => {
     status:"submit"
   });
   const postApi = async () => {
+    const customerId = CookieUtils.getCookies('userId');
+    const objectID = JSON.parse(atob(customerId.split('.')[1]));
+    const customerID = objectID.id;
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatus}`,
-        {
-          data: {
-            formData,
-            documentUpload: "",
-            AdditionDocuments: "",
-          },
-          customerID: "65ddc4c6b2b7c3bf692258a5",
-        }
-      );
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatus}`, {
+        data:{
+        formData,
+        documentUpload:[
+  
+        ],
+        AdditionDocuments:[
+  
+        ]
+       },
+       "customerID": customerID
+      });
+  
       if (response.status === 200) {
         setLoading(true);
         console.log("success");
       }
     } catch (error) {
-      console.log("success");
+      console.error("Error:", error);
     }
-  };
+  }
+
+  
   const handleConfirm = (e) => {
-    // setPaymentSubmitted(true);
+    setPaymentSubmitted(true);
     setShowModal(false); // Close the modal after confirmation
-    // setModalDisabled(true); // Disable the "Open Modal" button after confirmation
-    postApi();
+    setModalDisabled(true); // Disable the "Open Modal" button after confirmation
   };
 
   const handleSubmit = () => {
-    setShowModal(true);
-    // setPaymentConfirmed(true); // Set payment as confirmed
-    // setShowSuccessMessage(true); // Show success message
+    
+
+    setPaymentConfirmed(true); // Set payment as confirmed
+    postApi();
+    setShowSuccessMessage(true); // Show success message
+
+    
   };
   const [countriesData, setCountriesData] = useState([]);
   const handleInputChange = (event) => {
@@ -109,9 +119,37 @@ const ApplicationForm = ({ Data, setLoading }) => {
             {Array.isArray(Data) ? (
               <>
                 {Data.map((res) => (
-                  <div key={res._id}>
-                    Name: <span>{res.data.formData.firstName}</span>{" "}
+                  <div key={res._id} className="mb-4 p-3 border rounded">
+                  <div>
+                    First Name: <span className="fw-bold">{res.data.formData.firstName}</span>{" "}
                   </div>
+                  <div>
+                    Last Name: <span className="fw-bold">{res.data.formData.lastName}</span>{" "}
+                  </div>
+                  <div>
+                    Email: <span className="fw-bold text-primary">{res.data.formData.email}</span>{" "}
+                  </div>
+                  <div>
+                    Gender: <span className="fw-bold">{res.data.formData.gender}</span>{" "}
+                  </div>
+                  
+                  <div>
+                    Passport Number: <span className="fw-bold">{res.data.formData.passport}</span>{" "}
+                  </div>
+                  <div>
+                    Phone Number: <span className="fw-bold">{res.data.formData.phoneNumber}</span>{" "}
+                  </div>
+                  <div>
+                    Destination: <span className="fw-bold">{res.data.formData.destination}</span>{" "}
+                  </div>
+                  <div>
+                    visaType: <span className="fw-bold">{res.data.formData.visaType}</span>{" "}
+                  </div>
+                  <div>
+                    Country: <span className="fw-bold">{res.data.formData.country}</span>{" "}
+                  </div>
+                </div>
+                
                 ))}
               </>
             ) : (
@@ -119,7 +157,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
             )}
           </div>
         </div>
-      ) : (
+      )  : (
         <div className="container">
           {/* Application Form */}
           {modalDisabled ? null : (
@@ -301,7 +339,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                               name="destination"
                               value={formData.destination}
                               onChange={handleInputChange}
-                              // required
+                              required
                             >
                               <option value="">Select Country</option>
                               {countriesData.map((country, index) => (
@@ -326,7 +364,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                                 name="visaType"
                                 value={formData.visaType}
                                 onChange={handleInputChange}
-                                // required
+                                required
                               >
                                 <option>select</option>
                                 {countriesData
@@ -355,7 +393,6 @@ const ApplicationForm = ({ Data, setLoading }) => {
                           className="btn btn-danger-submit"
                           style={{ background: "#e12912", color: "white" }}
                           disabled={paymentConfirmed}
-                          onClick={handleSubmit}
                         >
                           Submit
                         </button>
@@ -375,6 +412,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
             <div className="w-50 modal-dialog-centered m-auto">
               <div className="modal-content">
                 <div className="modal-header">
+                  <h5 className="modal-title">Confirm Payment</h5>
                   <button
                     type="button"
                     className="btn-close"
@@ -382,7 +420,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  Are you sure you want to submit Application?
+                  Are you sure you want to proceed with the payment?
                 </div>
                 <div className="modal-footer">
                   <button
@@ -403,7 +441,8 @@ const ApplicationForm = ({ Data, setLoading }) => {
               </div>
             </div>
           </div>
-          Payment Div
+
+          {/* Payment Div */}
           <div className="d-flex flex-column align-items-center justify-content-center">
             {showSuccessMessage && (
               <div className="d-flex justify-content-center">
@@ -468,7 +507,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                 </div>
                 <button
                   className="btn btn-success"
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                   disabled={paymentConfirmed}
                 >
                   Payment
@@ -483,3 +522,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
 };
 
 export default ApplicationForm;
+
+
+
+

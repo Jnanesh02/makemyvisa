@@ -42,6 +42,7 @@ router.get("/getservice/:servicename",async(req,res)=>{
    try {
     const  serviceName  = req.params.servicename;
     const { customerID } = req.query;
+    console.log(serviceName,customerID);
     const db = mongoose.connection;
    const collection = db.collection(serviceName);
     const results = await collection.find({}).toArray();
