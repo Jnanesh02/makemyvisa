@@ -9,12 +9,12 @@ function DummyTicketForm() {
     returnDate: "",
     departureDate: "",
     numberOfPassengers: 1,
-    passengerDetails: [{ name: "", age: "", passportNumber: "" }],
+    passengerDetails: [{ givenName: "",surname:"", age: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"",dateOfBirth:"" }],
     from: "",
     to: "",
   });
   
-
+  console.log("FormData",formData);
   const { dummyticket } = useParams({});
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ function DummyTicketForm() {
     setFormData({
       ...formData,
       numberOfPassengers: formData.numberOfPassengers + 1,
-      passengerDetails: [...formData.passengerDetails, { name: '', age: '', passportNumber: '' }],
+      passengerDetails: [...formData.passengerDetails, {  givenName: "",Surname:"", age: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"",dateOfBirth:""}],
     });
   };
 
@@ -80,7 +80,10 @@ function DummyTicketForm() {
     const passengerErrors = [];
     formData.passengerDetails.forEach((passenger, index) => {
       const errors = {};
-      if (!passenger.name) {
+      if (!passenger.givenName) {
+        errors.name = `Please enter name for passenger ${index + 1}`;
+      }
+      if (!passenger.surname) {
         errors.name = `Please enter name for passenger ${index + 1}`;
       }
       if (!passenger.age) {
@@ -101,8 +104,9 @@ function DummyTicketForm() {
       setErrors(formErrors);
       return; // Prevent form submission if there are errors
     }
-
+    console.log("formdata",formData);
     try {
+     
       if (CookieUtils.getCookies("userId")) {
         navigate("/dashboard");
       } else {
@@ -148,7 +152,7 @@ function DummyTicketForm() {
         <div className="from-to-group ">
           {/* Arrival City */}
           <div className='fromto'>
-          <label className="form-label">Arrival City:</label>
+          <h4 className="form-label">Arrival City*</h4>
           <input type="text" className={`dummy-form-control form-control ${errors.to && 'is-invalid'}`} name="to" placeholder="Country Name" value={formData.to} onChange={handleChange} required />
           {errors.to && <div className="invalid-feedback">{errors.to}</div>}
 
@@ -156,7 +160,7 @@ function DummyTicketForm() {
           
           {/* Departure City */}
           <div className='fromto'>
-          <label className="form-label w-40">Departure City:</label>
+          <h4 className="form-label w-40">Departure City*</h4>
           <input type="text" className={`dummy-form-control form-control ${errors.from && 'is-invalid'}`} name="from" placeholder="Country Name" value={formData.from} onChange={handleChange} required />
           {errors.from && <div className="invalid-feedback">{errors.from}</div>}
           </div>
@@ -166,13 +170,13 @@ function DummyTicketForm() {
         {/* Departure and Return Date */}
         <div className="form-group mb-3">
           {/* Departure Date */}
-          <label className="label_Departure form-label">Departure Date:</label>
+          <h4 className="label_Departure form-label">Departure Date*</h4>
           <input type="date" className={`dummy-form-control form-control ${errors.departureDate && 'is-invalid'}`} value={formData.departureDate} name="departureDate" onChange={handleChange} required />
           {errors.departureDate && <div className="invalid-feedback">{errors.departureDate}</div>}
           {/* Return Date (only for Round Trip) */}
           {formData.tripType === 'roundTrip' && (
             <>
-              <label className="label_return">Return Date:</label>
+              <h4 className="label_return form-label">Return Date*</h4>
               <input type="date" className={`dummy-form-control form-control ${errors.returnDate && 'is-invalid'}`} value={formData.returnDate} name="returnDate" onChange={handleChange} required />
               {errors.returnDate && <div className="invalid-feedback">{errors.returnDate}</div>}
             </>
@@ -187,21 +191,30 @@ function DummyTicketForm() {
             <h4 className="form-label"> Passenger Details: </h4>
             <button className="btn btn-primary add-passangers" onClick={handleAddPassenger}><i className="fas fa-plus"></i> Add Passenger</button>
           </div>
-          <table className="table table-dummyticket">
+          <table className="table table-bordered table-dummyticket">
             <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col"> Age</th>
+              <tr className="fw-bold text-center align-middle">
+                <th scope="col">Given Name*</th>
+                <th scope="col">Surname*</th>
+                <th scope="col">Age*</th>
+                <th scope="col">Date of Birth</th>
                 <th scope="col">Passport Number</th>
+                <th scope="col">Date of Issue</th>
+                <th scope="col">Date of Expiry</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {formData.passengerDetails.map((passenger, index) => (
                 <tr key={index}>
-                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.name && 'is-invalid'}`} value={passenger.name} onChange={(e) => handlePassengerChange(index, 'name', e.target.value)} required /></td>
-                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.age && 'is-invalid'}`} value={passenger.age} onChange={(e) => handlePassengerChange(index, 'age', e.target.value)} required /></td>
-                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.passportNumber && 'is-invalid'}`} value={passenger.passportNumber} onChange={(e) => handlePassengerChange(index, 'passportNumber', e.target.value)} required /></td>
+                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.givenName && 'is-invalid'}`} value={passenger.givenName} onChange={(e) => handlePassengerChange(index, 'firstname', e.target.value)} required /></td>
+                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.surname && 'is-invalid'}`} value={passenger.surname} onChange={(e) => handlePassengerChange(index, 'surname', e.target.value)} required /></td>
+                  <td><input type="Number" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.age && 'is-invalid'}`} value={passenger.age} onChange={(e) => handlePassengerChange(index, 'age', e.target.value)} required /></td>
+                  <td><input type="date" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.dateOfBirth && 'is-invalid'}`} value={passenger.dateOfBirth} onChange={(e) => handlePassengerChange(index, 'dateOfBirth', e.target.value)} /></td>
+                  <td><input type="text" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.passportNumber && 'is-invalid'}`} value={passenger.passportNumber} onChange={(e) => handlePassengerChange(index, 'passportNumber', e.target.value)} /></td>
+                 
+                  <td><input type="date" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.dateOfIssue && 'is-invalid'}`} value={passenger.dateOfIssue} onChange={(e) => handlePassengerChange(index, 'dateOfIssue', e.target.value)} /></td>
+                  <td><input type="date" className={`dummy-form-control form-control ${errors.passengerDetails[index]?.dateOfIssue && 'is-invalid'}`} value={passenger.dateOfIssue} onChange={(e) => handlePassengerChange(index, 'dateOfIssue', e.target.value)} /></td>
                   <td><button className="btn btn-danger" onClick={() => handleRemovePassenger(index)}><i className="fas fa-minus"></i></button></td>
                 </tr>
               ))}

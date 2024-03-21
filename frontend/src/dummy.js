@@ -1,39 +1,84 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useState } from "react";
+import jsonData from "./data.json"; // Assuming your JSON data is stored in data.json
 
-const steps = [
-  'Select master blaster campaign settings',
-  'Create an ad group',
-  'Create an ad',
-];
+const CountryList = () => {
+  const [countries, setCountries] = useState([]);
+  const [formData, setFormData] = useState({
+   ArrivalCountry: "", 
+   ArrivalAirport: "" ,
+    DepartureCountry: "", 
+    DepartureAirport: "" 
+  });
+  const [arrivalAirports, setArrivalAirports] = useState([]);
+  const [departureAirports, setDepartureAirports] = useState([]);
 
-export default function HorizontalLinearAlternativeLabelStepper() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust breakpoint as needed
+  useEffect(() => {
+    // Extract unique countries from the JSON data
+    const countrySet = new Set(jsonData.map((entry) => entry.county));
+    const uniqueCountries = Array.from(countrySet);
+    setCountries(uniqueCountries);
+  }, []);
+
+  const handleCountryChange = (e) => {
+    e.preventDefault();
+    console.log("e.target.value",e.target.value)
+    setFormData(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }));
+ 
+  };
+
+ 
+
+  // Event handler for form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form data:", formData);
+  };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Stepper
-        activeStep={1}
-        alternativeLabel
-        orientation={isMobile ? 'vertical' : 'horizontal'} // Set orientation based on screen size
-      >
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel sx={{ 
-              width: isMobile ? '100px' : 'auto', // Adjust width for mobile
-              padding: isMobile ? '8px' : '12px' // Adjust padding for mobile
-            }}>
-              {label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Box>
+    <div>
+      <h1>List of Countries</h1>
+      <form onSubmit={handleSubmit}>
+        {/* Arrival City */}
+        <div>
+          <h2>Arrival City</h2>
+          <select name="ArrivalCountry" value={formData.ArrivalCity} onChange={handleCountryChange}>
+            <option value="">Select Arrival Country</option>
+            {countries.map((country, index) => (
+              <option key={index} value={country}>{country}</option>
+            ))}
+          </select>
+          <select name="ArrivalAirport" value={formData.ArrivalAirport} onChange={handleCountryChange}>
+            <option value="">Select Arrival Airport</option>
+            {arrivalAirports.map((airport, index) => (
+              <option key={index} value={airport.airport}>{airport.airport} - {airport.city_code} </option>
+            ))}
+            <option value='Not in the List'>Not in the List</option>
+          </select>
+        </div>
+        <div>
+          <h2>Arrival City</h2>
+          <select name="DepartureCountry" value={formData.ArrivalCity} onChange={handleCountryChange}>
+            <option value="">Select Departure Country</option>
+            {countries.map((country, index) => (
+              <option key={index} value={country}>{country}</option>
+            ))}
+          </select>
+          <select name="DepartureAirport" value={formData.ArrivalAirport} onChange={handleCountryChange}>
+            <option value="">Select Departure Airport</option>
+            {arrivalAirports.map((airport, index) => (
+              <option key={index} value={airport.airport}>{airport.airport} - {airport.city_code} </option>
+            ))}
+            <option value='Not in the List'>Not in the List</option>
+          </select>
+        </div>
+       
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
-}
+};
+
+export default CountryList;
