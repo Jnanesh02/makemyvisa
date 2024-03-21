@@ -15,6 +15,8 @@ import ApplicationForm from './ApplicationForm';
 import {DocumentUpload} from './DocumentUpload'
 import {AdditionalDocumentUpload} from './AdditionalDocumentUpload'
 import CookieUtils from "../../../components/Cookie/Cookies"
+import { DocumentDownloading } from './DocumentDownloading';
+import { DocumentVerification } from './DocumentVerification';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -139,8 +141,6 @@ export default function CustomizedSteppers() {
           `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatuses}`,
           { params: { customerID} }
         );
-        console.log("step clicked",response);
-
         setApplicationStatus(
           response.data.map((response) => response.data.formData.status)
         );
@@ -230,7 +230,15 @@ export default function CustomizedSteppers() {
             setLoading={setLoading}
           />
         )}
-        {activeStep === 2 }
+        {activeStep === 2 && <DocumentDownloading Data={appicationData}/>}
+        {activeStep === 3 && <DocumentVerification Data={appicationData}/>}
+        {activeStep === 4 && (
+          <AdditionalDocumentUpload
+            Data={appicationData}
+            visaId={visaApplicationId[0]}
+            setLoading={setLoading}
+          />
+        )}
         {activeStep === 4 && <AdditionalDocumentUpload />}
       </div>
     </Stack>

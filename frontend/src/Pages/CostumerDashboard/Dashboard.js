@@ -9,18 +9,13 @@ function Dashboard() {
   const [notifications, setNotifications] = useState([]);
   const token = CookieUtils.getCookies("userId");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
-  console.log(tokenData);
-
 
   const handleNotificationClick = async (notificationId) => {
     try {
-      // Send a request to update the notification status
       const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/${notificationId}`, {
         read: true,
         tokenData
       });
-
-      // If the request is successful, update the notification status in state
       if (response.status === 200) {
         const updatedNotifications = notifications.map(notification => {
           if (notification._id === notificationId) {
@@ -39,16 +34,8 @@ function Dashboard() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        // Get adminId from cookies
-        
-
-        // Construct URL for fetching notifications
         const url = `${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/${tokenData.id}`;
-
-        // Fetch notifications from the backend
         const response = await axios.get(url, { withCredentials: true });
-
-        // Set notifications in state
         setNotifications(response.data[0].notificationsData);
       } catch (error) {
         console.error("Error fetching notifications:", error);
@@ -58,7 +45,6 @@ function Dashboard() {
     fetchNotifications();
   }, []);
 
-  console.log("notifications", notifications);
 
 
 
@@ -246,7 +232,7 @@ function Dashboard() {
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        {notifications &&
+                        {/* {notifications &&
                           notifications.map((notification) => (
                             <a  href="/dashboard/visastatus" onClick={() => handleNotificationClick(notification._id)}>
                             <li key={notification._id} className="mx-3 my-4" >
@@ -258,7 +244,7 @@ function Dashboard() {
                             </li>
                             
                             </a>
-                          ))}
+                          ))} */}
                       </ul>
                     </div>
                   </li>
