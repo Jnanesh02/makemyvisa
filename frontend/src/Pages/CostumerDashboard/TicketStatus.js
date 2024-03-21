@@ -37,6 +37,9 @@ const TicketStatus = () => {
 
     fetchTicketDetails();
   }, [dummytickets]);
+
+
+  console.log("ticketDetails",ticketDetails);
   return (
     <div>
       {isLoading ? (
@@ -48,8 +51,8 @@ const TicketStatus = () => {
           {ticketDetails.length > 0 ? (
             <table className="employee-table">
               <thead>
-                <tr>
-                  <th>No Passengers</th>
+                <tr className="fw-bold align-middle text-center">
+                  <th>Passengers</th>
                   <th>Passenger Details</th>
                   <th>Departure Country</th>
                   <th>Arrive Country</th>
@@ -61,15 +64,23 @@ const TicketStatus = () => {
                   <th>Ticket Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="align-middle text-center ">
                 {ticketDetails.map((ticket, key) => (
-                  <tr key={`${ticket._id}-${key}`}>
+                  <tr key={`${ticket._id}-${key}`} className="justify-content-center">
                     <td>{ticket.data.numberOfPassengers}</td>
-                    <td>
+                    <td style={{width:'20%'}}>
                       {ticket?.data?.passengerDetails.map((details, subKey) => (
-                        <span key={subKey}>
-                          {details.name || "-"} ({details.age || "-"}) (
-                          {details.passportNumber || "-"})<br />
+                        <span key={subKey} className="card mb-2 p-2 bg-light">
+                          <span className="fw-bold"><span className="fw-normal">Given Name : </span>{details.givenName || "-"}</span>
+                          <span className="fw-bold"><span className="fw-normal">Surname :
+                          </span> {details.surname || "-"}</span> 
+                         <span className="fw-bold"><span className="fw-normal">Age :
+                         </span>
+                           {details.age || "-"}</span>
+                          <span className="fw-bold"><span className="fw-normal">Date of Birth : </span>{details.dateOfBirth || "-"}</span>
+                          <span className="fw-bold"><span className="fw-normal">Passport Number : </span>{details.passportNumber || "-"}</span>
+                          <span className="fw-bold"><span className="fw-normal">Date of Issue : </span>{details.dateOfIssue || "-"}</span>
+                          <span className="fw-bold"><span className="fw-normal">Date of Expiry : </span>{details.dateOfExpiry || "-"}</span>
                         </span>
                       ))}
                     </td>

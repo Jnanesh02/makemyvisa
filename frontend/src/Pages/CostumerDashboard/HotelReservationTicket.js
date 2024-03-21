@@ -48,13 +48,13 @@ export const HotelReservationTicket = () => {
       ) : (
         <>
           {ticketDetails.length > 0 ? (
-            <table className="employee-table">
+            <table className="employee-table ">
               <thead>
-                <tr>
+                <tr className='align-middle text-center'> 
                   <th>ArrivalCountry</th>
                   <th>Check In</th>
                   <th>Check Out</th>
-                  <th># Passengers</th>
+                  <th>Passengers</th>
                   <th>Passenger Details</th>
                   <th>Payment Details</th>
                   <th>Price</th>
@@ -70,9 +70,20 @@ export const HotelReservationTicket = () => {
                     <td>{ticket.data.numberOfPassengers}</td>
                     <td>
                       {ticket?.data?.passengerDetails.map((details, subKey) => (
-                        <span key={subKey}>
-                          {details.name || '-'} ({details.age || '-'}) ({details.passportNumber || '-'})<br />
-                        </span>
+                        <span key={subKey} className="card mb-2 p-2 bg-light">
+                        <span className="fw-bold"><span className="fw-normal">Given Name : </span>{details.givenName || "-"}</span>
+                        <span className="fw-bold"><span className="fw-normal">Surname :
+                        </span> {details.surname || "-"}</span> 
+                       <span className="fw-bold"><span className="fw-normal">Age :
+                       </span>
+                         {details.age || "-"}</span>
+                         <span className="fw-bold"><span className="fw-normal">Phone Number :
+                       </span>
+                         {details.phonenumber || "-"}</span>
+                        <span className="fw-bold"><span className="fw-normal">Passport Number : </span>{details.passportNumber || "-"}</span>
+                        <span className="fw-bold"><span className="fw-normal">Date of Issue : </span>{details.dateOfIssue || "-"}</span>
+                        <span className="fw-bold"><span className="fw-normal">Date of Expiry : </span>{details.dateOfExpiry || "-"}</span>
+                      </span>
                       ))}
                     </td>
                     {/* <td>{ticket.paymentDetails || '-'}</td> */}
