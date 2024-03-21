@@ -254,13 +254,7 @@ button.btn.btn-primary.btn-sidenavbar-b {
     background: #e12912 !important;
     border: none;
 }
-.modal.show .modal-dialog {
-    transform: none;
-    /* display: flex; */
-    position: absolute;
-    right: 47px;
-    top: 130px;
-}
+
 
 button.carousel-control-prev {
     background: #ffffffcc;

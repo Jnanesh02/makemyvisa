@@ -7,13 +7,13 @@ button.btn.btn-primary.btn-sidenavbar-b {
     background: #fe5141;
     border: none;
 }
-.modal.show .modal-dialog {
+/* .modal.show .modal-dialog {
     transform: none;
-    /* display: flex; */
+   
     position: absolute;
     right: 47px;
     top: 130px;
-}
+} */
 .modal-em-m {
     z-index: 9999999 !important;
 }
@@ -51,9 +51,17 @@ button.btn.btn-primary.btn-sidenavbar-b {
 .modal-em-m .carousel-control-next-icon {
     width: 18px;
 }
-.modal.show .modal-dialog {
+/* .modal.show .modal-dialog {
     transform: none;
-    /* display: flex; */
+   
+    position: absolute;
+    right: 47px;
+    top: 130px;
+} */
+
+.service-modal .service-model-dialog{
+    transform: none;
+   
     position: absolute;
     right: 47px;
     top: 130px;

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CookieUtils from "../../../components/Cookie/Cookies";
+
+
+
 export const DocumentUpload = ({ Data, visaId, setLoading }) => {
   const [formData, setFormData] = useState([]);
   const [documentNames, setDocumentNames] = useState([]);
+  const tokenData=CookieUtils.getCookies("userId");
+  const customerTokenId = JSON.parse(atob(tokenData.split(".")[1]));
+
+ 
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
@@ -31,7 +39,7 @@ export const DocumentUpload = ({ Data, visaId, setLoading }) => {
         {
           params: {
             numDocuments: len,
-            customerId: "65ddc4c6b2b7c3bf692258a5",
+            customerId: customerTokenId,
             document: documentName,
           },
         }

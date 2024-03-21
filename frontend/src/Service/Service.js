@@ -28,13 +28,13 @@ const Service = () => {
       </button>
 
       <div
-        className="modal modal-em-m"
+        className="modal modal-em-m service-modal"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog service-model-dialog">
           <div
             className="modal-content"
             style={{ backgroundImage: `url(${Bgservices})` }}
