@@ -18,7 +18,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
      const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/update/visastatus`,
         {
-          objectId: "65fa7434d05e3d06673c538d",
+          objectId: "65fc14e076b0fb054b379635",
           status: status,
         }
       );
@@ -49,7 +49,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
         const urls = fetchDocuments.data.message;
 
         const downloadPromises = urls.map((url, index) => {
-          return new Promise((resolve) => {
+          return new Promise((resolve,reject) => {
             setTimeout(() => {
               const link = document.createElement("a");
               link.href = url;
@@ -60,7 +60,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
         });
 
         await Promise.all(downloadPromises);
-        await updatestatus();
+        await updatestatus("downloaded");
       }
     } catch (error) {
       alert(error.message);

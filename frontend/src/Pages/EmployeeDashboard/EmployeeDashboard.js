@@ -15,13 +15,10 @@ const EmployeeDashboard = () => {
   console.log(tokenData);
   const handleNotificationClick = async (notificationId) => {
     try {
-      // Send a request to update the notification status
       const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/CustomerToAdminNotifications/${notificationId}`, {
         read: true,
         tokenData
       });
-
-      // If the request is successful, update the notification status in state
       if (response.status === 200) {
         const updatedNotifications = notifications.map(notification => {
           if (notification._id === notificationId) {
@@ -36,21 +33,16 @@ const EmployeeDashboard = () => {
     }
   }
 
-  // Fetch data from the endpoint when the component mounts
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        // Get adminId from cookies
-        
-
-        // Construct URL for fetching notifications
         const url = `${process.env.REACT_APP_BACKEND_URL}/CustomerToAdminNotifications/${tokenData.id}`;
-
-        // Fetch notifications from the backend
         const response = await axios.get(url, { withCredentials: true });
-
-        // Set notifications in state
-        setNotifications(response.data[0].notificationsData);
+          if(response.status=== 200 && response.length>0){
+            setNotifications(response.data[0].notificationsData);
+          }else{
+            setNotifications([]);
+          }
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }

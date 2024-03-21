@@ -43,12 +43,10 @@ export const Services = () => {
         {
           params: {
             employe_id: data.ticketId,
-            departmentName: `${data.ticketName}s`,
+            departmentName: `${data.ticketName}`,
           },
         }
       );
-      console.log("jjjj",fetchTicket)
-
       setAssignedTicket(fetchTicket);
     } catch (error) {
       console.error("Error fetching user data:", error.message);
@@ -70,7 +68,7 @@ export const Services = () => {
         return <TicketService serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
       case "hotelreservation":
           return <HotelReservationTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
-      case "visastatuse":
+      case "visastatuses":
           return <VisaTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
       default:
         return <p>Unsupported service: {serviceName}</p>;

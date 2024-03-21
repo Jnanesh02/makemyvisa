@@ -16,7 +16,7 @@ export const HotelBooking = () => {
     ],
   });
   const [formSubmitted, setFormSubmitted] = useState(false); // Track if form has been submitted
-  const { hotelReservation } = useParams();
+  const { hotelreservations } = useParams();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,7 +25,6 @@ export const HotelBooking = () => {
   };
 
   const handlePassengerChange = (index, field, value) => {
-    // console.log("index,field,value",index,field,value);
     const updatedPassengerDetails = [...formData.passengerDetails];
 
     updatedPassengerDetails[index][field] = value;
@@ -56,16 +55,15 @@ export const HotelBooking = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setFormSubmitted(true); // Set formSubmitted to true when the form is submitted
-    console.log("formdata",formData);
+    e.preventDefault();
+    setFormSubmitted(true); 
       try {
         if (CookieUtils.getCookies("userId")) {
           navigate("/dashboard");
         } else {
           const cookieData = {
             formData: formData,
-            serviceType: hotelReservation,
+            serviceType: hotelreservations,
           };
           CookieUtils.setCookies("servicename", JSON.stringify(cookieData));
           navigate("/login");

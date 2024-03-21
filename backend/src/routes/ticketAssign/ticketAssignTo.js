@@ -22,7 +22,7 @@ router.post("/assignTo", async (req, res) => {
         return res.status(400).json({ errors: validationErrors });
       }
     const db = await mongoose.connection;
-    const serviceCollection = db.collection(`${ticketName}s`);
+    const serviceCollection = db.collection(`${ticketName}`);
     const serviceObjectId = new mongoose.Types.ObjectId(ticketId);
     const ticketExit = await serviceCollection.findOne({_id:serviceObjectId});
     if (!ticketExit) {
