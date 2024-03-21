@@ -8,7 +8,6 @@ export const Services = () => {
   const { serviceName } = useParams();
   const [formData, setFormData] = useState([]);
   const [assignedTicket, setAssignedTicket] = useState([]);
-  const [error, setError] = useState(null);
   const [loading,setLoading] = useState(false);
 
   const token = CookieUtils.getCookies("adminToken");
@@ -55,6 +54,7 @@ export const Services = () => {
   useEffect(() => {
     fetchUserData();
   }, [loading]);
+  
   const renderTicketComponent = ()=>{
     if(!formData){
       return <p>Loading ...</p>
@@ -65,6 +65,8 @@ export const Services = () => {
     switch(serviceName){
       case "dummyticket":
         return <TicketService serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
+        case "visastatuse":
+          return <VisaTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
       default:
         return <p>Unsupported service: {serviceName}</p>;
     }

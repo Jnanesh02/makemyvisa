@@ -9,11 +9,7 @@ const EmployeeDashboard = () => {
   const [serviceName, setServiceName] = useState([]);
   const token = CookieUtils.getCookies("adminToken");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
-  const Role = tokenData.role;
-  const department = tokenData.department;
-
-
-
+ 
   const [notifications, setNotifications] = useState([]);
 
   console.log(tokenData);

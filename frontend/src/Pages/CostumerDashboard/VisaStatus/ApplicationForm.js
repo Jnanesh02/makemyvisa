@@ -339,7 +339,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                               name="destination"
                               value={formData.destination}
                               onChange={handleInputChange}
-                              required
+                              // required
                             >
                               <option value="">Select Country</option>
                               {countriesData.map((country, index) => (
@@ -364,7 +364,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
                                 name="visaType"
                                 value={formData.visaType}
                                 onChange={handleInputChange}
-                                required
+                                // required
                               >
                                 <option>select</option>
                                 {countriesData

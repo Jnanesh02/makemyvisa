@@ -23,7 +23,8 @@ router.get("/getPresignalUrl", async (req, res) => {
 
 router.get("/getPresignalUrlDownload", async (req, res) => {
   try {
-    const { customerId } = req.query; // Request both numDocuments and customerId
+    const { customerId } = req.query; 
+    console.log(customerId);
     if (!customerId ) {
       return res
         .status(400)

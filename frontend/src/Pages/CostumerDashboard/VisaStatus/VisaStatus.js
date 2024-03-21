@@ -136,9 +136,11 @@ export default function CustomizedSteppers() {
     const fetchSelectedServiceTicket = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}s`,
+          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}`,
           { params: { customerID} }
         );
+        console.log("step clicked",response);
+
         setApplicationStatus(
           response.data.map((response) => response.data.formData.status)
         );
@@ -154,7 +156,19 @@ export default function CustomizedSteppers() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Adjust breakpoint as needed
   React.useEffect(() => {
     switch (applicationStatus[0]) {
-      case "completeion":
+      case "approved":
+        setActiveStep(6); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setCompleteStep(6);
+        break;
+        case "processing":
+        setActiveStep(5); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setCompleteStep(5);
+        break;
+        case "additional":
+        setActiveStep(4); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setCompleteStep(4);
+        break;
+      case "downloaded":
         setActiveStep(3); // Set activeStep to 2 when ApplicationStatus is "completed"
         setCompleteStep(3);
         break;
@@ -216,7 +230,7 @@ export default function CustomizedSteppers() {
             setLoading={setLoading}
           />
         )}
-        {activeStep === 2}
+        {activeStep === 2 ?`${applicationStatus[0]} all necessary documents have been uploaded by the client.`: ""}
         {activeStep === 4 && <AdditionalDocumentUpload />}
       </div>
     </Stack>

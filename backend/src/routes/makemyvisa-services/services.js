@@ -44,7 +44,7 @@ router.get("/getservice/:servicename",async(req,res)=>{
     const { customerID } = req.query;
     console.log(serviceName,customerID);
     const db = mongoose.connection;
-   const collection = db.collection(serviceName);
+   const collection = db.collection(`${serviceName}es`);
     const results = await collection.find({}).toArray();
     const filteredResult = results.filter(doc => doc.customerID.equals(customerID));
     return res.status(200).json(filteredResult);

@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 
+
 const TicketService = ({ serviceName, data,setLoading }) => {
   const [disablePriceInput, setDisablePriceInput] = useState(
     data.data?.price === ""
   );
+
   const [price,setPrice]= useState("");
   const priceUpdate = async()=>{
     try {
-      console.log("price",price);
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/employe/priceupdate`,{
         serviceName: `${serviceName}`,
         ticketId: data.data._id,
@@ -31,6 +32,7 @@ const TicketService = ({ serviceName, data,setLoading }) => {
       [event.target.name]:event.target.value
     }));
   }
+  
   return (
     <>
       <table className="employee-table">
