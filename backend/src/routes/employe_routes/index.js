@@ -9,6 +9,8 @@ const departmentOperation = require("../employe_routes/routers/department-operat
 const departmentDetails = require("../employe_routes/routers/department-details");
 const visaDocumentName = require("../employe_routes/routers/visa-document-name");
 const employeTicket = require("../employe_routes/routers/employe-ticket");
+const employePriceTicket = require("../employe_routes/routers/employee-ticketprice");
+
 module.exports={
     adminUpdateEmployeeRoles,
     employeeAuthentication,
@@ -20,5 +22,6 @@ module.exports={
     departmentDetails,
     employeeDetail,
     visaDocumentName,
-    employeTicket
+    employeTicket,
+    employePriceTicket
 }

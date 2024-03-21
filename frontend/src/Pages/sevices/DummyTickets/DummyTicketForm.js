@@ -54,6 +54,7 @@ function DummyTicketForm() {
   const handleSubmit = async () => {
     console.log("Formdata",formData);
     try {
+     
       if (CookieUtils.getCookies("userId")) {
         navigate("/dashboard");
       } else {
