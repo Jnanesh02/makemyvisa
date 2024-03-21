@@ -80,7 +80,7 @@ const Service = () => {
                 </p>
                    </div>     
                 <div className="myDIV active"> 
-                <Link to="/services/dummy/dummyticket">
+                <Link to="/services/dummy/dummytickets">
                 <img src={services3} alt=".."/>
 
                 </Link>
@@ -92,7 +92,7 @@ const Service = () => {
                 </p>
                 </div>   
                 <div className="myDIVfour"> 
-                <Link to="/services/hotel/hotelreservation">  <img src={services4} alt="..."/></Link>
+                <Link to="/services/hotel/hotelreservations">  <img src={services4} alt="..."/></Link>
                 </div>
                 <div className="hideefour"> 
                 <img src={services4} alt="..."/> 

@@ -132,7 +132,6 @@ export default function CustomizedSteppers() {
       setActiveStep(step);
     }
   };
-  console.log('visastatus',visastatuses);
   useEffect(() => {
     const fetchSelectedServiceTicket = async () => {
       try {
@@ -231,7 +230,7 @@ export default function CustomizedSteppers() {
             setLoading={setLoading}
           />
         )}
-        {activeStep === 2 ?`${applicationStatus[0]} all necessary documents have been uploaded by the client.`: ""}
+        {activeStep === 2 }
         {activeStep === 4 && <AdditionalDocumentUpload />}
       </div>
     </Stack>

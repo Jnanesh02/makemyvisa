@@ -20,7 +20,7 @@ const SuccessIcon = styled(CheckCircleIcon)(({ theme }) => ({
   color: "green",
 }));
 const ApplicationForm = ({ Data, setLoading }) => {
-  const { visastatus } = useParams();
+  const { visastatuses } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [paymentSubmitted, setPaymentSubmitted] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
@@ -45,7 +45,7 @@ const ApplicationForm = ({ Data, setLoading }) => {
     const objectID = JSON.parse(atob(customerId.split('.')[1]));
     const customerID = objectID.id;
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatus}`, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create/newserviceType/${visastatuses}`, {
         data:{
         formData,
         documentUpload:[

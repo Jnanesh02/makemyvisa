@@ -15,7 +15,7 @@ function DummyTicketForm() {
     to: "",
   });
 
-  const { dummyticket } = useParams({});
+  const { dummytickets } = useParams({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -61,7 +61,7 @@ function DummyTicketForm() {
       } else {
         const cookieData = {
           formData: formData,
-          serviceType: dummyticket,
+          serviceType: dummytickets,
         };
         CookieUtils.setCookies("servicename", JSON.stringify(cookieData));
         navigate("/login");

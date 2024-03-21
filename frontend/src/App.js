@@ -65,15 +65,15 @@ function App() {
               element={<TravelHealthInsurance />}
             />
             <Route
-              path="/services/hotel/:hotelreservation"
+              path="/services/hotel/:hotelreservations"
               element={<HotelBooking />}
             />
             <Route
-              path="/services/dummy/:dummyticket"
+              path="/services/dummy/:dummytickets"
               element={<DummyTicketForm />}
             />
             <Route
-              path="service/immigration/:immigrationAdvice"
+              path="service/immigration/:immigrationAdvices"
               element={<Immigration />}
             />
             <Route
