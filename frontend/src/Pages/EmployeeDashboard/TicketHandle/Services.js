@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CookieUtils from "../../../components/Cookie/Cookies";
 import TicketService from "./DummyTicket";
 import VisaTicket from "./VisaTicket";
+import HotelReservationTicket from "./HotelReservationTicket"
 export const Services = () => {
   const { serviceName } = useParams();
   const [formData, setFormData] = useState([]);
@@ -46,6 +47,8 @@ export const Services = () => {
           },
         }
       );
+      console.log("jjjj",fetchTicket)
+
       setAssignedTicket(fetchTicket);
     } catch (error) {
       console.error("Error fetching user data:", error.message);
@@ -65,7 +68,9 @@ export const Services = () => {
     switch(serviceName){
       case "dummyticket":
         return <TicketService serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
-        case "visastatuse":
+      case "hotelreservation":
+          return <HotelReservationTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
+      case "visastatuse":
           return <VisaTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
       default:
         return <p>Unsupported service: {serviceName}</p>;
