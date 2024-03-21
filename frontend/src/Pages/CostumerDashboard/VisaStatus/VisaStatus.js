@@ -122,7 +122,7 @@ export default function CustomizedSteppers() {
   const [visaApplicationId, setVisaApplicationId] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { visastatus } = useParams();
+  const { visastatuses } = useParams();
   const customerId = CookieUtils.getCookies('userId');
   const objectID = JSON.parse(atob(customerId.split('.')[1]));
   const customerID = objectID.id;
@@ -132,11 +132,12 @@ export default function CustomizedSteppers() {
       setActiveStep(step);
     }
   };
+  console.log('visastatus',visastatuses);
   useEffect(() => {
     const fetchSelectedServiceTicket = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatus}`,
+          `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatuses}`,
           { params: { customerID} }
         );
         console.log("step clicked",response);
@@ -151,7 +152,7 @@ export default function CustomizedSteppers() {
       }
     };
     fetchSelectedServiceTicket();
-  }, [visastatus, loading]);
+  }, [visastatuses, loading]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Adjust breakpoint as needed
   React.useEffect(() => {

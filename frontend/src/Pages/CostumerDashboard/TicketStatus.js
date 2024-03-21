@@ -39,7 +39,6 @@ const TicketStatus = () => {
   }, [dummytickets]);
 
 
-  console.log("ticketDetails",ticketDetails);
   return (
     <div>
       {isLoading ? (

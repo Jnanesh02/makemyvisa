@@ -42,9 +42,6 @@ import VisaAssistance from "./Pages/sevices/VisaAssistance/VisaAssistance";
 import CourierPickup from "./Pages/sevices/CourierPickup/CourierPickup";
 import TravelInsuranceService from "./Pages/AdminDashboard/master/TravelInsuranceService/TravelInsuranceService";
 import VisaApplicationDoc from "./Pages/AdminDashboard/master/VisaApplicationDoc/VisaApplicationDoc";
-
-
-import Dummy from './dummy.js'
 import { Services } from "./Pages/EmployeeDashboard/TicketHandle/Services.js";
 
 function App() {
@@ -63,7 +60,6 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-            <Route path="dummy" element={<Dummy />} />
             <Route
               path="/services/TravelHealthInsurance"
               element={<TravelHealthInsurance />}
@@ -112,7 +108,7 @@ function App() {
                 path="ticket/hotel/:hotelreservations"
                 element={<HotelReservationTicket />}
               />
-              <Route path=":visastatus" element={<VisaStatus />} />
+              <Route path="ticket/visa/:visastatuses" element={<VisaStatus />} />
             </Route>
           </Route>
 

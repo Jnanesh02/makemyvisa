@@ -130,7 +130,7 @@ function Dashboard() {
             <div className="accordion" id="accordionExample2">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne2">
-                  <NavLink className="accordion-button custom-button" to="visastatus">
+                  <NavLink className="accordion-button custom-button" to="ticket/visa/visastatuses">
                   Visa Status
                   </NavLink>
                 </h2>
