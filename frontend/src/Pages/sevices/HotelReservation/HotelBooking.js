@@ -12,7 +12,7 @@ export const HotelBooking = () => {
     phonenumber: "",
     numberOfPassengers: 1,
     passengerDetails: [
-      { name: "", age: "", phonenumber: "", passportNumber: "" },
+      { givenName: "",surname:"", age: "", phonenumber: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" },
     ],
   });
   const [formSubmitted, setFormSubmitted] = useState(false); // Track if form has been submitted
@@ -25,6 +25,7 @@ export const HotelBooking = () => {
   };
 
   const handlePassengerChange = (index, field, value) => {
+    // console.log("index,field,value",index,field,value);
     const updatedPassengerDetails = [...formData.passengerDetails];
 
     updatedPassengerDetails[index][field] = value;
@@ -38,7 +39,7 @@ export const HotelBooking = () => {
       numberOfPassengers: formData.numberOfPassengers + 1,
       passengerDetails: [
         ...formData.passengerDetails,
-        { name: "", age: "", phonenumber: "", passportNumber: "" },
+        { givenName: "",surname:"", age: "", phonenumber: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" },
       ],
     });
   };
@@ -57,7 +58,7 @@ export const HotelBooking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     setFormSubmitted(true); // Set formSubmitted to true when the form is submitted
-    if (validateForm()) {
+    console.log("formdata",formData);
       try {
         if (CookieUtils.getCookies("userId")) {
           navigate("/dashboard");
@@ -72,33 +73,10 @@ export const HotelBooking = () => {
       } catch (error) {
         console.error("Error:", error);
       }
-    }
+    
   };
 
-  const validateForm = () => {
-    // Basic validation checks
-    if (
-      formData.arrivalCountry === "" ||
-      formData.checkIn === "" ||
-      formData.checkOut === ""
-    ) {
-      return false;
-    }
-
-    // Additional validation checks for passenger details
-    for (let passenger of formData.passengerDetails) {
-      if (
-        passenger.name === "" ||
-        passenger.age === "" ||
-        passenger.phonenumber.length > 15 ||
-        passenger.passportNumber === ""
-      ) {
-        return false;
-      }
-    }
-
-    return true;
-  };
+  
 
   return (
     <div className="dummy-ticket-form-container">
@@ -119,71 +97,50 @@ export const HotelBooking = () => {
             <div className="form-group w-100">
               <div className="from-to-group">
                 <div className="fromto" style={{ width: "90%" }}>
-                  <h4>Arrival City:</h4>
+                  <h4>Arrival City*</h4>
                   <input
                     type="text"
-                    className={`dummy-form-control form-control ${
-                      formSubmitted && formData.arrivalCountry === ""
-                        ? "is-invalid"
-                        : ""
-                    }`}
+                    className={`dummy-form-control form-control`}
                     name="arrivalCountry"
                     placeholder="Country Name"
                     value={formData.arrivalCountry}
                     onChange={handleChange}
+                    required
                   />
-                  {formSubmitted && formData.arrivalCountry === "" && (
-                    <div className="invalid-feedback">
-                      Please provide a valid arrival city.
-                    </div>
-                  )}
+                 
                 </div>
               </div>
             </div>
             <div className="form-group w-100 me-2">
               <div className="date-group">
                 <div className="Departure_date">
-                  <h4 className="label_Departure">Check In:</h4>
+                  <h4 className="label_Departure">Check In*</h4>
                   <input
                     type="date"
-                    className={`dummy-form-control form-control ${
-                      formSubmitted && formData.checkIn === ""
-                        ? "is-invalid"
-                        : ""
-                    }`}
+                    className={`dummy-form-control form-control `}
                     value={formData.checkIn}
                     name="checkIn"
                     onChange={handleChange}
                     min={new Date().toISOString().split("T")[0]}
+                    required
                   />
-                  {formSubmitted && formData.checkIn === "" && (
-                    <div className="invalid-feedback">
-                      Please provide a valid check-in date.
-                    </div>
-                  )}
+                  
                 </div>
               </div>
             </div>
             <div className="form-group w-100">
               <div className="date-group">
                 <div className="Departure_date">
-                  <h4 className="label_Departure">Check out:</h4>
+                  <h4 className="label_Departure">Check out*</h4>
                   <input
                     type="date"
-                    className={`dummy-form-control form-control ${
-                      formSubmitted && formData.checkOut === ""
-                        ? "is-invalid"
-                        : ""
-                    }`}
+                    className={`dummy-form-control form-control`}
                     value={formData.checkOut}
                     name="checkOut"
                     onChange={handleChange}
+                    required
                   />
-                  {formSubmitted && formData.checkOut === "" && (
-                    <div className="invalid-feedback">
-                      Please provide a valid check-out date.
-                    </div>
-                  )}
+                  
                 </div>
               </div>
             </div>
@@ -199,13 +156,16 @@ export const HotelBooking = () => {
                 <i className="fas fa-plus"></i> Add Passenger
               </button>
             </div>
-            <table className="table table-dummyticket">
+            <table className="table table-bordered  table-dummyticket">
               <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Phone Number</th>
+                <tr className="fw-bold align-middle text-center">
+                  <th scope="col">Given Name*</th>
+                  <th scope="col">Surname*</th>
+                  <th scope="col">Age*</th>
+                  <th scope="col">Phone Number*</th>
                   <th scope="col">Passport Number</th>
+                  <th scope="col">Date of Issue</th>
+                  <th scope="col">Date of Expiry</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -215,41 +175,40 @@ export const HotelBooking = () => {
                     <td>
                       <input
                         type="text"
-                        className={`dummy-form-control form-control ${
-                          formSubmitted && passenger.name === ""
-                            ? "is-invalid"
-                            : ""
-                        }`}
-                        value={passenger.name}
+                        className={`dummy-form-control form-control`}
+                        value={passenger.giveName}
                         onChange={(e) =>
-                          handlePassengerChange(index, "name", e.target.value)
+                          handlePassengerChange(index, "givenName", e.target.value)
                         }
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="Number"
-                        className={`dummy-form-control form-control ${
-                          formSubmitted && passenger.age === ""
-                            ? "is-invalid"
-                            : ""
-                        }`}
-                        value={passenger.age}
-                        onChange={(e) =>
-                          handlePassengerChange(index, "age", e.target.value)
-                        }
+                        required
                       />
                     </td>
                     <td>
                       <input
                         type="text"
-                        className={`dummy-form-control form-control ${
-                          formSubmitted &&
-                          (passenger.phonenumber === "" ||
-                            passenger.phonenumber.length > 15)
-                            ? "is-invalid"
-                            : ""
-                        }`}
+                        className={`dummy-form-control form-control`}
+                        value={passenger.surname}
+                        onChange={(e) =>
+                          handlePassengerChange(index, "surname", e.target.value)
+                        }
+                        required
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="Number"
+                        className={`dummy-form-control form-control`}
+                        value={passenger.age}
+                        onChange={(e) =>
+                          handlePassengerChange(index, "age", e.target.value)
+                        }
+                        required
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="Number"
+                        className={`dummy-form-control form-control`}
                         value={passenger.phonenumber}
                         onChange={(e) =>
                           handlePassengerChange(
@@ -258,16 +217,13 @@ export const HotelBooking = () => {
                             e.target.value
                           )
                         }
+                        required
                       />
                     </td>
                     <td>
                       <input
                         type="text"
-                        className={`dummy-form-control form-control ${
-                          formSubmitted && passenger.passportNumber === ""
-                            ? "is-invalid"
-                            : ""
-                        }`}
+                        className={`dummy-form-control form-control`}
                         value={passenger.passportNumber}
                         onChange={(e) =>
                           handlePassengerChange(
@@ -277,14 +233,41 @@ export const HotelBooking = () => {
                           )
                         }
                         pattern="[A-Za-z0-9]{6,20}"
-                        title="Please provide a valid passport number (6-20 alphanumeric characters)."
+                        
                       />
-                      {formSubmitted && passenger.passportNumber === "" && (
-                        <div className="invalid-feedback">
-                          Please provide a valid passport number (6-20
-                          alphanumeric characters).
-                        </div>
-                      )}
+                      
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        className={`dummy-form-control form-control`}
+                        value={passenger.dateOfIssue}
+                        onChange={(e) =>
+                          handlePassengerChange(
+                            index,
+                            "dateOfIssue",
+                            e.target.value
+                          )
+                        }
+                       
+                      />
+                      
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        className={`dummy-form-control form-control`}
+                        value={passenger.dateOfExpiry}
+                        onChange={(e) =>
+                          handlePassengerChange(
+                            index,
+                            "dateOfExpiry",
+                            e.target.value
+                          )
+                        }
+                       
+                      />
+                      
                     </td>
                     <td>
                       <button
