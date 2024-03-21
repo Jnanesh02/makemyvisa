@@ -1,0 +1,41 @@
+.confirmation-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 999; /* Set a high z-index value */
+  }
+  
+  .confirmation-modal p {
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-modal button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .confirmation-modal button.cancel {
+    background-color: #e42716;
+  }
+  
+  .confirmation-modal button:hover {
+    background-color: #45a049;
+  }
+  
+  .confirmation-modal button.cancel:hover {
+    background-color: #cc1f0a;
+  }
+  
