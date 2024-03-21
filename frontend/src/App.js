@@ -65,7 +65,7 @@ function App() {
               element={<TravelHealthInsurance />}
             />
             <Route
-              path="/services/hotel/:hotelReservation"
+              path="/services/hotel/:hotelreservation"
               element={<HotelBooking />}
             />
             <Route
