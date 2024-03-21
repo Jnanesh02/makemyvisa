@@ -63,7 +63,6 @@ function DummyTicketForm() {
           formData: formData,
           serviceType: dummyticket,
         };
-        console.log(cookieData);
         CookieUtils.setCookies("servicename", JSON.stringify(cookieData));
         navigate("/login");
       }

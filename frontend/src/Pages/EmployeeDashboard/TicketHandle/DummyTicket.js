@@ -7,7 +7,6 @@ const TicketService = ({ serviceName, data, setLoading }) => {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [price, setPrice] = useState({});
-    console.log("price",price);
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -23,7 +22,6 @@ const TicketService = ({ serviceName, data, setLoading }) => {
 
   const priceUpdate = async () => {
     try {
-      console.log("price", price);
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/employe/priceupdate`,
         {
@@ -44,7 +42,6 @@ const TicketService = ({ serviceName, data, setLoading }) => {
   };
   const onChangeInput = (event) => {
     event.preventDefault();
-    console.log("event",event.target);
     setPrice((prevData) => ({
       ...prevData,
       [event.target.name]: event.target.value,
