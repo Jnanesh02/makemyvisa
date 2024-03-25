@@ -13,29 +13,33 @@ export const Services = () => {
 
   const token = CookieUtils.getCookies("adminToken");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/employeeticket`,
-        {
-          params: {
-            employe_id: tokenData.id,
-            departmentName: `${tokenData.department}s`,
-          },
+ 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/employeeticket`,
+          {
+            params: {
+              employe_id: tokenData.id,
+              departmentName: `${tokenData.department}s`,
+            },
+          }
+        );
+        if (response.status === 200 ) {
+          setFormData(response.data);
+          if(response.data.status === "occupied"){
+          fetchEmployeTickets(response.data.assignto);
+          }
+        } else {
+          setFormData(response.data);
         }
-      );
-      if (response.status === 200 ) {
-        setFormData(response.data);
-        if(response.data.status === "occupied"){
-        fetchEmployeTickets(response.data.assignto);
-        }
-      } else {
-        setFormData(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
       }
-    } catch (error) {
-      console.error("Error fetching user data:", error.message);
-    }
-  };
+    };
+    fetchUserData();
+  }, [loading]);
   const fetchEmployeTickets = async (data) => {
     try {
       const fetchTicket = await axios.get(
@@ -52,9 +56,6 @@ export const Services = () => {
       console.error("Error fetching user data:", error.message);
     }
   };
-  useEffect(() => {
-    fetchUserData();
-  }, [loading]);
   
   const renderTicketComponent = ()=>{
     if(!formData){

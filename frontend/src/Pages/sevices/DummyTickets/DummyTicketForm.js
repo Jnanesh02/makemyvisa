@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./DummyTicketForm.css";
 import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
-import Airport from "../../../mock-airport/airport.json";
+// import Airport from "../../../mock-airport/airport.json";
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
     tripType: "oneWay",
