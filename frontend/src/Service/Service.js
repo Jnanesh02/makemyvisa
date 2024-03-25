@@ -15,9 +15,6 @@ import services14 from "../assets/images/servicesImages/14.png";
 const Service = () => {
   return (
     <>
-
-
-
       <button
         type="button"
         className="btn btn-primary btn-sidenavbar-b"

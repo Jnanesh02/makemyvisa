@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../DummyTickets/DummyTicketForm.css";
 import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
+import Select from "react-select";
+import Airport from "../../../mock-airport/airport.json";
 
 export const HotelBooking = () => {
   const [formData, setFormData] = useState({
@@ -12,17 +14,46 @@ export const HotelBooking = () => {
     phonenumber: "",
     numberOfPassengers: 1,
     passengerDetails: [
-      { givenName: "",surname:"", age: "", phonenumber: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" },
+      {
+        givenName: "",
+        surname: "",
+        age: "",
+        phonenumber: "",
+        passportNumber: "",
+        dateOfIssue: "",
+        dateOfExpiry: "",
+      },
     ],
   });
+  const countrySet = new Set();
+
+  const options = Airport.reduce((acc, airport) => {
+    if (!countrySet.has(airport.county)) {
+      countrySet.add(airport.county);
+      acc.push({
+        value: airport.county,
+        label: airport.county,
+      });
+    }
+    return acc;
+  }, []);
+
+
+
   const [formSubmitted, setFormSubmitted] = useState(false); // Track if form has been submitted
   const { hotelreservations } = useParams();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleCountryChange=(field,selectedOption)=>{
+   console.log("Field",field);
+    setFormData({...formData,[field]:selectedOption.value});
+  }
 
   const handlePassengerChange = (index, field, value) => {
     const updatedPassengerDetails = [...formData.passengerDetails];
@@ -38,7 +69,15 @@ export const HotelBooking = () => {
       numberOfPassengers: formData.numberOfPassengers + 1,
       passengerDetails: [
         ...formData.passengerDetails,
-        { givenName: "",surname:"", age: "", phonenumber: "", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" },
+        {
+          givenName: "",
+          surname: "",
+          age: "",
+          phonenumber: "",
+          passportNumber: "",
+          dateOfIssue: "",
+          dateOfExpiry: "",
+        },
       ],
     });
   };
@@ -54,27 +93,28 @@ export const HotelBooking = () => {
     });
   };
 
+  
+  console.log("FormData",formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true); 
-      try {
-        if (CookieUtils.getCookies("userId")) {
-          navigate("/dashboard");
-        } else {
-          const cookieData = {
-            formData: formData,
-            serviceType: hotelreservations,
-          };
-          CookieUtils.setCookies("servicename", JSON.stringify(cookieData));
-          navigate("/login");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    
-  };
+    setFormSubmitted(true);
+    try {
 
-  
+      if (CookieUtils.getCookies("userId")) {
+        navigate("/dashboard");
+      } else {
+        const cookieData = {
+          formData: formData,
+          serviceType: hotelreservations,
+        };
+        CookieUtils.setCookies("servicename", JSON.stringify(cookieData));
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div className="dummy-ticket-form-container">
@@ -96,7 +136,7 @@ export const HotelBooking = () => {
               <div className="from-to-group">
                 <div className="fromto" style={{ width: "90%" }}>
                   <h4>Arrival City*</h4>
-                  <input
+                  {/* <input
                     type="text"
                     className={`dummy-form-control form-control`}
                     name="arrivalCountry"
@@ -104,8 +144,21 @@ export const HotelBooking = () => {
                     value={formData.arrivalCountry}
                     onChange={handleChange}
                     required
+                  /> */}
+
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                   
+                    isSearchable={true}
+                    name="arrivalCountry"
+                    options={options}
+                    
+                    onChange={(selectedOption)=>{
+                      handleCountryChange("arrivalCountry",selectedOption)
+                    }}
+                    required
                   />
-                 
                 </div>
               </div>
             </div>
@@ -122,7 +175,6 @@ export const HotelBooking = () => {
                     min={new Date().toISOString().split("T")[0]}
                     required
                   />
-                  
                 </div>
               </div>
             </div>
@@ -138,7 +190,6 @@ export const HotelBooking = () => {
                     onChange={handleChange}
                     required
                   />
-                  
                 </div>
               </div>
             </div>
@@ -176,7 +227,11 @@ export const HotelBooking = () => {
                         className={`dummy-form-control form-control`}
                         value={passenger.giveName}
                         onChange={(e) =>
-                          handlePassengerChange(index, "givenName", e.target.value)
+                          handlePassengerChange(
+                            index,
+                            "givenName",
+                            e.target.value
+                          )
                         }
                         required
                       />
@@ -187,7 +242,11 @@ export const HotelBooking = () => {
                         className={`dummy-form-control form-control`}
                         value={passenger.surname}
                         onChange={(e) =>
-                          handlePassengerChange(index, "surname", e.target.value)
+                          handlePassengerChange(
+                            index,
+                            "surname",
+                            e.target.value
+                          )
                         }
                         required
                       />
@@ -231,9 +290,7 @@ export const HotelBooking = () => {
                           )
                         }
                         pattern="[A-Za-z0-9]{6,20}"
-                        
                       />
-                      
                     </td>
                     <td>
                       <input
@@ -247,9 +304,7 @@ export const HotelBooking = () => {
                             e.target.value
                           )
                         }
-                       
                       />
-                      
                     </td>
                     <td>
                       <input
@@ -263,9 +318,7 @@ export const HotelBooking = () => {
                             e.target.value
                           )
                         }
-                       
                       />
-                      
                     </td>
                     <td>
                       <button
