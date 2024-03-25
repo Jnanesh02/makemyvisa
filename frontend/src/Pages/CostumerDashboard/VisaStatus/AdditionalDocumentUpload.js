@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export const AdditionalDocumentUpload = ({ Data, visaId, setLoading }) => {
-  console.log("Datayyy",Data);
   const [formData, setFormData] = useState([]);
   const [documentNames, setDocumentNames] = useState([]);
 
@@ -89,9 +88,9 @@ export const AdditionalDocumentUpload = ({ Data, visaId, setLoading }) => {
   }, []);
   return (
     <>
-      {/* {Data.map((data) => (
+      {Data.map((data) => (
         <div key={data._id}>
-          {data.data.formData.status === "submit" ? (
+          {data.data.formData.status === "additional" ? (
             <div>
               <div
                 className="mx-auto mb-3 shadow px-5 py-3 rounded"
@@ -99,7 +98,7 @@ export const AdditionalDocumentUpload = ({ Data, visaId, setLoading }) => {
               >
                 <div className="visaApplication-form-group-doc">
                   <div className="document-add-btns">
-                    <h5 className="visaApplication-label">Documents Upload</h5>
+                    <h5 className="visaApplication-label">Additional Documents Upload</h5>
                   </div>
                   <div className="table-responsive">
                     <table className="table my-2 table-bordered border-Dark text-center">
@@ -150,7 +149,7 @@ export const AdditionalDocumentUpload = ({ Data, visaId, setLoading }) => {
                 className="visaApplication-container mx-auto mb-3 shadow px-5 py-3 rounded"
                 style={{ width: "1000px" }}
               >
-                <h2 className="visaApplication-title">Document Update</h2>
+                <h2 className="visaApplication-title">Additional Documents Upload</h2>
                 {Array.isArray(Data) ? (
                   <>
                     {Data.map((res) => (
@@ -166,7 +165,7 @@ export const AdditionalDocumentUpload = ({ Data, visaId, setLoading }) => {
             </div>
           )}
         </div>
-      ))} */}
+      ))}
     </>
   );
 }

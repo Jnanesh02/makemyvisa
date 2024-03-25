@@ -18,11 +18,10 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
      const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/update/visastatus`,
         {
-          objectId: "65fc14e076b0fb054b379635",
+          objectId:data.data._id,
           status: status,
         }
       );
-      console.log(response.status === 200);
       if(response.status === 200) {
         setLoading(true);
       }
@@ -38,7 +37,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
         `${process.env.REACT_APP_BACKEND_URL}/getPresignalUrlDownload`,
         {
           params: {
-            customerId: "65ddc4c6b2b7c3bf692258a5",
+            customerId:data.data.customerID,
           },
         }
       );
@@ -49,7 +48,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
         const urls = fetchDocuments.data.message;
 
         const downloadPromises = urls.map((url, index) => {
-          return new Promise((resolve,reject) => {
+          return new Promise((resolve) => {
             setTimeout(() => {
               const link = document.createElement("a");
               link.href = url;
@@ -69,7 +68,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
 
   const handleConfirm = async () => {
     try {
-      console.log(selectStatus.status);
+      console.log("12edc vbfd",selectStatus.status);
       await updatestatus(selectStatus.status);
     } catch (error) {
       console.error("Error:", error.message);
@@ -112,7 +111,7 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
               <td>{data.data.data.formData.visaType}</td>
 
               <td>
-                {data.data.data.formData.status !== "approved" ? (
+                {data.data.data.formData.status !== "payment" ? (
                   <select
                     name="status"
                     value={selectStatus.status}
@@ -120,11 +119,11 @@ const VisaTicket = ({ serviceName, data,setLoading }) => {
                   >
                     <option value="">Select Status</option>
                     <option value="additional">Additional Document</option>
-                    <option value="approved">Approved</option>
+                    <option value="payment">Approved</option>
                   </select>
                 ) : (
                   <>
-                    <p>{data.data.data.formData.status}</p>
+                    <p>{"Approved"}</p>
                   </>
                 )}
               </td>

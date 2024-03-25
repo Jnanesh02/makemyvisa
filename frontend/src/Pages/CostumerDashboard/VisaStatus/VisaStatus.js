@@ -1,22 +1,26 @@
-import React,{useState,useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Check from '@mui/icons-material/Check';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import ApplicationForm from './ApplicationForm';
-import {DocumentUpload} from './DocumentUpload'
-import {AdditionalDocumentUpload} from './AdditionalDocumentUpload'
-import CookieUtils from "../../../components/Cookie/Cookies"
-import { DocumentDownloading } from './DocumentDownloading';
-import { DocumentVerification } from './DocumentVerification';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { styled } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Check from "@mui/icons-material/Check";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import StepConnector, {
+  stepConnectorClasses,
+} from "@mui/material/StepConnector";
+import ApplicationForm from "./ApplicationForm";
+import { DocumentUpload } from "./DocumentUpload";
+import { AdditionalDocumentUpload } from "./AdditionalDocumentUpload";
+import CookieUtils from "../../../components/Cookie/Cookies";
+import { DocumentDownloading } from "./DocumentDownloading";
+import { DocumentVerification } from "./DocumentVerification";
+import { DocumentUnderProcessing } from "./DocumentUnderProcessing";
+import { DocumentApproved } from "./DocumentApproved";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -125,12 +129,11 @@ export default function CustomizedSteppers() {
   const [loading, setLoading] = useState(false);
 
   const { visastatuses } = useParams();
-  const customerId = CookieUtils.getCookies('userId');
-  const objectID = JSON.parse(atob(customerId.split('.')[1]));
+  const customerId = CookieUtils.getCookies("userId");
+  const objectID = JSON.parse(atob(customerId.split(".")[1]));
   const customerID = objectID.id;
   const handleStepClick = (step) => {
     if (step <= completeStep) {
-      // Check if the clicked step is before the current active step
       setActiveStep(step);
     }
   };
@@ -139,7 +142,7 @@ export default function CustomizedSteppers() {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/getservice/${visastatuses}`,
-          { params: { customerID} }
+          { params: { customerID } }
         );
         setApplicationStatus(
           response.data.map((response) => response.data.formData.status)
@@ -151,29 +154,33 @@ export default function CustomizedSteppers() {
       }
     };
     fetchSelectedServiceTicket();
-  }, [visastatuses, loading]);
+  }, [customerID, visastatuses, loading]);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Adjust breakpoint as needed
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
   React.useEffect(() => {
     switch (applicationStatus[0]) {
+      case "payment":
+        setActiveStep(7);
+        setCompleteStep(7);
+        break;
       case "approved":
-        setActiveStep(6); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setActiveStep(6);
         setCompleteStep(6);
         break;
-        case "processing":
-        setActiveStep(5); // Set activeStep to 2 when ApplicationStatus is "completed"
+      case "underprocess":
+        setActiveStep(5);
         setCompleteStep(5);
         break;
-        case "additional":
-        setActiveStep(4); // Set activeStep to 2 when ApplicationStatus is "completed"
+      case "additional":
+        setActiveStep(4);
         setCompleteStep(4);
         break;
       case "downloaded":
-        setActiveStep(3); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setActiveStep(3);
         setCompleteStep(3);
         break;
       case "verification":
-        setActiveStep(2); // Set activeStep to 2 when ApplicationStatus is "completed"
+        setActiveStep(2);
         setCompleteStep(2);
         break;
       case "submit":
@@ -188,6 +195,7 @@ export default function CustomizedSteppers() {
         break;
     }
   }, [applicationStatus]);
+  console.log("appicationData",appicationData);
   return (
     <Stack
       sx={{
@@ -223,23 +231,25 @@ export default function CustomizedSteppers() {
         {activeStep === 0 && (
           <ApplicationForm Data={appicationData} setLoading={setLoading} />
         )}
-        {activeStep === 1 && (
+        {activeStep === 1 && appicationData.length > 0 && (
           <DocumentUpload
             Data={appicationData}
             visaId={visaApplicationId[0]}
             setLoading={setLoading}
           />
         )}
-        {activeStep === 2 && <DocumentDownloading Data={appicationData}/>}
-        {activeStep === 3 && <DocumentVerification Data={appicationData}/>}
-        {activeStep === 4 && (
+        {activeStep === 2 && <DocumentDownloading Data={appicationData} />}
+        {activeStep === 3 && <DocumentVerification Data={appicationData} />}
+        {activeStep === 4 && appicationData.length > 0 && (
           <AdditionalDocumentUpload
             Data={appicationData}
             visaId={visaApplicationId[0]}
             setLoading={setLoading}
           />
         )}
-        {activeStep === 4 && <AdditionalDocumentUpload />}
+        {activeStep === 5 && <DocumentApproved Data={appicationData} />}
+        {activeStep === 6 && <DocumentUnderProcessing Data={appicationData} />}
+
       </div>
     </Stack>
   );
