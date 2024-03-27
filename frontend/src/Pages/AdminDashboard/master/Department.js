@@ -42,8 +42,8 @@ const Department = () => {
         `${process.env.REACT_APP_BACKEND_URL}/employee/create/department`,
         postData,
       );
-      fetchDetails(); // Fetch updated data
-      setShowModal(false); // Close the modal
+      fetchDetails(); 
+      setShowModal(false);
     } catch (error) {
       alert(error.message);
     }

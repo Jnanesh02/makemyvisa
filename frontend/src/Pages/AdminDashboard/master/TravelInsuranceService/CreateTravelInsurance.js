@@ -25,12 +25,9 @@ export const CreateTravelInsurance = ({
  
 
   useEffect(() => {
-    // Fetch country data from API
     setIsLoading(true);
     axios.get( `${process.env.REACT_APP_BACKEND_URL}/getcountries`)
       .then(response => {
-        // Transform the response data into the format required by react-select
-        
         const transformedOptions = response.data.message.map(country => ({
           value: country.countryName,
           label: country.countryName
@@ -43,7 +40,7 @@ export const CreateTravelInsurance = ({
       .finally(()=>{
         setIsLoading(false);
       });
-  }, []); // Empty dependency array to ensure it only runs once when the component mounts
+  }, []); 
 
   const handleInputChanges = (name, value) => {
     setTravelInsuranceFormData((previous) => ({
