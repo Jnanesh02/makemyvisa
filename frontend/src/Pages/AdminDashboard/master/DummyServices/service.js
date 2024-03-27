@@ -151,8 +151,7 @@ const Service = () => {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/assignTo`,assignTo);
        if(response.status === 200){   
         const AdminID = JSON.parse(atob(CookieUtils.getCookies('adminToken').split(".")[1]));
-        const response = await axios.post(
-          
+       await axios.post(  
           `${process.env.REACT_APP_BACKEND_URL}/AdminToEmployeeAndCustomerNotifications/`,
           {assignTo: assignTo,sender:AdminID.id,EmployeeMessage:"Task Assigned",CustomerMessage:"Ticket Assigned"}
         );

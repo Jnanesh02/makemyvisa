@@ -28,14 +28,12 @@ const [visaDocName, setVisaDocName] = useState([]);
 
   const handleCreateDepartment = async () => {
     try {
-      
-      console.log("formdata",formData);
-      await axios.post(
+            await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/employee/create/visaDocumentName`,
         formData,
       );
-      fetchDetails(); // Fetch updated data
-      setShowModal(false); // Close the modal
+      fetchDetails(); 
+      setShowModal(false); 
     } catch (error) {
       alert(error.message);
     }

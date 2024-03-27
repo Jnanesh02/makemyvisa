@@ -1,27 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DummyTicketForm.css";
 import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
-// import Airport from "../../../mock-airport/airport.json";
+import Select from "react-select";
+import axios from "axios";
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    borderBottom: "1px dotted gray",
+    color: state.isSelected ? "white" : "black",
+    backgroundColor: state.isSelected ? "#dd2817" : "white",
+    padding: 10,
+    fontSize: 14,
+    fontWeight: state.data.isCountry ? "bold" : "normal",
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    fontWeight: state.data.isCountry ? "bold" : "normal",
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: "#dd2817",
+  }),
+};
+
+const formatOptionLabel = ({ label, iata, city }) => (
+  <div style={{ display: "flex", alignItems: "center" }}>
+    <i
+      className="fas fa-plane"
+      style={{ fontSize: "16px", marginRight: "5px", color: "#dd2817" }}
+    ></i>
+    <div>
+      <p style={{ margin: 0, fontWeight: "bold" }}>{city}</p>
+      <p style={{ margin: 0, fontSize: "14px", color: "#333" }}>{label}</p>
+      <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>{iata}</p>
+    </div>
+  </div>
+);
 function DummyTicketForm() {
   const [formData, setFormData] = useState({
     tripType: "oneWay",
     returnDate: "",
     departureDate: "",
     numberOfPassengers: 1,
-    passengerDetails: [{ givenName: "",surname:"", age: "",dateOfBirth:"", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" }],
+    passengerDetails: [
+      {
+        givenName: "",
+        surname: "",
+        age: "",
+        dateOfBirth: "",
+        passportNumber: "",
+        dateOfIssue: "",
+        dateOfExpiry: "",
+      },
+    ],
     from: "",
     to: "",
   });
-
+  const [airport, setAirport] = useState([]);
+  useEffect(() => {
+    const fetchAirports = async () => {
+      try {
+        const fecthAirport = await axios.get(
+          "https://freetestapi.com/api/v1/airports"
+        );
+        setAirport(fecthAirport.data);
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    fetchAirports();
+  }, []);
+  const handleAirportChange = (inputValue,value) => {
+    console.log("handle",value,inputValue);
+    airport.filter((port) => port.city.toLowerCase().includes(inputValue));
+    setFormData((prev) => ({
+      ...prev,
+      [value]: `${inputValue.city}-${inputValue.label}-${inputValue.iata}`,
+    }));
+  };
   const { dummytickets } = useParams({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
   };
 
   const handlePassengerChange = (index, field, value) => {
@@ -36,7 +100,15 @@ function DummyTicketForm() {
       numberOfPassengers: formData.numberOfPassengers + 1,
       passengerDetails: [
         ...formData.passengerDetails,
-        { givenName: "",surname:"", age: "",dateOfBirth:"", passportNumber: "",dateOfIssue:"",dateOfExpiry:"" },
+        {
+          givenName: "",
+          surname: "",
+          age: "",
+          dateOfBirth: "",
+          passportNumber: "",
+          dateOfIssue: "",
+          dateOfExpiry: "",
+        },
       ],
     });
   };
@@ -53,9 +125,8 @@ function DummyTicketForm() {
   };
 
   const handleSubmit = async () => {
-    console.log("Formdata",formData);
+    console.log("Formdata", formData);
     try {
-     
       if (CookieUtils.getCookies("userId")) {
         navigate("/dashboard");
       } else {
@@ -121,28 +192,40 @@ function DummyTicketForm() {
             {/* Arrival City */}
             <div className="fromto">
               <h4 className="form-label">Arrival City*</h4>
-              <input
-                type="text"
+              <Select
                 className={`dummy-form-control form-control`}
-                name="to"
                 placeholder="Country Name"
-                value={formData.to}
-                onChange={handleChange}
+                styles={customStyles}
+                formatOptionLabel={formatOptionLabel}
+                options={airport?.map((airport) => ({
+                  value: airport.city,
+                  label: airport.name,
+                  city: airport.city,
+                  iata: airport.code,
+                }))}
                 required
+                onChange={(e)=>handleAirportChange(e,"to")}
               />
+              
             </div>
 
             {/* Departure City */}
             <div className="fromto">
               <h4 className="form-label w-40">Departure City*</h4>
-              <input
-                type="text"
+
+              <Select
                 className={`dummy-form-control form-control`}
-                name="from"
                 placeholder="Country Name"
-                value={formData.from}
-                onChange={handleChange}
+                styles={customStyles}
+                formatOptionLabel={formatOptionLabel}
+                options={airport?.map((airport) => ({
+                  value: airport.city,
+                  label: airport.name,
+                  city: airport.city,
+                  iata: airport.code,
+                }))}
                 required
+                onChange={(e)=>handleAirportChange(e,"from")}
               />
             </div>
           </div>
@@ -150,34 +233,32 @@ function DummyTicketForm() {
           <div className="form-group d-flex gap-3 mb-3">
             {/* Departure Date */}
             <div className="w-50">
-            <h4 className="label_Departure form-label">
-              Departure Date*
-            </h4>
-            <input
-              type="date"
-              className={`dummy-form-control form-control`}
-              value={formData.departureDate}
-              name="departureDate"
-              onChange={handleChange}
-              required
-            />
+              <h4 className="label_Departure form-label">Departure Date*</h4>
+              <input
+                type="date"
+                className={`dummy-form-control form-control`}
+                value={formData.departureDate}
+                name="departureDate"
+                onChange={handleChange}
+                required
+              />
             </div>
 
             {/* Return Date (only for Round Trip) */}
             <div className="w-50">
-            {formData.tripType === "roundTrip" && (
-              <>
-                <h4 className="label_return form-label">Return Date*</h4>
-                <input
-                  type="date"
-                  className={`dummy-form-control form-control`}
-                  value={formData.returnDate}
-                  name="returnDate"
-                  onChange={handleChange}
-                  required
-                />
-              </>
-            )}
+              {formData.tripType === "roundTrip" && (
+                <>
+                  <h4 className="label_return form-label">Return Date*</h4>
+                  <input
+                    type="date"
+                    className={`dummy-form-control form-control`}
+                    value={formData.returnDate}
+                    name="returnDate"
+                    onChange={handleChange}
+                    required
+                  />
+                </>
+              )}
             </div>
           </div>
 
@@ -214,7 +295,11 @@ function DummyTicketForm() {
                         className={`dummy-form-control form-control`}
                         value={passenger.givenName}
                         onChange={(e) =>
-                          handlePassengerChange(index, "givenName", e.target.value)
+                          handlePassengerChange(
+                            index,
+                            "givenName",
+                            e.target.value
+                          )
                         }
                         required
                       />
@@ -225,7 +310,11 @@ function DummyTicketForm() {
                         className={`dummy-form-control form-control`}
                         value={passenger.surname}
                         onChange={(e) =>
-                          handlePassengerChange(index, "surname", e.target.value)
+                          handlePassengerChange(
+                            index,
+                            "surname",
+                            e.target.value
+                          )
                         }
                         required
                       />
@@ -247,9 +336,12 @@ function DummyTicketForm() {
                         className={`dummy-form-control form-control`}
                         value={passenger.dateOfBirth}
                         onChange={(e) =>
-                          handlePassengerChange(index, "dateOfBirth", e.target.value)
+                          handlePassengerChange(
+                            index,
+                            "dateOfBirth",
+                            e.target.value
+                          )
                         }
-                        
                       />
                     </td>
                     <td>
@@ -264,7 +356,6 @@ function DummyTicketForm() {
                             e.target.value
                           )
                         }
-                     
                       />
                     </td>
                     <td>
@@ -279,7 +370,6 @@ function DummyTicketForm() {
                             e.target.value
                           )
                         }
-                    
                       />
                     </td>
                     <td>
@@ -294,7 +384,6 @@ function DummyTicketForm() {
                             e.target.value
                           )
                         }
-       
                       />
                     </td>
                     <td>

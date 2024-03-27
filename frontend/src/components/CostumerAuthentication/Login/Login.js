@@ -29,8 +29,6 @@ const Login = () => {
         `${process.env.REACT_APP_BACKEND_URL}/customer/login`,
         data
       );  
-
-      
       if (response.data.error) {
         alert(response.data.error.message);
       } else {

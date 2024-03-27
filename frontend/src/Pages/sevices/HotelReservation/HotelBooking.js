@@ -40,7 +40,7 @@ export const HotelBooking = () => {
 
 
 
-  const [formSubmitted, setFormSubmitted] = useState(false); // Track if form has been submitted
+
   const { hotelreservations } = useParams();
   const navigate = useNavigate();
 
@@ -94,11 +94,9 @@ export const HotelBooking = () => {
   };
 
   
-  console.log("FormData",formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
     try {
 
       if (CookieUtils.getCookies("userId")) {

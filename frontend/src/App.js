@@ -45,7 +45,6 @@ import VisaApplicationDoc from "./Pages/AdminDashboard/master/VisaApplicationDoc
 import { Services } from "./Pages/EmployeeDashboard/TicketHandle/Services.js";
 
 
-import Dummy from './dummy.js'
 
 function App() {
   const Visa = () => <h1>visa is working</h1>;
@@ -63,8 +62,6 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="registration" element={<SignUp />} />
             <Route path="Admin" element={<AdminLogin />} />
-
-            <Route path='dummy' element={<Dummy/>} />
             <Route
               path="/services/TravelHealthInsurance"
               element={<TravelHealthInsurance />}

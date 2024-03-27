@@ -13,7 +13,7 @@ export const Services = () => {
 
   const token = CookieUtils.getCookies("adminToken");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
- 
+ console.log("Data",tokenData);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -40,6 +40,7 @@ export const Services = () => {
     };
     fetchUserData();
   }, [loading]);
+  
   const fetchEmployeTickets = async (data) => {
     try {
       const fetchTicket = await axios.get(
@@ -65,9 +66,9 @@ export const Services = () => {
       return <p>No Ticket Available</p>
     }
     switch(serviceName){
-      case "dummyticket":
+      case "dummytickets":
         return <TicketService serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
-      case "hotelreservation":
+      case "hotelreservations":
           return <HotelReservationTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;
       case "visastatuses":
           return <VisaTicket serviceName={serviceName} data={assignedTicket} setLoading={setLoading}/>;

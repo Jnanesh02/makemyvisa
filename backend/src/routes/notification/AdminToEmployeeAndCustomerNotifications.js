@@ -86,12 +86,11 @@ const { ObjectId } = require("mongodb");
 // Route to create a new notification
 router.post("/AdminToEmployeeAndCustomerNotifications", async (req, res) => {
   try {
-    console.log("assignedto", req.body);
-
     const { sender, assignTo,CustomerMessage,EmployeeMessage } = req.body;
+    console.log("assignedto", req.body);
     const recipient = assignTo.employeeId;
     const ticketId = assignTo.ticketId;
-    const department = assignTo.ticketName + 's';
+    const department = assignTo.ticketName;
 
     const db = mongoose.connection;
     const EmployeeCollection = db.collection("employeeschemas");

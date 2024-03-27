@@ -49,7 +49,7 @@ const EmployeeDashboard = () => {
     };
 
     fetchNotifications();
-  }, []);
+  }, [tokenData.id]);
 
   console.log("notifications", notifications);
 
@@ -127,7 +127,7 @@ const EmployeeDashboard = () => {
                         className="accordion-button custom-button"
                         to={`servicetickets/${service.serviceTypeName}`}
                       >
-                        {service.serviceTypeName}
+                        {service.serviceTypeName[0].toUpperCase()+service.serviceTypeName.slice(1)}
                       </NavLink>
                     </h2>
                   </div>
@@ -135,7 +135,8 @@ const EmployeeDashboard = () => {
               </div>
             ) : (
               <>
-                <h1>no data</h1>
+                <h1>No Service Available</h1>
+    
               </>
             )}
 
