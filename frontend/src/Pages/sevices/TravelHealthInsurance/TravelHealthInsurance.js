@@ -18,20 +18,23 @@ const TravelHealthInsurance = () => {
       const response = await axios.get(
         `http://localhost:3000/makemyvisa/api/files/${countryName}`
       );
+      console.log("REsponse",response);
       setInsurance(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+// console.log("insurence",insurance);
   const [countriesData, setCountriesData] = useState([]);
-
+  
   useEffect(() => {
     const fetchCountries = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getcountries`);
+        
         if (Array.isArray(response.data.message)) {
           setCountriesData(response.data.message);
+          
         } else {
           setCountriesData([]);
         }
@@ -43,6 +46,8 @@ const TravelHealthInsurance = () => {
     fetchCountries();
   }, []);
 
+
+  console.log("countriesData",countriesData);
   const handleInputChange = (event) => {
     event.preventDefault();
     setformData((prevData) => ({
@@ -76,12 +81,12 @@ const TravelHealthInsurance = () => {
         <div className="travel-Insurance-container-form shadow p-5 mb-5 bg-body rounded">
           <div className="travel-Insurance-container-sub">
             <div>
-              <label
+              <h5
                 htmlFor="destinationCountry"
                 className="travel-Insurance-label"
               >
                 Destination Country:
-              </label>
+              </h5>
               <select
                 type="text"
                 id="destinationCountry"
@@ -100,9 +105,9 @@ const TravelHealthInsurance = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="departureDate" className="travel-Insurance-label">
+              <h5 htmlFor="departureDate" className="travel-Insurance-label">
                 Departure Date:
-              </label>
+              </h5>
               <input
                 type="date"
                 id="departureDate"
@@ -115,9 +120,9 @@ const TravelHealthInsurance = () => {
               />
             </div>
             <div>
-              <label htmlFor="returnDate" className="travel-Insurance-label">
+              <h5 htmlFor="returnDate" className="travel-Insurance-label">
                 Return Date:
-              </label>
+              </h5>
               <input
                 type="date"
                 id="returnDate"
