@@ -7,32 +7,40 @@ import { NavLink, Link, Outlet } from "react-router-dom";
 import { Master } from "./master/Master";
 import axios from "axios";
 import CookieUtils from "../../components/Cookie/Cookies";
-
+import updateNotificationStatus from "../../components/ApiServices/notificationUtils"
 export const AdminDashboard = () => {
   const [notifications, setNotifications] = useState([]);
   const token = CookieUtils.getCookies("adminToken");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
   console.log(tokenData);
   const handleNotificationClick = async (notificationId) => {
-    try {
-      // Send a request to update the notification status
-      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/CustomerToAdminNotifications/${notificationId}`, {
-        read: true,
-        tokenData
-      });
+    // try {
+    //   // Send a request to update the notification status
+    //   const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/CustomerToAdminNotifications/${notificationId}`, {
+    //     read: true,
+    //     tokenData
+    //   });
 
-      // If the request is successful, update the notification status in state
-      if (response.status === 200) {
-        const updatedNotifications = notifications.map(notification => {
-          if (notification._id === notificationId) {
-            return { ...notification, read: true };
-          }
-          return notification;
-        });
-        setNotifications(updatedNotifications);
-      }
+    //   // If the request is successful, update the notification status in state
+    //   if (response.status === 200) {
+    //     const updatedNotifications = notifications.map(notification => {
+    //       if (notification._id === notificationId) {
+    //         return { ...notification, read: true };
+    //       }
+    //       return notification;
+    //     });
+    //     setNotifications(updatedNotifications);
+    //   }
+    // } catch (error) {
+    //   console.error('Error updating notification status:', error);
+    // }
+
+
+    try {
+      await updateNotificationStatus(notificationId, tokenData, notifications, setNotifications);
     } catch (error) {
-      console.error('Error updating notification status:', error);
+      // Handle error
+      console.error('Error handling notification click:', error);
     }
   }
 
@@ -181,14 +189,7 @@ export const AdminDashboard = () => {
                 id="sidebarCollapse"
                 className="btn btn-info "
               >
-                {/* <svg
-                  className="mb-bl"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  viewBox="0 -960 960 960"
-                  width="24">
-                  <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-                </svg> */}
+                
 
                 <span>
                   <svg
@@ -219,18 +220,7 @@ export const AdminDashboard = () => {
               >
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item">
-                    {/* <div >
-                    <a className="nav-link notification" href="/">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24"
-                        viewBox="0 -960 960 960"
-                        width="24">
-                        <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
-                      </svg>
-                      
-                    </a>
-                    </div> */}
+                
                     <div className="btn-group nav-link notification">
                       <span className="notificationNumber">{notifications.length}</span>
                       <button
