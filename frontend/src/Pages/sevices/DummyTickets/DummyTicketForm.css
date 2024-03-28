@@ -67,3 +67,17 @@ button.btn.btn-secondary.dropdown-toggle.country-tgl {
 ul.dropdown-menu.dropdown-countries.show {
   padding: 14px;
 }
+.note-text{
+  margin-top: 0;
+    margin-bottom: 1rem;
+    background: red;
+    text-align: center;
+    padding: 6px;
+    border-radius: 20px;
+}
+.input-type-input {
+  width: 100%;
+  padding: 7px;
+  border-radius: 7px;
+  margin-top: 11px;
+}

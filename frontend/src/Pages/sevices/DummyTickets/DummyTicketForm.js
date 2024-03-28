@@ -5,40 +5,10 @@ import CookieUtils from "../../../components/Cookie/Cookies";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    borderBottom: "1px dotted gray",
-    color: state.isSelected ? "white" : "black",
-    backgroundColor: state.isSelected ? "#dd2817" : "white",
-    padding: 10,
-    fontSize: 14,
-    fontWeight: state.data.isCountry ? "bold" : "normal",
-  }),
-  singleValue: (provided, state) => ({
-    ...provided,
-    fontWeight: state.data.isCountry ? "bold" : "normal",
-  }),
-  dropdownIndicator: (provided) => ({
-    ...provided,
-    color: "#dd2817",
-  }),
-};
+import styles from "./CustomeStyles";
 
-const formatOptionLabel = ({ label, iata, city }) => (
-  <div style={{ display: "flex", alignItems: "center" }}>
-    <i
-      className="fas fa-plane"
-      style={{ fontSize: "16px", marginRight: "5px", color: "#dd2817" }}
-    ></i>
-    <div>
-      <p style={{ margin: 0, fontWeight: "bold" }}>{city}</p>
-      <p style={{ margin: 0, fontSize: "14px", color: "#333" }}>{label}</p>
-      <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>{iata}</p>
-    </div>
-  </div>
-);
 function DummyTicketForm() {
+  CookieUtils.removeCookies("servicename");
   const [formData, setFormData] = useState({
     tripType: "oneWay",
     returnDate: "",
@@ -55,10 +25,11 @@ function DummyTicketForm() {
         dateOfExpiry: "",
       },
     ],
-    from: "",
-    to: "",
+    arrivalCity: "",
+    departureCity: "",
   });
   const [airport, setAirport] = useState([]);
+  const [other,setOther]=useState({  arrivalCity: "",departureCity: ""});
   useEffect(() => {
     const fetchAirports = async () => {
       try {
@@ -72,13 +43,19 @@ function DummyTicketForm() {
     };
     fetchAirports();
   }, []);
-  const handleAirportChange = (inputValue,value) => {
-    console.log("handle",value,inputValue);
+  const handleAirportChange = (inputValue, value) => {
     airport.filter((port) => port.city.toLowerCase().includes(inputValue));
-    setFormData((prev) => ({
-      ...prev,
-      [value]: `${inputValue.city}-${inputValue.label}-${inputValue.iata}`,
-    }));
+    if (inputValue.value !== "other") {
+      setFormData((prev) => ({
+        ...prev,
+        [value]: `${inputValue.city}-${inputValue.label}-${inputValue.iata}`,
+      }));
+    } else {
+      setOther((prev) => ({
+        ...prev,
+        [value]: inputValue.value,
+      }));
+    }
   };
   const { dummytickets } = useParams({});
   const navigate = useNavigate();
@@ -94,7 +71,8 @@ function DummyTicketForm() {
     setFormData({ ...formData, passengerDetails: updatedPassengerDetails });
   };
 
-  const handleAddPassenger = () => {
+  const handleAddPassenger = (event) => {
+    event.preventDefault();
     setFormData({
       ...formData,
       numberOfPassengers: formData.numberOfPassengers + 1,
@@ -144,7 +122,7 @@ function DummyTicketForm() {
 
   return (
     <div className="dummy-ticket-form-container">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="container mx-auto shadow bg-body rounded p-5 dummytickets">
           <h2 className="text-center dummy-text-heading">
             <svg
@@ -188,45 +166,72 @@ function DummyTicketForm() {
               </label>
             </div>
           </div>
+          <p className="note-text">
+            <b>Note:</b>Choose an other option if the arrival and departure
+            cities are not available.
+          </p>
           <div className="from-to-group ">
             {/* Arrival City */}
             <div className="fromto">
-              <h4 className="form-label">Arrival City*</h4>
+              <h4 className="form-label">Departure City*</h4>
               <Select
                 className={`dummy-form-control form-control`}
                 placeholder="Country Name"
-                styles={customStyles}
-                formatOptionLabel={formatOptionLabel}
-                options={airport?.map((airport) => ({
-                  value: airport.city,
-                  label: airport.name,
-                  city: airport.city,
-                  iata: airport.code,
-                }))}
+                styles={styles.customStyles}
+                formatOptionLabel={styles.formatOptionLabel}
+                options={[
+                  ...airport?.map((airport) => ({
+                    value: airport.city,
+                    label: airport.name,
+                    city: airport.city,
+                    iata: airport.code,
+                  })),
+                  { value: "other", label: "Other" },
+                ]}
                 required
-                onChange={(e)=>handleAirportChange(e,"to")}
+                onChange={(e) => handleAirportChange(e, "departureCity")}
               />
-              
+              {other.departureCity === "other" && (
+                <input
+                  className="input-type-input"
+                  type="text"
+                  placeholder="Enter City"
+                  name="departureCity"
+                  value={formData.to}
+                  onChange={handleChange}
+                />
+              )}
             </div>
 
             {/* Departure City */}
             <div className="fromto">
-              <h4 className="form-label w-40">Departure City*</h4>
-
+              <h4 className="form-label w-40">Arrival City*</h4>
               <Select
                 className={`dummy-form-control form-control`}
                 placeholder="Country Name"
-                styles={customStyles}
-                formatOptionLabel={formatOptionLabel}
-                options={airport?.map((airport) => ({
+                styles={styles.customStyles}
+                formatOptionLabel={styles.formatOptionLabel}
+                options={[...airport?.map((airport) => ({
                   value: airport.city,
                   label: airport.name,
                   city: airport.city,
                   iata: airport.code,
-                }))}
+                })),
+                { value: "other", label: "Other" },
+              ]}
                 required
-                onChange={(e)=>handleAirportChange(e,"from")}
+                onChange={(e) => handleAirportChange(e, "arrivalCity")}
               />
+               {other.arrivalCity === "other" && (
+                <input
+                  className="input-type-input"
+                  type="text"
+                  placeholder="Enter City"
+                  name="arrivalCity"
+                  value={formData.to}
+                  onChange={handleChange}
+                />
+              )}
             </div>
           </div>
           {/* Departure and Return Date */}
@@ -400,7 +405,8 @@ function DummyTicketForm() {
             </table>
           </div>
 
-          <button className="btn btn-success" type="submit">
+          <button className="btn btn-success" type="submit"
+          onClick={handleSubmit}>
             Submit
           </button>
         </div>
